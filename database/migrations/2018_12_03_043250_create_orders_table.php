@@ -13,7 +13,7 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::connection('mysql2')->create('orders', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('no_order');
           $table->bigInteger('user_id');
