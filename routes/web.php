@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+//Route verifyemail
+Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
+
+Route::get('/home', 'HomeController@index')->name('home');
