@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+
+use App\User;
+use App\Referral;
 
 use App\Mail\ConfirmEmail;
 
@@ -75,9 +77,21 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
                 'username' => 'tes',
             ]);
+      $user->referral_link = uniqid().md5($user->id);
       $user->point = 10;
       $user->save();
       
+      if(isset($_COOKIE['referral_link'])) {
+        $user_giver = User::where('referral_link',$_COOKIE['referral_link'])->first();
+        $referral = new Referral; 
+        $referral->user_id_taker = $user->id;
+        $referral->user_id_giver = $user_giver->id;
+        $referral->save();
+
+        $user_giver->point = $user_giver->point+20;
+        $user_giver->save();
+      } 
+
       return $user;
     }
 
