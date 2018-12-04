@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+
+use App\User;
+use App\Referral;
+
+use App\Mail\ConfirmEmail;
+
+use Carbon, Crypt, Mail;
 
 class RegisterController extends Controller
 {
@@ -62,11 +69,59 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+    { 
+      $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'gender'=> $data['gender'],
+                'password' => Hash::make($data['password']),
+                'username' => 'tes',
+            ]);
+      $user->referral_link = uniqid().md5($user->id);
+      $user->point = 10;
+      $user->save();
+      
+      if(isset($_COOKIE['referral_link'])) {
+        $user_giver = User::where('referral_link',$_COOKIE['referral_link'])->first();
+        $referral = new Referral; 
+        $referral->user_id_taker = $user->id;
+        $referral->user_id_giver = $user_giver->id;
+        $referral->save();
+
+        $user_giver->point = $user_giver->point+20;
+        $user_giver->save();
+      } 
+
+      return $user;
+    }
+
+    public function register(Request $request){
+      $validator = $this->validator($request->all());
+
+      if(!$validator->fails()) {
+        $user = $this->create($request->all());
+
+        $register_time = Carbon::now()->toDateTimeString();
+        $confirmcode = Hash::make($user->email.$register_time);
+        $user->confirm_code = $confirmcode;
+        $user->save();
+        
+        $secret_data = [
+          'email' => $user->email,
+          'register_time' => $register_time,
+          'confirm_code' => $confirmcode,
+        ];
+      
+        $emaildata = [
+          'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
+          'user' => $user,
+          'password' => $request->password,
+        ];
+        
+        Mail::to($user->email)->queue(new ConfirmEmail($emaildata));
+        return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
+      } else {
+        return redirect("register")->with("error",$validator->errors()->first());
+      }
     }
 }

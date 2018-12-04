@@ -14,3 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+//Route generate halaman register berdasarkan referral link
+Route::get('/ref/{rand}','ReferralController@refer');
+
+//Route verifyemail
+Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['web','auth']], function() {
+
+  //Referral
+  Route::get('/referral','ReferralController@index');
+  Route::get('/referral/load-referral','ReferralController@load_referral');
+});
+
