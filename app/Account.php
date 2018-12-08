@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Referral extends Model
+class Account extends Model
 {
-    protected $table = 'referrals';
+    protected $table = 'accounts';
 }
