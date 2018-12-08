@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+use App\Account;
+use App\AccountLog;
+
 class UpdateAccount extends Command
 {
     /**
@@ -53,7 +56,7 @@ class UpdateAccount extends Command
     
     public function handle()
     {
-      $accounts = IG_Account::orderBy('voting','desc')->get();
+      $accounts = Account::orderBy('voting','desc')->get();
 
       foreach($accounts as $account){
         //kalo belum ada informasi ig_id ngejalanin pake username di database
@@ -69,20 +72,14 @@ class UpdateAccount extends Command
           $account->ig_id = $arr_res["pk"];
           //replace username di database kalo beda sama yang diambil
           if($account->username!=$arr_res["username"]){
-            //ngecek kalo username clb nya udah diganti sama user atau belum
-            if($account->username==$account->username_clb){
-              $account->username_clb = $arr_res["username"];
-            }
-
             $account->username = $arr_res["username"];
           }
 
-          $account->profpic = $arr_res["hd_profile_pic_url_info"]["url"];
-          $account->profpic_clb = $arr_res["hd_profile_pic_url_info"]["url"];
-          $account->following = $arr_res["following_count"];
-          $account->followers = $arr_res["follower_count"];
-          $account->jmlpost = $arr_res["media_count"];
-          //var_dump($arr_res);
+          $account->prof_pic = $arr_res["hd_profile_pic_url_info"]["url"];
+          $account->jml_following = $arr_res["following_count"];
+          $account->jml_followers = $arr_res["follower_count"];
+          $account->jml_post = $arr_res["media_count"];
+
           var_dump($arr_res["username"]);
 
           $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"];
@@ -115,8 +112,9 @@ class UpdateAccount extends Command
             var_dump(date("d/m/Y",$arr_res2[0]["taken_at"]));
 
             $account->lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
-            $account->jmllike = floor($ratalike);
-            $account->jmlcomment = floor($ratacomment);
+            $account->jml_likes = floor($ratalike);
+            $account->jml_comments = floor($ratacomment);
+            $account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
           
             var_dump('ratalike = '.floor($ratalike));
             var_dump('ratacomment = '.floor($ratacomment));
@@ -125,6 +123,17 @@ class UpdateAccount extends Command
           }
 
           $account->save();
+
+          $accountlog = new AccountLog;
+          $accountlog->account_id = $account->id;
+          $accountlog->jml_followers = $account->jml_followers;
+          $accountlog->jml_following = $account->jml_following;
+          $accountlog->jml_post = $account->jml_post;
+          $accountlog->lastpost = $account->lastpost;
+          $accountlog->jml_likes = $account->jml_likes;
+          $accountlog->jml_comments = $account->jml_comments;
+          $accountlog->eng_rate = $account->eng_rate;
+          $accountlog->save();
         }
         sleep(0.1);
       }

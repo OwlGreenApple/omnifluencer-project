@@ -16,13 +16,13 @@ class CreateAccountLogsTable extends Migration
         Schema::create('account_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id');
-            $table->integer('jml_followers')->nullable();
-            $table->integer('jml_following')->nullable();
-            $table->integer('jml_post')->nullable();
+            $table->integer('jml_followers')->default(0);
+            $table->integer('jml_following')->default(0);
+            $table->integer('jml_post')->default(0);
             $table->timestamp('lastpost')->default(null)->nullable();
-            $table->integer('jml_likes')->nullable();
-            $table->integer('jml_comments')->nullable();
-            $table->double('eng_rate',8,2)->nullable();
+            $table->integer('jml_likes')->default(0);
+            $table->integer('jml_comments')->default(0);
+            $table->double('eng_rate',8,4)->default(0);
             $table->timestamps();
         });
     }
