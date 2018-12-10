@@ -30,5 +30,11 @@ Route::group(['middleware' => ['web','auth']], function() {
   //Referral
   Route::get('/referral','ReferralController@index');
   Route::get('/referral/load-referral','ReferralController@load_referral');
+
+  //Search
+  Route::get('/search','AccountController@index');
+  Route::get('/search/load-search','AccountController@load_search');
+  Route::get('/search/load-history-search','AccountController@load_history_search');  
+  Route::get('/search/delete-history','AccountController@delete_history');
 });
 

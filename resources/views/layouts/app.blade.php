@@ -40,6 +40,11 @@
                 Referral  
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('search')}}">
+                Search
+              </a>
+            </li>
           </ul>
 
           <!-- Right Side Of Navbar -->
