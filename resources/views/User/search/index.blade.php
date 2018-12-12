@@ -4,6 +4,10 @@
 <script type="text/javascript">
   $(document).ready(function() {
     refresh_page();
+    $('.counter').counterUp({
+        delay: 10,
+        time: 1000
+    });
   });
 
   $( "body" ).on( "click", ".btn-search", function() {
@@ -36,9 +40,21 @@
         $('.div-loading').removeClass('background-load');
 
         var data = jQuery.parseJSON(result);
-        $('#content-akun').html(data.view);
 
-        load_history();
+        if(data.status == 'success'){
+          $('#pesan').hide();
+          $('#content-akun').html(data.view);
+          load_history();
+        } else {
+          if(data.message=='kuota habis'){
+            $('#info-kuota').modal('show');
+          } else {
+            $('#pesan').html(data.message);
+            $('#pesan').removeClass('alert-success');
+            $('#pesan').addClass('alert-warning');
+            $('#pesan').show();
+          }
+        }
       }
     });
   }
@@ -88,7 +104,14 @@
         $('.div-loading').removeClass('background-load');
 
         var data = jQuery.parseJSON(result);
-        refresh_page();
+
+        if(data.status=='success'){
+          refresh_page();
+        } else {
+          if(data.message=='kuota habis'){
+            $('#info-kuota').modal('show');
+          }
+        }
       }
     });
   }
@@ -98,8 +121,12 @@
 <input type="hidden" name="id_delete" id="id_delete">
 
 <div class="container">
+
+  <div class="alert" id="pesan"></div>
+
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-6" align="center">
+      <p>Enter Instagram username and tap Enter!</p>
       <form>
         @csrf         
         <div class="form-group row" style="margin-left: 1px;">
@@ -108,7 +135,7 @@
         </div>
       </form> 
 
-      <div id="content-history"></div>   
+      <div id="content-history" align="left"></div>   
 
     </div>
 
@@ -140,6 +167,37 @@
         <button class="btn" data-dismiss="modal">
           Cancel
         </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
+<!-- Modal Info Kuota -->
+<div class="modal fade" id="info-kuota" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Kuota telah habis. <br>
+        Silahkan Sign up untuk melanjutkan.
+      </div>
+      <div class="modal-footer" id="foot">
+        <a class="mr-auto" href="{{url('login')}}">
+          <button class="btn btn-primary">
+            LOG IN
+          </button>
+        </a>
+  
+        <a href="{{url('register')}}">
+          <button class="btn btn-primary">
+            SIGN UP
+          </button>
+        </a>
       </div>
     </div>
       
