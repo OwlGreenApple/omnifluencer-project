@@ -62,7 +62,7 @@
   function load_history(){
     $.ajax({
       type : 'GET',
-      url : "<?php echo url('/search/load-history-search') ?>",
+      url : "<?php echo url('/search/load-history') ?>",
       data: {
         keywords : $('#keywords').val(),
       },

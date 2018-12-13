@@ -47,6 +47,11 @@
                 Search
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('history-search')}}">
+                History Search
+              </a>
+            </li>
           </ul>
 
           <!-- Right Side Of Navbar -->

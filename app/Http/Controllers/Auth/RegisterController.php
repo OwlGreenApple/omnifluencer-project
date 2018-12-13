@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Referral;
+use App\HistorySearch;
 
 use App\Mail\ConfirmEmail;
 
@@ -36,6 +37,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    protected $cookie_search = "history_search";
 
     /**
      * Create a new controller instance.
@@ -95,6 +97,19 @@ class RegisterController extends Controller
       return $user;
     }
 
+    protected function check_history($user){
+      if(isset($_COOKIE[$this->cookie_search])) {
+        $cookie_value = json_decode($_COOKIE[$this->cookie_search], true);
+
+        foreach ($cookie_value as $cookie) {
+          $history = new HistorySearch;
+          $history->account_id = $cookie;
+          $history->user_id = $user->id;
+          $history->save();
+        }
+      }
+    }
+
     public function register(Request $request){
       $validator = $this->validator($request->all());
 
@@ -106,6 +121,8 @@ class RegisterController extends Controller
         $user->confirm_code = $confirmcode;
         $user->save();
         
+        $this->check_history($user);
+
         $secret_data = [
           'email' => $user->email,
           'register_time' => $register_time,

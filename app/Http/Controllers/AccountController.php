@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Account;
 use App\HistorySearch;
 
-use Auth;
+use Auth,PDF,Excel;
+use PHPExcel_Worksheet_Drawing;
 
 class AccountController extends Controller
 {
@@ -129,7 +130,7 @@ class AccountController extends Controller
     return $arr;
   }
 
-  public function load_history_search(Request $request){
+  public function load_history(Request $request){
     $accounts = null;
 
     if(Auth::check()){
@@ -140,6 +141,7 @@ class AccountController extends Controller
     } else {
       if(isset($_COOKIE[$this->cookie_search])){
         $cookie_value = json_decode($_COOKIE[$this->cookie_search]);
+        //dd($cookie_value);
         $accounts = Account::findMany($cookie_value);
       }
     }
@@ -160,9 +162,16 @@ class AccountController extends Controller
         $cookie_value = 1;
         // set cookie for 30days, 86400 = 1 day
         setcookie($this->cookie_delete, $cookie_value, time() + (86400 * 30), "/");
+
+        $cookie_value_search = json_decode($_COOKIE[$this->cookie_search]);
+        if (($key = array_search($request->id, $cookie_value_search)) !== false) {
+          unset($cookie_value_search[$key]);
+        }
+
+        setcookie($this->cookie_search, json_encode($cookie_value_search), time() + (86400 * 30), "/");
       } else {
         $cookie_value = $_COOKIE[$this->cookie_delete];
-        if($cookie_value>1){
+        if($cookie_value>=1){
           $arr['status'] = 'error';
           $arr['message'] = 'kuota habis';
         } else {
@@ -180,5 +189,81 @@ class AccountController extends Controller
     }
 
     return $arr;
+  }
+
+  public function index_history(){
+    return view('user.history-search.index');
+  }
+
+  public function load_history_search(){
+    $accounts = HistorySearch::join('accounts','accounts.id','=','history_searchs.account_id')
+          ->select('history_searchs.*','accounts.id as accountid','accounts.username','accounts.prof_pic')
+          ->where('history_searchs.user_id',Auth::user()->id)
+          ->orderBy('history_searchs.created_at','desc')
+          ->paginate(15);
+
+    $arr['view'] = (string) view('user.history-search.content')
+                      ->with('accounts',$accounts);
+    $arr['pager'] = (string) view('user.history-search.pagination')
+                      ->with('accounts',$accounts); 
+
+    return $arr;
+  }
+
+  public function print_pdf($id){
+    $account = Account::find($id);
+
+    $data = array(
+      'account' => $account,   
+    );
+
+    $pdf = PDF::loadView('user.history-search.pdf', $data);
+
+    return $pdf->stream();
+  }
+
+  public function print_csv($id){
+    $filename = 'omnifluencer';
+    $account = Account::find($id);
+
+    $Excel_file = Excel::create($filename, function($excel) use ($account) {
+        $excel->sheet('list', function($sheet) use ($account) {
+          /*$objDrawing = new PHPExcel_Worksheet_Drawing;
+          $objDrawing->setPath(public_path('img/headerKop.png')); //your image path
+          $objDrawing->setCoordinates('A2');
+          $objDrawing->setWorksheet($sheet);*/
+          
+          $username = '@'.$account->username;
+          $sheet->cell('B2', $username); 
+          $sheet->cell('B3', $account->eng_rate); 
+
+          $sheet->cell('B4', $account->jml_post); 
+          $sheet->cell('B5', function($cell) {
+            $cell->setValue('Post');   
+          });
+          $sheet->cell('B6', $account->jml_followers); 
+          $sheet->cell('B7', function($cell) {
+            $cell->setValue('Followers');   
+          });
+          $sheet->cell('B8', $account->jml_following); 
+          $sheet->cell('B9', function($cell) {
+            $cell->setValue('Following');   
+          });
+          
+          $sheet->cell('C4', date("M d Y", strtotime($account->lastpost))); 
+          $sheet->cell('C5', function($cell) {
+            $cell->setValue('Last Post');   
+          });
+          $sheet->cell('C6', $account->jml_likes); 
+          $sheet->cell('C7', function($cell) {
+            $cell->setValue('Avg Like Per Post');   
+          });
+          $sheet->cell('C8', $account->jml_comments); 
+          $sheet->cell('C9', function($cell) {
+            $cell->setValue('Avg Comment Per Post');   
+          });
+          //$sheet->fromArray($data);
+        });
+      })->download();
   }
 }
