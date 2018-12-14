@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Barryvdh\Snappy\ServiceProvider::class,
     ],
 
     /*
@@ -225,6 +226,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Carbon' => 'Carbon\Carbon',
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];

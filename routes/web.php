@@ -30,5 +30,17 @@ Route::group(['middleware' => ['web','auth']], function() {
   //Referral
   Route::get('/referral','ReferralController@index');
   Route::get('/referral/load-referral','ReferralController@load_referral');
+
+  //History Search
+  Route::get('/history-search','AccountController@index_history');
+  Route::get('/history-search/load-history-search','AccountController@load_history_search');
+  Route::get('/history-search/print-pdf/{id}','AccountController@print_pdf');
+  Route::get('/history-search/print-csv/{id}','AccountController@print_csv');
 });
+
+//Search
+  Route::get('/search','AccountController@index');
+  Route::get('/search/load-search','AccountController@load_search');
+  Route::get('/search/load-history','AccountController@load_history');  
+  Route::get('/search/delete-history','AccountController@delete_history');
 

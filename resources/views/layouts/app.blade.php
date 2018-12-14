@@ -12,6 +12,8 @@
   <!-- Scripts -->
   <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
   <script src="{{ asset('js/app.js') }}" defer></script>
+  <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
+  <script src="{{ asset('js/noframework.waypoints.min.js') }}"></script>
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -38,6 +40,16 @@
             <li class="nav-item">
               <a class="nav-link" href="{{url('referral')}}">
                 Referral  
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('search')}}">
+                Search
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('history-search')}}">
+                History Search
               </a>
             </li>
           </ul>

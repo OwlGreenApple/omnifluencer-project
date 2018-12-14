@@ -14,7 +14,9 @@
             </div>
           @endif
 
-          You are logged in!
+          You are logged in! <br>
+          <?php echo 'Lifetime = '.config('session.lifetime') ?>
+
         </div>
       </div>
     </div>
