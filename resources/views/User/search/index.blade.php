@@ -22,6 +22,13 @@
     delete_history();
   });
 
+  $( "body" ).on( "click", ".btn-compare", function(e) {
+    <?php if(!Auth::check()) { ?>
+      e.preventDefault();
+      $('#info-kuota').modal('show');
+    <?php } ?>
+  });
+
   function load_search(){
     $.ajax({
       type : 'GET',
@@ -78,6 +85,15 @@
 
         var data = jQuery.parseJSON(result);
         $('#content-history').html(data.view);
+        console.log(data.count);
+        if(data.count>=2){
+          $('.boxcompare').show();
+          $('.btn-compare').show();
+        }
+
+        if(data.count>5){
+          $('#link-show').show();
+        }
       }
     });
   }

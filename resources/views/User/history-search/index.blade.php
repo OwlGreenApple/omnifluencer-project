@@ -95,13 +95,13 @@
         <div class="card-header">History</div>
 
         <div class="card-body">
-          <form>
+          <!--<form>
             @csrf       
             <div class="form-group row" style="margin-left: 1px;">
               <input id="keywords" class="form-control col-md-4 col-xs-12" name="search" placeholder="Masukkan nama/email...">
               <button type="button" class="btn btn-primary btn-search" style="margin-left: 13px; margin-right: 13px;"> Search </button>
             </div>
-          </form>
+          </form>-->
 
           <table class="table table-bordered table-striped">
             <thead>
