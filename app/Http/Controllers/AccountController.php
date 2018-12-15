@@ -105,6 +105,10 @@ class AccountController extends Controller
         $history->account_id = $account->id;
         $history->user_id = Auth::user()->id;
         $history->save();
+
+        $user = User::find(Auth::user()->id);
+        $user->count_calc = $user->count_calc + 1;
+        $user->save();
       } else {
         //$request->session()->put('account_search', $account->username);
         if(!isset($_COOKIE[$this->cookie_search])) {
@@ -137,17 +141,33 @@ class AccountController extends Controller
       $accounts = HistorySearch::join('accounts','accounts.id','=','history_searchs.account_id')
           ->select('history_searchs.*','accounts.username','accounts.prof_pic')
           ->where('history_searchs.user_id',Auth::user()->id)
-          ->orderBy('history_searchs.created_at','desc')->get();
+          ->orderBy('history_searchs.created_at','desc');
+
+      $arr['count'] = $accounts->count();
+      
+      $accounts = $accounts->paginate(5);
     } else {
-      if(isset($_COOKIE[$this->cookie_search])){
-        $cookie_value = json_decode($_COOKIE[$this->cookie_search]);
+      /*if(isset($_COOKIE[$this->cookie_search])){
+        $cookie_value = json_decode($_COOKIE[$this->cookie_search],true);
         //dd($cookie_value);
         $accounts = Account::findMany($cookie_value);
+
+        $arr['count'] = count($cookie_value);
+      }*/
+
+      $accounts = [];
+      if(isset($_COOKIE[$this->cookie_search])){
+        $cookie_value = json_decode($_COOKIE[$this->cookie_search],true);
+        //dd($cookie_value);
+        foreach ($cookie_value as $cookie) {
+          $accounts[] = Account::find($cookie); 
+        }
+        
+        $arr['count'] = count($accounts);
       }
     }
 
     $arr['view'] = (string) view('user.search.content-history')->with('accounts',$accounts);
-
     return $arr;
   }
 
@@ -162,20 +182,22 @@ class AccountController extends Controller
         $cookie_value = 1;
         // set cookie for 30days, 86400 = 1 day
         setcookie($this->cookie_delete, $cookie_value, time() + (86400 * 30), "/");
-
-        $cookie_value_search = json_decode($_COOKIE[$this->cookie_search]);
+        
+        $cookie_value_search = json_decode($_COOKIE[$this->cookie_search],true);
+        
         if (($key = array_search($request->id, $cookie_value_search)) !== false) {
           unset($cookie_value_search[$key]);
         }
-
+        
         setcookie($this->cookie_search, json_encode($cookie_value_search), time() + (86400 * 30), "/");
+        //dd($_COOKIE[$this->cookie_search]);
       } else {
         $cookie_value = $_COOKIE[$this->cookie_delete];
         if($cookie_value>=1){
           $arr['status'] = 'error';
           $arr['message'] = 'kuota habis';
         } else {
-          $cookie_value_search = json_decode($_COOKIE[$this->cookie_search]);
+          $cookie_value_search = json_decode($_COOKIE[$this->cookie_search],true);
 
           if (($key = array_search($request->id, $cookie_value_search)) !== false) {
             unset($cookie_value_search[$key]);
@@ -211,6 +233,10 @@ class AccountController extends Controller
   }
 
   public function print_pdf($id){
+    $user = User::find(Auth::user()->id);
+    $user->count_pdf = $user->count_pdf + 1;
+    $user->save();
+
     $account = Account::find($id);
 
     $data = array(
@@ -223,6 +249,10 @@ class AccountController extends Controller
   }
 
   public function print_csv($id){
+    $user = User::find(Auth::user()->id);
+    $user->count_csv = $user->count_csv + 1;
+    $user->save();
+
     $filename = 'omnifluencer';
     $account = Account::find($id);
 

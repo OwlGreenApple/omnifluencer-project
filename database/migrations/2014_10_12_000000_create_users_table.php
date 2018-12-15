@@ -27,6 +27,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_login')->nullable();
             $table->smallInteger('status_membership')->default(0)->nullable();
             $table->string('referral_link')->nullable();
+            $table->integer('count_csv')->default(0);
+            $table->integer('count_pdf')->default(0);
+            $table->integer('count_calc')->default(0);
             // $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
