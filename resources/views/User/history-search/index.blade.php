@@ -27,6 +27,43 @@
     delete_history();
   });
 
+  $( "body" ).on( "click", "#btn-save", function() {
+    get_groups();
+  });
+
+  $( "body" ).on( "click", "#btn-add-group", function() {
+    add_groups();
+  });
+
+  $(document).on('click', '#checkAll', function (e) {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+  });
+
+  function get_groups(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('history-search/get-groups') ?>",
+      data: {
+        keywords : $('#keywords').val(),
+      },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        $('#list-group').html(data.view);
+
+        $('#save-group').modal('show');
+      }
+    });
+  }
+
   function refresh_page(){
     if(currentPage==''){
       currentPage = "<?php echo url('/history-search/load-history-search') ?>";
@@ -84,6 +121,30 @@
       }
     });
   }
+
+  function add_groups(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/history-search/add-groups') ?>",
+      data: $('form').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          refresh_page();
+        } 
+      }
+    });
+  }
 </script>
 
 <input type="hidden" name="id_delete" id="id_delete">
@@ -102,24 +163,38 @@
               <button type="button" class="btn btn-primary btn-search" style="margin-left: 13px; margin-right: 13px;"> Search </button>
             </div>
           </form>-->
+          <div align="right"> 
+            <button class="btn btn-primary" id="btn-save">
+              Save to group
+            </button>
+            <button class="btn btn-danger">
+              Delete
+            </button>  
+          </div>
+          <br>  
 
-          <table class="table table-bordered table-striped">
-            <thead>
-              <th class="header" action="username">
-                Instagram
-              </th>
-              <th class="header" action="created_at">
-                Date
-              </th>
-              <th>Action</th>
-            </thead>
+          <form>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <th>
+                  <input type="checkbox" name="checkAll" id="checkAll">
+                </th>
+                <th class="header" action="username">
+                  Instagram
+                </th>
+                <th class="header" action="created_at">
+                  Date
+                </th>
+                <th>Action</th>
+              </thead>
 
-            <tbody id="content"></tbody>
+              <tbody id="content"></tbody>
 
-          </table>
+            </table>
 
-          <div id="pager"></div>
-
+            <div id="pager"></div>    
+          </form>
+      
         </div>
       </div>
     </div>
@@ -147,6 +222,38 @@
         </button>
         <button class="btn" data-dismiss="modal">
           Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
+<!-- Modal Save Group -->
+<div class="modal fade" id="save-group" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Save to group
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <button class="btn btn-primary">
+          Create new group
+        </button>
+
+        <form id="form-groups">
+          <div id="list-group"></div>
+        </form>
+
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-primary" id="btn-add-group" data-dismiss="modal">
+          Add
         </button>
       </div>
     </div>

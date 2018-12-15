@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Account;
 use App\HistorySearch;
+use App\User;
+use App\Group;
+use App\Save;
 
 use Auth,PDF,Excel;
 use PHPExcel_Worksheet_Drawing;
@@ -188,7 +191,7 @@ class AccountController extends Controller
         if (($key = array_search($request->id, $cookie_value_search)) !== false) {
           unset($cookie_value_search[$key]);
         }
-        
+        //dd($cookie_value_search);
         setcookie($this->cookie_search, json_encode($cookie_value_search), time() + (86400 * 30), "/");
         //dd($_COOKIE[$this->cookie_search]);
       } else {
@@ -202,6 +205,7 @@ class AccountController extends Controller
           if (($key = array_search($request->id, $cookie_value_search)) !== false) {
             unset($cookie_value_search[$key]);
           }
+          //dd($cookie_value_search);
           setcookie($this->cookie_search, json_encode($cookie_value_search), time() + (86400 * 30), "/");
 
           $cookie_value = $cookie_value + 1;
@@ -295,5 +299,40 @@ class AccountController extends Controller
           //$sheet->fromArray($data);
         });
       })->download();
+  }
+
+  public function get_groups(){
+    $groups = Group::where('user_id',Auth::user()->id)
+                ->get();
+
+    $arr['view'] = (string) view('user.history-search.content-group')
+            ->with('groups',$groups);
+
+    return $arr;
+  }
+
+  public function add_groups(Request $request){
+    $arr['status'] = 'success';
+    $arr['message'] = '';
+
+    foreach ($request->accountid as $accountid) {
+      foreach ($request->groupid as $groupid) {
+        $checksave = Save::where('user_id',Auth::user()->id)
+                      ->where('account_id',$accountid)
+                      ->where('group_id',$groupid)
+                      ->first();
+
+        if(is_null($checksave)){
+          $save = new Save;
+          $save->user_id = Auth::user()->id;
+          $save->type = 'influencer';
+          $save->account_id = $accountid;
+          $save->group_id = $groupid;
+          $save->save();
+        }
+      }
+    }
+
+    return $arr;
   }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSavesTable extends Migration
+class CreateGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateSavesTable extends Migration
      */
     public function up()
     {
-        Schema::create('saves', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('type');
-            $table->integer('account_id')->nullable();
-            $table->integer('post_id')->nullable();
-            $table->integer('group_id');
+            $table->string('group_name');
+            $table->biginteger('user_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateSavesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('saves');
+        Schema::dropIfExists('groups');
     }
 }

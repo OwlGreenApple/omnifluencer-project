@@ -1,6 +1,9 @@
 @foreach($accounts as $account)
   <tr>
     <td>
+      <input type="checkbox" name="accountid[]" value="{{$account->id}}">
+    </td>
+    <td>
       <img src="{{$account->prof_pic}}" style="max-width:50px">
       <?php echo '@'.$account->username ?>
     </td>
