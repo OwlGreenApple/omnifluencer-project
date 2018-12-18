@@ -62,6 +62,11 @@
                 History Search
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('edit-profile')}}">
+                Edit Profile
+              </a>
+            </li>
           </ul>
 
           <!-- Right Side Of Navbar -->

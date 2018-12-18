@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->integer('count_csv')->default(0);
             $table->integer('count_pdf')->default(0);
             $table->integer('count_calc')->default(0);
+            $table->text('prof_pic')->nullable();
             // $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
