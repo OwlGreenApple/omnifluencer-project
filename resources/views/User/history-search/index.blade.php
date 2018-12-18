@@ -1,42 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="{{ asset('css/history-search.css') }}" rel="stylesheet">
+
 <script type="text/javascript">
   var currentPage = '';
 
   $(document).ready(function() {
     //function saat klik pagination
     refresh_page();
-    $(document).on('click', '.pagination a', function (e) {
-      e.preventDefault();
-      currentPage = $(this).attr('href');
-      refresh_page();
+    
+    $('#save-group').on('hidden.bs.modal', function () {
+      $('#input-group').val('');
+      $('#input-group').hide();
     });
-  });
-
-  $( "body" ).on( "click", ".btn-search", function() {
-    currentPage = '';
-    refresh_page();
-  });
-
-  $( "body" ).on( "click", ".btn-delete", function() {
-    $('#id_delete').val($(this).attr('data-id'));
-  });
-
-  $( "body" ).on( "click", "#btn-delete-ok", function() {
-    delete_history();
-  });
-
-  $( "body" ).on( "click", "#btn-save", function() {
-    get_groups();
-  });
-
-  $( "body" ).on( "click", "#btn-add-group", function() {
-    add_groups();
-  });
-
-  $(document).on('click', '#checkAll', function (e) {
-    $('input:checkbox').not(this).prop('checked', this.checked);
   });
 
   function get_groups(){
@@ -145,6 +122,34 @@
       }
     });
   }
+
+  function create_groups(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/history-search/create-groups') ?>",
+      data: { 
+        groupname:$('#input-group').val() 
+      },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          $('#input-group').val('');
+          $('#input-group').hide();
+          get_groups();
+        } 
+      }
+    });
+  }
 </script>
 
 <input type="hidden" name="id_delete" id="id_delete">
@@ -164,8 +169,14 @@
             </div>
           </form>-->
           <div align="right"> 
+            <button class="btn btn-primary" id="btn-compare">
+              Compare
+            </button>
             <button class="btn btn-primary" id="btn-save">
-              Save to group
+              Add to group
+            </button>
+            <button class="btn btn-primary" id="btn-save-global">
+              Save
             </button>
             <button class="btn btn-danger">
               Delete
@@ -185,6 +196,7 @@
                 <th class="header" action="created_at">
                   Date
                 </th>
+                <th>Groups</th>
                 <th>Action</th>
               </thead>
 
@@ -242,9 +254,11 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <button class="btn btn-primary">
-          Create new group
+        <button class="col-md-12" id="btn-create-group">
+          + Create new group
         </button>
+        
+        <input class="col-md-12 form-control" type="text" name="input-group" id="input-group">
 
         <form id="form-groups">
           <div id="list-group"></div>
@@ -260,4 +274,50 @@
       
   </div>
 </div>
+
+<script type="text/javascript">
+  $( "body" ).on( "keypress", "#input-group", function(e)
+  {
+      if(e.which == 13)
+      {
+        create_groups();
+      }
+  });  
+
+  $( "body" ).on( "click", ".btn-search", function() {
+    currentPage = '';
+    refresh_page();
+  });
+
+  $( "body" ).on( "click", ".btn-delete", function() {
+    $('#id_delete').val($(this).attr('data-id'));
+  });
+
+  $( "body" ).on( "click", "#btn-delete-ok", function() {
+    delete_history();
+  });
+
+  $( "body" ).on( "click", "#btn-save", function() {
+    get_groups();
+  });
+
+  $( "body" ).on( "click", "#btn-add-group", function() {
+    add_groups();
+  });
+
+  $( "body" ).on( "click", "#btn-create-group", function() {
+    $('#input-group').show();
+    $("#input-group").focus();
+  });
+
+  $(document).on('click', '#checkAll', function (e) {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+  });
+
+  $(document).on('click', '.pagination a', function (e) {
+    e.preventDefault();
+    currentPage = $(this).attr('href');
+    refresh_page();
+  });
+</script>
 @endsection

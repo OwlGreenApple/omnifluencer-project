@@ -11,9 +11,10 @@
 
   <!-- Scripts -->
   <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
-  <script src="{{ asset('js/app.js') }}" defer></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
   <script src="{{ asset('js/noframework.waypoints.min.js') }}"></script>
+  <script type="text/javascript" src="tooltipster/dist/js/tooltipster.main.min.js"></script>
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,6 +23,15 @@
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="tooltipster/dist/css/tooltipster.main.min.css" />
+
+  <script>
+    $(document).ready(function() {
+      $('.tooltipstered').tooltipster({
+          
+      });
+    });
+  </script>
 </head>
 <body>
   <div id="app">

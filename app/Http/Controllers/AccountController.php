@@ -303,6 +303,7 @@ class AccountController extends Controller
 
   public function get_groups(){
     $groups = Group::where('user_id',Auth::user()->id)
+                ->orderBy('created_at','desc')
                 ->get();
 
     $arr['view'] = (string) view('user.history-search.content-group')
@@ -332,6 +333,18 @@ class AccountController extends Controller
         }
       }
     }
+
+    return $arr;
+  }
+
+  public function create_groups(Request $request){
+    $group = new Group;
+    $group->user_id = Auth::user()->id;
+    $group->group_name = $request->groupname;
+    $group->save();
+
+    $arr['status'] = 'success';
+    $arr['message'] = '';
 
     return $arr;
   }

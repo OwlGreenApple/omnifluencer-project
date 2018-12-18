@@ -38,6 +38,7 @@ Route::group(['middleware' => ['web','auth']], function() {
   Route::get('/history-search/print-csv/{id}','AccountController@print_csv');
   Route::get('/history-search/get-groups','AccountController@get_groups');
   Route::get('/history-search/add-groups','AccountController@add_groups');
+  Route::get('/history-search/create-groups','AccountController@create_groups');
 });
 
 //Search
