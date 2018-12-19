@@ -27,7 +27,7 @@ class ProfileController extends Controller
     }
 
     public function edit_profile(Request $request){
-      //dd($request->all());
+      dd($request->all());
       $user = User::find(Auth::user()->id);
 
       $validator = $this->validator($request->all());

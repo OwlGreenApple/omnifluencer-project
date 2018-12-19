@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 <script type="text/javascript">
@@ -36,7 +36,7 @@
         $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
-      success: function(result) {
+      success: function(data) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
 
@@ -71,7 +71,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-10">
 
       <div class="alert" id="pesan"></div>
 
