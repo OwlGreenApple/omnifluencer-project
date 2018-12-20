@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 <link href="{{ asset('css/history-search.css') }}" rel="stylesheet">

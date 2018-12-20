@@ -44,6 +44,12 @@ Route::group(['middleware' => ['web','auth']], function() {
   Route::get('/edit-profile','ProfileController@index_edit');
   Route::post('/edit-profile/edit','ProfileController@edit_profile');
 
+  //Change Password
+  Route::get('/change-password','ProfileController@index_changepass');
+  Route::post('/change-password/change','ProfileController@change_password');
+
+  //Dashboard 
+  Route::get('/dashboard','ProfileController@index_dashboard');
 });
 
 //Search
