@@ -50,6 +50,10 @@ Route::group(['middleware' => ['web','auth']], function() {
 
   //Dashboard 
   Route::get('/dashboard','ProfileController@index_dashboard');
+
+  //Points 
+  Route::get('/points','PointController@index');  
+  Route::get('/points/load-points','PointController@load_points');  
 });
 
 //Search

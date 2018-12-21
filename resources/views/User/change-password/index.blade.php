@@ -46,45 +46,48 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-11">
+
+      <h2><b>Change Password</b></h2>
+      <h5>
+        Change your old password to the new password
+      </h5> 
+      <hr>
 
       <div class="alert" id="pesan"></div>
 
-      <div class="card">
-        <div class="card-header">Change Password</div>
+      <form enctype="multipart/form-data" id="form-edit">
+        @csrf
 
-        <div class="card-body">
-          <form enctype="multipart/form-data" id="form-edit">
-            @csrf
+        <div class="form-group">
+          <label class="col-sm-4 col-form-label">
+            Enter new password
+          </label>
 
-            <div class="form-group">
-              <label class="col-sm-4 col-form-label">
-                Enter new password
-              </label>
-
-              <div class="col-md-6">
-                <input id="password" type="password" class="form-control" name="password">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-sm-4 col-form-label">
-                Confirm new password
-              </label>
-
-              <div class="col-md-6">
-                <input id="confirm" type="password" class="form-control" name="confirm">
-              </div>
-            </div>
-            
-          </form>
-
-          <button type="button" class="btn btn-primary" id="btn-edit">
-            Update Password
-          </button>
-
+          <div class="col-md-6">
+            <input id="password" type="password" class="form-control" name="password">
+          </div>
         </div>
-      </div>
+
+        <div class="form-group">
+          <label class="col-sm-4 col-form-label">
+            Confirm new password
+          </label>
+
+          <div class="col-md-6">
+            <input id="confirm" type="password" class="form-control" name="confirm">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-primary" id="btn-edit">
+              Update Password
+            </button>      
+          </div>
+        </div>
+      </form>
+
     </div>
   </div>
 </div>

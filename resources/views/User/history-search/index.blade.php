@@ -154,61 +154,113 @@
 
 <input type="hidden" name="id_delete" id="id_delete">
 
+<style type="text/css">
+  thead {
+    background-color: #E5E5E5; 
+    border-bottom: 2px solid #333;
+  }
+
+  td{
+    background-color: #fff; 
+  }
+</style>
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">History</div>
+    <div class="col-md-11">
 
-        <div class="card-body">
-          <!--<form>
-            @csrf       
-            <div class="form-group row" style="margin-left: 1px;">
-              <input id="keywords" class="form-control col-md-4 col-xs-12" name="search" placeholder="Masukkan nama/email...">
-              <button type="button" class="btn btn-primary btn-search" style="margin-left: 13px; margin-right: 13px;"> Search </button>
-            </div>
-          </form>-->
-          <div align="right"> 
-            <button class="btn btn-primary" id="btn-compare">
-              Compare
-            </button>
-            <button class="btn btn-primary" id="btn-save">
-              Add to group
-            </button>
-            <button class="btn btn-primary" id="btn-save-global">
-              Save
-            </button>
-            <button class="btn btn-danger">
-              Delete
-            </button>  
-          </div>
-          <br>  
-
-          <form>
-            <table class="table table-bordered table-striped">
-              <thead>
-                <th>
-                  <input type="checkbox" name="checkAll" id="checkAll">
-                </th>
-                <th class="header" action="username">
-                  Instagram
-                </th>
-                <th class="header" action="created_at">
-                  Date
-                </th>
-                <th>Groups</th>
-                <th>Action</th>
-              </thead>
-
-              <tbody id="content"></tbody>
-
-            </table>
-
-            <div id="pager"></div>    
-          </form>
+      <h2><b>History</b></h2>  
       
+      <div class="row">
+        <div class="col-md-5">
+          <h5>
+            Select bulk action, save or add it to group
+          </h5>    
+        </div>
+
+        <div class="col-md-7" align="right">
+          <button class="btn btn-primary" id="btn-compare">
+            <i class="fas fa-chart-bar"></i>
+            Compare
+          </button>
+          <button class="btn btn-primary" id="btn-save">
+            <i class="fas fa-folder-plus"></i> 
+            Add to group
+          </button>
+          <button class="btn btn-primary" id="btn-save-global">
+            <i class="fas fa-save"></i> 
+            Save
+          </button>
+          <button class="btn btn-danger">
+            <i class="far fa-trash-alt"></i> Delete
+          </button>     
         </div>
       </div>
+      
+      <hr>
+
+      <br>  
+
+      <form>
+        <div class="row">
+          <div class="form-group row col-md-6">
+            <label class="col-md-1 col-form-label">
+              <b>Dari</b>
+            </label>
+
+            <div class="col-md-4">
+              <input id="from" type="text" class="form-control" name="from">
+            </div>
+
+            <label class="col-md-1 col-form-label" style="padding-left: 0;">
+              <b>hingga</b>
+            </label>
+
+            <div class="col-md-4">
+              <input id="to" type="text" class="form-control" name="to">
+            </div>
+          </div>
+
+          <div class="form-group row col-md-6">
+            <div class="offset-md-5 col-md-6" style="padding-right: 0;">
+              <input id="keywords" type="text" class="form-control" name="keywords">
+            </div>
+
+            <div class="col-md-1">
+              <button class="btn btn-primary">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead align="center">
+            <th>
+              <input type="checkbox" name="checkAll" id="checkAll">
+            </th>
+            <th class="header" action="username">
+              Instagram
+            </th>
+            <th class="header" action="eng_rate">
+              Eng. Rate
+            </th>
+            <th class="header" action="jml_followers">
+              Followers
+            </th>
+            <th class="header" action="jml_post">
+              Posts
+            </th>
+            <th>Groups</th>
+            <th class="header" action="created_at">
+              Date
+            </th>
+            <th>Action</th>
+          </thead>
+          <tbody id="content"></tbody>
+        </table>
+
+        <div id="pager"></div>    
+      </form>
     </div>
   </div>
 </div>

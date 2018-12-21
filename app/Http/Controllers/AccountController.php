@@ -223,7 +223,7 @@ class AccountController extends Controller
 
   public function load_history_search(){
     $accounts = HistorySearch::join('accounts','accounts.id','=','history_searchs.account_id')
-          ->select('history_searchs.*','accounts.id as accountid','accounts.username','accounts.prof_pic')
+          ->select('history_searchs.*','accounts.id as accountid','accounts.username','accounts.prof_pic','accounts.eng_rate','accounts.jml_followers','accounts.jml_post')
           ->where('history_searchs.user_id',Auth::user()->id)
           ->orderBy('history_searchs.created_at','desc')
           ->paginate(15);

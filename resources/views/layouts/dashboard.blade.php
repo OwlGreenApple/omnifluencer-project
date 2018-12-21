@@ -69,7 +69,44 @@
       </div>
 
       <div class="col-md-1">
-        <img class="profpic-header" src="{{Auth::user()->prof_pic}}">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+              <img class="profpic-header" src="{{Auth::user()->prof_pic}}">
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right profpic-menu" aria-labelledby="navbarDropdown">
+              <div class="container" style="padding-bottom: 10px;">
+                <div class="row">
+                  <div class="col-md-4" align="center">
+                    <img class="profpic-header-big" src="{{Auth::user()->prof_pic}}">
+                  </div>
+
+                  <div class="col-md-8" align="left">
+                    <b>{{Auth::user()->name}}</b><br>
+                    {{Auth::user()->point}} Points<br>
+                    Change Password
+                  </div>  
+                </div>   
+              </div>
+              
+              <div class="col-md-12 menu-signout">
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                  <button class="btn btn-primary">
+                    {{ __('Sign Out') }}
+                  </button>
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;" >
+                  @csrf
+                </form>
+              </div>
+              
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>

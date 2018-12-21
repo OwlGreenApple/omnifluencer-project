@@ -1,17 +1,32 @@
-<?php use App\Save; ?>
+<?php use App\Save; 
+      use App\Helpers\Helper;
+?>
 
 @foreach($accounts as $account)
   <tr>
-    <td>
+    <td align="center">
       <input type="checkbox" name="accountid[]" value="{{$account->accountid}}">
     </td>
     <td>
-      <img src="{{$account->prof_pic}}" style="max-width:50px">
+      <img src="{{$account->prof_pic}}" style="max-width:50px; border-radius:50%;">
       <?php echo '@'.$account->username ?>
     </td>
     <td>
-      {{ date("d F Y", strtotime($account->created_at))  }}
-    </td> 
+      <?php 
+        $eng_rate = $account->eng_rate*100;
+        echo $eng_rate.'%';
+      ?> 
+    </td>
+    <td>
+      <?php 
+        echo Helper::abbreviate_number($account->jml_followers,2)
+      ?>
+    </td>
+    <td>
+      <?php 
+        echo Helper::abbreviate_number($account->jml_post,2)
+      ?>
+    </td>
     <td align="center">
       <?php  
         $groups = Save::join('groups','groups.id','=','saves.group_id')
@@ -36,14 +51,25 @@
       ?>
     </td> 
     <td>
-      <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">Delete</button>
+      {{ date("H:i", strtotime($account->created_at))  }}
+      <br>
+      {{ date("Y/m/d", strtotime($account->created_at))  }}
+    </td> 
+    <td>
+      <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">
+        <i class="far fa-trash-alt"></i>
+      </button>
 
       <a href="<?php echo url('history-search/print-pdf').'/'.$account->accountid ?>" target="_blank">
-        <button class="btn btn-primary">PDF</button>
+        <button class="btn btn-primary">
+          <i class="fas fa-file-pdf"></i>
+        </button>
       </a>
 
       <a href="<?php echo url('history-search/print-csv').'/'.$account->accountid ?>" target="_blank">
-        <button class="btn btn-primary">CSV</button>
+        <button class="btn btn-primary">
+          <i class="fas fa-file-csv"></i>
+        </button>
       </a>
     </td>
   </tr>
