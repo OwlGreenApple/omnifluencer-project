@@ -25,11 +25,11 @@
 
       <div class="row">
         <div class="col-md-4">
-          <div class="card">
+          <div class="card dashboard">
             <div class="card-header calc">
               <h5>Total Calculates</h5>
             </div>
-            <div class="card-body" align="center">
+            <div class="card-body dashboard" align="center">
               <h1>
                 {{Auth::user()->count_calc}} 
                 <sub>times</sub>
@@ -39,11 +39,11 @@
         </div>
         
         <div class="col-md-4">
-          <div class="card">
+          <div class="card dashboard">
             <div class="card-header pdf">
               <h5>Total Save As PDF</h5>
             </div>
-            <div class="card-body" align="center">
+            <div class="card-body dashboard" align="center">
               <h1>
                 {{Auth::user()->count_pdf}}
                 <sub>times</sub>
@@ -53,11 +53,11 @@
         </div>
 
         <div class="col-md-4">
-          <div class="card">
+          <div class="card dashboard">
             <div class="card-header csv">
               <h5>Total Save As CSV</h5> 
             </div>
-            <div class="card-body" align="center">
+            <div class="card-body dashboard" align="center">
               <h1>
                 {{Auth::user()->count_csv}}
                 <sub>times</sub>

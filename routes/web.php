@@ -53,7 +53,13 @@ Route::group(['middleware' => ['web','auth']], function() {
 
   //Points 
   Route::get('/points','PointController@index');  
-  Route::get('/points/load-points','PointController@load_points');  
+  Route::get('/points/load-points','PointController@load_points'); 
+
+  //Compare History
+  Route::get('/compare-history','CompareController@index_history');
+  Route::get('/compare-history/load-history-compare','CompareController@load_history_compare');
+  Route::get('/compare-history/print-pdf/{id}','CompareController@print_pdf');
+  Route::get('/compare-history/print-csv/{id}','CompareController@print_csv');
 });
 
 //Search

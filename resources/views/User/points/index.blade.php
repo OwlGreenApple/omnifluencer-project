@@ -47,7 +47,7 @@
 
 <style type="text/css">
   .profpic {
-    width: 70px;
+    width: 75px;
     border-radius: 50%;
   }
 </style>
@@ -59,9 +59,31 @@
         <div class="col-md-7">
           <div class="card">  
             <div class="card-body">
-              <img class="profpic" src="<?php echo Auth::user()->prof_pic ?>">
-              <span>{{Auth::user()->name}}</span><br>
-              
+              <div class="row"> 
+                <div class="col-md-2">  
+                  <img class="profpic" src="<?php echo Auth::user()->prof_pic ?>">    
+                </div>
+
+                <div class="col-md-10"> 
+                  <h4><b>{{Auth::user()->name}}</b></h4>
+                  <i>Free Membership</i>
+                </div>
+              </div>
+              <br>  
+              <div class="col-md-12"> 
+                <p style="padding:0;margin:0;" align="right">2500 pts</p>
+
+                <?php $percent = (Auth::user()->point/2500)*100 ?>
+                <div class="progress" style="height: 25px;margin-bottom: 9px;">
+                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $percent ?>%">
+                    {{Auth::user()->point}} pts
+                  </div>
+                </div>
+
+                <h5>
+                  <b>FREE PRO MEMBER : 2000 PTS to go</b>
+                </h5>
+              </div>             
             </div>
           </div>
         </div>  
@@ -71,8 +93,12 @@
             <div class="card-header membership" align="center">
               <h3>PRO MEMBER</h3>
             </div>
-            <div class="card-body">
-              
+            <div class="card-body" align="center">
+                Importance <br> 
+                Design <br> 
+                Group <br>  
+                Save as .PDF<br> 
+                Save as .CSV
             </div>
           </div>
         </div>
@@ -81,8 +107,16 @@
       <br>
 
       <div class="card col-md-12">
-        <div class="card-bpdy">
-          <i class="fas fa-exclamation-circle"></i>
+        <div class="card-body row">
+          <div class="col-md-1" align="center">  
+            <i class="fas fa-exclamation-circle icon-exclamation" style="font-size:30px;color:#FF8717;"></i>
+          </div>
+          <div class="col-md-11"> 
+            <h4><b>What is PRO MEMBER?</b></h4>  
+            * <b>PRO Member</b> dapat menampilkan seluruh history pencarian <br>  
+            * <b>PRO Member</b> dapat mengelompokkan ke dalam suatu grup dari hasil pencarian <br>  
+            * <b>PRO Member</b> mendapatkan file .PDF dan .CSV dari seluruh history pencarian 
+          </div>
         </div>
       </div>
 

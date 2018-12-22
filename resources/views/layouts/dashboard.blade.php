@@ -141,9 +141,9 @@
           </span>
         </li>
 
-        <li class="<?php if(Request::is('history-compare')) echo 'active' ?>">
+        <li class="<?php if(Request::is('compare-history')) echo 'active' ?>">
           <span class="submenu-navbar">
-            <a href="{{url('history-compare')}}">
+            <a href="{{url('compare-history')}}">
               <i class="fas fa-chart-bar icon-menu"></i>
               Compare History
             </a>

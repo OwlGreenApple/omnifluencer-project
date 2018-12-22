@@ -175,10 +175,13 @@ ul ul a {
 /* Dashboard */
 .card {
   box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);
+}
+
+.card.dashboard {
   height: 220px;
 }
 
-.card-body {
+.card-body.dashboard {
   padding-top: 35px;
 }
 
