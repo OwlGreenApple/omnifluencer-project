@@ -12,22 +12,11 @@
       <?php echo '@'.$account->username ?>
     </td>
     <td>
-      <?php 
-        $eng_rate = $account->eng_rate*100;
-        echo $eng_rate.'%';
-      ?> 
-    </td>
-    <td>
-      <?php 
-        echo Helper::abbreviate_number($account->jml_followers,2)
-      ?>
-    </td>
-    <td>
-      <?php 
-        echo Helper::abbreviate_number($account->jml_post,2)
-      ?>
-    </td>
-    <td>
+      {{ date("H:i", strtotime($account->created_at))  }}
+      <br>
+      {{ date("Y/m/d", strtotime($account->created_at))  }}
+    </td> 
+    <td align="center">
       <?php  
         $groups = Save::join('groups','groups.id','=','saves.group_id')
                     ->select('groups.group_name')
@@ -51,26 +40,21 @@
       ?>
     </td> 
     <td>
-      {{ date("H:i", strtotime($account->created_at))  }}
-      <br>
-      {{ date("Y/m/d", strtotime($account->created_at))  }}
-    </td> 
-    <td>
-      <button type="button" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">
-        <i class="far fa-trash-alt"></i>
-      </button>
-
       <a href="<?php echo url('history-search/print-pdf').'/'.$account->accountid ?>" target="_blank">
-        <button type="button" class="btn btn-primary">
+        <button class="btn btn-primary">
           <i class="fas fa-file-pdf"></i>
         </button>
       </a>
 
       <a href="<?php echo url('history-search/print-csv').'/'.$account->accountid ?>" target="_blank">
-        <button type="button" class="btn btn-primary">
+        <button class="btn btn-primary">
           <i class="fas fa-file-csv"></i>
         </button>
       </a>
+
+      <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">
+        <i class="far fa-trash-alt"></i>
+      </button>
     </td>
   </tr>
 @endforeach

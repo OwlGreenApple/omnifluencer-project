@@ -1,0 +1,155 @@
+@extends('layouts.dashboard')
+
+@section('content')
+<link href="{{ asset('css/history-search.css') }}" rel="stylesheet">
+
+<script type="text/javascript">
+  var currentPage = '';
+
+  $(document).ready(function() {
+    //function saat klik pagination
+    refresh_page();
+  });
+
+  function refresh_page(){
+    if(currentPage==''){
+      currentPage = "<?php echo url('/groups/load-list-group') ?>";
+    } 
+
+    $.ajax({
+      type : 'GET',
+      url : currentPage,
+      data : {
+        id:{{$id_group}},
+      },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        $('#content').html(data.view);
+        $('#pager').html(data.pager);
+      }
+    });
+  }
+</script>
+
+<input type="hidden" name="id_delete" id="id_delete">
+
+<style type="text/css">
+  thead {
+    background-color: #E5E5E5; 
+    border-bottom: 2px solid #333;
+  }
+
+  td{
+    background-color: #fff; 
+  }
+</style>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-11">
+
+      <h2><b>Group - {{$group_name}}</b></h2>  
+      
+      <div class="row">
+        <div class="col-md-5">
+          <h5>
+            Manage your saved group
+          </h5>    
+        </div>
+
+        <div class="col-md-7" align="right">
+          <button class="btn btn-primary">
+            <i class="fas fa-file-pdf"></i> PDF
+          </button>
+          <button class="btn btn-primary">
+            <i class="fas fa-file-csv"></i> CSV
+          </button>
+          <button class="btn btn-danger">
+            <i class="far fa-trash-alt"></i> Delete
+          </button>     
+        </div>
+      </div>
+      
+      <hr>
+
+      <br>  
+
+      <form>
+        <table class="table">
+          <thead align="center">
+            <th>
+              <input type="checkbox" name="checkAll" id="checkAll">
+            </th>
+            <th class="header" action="username">
+              Instagram
+            </th>
+            <th class="header" action="created_at">
+              Date
+            </th>
+            <th>Action</th>
+          </thead>
+          <tbody id="content"></tbody>
+        </table>
+
+        <div id="pager"></div>    
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Confirm Delete -->
+<div class="modal fade" id="confirm-delete" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Delete Confirmation
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete?
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-primary" id="btn-delete-ok" data-dismiss="modal">
+          Yes
+        </button>
+        <button class="btn" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
+<script type="text/javascript">
+  $( "body" ).on( "click", ".btn-delete", function() {
+    $('#id_delete').val($(this).attr('data-id'));
+  });
+
+  $( "body" ).on( "click", "#btn-delete-ok", function() {
+    delete_history();
+  });
+
+  $(document).on('click', '#checkAll', function (e) {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+  });
+
+  $(document).on('click', '.pagination a', function (e) {
+    e.preventDefault();
+    currentPage = $(this).attr('href');
+    refresh_page();
+  });
+</script>
+@endsection

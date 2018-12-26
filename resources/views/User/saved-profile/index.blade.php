@@ -43,15 +43,12 @@
 
   function refresh_page(){
     if(currentPage==''){
-      currentPage = "<?php echo url('/history-search/load-history-search') ?>";
+      currentPage = "<?php echo url('/saved-profile/load-accounts') ?>";
     } 
 
     $.ajax({
       type : 'GET',
       url : currentPage,
-      data: {
-        keywords : $('#keywords').val(),
-      },
       dataType: 'text',
       beforeSend: function()
       {
@@ -167,18 +164,12 @@
   td{
     background-color: #fff; 
   }
-
-  .table td, .table th {
-    vertical-align: middle;
-  }
-
-  .mdl-data-table th:first-of-type { text-align:left; width: 40px; }
 </style>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-11">
 
-      <h2><b>History</b></h2>  
+      <h2><b>Saved Profile</b></h2>  
       
       <div class="row">
         <div class="col-md-5">
@@ -188,98 +179,33 @@
         </div>
 
         <div class="col-md-7" align="right">
-          <button class="btn btn-primary" id="btn-compare">
-            <i class="fas fa-chart-bar"></i>
-            Compare
-          </button>
           <button class="btn btn-primary" id="btn-save">
             <i class="fas fa-folder-plus"></i> 
             Add to group
-          </button>
-          <button class="btn btn-primary" id="btn-save-global">
-            <i class="fas fa-save"></i> 
-            Save
           </button>
           <button class="btn btn-danger">
             <i class="far fa-trash-alt"></i> Delete
           </button>     
         </div>
       </div>
-      
-      <div class="card col-md-12" style="display: none">
-        <div class="card-body row">
-          <div class="col-md-1" align="center">  
-            <i class="fas fa-exclamation-circle icon-exclamation" style="font-size:30px;color:#FF8717;"></i>
-          </div>
-          <div class="col-md-11"> 
-            <h4><b>Info for Free Member</b></h4>  
-            * <b>Free Member</b> hanya dapat menampilkan 10 history pencarian terakhir<br>  
-            * <b>Free Member</b> tidak dapat mengelompokkan ke dalam suatu grup dari hasil pencarian <br>  
-            * <b>Free Member</b> hanya mendapatkan file .CSV sesuai dengan 10 history pencarian terakhir <br> 
-            <br>  
-            ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. <button class="btn btn-primary"><i class="fas fa-star"></i> Upgrade To Pro</button>
-          </div>
-        </div>
-      </div>
-
+    
       <hr>
 
       <br>  
 
       <form>
-        <div class="row">
-          <div class="form-group row col-md-6">
-            <label class="col-md-1 col-form-label">
-              <b>Dari</b>
-            </label>
-
-            <div class="col-md-4">
-              <input id="from" type="text" class="form-control" name="from">
-            </div>
-
-            <label class="col-md-1 col-form-label" style="padding-left: 0;">
-              <b>hingga</b>
-            </label>
-
-            <div class="col-md-4">
-              <input id="to" type="text" class="form-control" name="to">
-            </div>
-          </div>
-
-          <div class="form-group row col-md-6">
-            <div class="offset-md-5 col-md-6" style="padding-right: 0;">
-              <input id="keywords" type="text" class="form-control" name="keywords">
-            </div>
-
-            <div class="col-md-1">
-              <button class="btn btn-primary">
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
-
         <table class="table">
-          <thead>
+          <thead align="center">
             <th>
               <input type="checkbox" name="checkAll" id="checkAll">
             </th>
             <th class="header" action="username">
               Instagram
             </th>
-            <th class="header" action="eng_rate">
-              Eng. Rate
-            </th>
-            <th class="header" action="jml_followers">
-              Followers
-            </th>
-            <th class="header" action="jml_post">
-              Posts
+            <th class="header" action="created_at">
+              Saved Date
             </th>
             <th>Groups</th>
-            <th class="header" action="created_at">
-              Date
-            </th>
             <th>Action</th>
           </thead>
           <tbody id="content"></tbody>
@@ -304,11 +230,11 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        Apakah Anda yakin untuk menghapus histori ini?
+        Are you sure you want to delete?
       </div>
       <div class="modal-footer" id="foot">
-        <button class="btn btn-danger" id="btn-delete-ok" data-dismiss="modal">
-          Delete
+        <button class="btn btn-primary" id="btn-delete-ok" data-dismiss="modal">
+          Yes
         </button>
         <button class="btn" data-dismiss="modal">
           Cancel
@@ -361,11 +287,6 @@
         create_groups();
       }
   });  
-
-  $( "body" ).on( "click", ".btn-search", function() {
-    currentPage = '';
-    refresh_page();
-  });
 
   $( "body" ).on( "click", ".btn-delete", function() {
     $('#id_delete').val($(this).attr('data-id'));

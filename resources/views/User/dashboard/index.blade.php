@@ -5,14 +5,14 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-8">
           <h2><b>Dashboard</b></h2>
           <h5>
             Welcome to Omnifluencer!
           </h5>    
         </div>  
 
-        <div class="col-md-3" align="right">
+        <div class="col-md-4" align="right">
           <h5>
             {{ date("l, d F Y")  }}
           </h5>

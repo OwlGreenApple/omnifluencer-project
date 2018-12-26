@@ -14,21 +14,21 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
   <script src="{{ asset('js/noframework.waypoints.min.js') }}"></script>
-  <script type="text/javascript" src="tooltipster/dist/js/tooltipster.main.min.js"></script>
+  <script type="text/javascript" src="tooltipster/dist/js/tooltipster.bundle.min.js"></script>
   <!--<script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>-->
   <script defer src="{{asset('js/all.js')}}"></script>
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="tooltipster/dist/css/tooltipster.main.min.css" />
+  <link rel="stylesheet" type="text/css" href="tooltipster/dist/css/tooltipster.bundle.min.css" />
   <link href="{{ asset('css/all.css') }}" rel="stylesheet">
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 
   <script>
     $(document).ready(function() {
       $('.tooltipstered').tooltipster({
-          
+        contentAsHTML: true,
       });
     });
   </script>
@@ -38,32 +38,34 @@
   <!-- Navbar -->
   <nav class="menu-header">
     <div class="row div-header">
-      <div class="col-md-1"></div>
+      
 
-      <div class="col-md-4">
-        <div class="row">
-          <label class="submenu-header">
-            <b>Referral link</b>
-            <i class="fas fa-question-circle"></i>
-          </label>
+      <div class="col-md-6">
+        <label class="submenu-header">
+          <b>Referral link</b>
+          <span class="tooltipstered" title="Referral link">
+            <i class="fas fa-question-circle" style="margin: 0px 5px;"></i>
+          </span>
+        </label>
           
-          <input type="text" name="reflink" class="col-md-6" id="reflink-box" value="<?php echo url('/').'/ref/'.Auth::user()->referral_link ?>">
-          <button class="btn btn-default btn-sm btn-copy" onclick="copylink()">
-            Copy
-          </button>    
-        </div>
+        <input type="text" name="reflink" class="col-md-6" id="reflink-box" value="<?php echo url('/').'/ref/'.Auth::user()->referral_link ?>">
+        <button class="btn btn-default btn-sm btn-copy" onclick="copylink()">
+          Copy
+        </button>    
       </div>
 
-      <div class="col-md-6" align="right">
-        <span class="submenu-header" style="padding-right: 20px;">
+      <div class="col-md-5" align="right">
+        <span class="submenu-header"  style="padding-right: 20px;">
           <a href="{{url('/')}}">
-            <i class="fas fa-home"></i>
+            <i class="fas fa-home" style="margin-right: 7px;"></i>
             <b>Home</b>
           </a>
         </span>
 
         <span class="submenu-header">
-          <i class="fas fa-bell"></i>
+          <span class="icon-notif" data-badge="6">
+            <i class="fas fa-bell" style="margin-right: 7px;"></i>
+          </span>
           <b>Notification</b>
         </span>
       </div>

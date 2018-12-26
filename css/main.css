@@ -26,7 +26,11 @@ img {
   width: 100%;
 }
 
-html, body {
+html {
+  height: 100%;
+}
+
+body {
   min-height: 100%;
 }
 
@@ -99,4 +103,29 @@ td{
 @keyframes animatebottom { 
   from{ bottom:-100px; opacity:0 } 
   to{ bottom:0; opacity:1 }
+}
+
+/* Pop Up */
+.modal-header {
+  background-image: linear-gradient(-228deg, #0BB2D6 0%, #1094C2 100%);
+  color: #fff;
+}
+
+.icon-notif {
+  position:relative;
+}
+
+.icon-notif[data-badge]:after {
+   content:attr(data-badge);
+   position:absolute;
+   top:-6px;
+   right:1px;
+   font-size:.6em;
+   background:#6BFFDC;
+   color:black;
+   width:16px;height:16px;
+   text-align:center;
+   line-height:16px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
 }

@@ -60,6 +60,16 @@ Route::group(['middleware' => ['web','auth']], function() {
   Route::get('/compare-history/load-history-compare','CompareController@load_history_compare');
   Route::get('/compare-history/print-pdf/{id}','CompareController@print_pdf');
   Route::get('/compare-history/print-csv/{id}','CompareController@print_csv');
+
+  //Groups
+  Route::get('/groups','GroupController@index');
+  Route::get('/groups/load-groups','GroupController@load_groups');
+  Route::get('/groups/{id}/{group_name}','GroupController@index_list');
+  Route::get('/groups/load-list-group','GroupController@load_list_group');
+
+  //Saved Profile
+  Route::get('/saved-profile','GroupController@index_saved');
+  Route::get('/saved-profile/load-accounts','GroupController@load_saved_accounts');
 });
 
 //Search

@@ -28,7 +28,7 @@
   <script>
     $(document).ready(function() {
       $('.tooltipstered').tooltipster({
-          
+        contentAsHTML: true,
       });
     });
   </script>

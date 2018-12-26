@@ -51,7 +51,8 @@
       <h2><b>Change Password</b></h2>
       <h5>
         Change your old password to the new password
-      </h5> 
+      </h5>
+      
       <hr>
 
       <div class="alert" id="pesan"></div>
