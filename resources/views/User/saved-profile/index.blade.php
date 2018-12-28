@@ -194,10 +194,14 @@
       <br>  
 
       <form>
+        <div class="check-mobile">
+          <input class="checkAll" type="checkbox" name="checkAll"> Check All
+        </div>
+
         <table class="table">
           <thead align="center">
             <th>
-              <input type="checkbox" name="checkAll" id="checkAll">
+              <input class="checkAll" type="checkbox" name="checkAll">
             </th>
             <th class="header" action="username">
               Instagram
@@ -309,7 +313,7 @@
     $("#input-group").focus();
   });
 
-  $(document).on('click', '#checkAll', function (e) {
+  $(document).on('click', '.checkAll', function (e) {
     $('input:checkbox').not(this).prop('checked', this.checked);
   });
 

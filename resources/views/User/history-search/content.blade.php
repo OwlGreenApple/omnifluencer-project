@@ -7,27 +7,27 @@
     <td align="center">
       <input type="checkbox" name="accountid[]" value="{{$account->accountid}}">
     </td>
-    <td>
+    <td data-label="Instagram">
       <img src="{{$account->prof_pic}}" style="max-width:50px; border-radius:50%;">
       <?php echo '@'.$account->username ?>
     </td>
-    <td>
+    <td data-label="Eng. Rate">
       <?php 
         $eng_rate = $account->eng_rate*100;
         echo $eng_rate.'%';
       ?> 
     </td>
-    <td>
+    <td data-label="Followers">
       <?php 
         echo Helper::abbreviate_number($account->jml_followers,2)
       ?>
     </td>
-    <td>
+    <td data-label="Posts">
       <?php 
         echo Helper::abbreviate_number($account->jml_post,2)
       ?>
     </td>
-    <td>
+    <td data-label="Groups">
       <?php  
         $groups = Save::join('groups','groups.id','=','saves.group_id')
                     ->select('groups.group_name')
@@ -50,12 +50,12 @@
         }
       ?>
     </td> 
-    <td>
+    <td data-label="Date">
       {{ date("H:i", strtotime($account->created_at))  }}
       <br>
       {{ date("Y/m/d", strtotime($account->created_at))  }}
     </td> 
-    <td>
+    <td data-label="Action">
       <button type="button" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">
         <i class="far fa-trash-alt"></i>
       </button>

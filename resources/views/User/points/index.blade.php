@@ -55,22 +55,34 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
 
+      <h2><b>Points</b></h2>  
+      <h5>
+        Your point history
+      </h5>    
+      <hr>
+
+      <br>  
+
       <div class="row">
         <div class="col-md-7">
           <div class="card">  
             <div class="card-body">
               <div class="row"> 
-                <div class="col-md-2">  
+                <div class="col-md-2 col-12" align="center">  
                   <img class="profpic" src="<?php echo Auth::user()->prof_pic ?>">    
                 </div>
 
-                <div class="col-md-10"> 
+                <div class="col-md-6 col-12 center-mobile"> 
                   <h4><b>{{Auth::user()->name}}</b></h4>
                   <i>Free Membership</i>
                 </div>
+
+                <div class="col-md-4 col-12 center-mobile" align="right">
+                  Total points : {{Auth::user()->point}}pts
+                </div>
               </div>
               <br>  
-              <div class="col-md-12"> 
+              <!--<div class="col-md-12"> 
                 <p style="padding:0;margin:0;" align="right">2500 pts</p>
 
                 <?php $percent = (Auth::user()->point/2500)*100 ?>
@@ -83,28 +95,34 @@
                 <h5>
                   <b>FREE PRO MEMBER : 2000 PTS to go</b>
                 </h5>
-              </div>             
+              </div>-->            
             </div>
           </div>
         </div>  
 
         <div class="col-md-5">
           <div class="card">  
-            <div class="card-header membership" align="center">
+            <!--<div class="card-header membership" align="center">
               <h3>PRO MEMBER</h3>
-            </div>
+            </div>-->
             <div class="card-body" align="center">
-                Importance <br> 
+              <p>
+                Upgrade to pro membership? <br>
+                Click button below
+              </p>
+              <button class="btn btn-primary">
+                <i class="fas fa-star"></i> 
+                Upgrade To Pro
+              </button>
+                <!--Importance <br> 
                 Design <br> 
                 Group <br>  
                 Save as .PDF<br> 
-                Save as .CSV
+                Save as .CSV-->
             </div>
           </div>
         </div>
       </div>
-
-      <br>
 
       <div class="card col-md-12">
         <div class="card-body row">
@@ -122,31 +140,44 @@
 
       <br>
 
-      <h2><b>Point History</b></h2>  
-      <h5>
-        Check your earn point activity
-      </h5>    
-      <hr>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-redeem-tab" data-toggle="tab" href="#nav-redeem" role="tab" aria-controls="nav-redeem" aria-selected="true">
+            <b>Redeem Points</b>
+          </a>
+          <a class="nav-item nav-link" id="nav-history-tab" data-toggle="tab" href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="false">
+            <b>Point History</b>
+          </a>
+        </div>
+      </nav>
 
-      <br>  
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-redeem" role="tabpanel" aria-labelledby="nav-redeem-tab">
+              
+        </div>
 
-      <table class="table">
-        <thead align="center">
-          <th class="header" action="created_at">
-            Date
-          </th>
-          <th class="header" action="keterangan">
-            Description
-          </th>
-          <th class="header" action="jml_point">
-            Points
-          </th>
-        </thead>
-        <tbody id="content"></tbody>
-      </table>
+        <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
+          <br>
+        
+          <table class="table">
+            <thead align="center">
+              <th class="header" action="created_at">
+                Date
+              </th>
+              <th class="header" action="keterangan">
+                Description
+              </th>
+              <th class="header" action="jml_point">
+                Points
+              </th>
+            </thead>
+            <tbody id="content"></tbody>
+          </table>
 
-      <div id="pager"></div>    
-      
+          <div id="pager"></div>    
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

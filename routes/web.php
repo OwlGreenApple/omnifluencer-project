@@ -70,6 +70,9 @@ Route::group(['middleware' => ['web','auth']], function() {
   //Saved Profile
   Route::get('/saved-profile','GroupController@index_saved');
   Route::get('/saved-profile/load-accounts','GroupController@load_saved_accounts');
+
+  //Notification 
+  Route::get('/notifications','NotificationController@index');
 });
 
 //Search

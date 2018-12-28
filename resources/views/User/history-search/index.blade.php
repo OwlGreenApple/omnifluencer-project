@@ -158,22 +158,6 @@
 
 <input type="hidden" name="id_delete" id="id_delete">
 
-<style type="text/css">
-  thead {
-    background-color: #E5E5E5; 
-    border-bottom: 2px solid #333;
-  }
-
-  td{
-    background-color: #fff; 
-  }
-
-  .table td, .table th {
-    vertical-align: middle;
-  }
-
-  .mdl-data-table th:first-of-type { text-align:left; width: 40px; }
-</style>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-11">
@@ -229,19 +213,19 @@
       <form>
         <div class="row">
           <div class="form-group row col-md-6">
-            <label class="col-md-1 col-form-label">
+            <label class="col-md-1 col-12 col-form-label">
               <b>Dari</b>
             </label>
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-12">
               <input id="from" type="text" class="form-control" name="from">
             </div>
 
-            <label class="col-md-1 col-form-label" style="padding-left: 0;">
+            <label class="col-md-1 col-12 col-form-label" style="padding-left: 0;">
               <b>hingga</b>
             </label>
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-12">
               <input id="to" type="text" class="form-control" name="to">
             </div>
           </div>
@@ -259,10 +243,14 @@
           </div>
         </div>
 
+        <div class="check-mobile">
+          <input class="checkAll" type="checkbox" name="checkAll"> Check All
+        </div>
+
         <table class="table">
           <thead>
             <th>
-              <input type="checkbox" name="checkAll" id="checkAll">
+              <input class="checkAll" type="checkbox" name="checkAll">
             </th>
             <th class="header" action="username">
               Instagram
@@ -388,7 +376,7 @@
     $("#input-group").focus();
   });
 
-  $(document).on('click', '#checkAll', function (e) {
+  $(document).on('click', '.checkAll', function (e) {
     $('input:checkbox').not(this).prop('checked', this.checked);
   });
 

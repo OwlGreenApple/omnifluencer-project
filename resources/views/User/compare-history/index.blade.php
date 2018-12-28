@@ -75,15 +75,6 @@
 <input type="hidden" name="id_delete" id="id_delete">
 
 <style type="text/css">
-  thead {
-    background-color: #E5E5E5; 
-    border-bottom: 2px solid #333;
-  }
-
-  td{
-    background-color: #fff; 
-  }
-
   .icon-arrow{
     color: #2089F6;
   }
@@ -145,10 +136,14 @@
           </div>
         </div>
 
+        <div class="check-mobile">
+          <input class="checkAll" type="checkbox" name="checkAll"> Check All
+        </div>
+
         <table class="table">
           <thead align="center">
             <th>
-              <input type="checkbox" name="checkAll" id="checkAll">
+              <input class="checkAll" type="checkbox" name="checkAll">
             </th>
             <th class="header" action="username">
               Instagram
@@ -232,7 +227,7 @@
     $("#input-group").focus();
   });
 
-  $(document).on('click', '#checkAll', function (e) {
+  $(document).on('click', '.checkAll', function (e) {
     $('input:checkbox').not(this).prop('checked', this.checked);
   });
 

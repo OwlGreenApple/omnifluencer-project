@@ -5,7 +5,7 @@
     <td align="center">
       <input type="checkbox" name="compareid[]" value="{{$compare->id}}">
     </td>
-    <td>
+    <td data-label="Instagram">
       <?php  
         $account1 = Account::where('id',$compare->account_id_1)->select('accounts.username')->first();
         $account2 = Account::where('id',$compare->account_id_2)->select('accounts.username')->first();
@@ -31,12 +31,12 @@
           {{'@'.$account4->username}}          
       <?php } ?>
     </td>
-    <td>
+    <td data-label="Date">
       {{ date("H:i", strtotime($compare->created_at))  }}
       <br>
       {{ date("Y/m/d", strtotime($compare->created_at))  }}
     </td> 
-    <td>
+    <td data-label="Action">
       <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$compare->id}}">
         <i class="far fa-trash-alt"></i>
       </button>

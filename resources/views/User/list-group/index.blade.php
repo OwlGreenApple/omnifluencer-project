@@ -42,16 +42,6 @@
 
 <input type="hidden" name="id_delete" id="id_delete">
 
-<style type="text/css">
-  thead {
-    background-color: #E5E5E5; 
-    border-bottom: 2px solid #333;
-  }
-
-  td{
-    background-color: #fff; 
-  }
-</style>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-11">

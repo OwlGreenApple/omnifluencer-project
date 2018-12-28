@@ -88,14 +88,20 @@
             }
       ?>
 
-      <img id="profpic" class="profpic img-img" src="<?php echo $src ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')" style="cursor: pointer; max-width: 100px; border-radius: 50%;">  
+      <div class="row">
+        <div class="col-md-2 col-12 space-bottom" align="center">
+          <img id="profpic" class="profpic img-img" src="<?php echo $src ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')" style="cursor: pointer; max-width: 100px; border-radius: 50%;">  
+        </div>
 
-      <button class="btn btn-primary" id="btn-upload-profpic">
-        Upload new picture
-      </button>
-      <button class="btn btn-danger">
-        Delete
-      </button>
+        <div class="col-md-9 col-12 center-mobile space-bottom">
+          <button class="btn btn-primary" id="btn-upload-profpic" style="margin-right: 5px;">
+            Upload new picture
+          </button>
+          <button class="btn btn-danger">
+            Delete
+          </button>          
+        </div>
+      </div>
 
       <form enctype="multipart/form-data" id="form-edit">
         @csrf

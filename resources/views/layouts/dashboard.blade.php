@@ -29,32 +29,76 @@
     $(document).ready(function() {
       $('.tooltipstered').tooltipster({
         contentAsHTML: true,
+        trigger: 'ontouchstart' in window || navigator.maxTouchPoints ? 'click' : 'hover',
       });
     });
   </script>
 </head>
 
 <body>
+  <?php  
+        use App\Notification;
+        use App\Helpers\Helper;
+
+        $countnotif = Notification::where('user_id',Auth::user()->id)
+                      ->where('is_read',0)
+                      ->count();
+
+        $notification = Notification::where('user_id',Auth::user()->id)
+                  ->orderBy('created_at','desc')
+                  ->take(5)
+                  ->get();
+  ?>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var countnotif = '{{$countnotif}}';
+
+      if(countnotif>0){
+        $('#icon-notif').addClass('new');
+      } else {
+        $('#icon-notif').removeClass('new');
+      }
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $('.div-loading').addClass('background-load');
+        $('.div-loading').addClass('bg-sidebar');
+      });
+    });
+
+    $(document).click(function(e) {
+      var sidebar = $("#sidebar, #sidebarCollapse");
+      if (!sidebar.is(e.target) && sidebar.has(e.target).length === 0) {
+        sidebar.removeClass('active');
+        $('.div-loading').removeClass('background-load');
+        $('.div-loading').removeClass('bg-sidebar');
+      }
+    });      
+  </script>
+
   <!-- Navbar -->
   <nav class="menu-header">
     <div class="row div-header">
-      
+      <div class="col-md-6 col-xs-12 navbar-reflink">
+        <button class="navbar-toggler" type="button" id="sidebarCollapse">
+          <i class="fas fa-bars"></i>
+        </button>
 
-      <div class="col-md-6">
-        <label class="submenu-header">
+        <label class="submenu-header label-reflink">
           <b>Referral link</b>
           <span class="tooltipstered" title="Referral link">
-            <i class="fas fa-question-circle" style="margin: 0px 5px;"></i>
+            <i class="fas fa-question-circle icon-reflink"></i>
           </span>
         </label>
           
-        <input type="text" name="reflink" class="col-md-6" id="reflink-box" value="<?php echo url('/').'/ref/'.Auth::user()->referral_link ?>">
+        <input type="text" name="reflink" class="col-md-6 col-4" id="reflink-box" value="<?php echo url('/').'/ref/'.Auth::user()->referral_link ?>">
         <button class="btn btn-default btn-sm btn-copy" onclick="copylink()">
           Copy
         </button>    
       </div>
 
-      <div class="col-md-5" align="right">
+      <div class="col-md-6 col-xs-12 div-header justify-content-end">
         <span class="submenu-header"  style="padding-right: 20px;">
           <a href="{{url('/')}}">
             <i class="fas fa-home" style="margin-right: 7px;"></i>
@@ -62,53 +106,89 @@
           </a>
         </span>
 
-        <span class="submenu-header">
-          <span class="icon-notif" data-badge="6">
-            <i class="fas fa-bell" style="margin-right: 7px;"></i>
-          </span>
-          <b>Notification</b>
+        <span class="submenu-header" style="padding-right: 20px;">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown" >
+              <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre data-offset="5,10">
+                <span class="icon-notif" id="icon-notif" data-badge="{{$countnotif}}">
+                  <i class="fas fa-bell" style="margin-right: 7px;"></i>
+                </span>
+                <b>Notification</b>
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right profpic-menu" aria-labelledby="navbarDropdown">
+                @foreach($notification as $notif)
+                  <span class="dropdown-item">
+                    @if($notif->type=='point')
+                      <span class="notif-point">
+                        <i class="fas fa-coins" style="margin-right: 5px"></i>
+                        {{$notif->notification}}
+                      </span>
+                    @elseif($notif->type=='promo')
+                      <span class="notif-promo">
+                        <i class="fas fa-star" style="margin-right: 5px"></i>
+                        {{$notif->notification}}
+                      </span>
+                    @endif
+                    <span style="float: right;font-size: 12px;">
+                      <?php 
+                        $time = Helper::getTimeAgo($notif->created_at);
+                        echo $time;
+                      ?>
+                    </span>
+                  </span>
+                @endforeach  
+                
+                <div class="col-md-12 menu-viewnotif" align="center">
+                  <a href="{{url('notifications')}}">
+                    View All Notifications
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
         </span>
-      </div>
 
-      <div class="col-md-1">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              <img class="profpic-header" src="{{Auth::user()->prof_pic}}">
-            </a>
+        <span class="submenu-header">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <img class="profpic-header" src="{{Auth::user()->prof_pic}}">
+              </a>
 
-            <div class="dropdown-menu dropdown-menu-right profpic-menu" aria-labelledby="navbarDropdown">
-              <div class="container" style="padding-bottom: 10px;">
-                <div class="row">
-                  <div class="col-md-4" align="center">
-                    <img class="profpic-header-big" src="{{Auth::user()->prof_pic}}">
-                  </div>
+              <div class="dropdown-menu dropdown-menu-right profpic-menu" aria-labelledby="navbarDropdown">
+                <div class="container" style="padding-bottom: 10px;">
+                  <div class="row">
+                    <div class="col-md-4" align="center">
+                      <img class="profpic-header-big" src="{{Auth::user()->prof_pic}}">
+                    </div>
 
-                  <div class="col-md-8" align="left">
-                    <b>{{Auth::user()->name}}</b><br>
-                    {{Auth::user()->point}} Points<br>
-                    Change Password
-                  </div>  
-                </div>   
+                    <div class="col-md-8" align="left">
+                      <b>{{Auth::user()->name}}</b><br>
+                      {{Auth::user()->point}} Points<br>
+                      Change Password
+                    </div>  
+                  </div>   
+                </div>
+                
+                <div class="col-md-12 menu-signout">
+                  <a href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                    <button class="btn btn-primary">
+                      {{ __('Sign Out') }}
+                    </button>
+                  </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;" >
+                    @csrf
+                  </form>
+                </div>
+                
               </div>
-              
-              <div class="col-md-12 menu-signout">
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                  <button class="btn btn-primary">
-                    {{ __('Sign Out') }}
-                  </button>
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;" >
-                  @csrf
-                </form>
-              </div>
-              
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </span>
       </div>
     </div>
   </nav>

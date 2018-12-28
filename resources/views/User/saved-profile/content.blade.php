@@ -7,16 +7,16 @@
     <td align="center">
       <input type="checkbox" name="accountid[]" value="{{$account->accountid}}">
     </td>
-    <td>
+    <td data-label="Instagram">
       <img src="{{$account->prof_pic}}" style="max-width:50px; border-radius:50%;">
       <?php echo '@'.$account->username ?>
     </td>
-    <td>
+    <td data-label="Saved Date">
       {{ date("H:i", strtotime($account->created_at))  }}
       <br>
       {{ date("Y/m/d", strtotime($account->created_at))  }}
     </td> 
-    <td align="center">
+    <td data-label="Groups" align="center">
       <?php  
         $groups = Save::join('groups','groups.id','=','saves.group_id')
                     ->select('groups.group_name')
@@ -39,7 +39,7 @@
         }
       ?>
     </td> 
-    <td>
+    <td data-label="Action">
       <a href="<?php echo url('history-search/print-pdf').'/'.$account->accountid ?>" target="_blank">
         <button class="btn btn-primary">
           <i class="fas fa-file-pdf"></i>

@@ -4,6 +4,7 @@ namespace App\Helpers;
 /**
 * 
 */
+use Carbon;
 
 class Helper
 {
@@ -37,6 +38,25 @@ class Helper
     }
 
     return $n_format . $suffix;
+  }
+
+  public static function getTimeAgo($created_at){
+    $time = Carbon::createFromTimeStamp(strtotime($created_at))->diffForHumans();   
+    $time = str_replace('ago', '', $time);
+    $arr_time = explode(' ', $time);
+    
+    $diff = $arr_time[1][0];
+
+    if($arr_time[1]=='minute'||$arr_time[1]=='minutes'){
+      $diff = substr($arr_time[1], 0,3);
+    }
+    if($arr_time[1]=='month'||$arr_time[1]=='months'){
+      $diff = substr($arr_time[1], 0,2);
+    }
+
+    $newtime = $arr_time[0].$diff;
+
+    return $newtime;
   }
 }
 

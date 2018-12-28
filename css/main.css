@@ -111,11 +111,12 @@ td{
   color: #fff;
 }
 
+/* Notifications */
 .icon-notif {
   position:relative;
 }
 
-.icon-notif[data-badge]:after {
+.icon-notif.new[data-badge]:after {
    content:attr(data-badge);
    position:absolute;
    top:-6px;
@@ -128,4 +129,111 @@ td{
    line-height:16px;
    border-radius:50%;
    box-shadow:0 0 1px #333;
+}
+
+.notif {
+  font-size: 17px;  
+  font-weight: 600;
+}
+
+.notif-promo { 
+  color: #1E88F5;
+}
+
+.notif-point {
+  color: #079D2F;
+}
+
+/* Mobile */
+@media (max-width:769px){
+  .center-mobile {
+    text-align: center !important;
+  }
+}
+
+/* Miscellaneous */
+.space-bottom {
+  margin-bottom: 20px;
+}
+
+.no-padding {
+  padding: 0;
+  margin: 0;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+/* Table */
+thead {
+  background-color: #E5E5E5; 
+  border-bottom: 2px solid #333;
+}
+
+td{
+  background-color: #fff; 
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+
+table tr {
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+.check-mobile{
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  /* untuk ilangin table thead di mobile */ 
+  table thead {
+    overflow: hidden; /*important*/
+    position: absolute;
+    width: 1px;
+
+    border: none; /*optional*/
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: right;
+    width: 100%;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+
+  .check-mobile{
+    display: block;
+  }
 }
