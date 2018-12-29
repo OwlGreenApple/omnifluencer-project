@@ -65,6 +65,7 @@
 
         $('.tooltipstered').tooltipster({
           contentAsHTML: true,
+          trigger: 'ontouchstart' in window || navigator.maxTouchPoints ? 'click' : 'hover',
         });
       }
     });
@@ -155,16 +156,6 @@
 
 <input type="hidden" name="id_delete" id="id_delete">
 
-<style type="text/css">
-  thead {
-    background-color: #E5E5E5; 
-    border-bottom: 2px solid #333;
-  }
-
-  td{
-    background-color: #fff; 
-  }
-</style>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-11">
@@ -277,6 +268,57 @@
         <button class="btn btn-primary" id="btn-add-group" data-dismiss="modal">
           Add
         </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
+<!-- Modal Send File -->
+<div class="modal fade" id="send-file" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Download or Send to
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+
+        <input type="hidden" name="email-type" id="email-type">
+
+        <div class="container">
+          <div class="send-pdf mb-4">
+            <i class="fas fa-file-pdf"></i>
+            PDF Download 
+
+            <a href="<?php echo url('history-search/print-pdf')?>" target="_blank">
+              <button class="btn btn-primary float-right"> 
+                Download
+              </button>
+            </a>
+          </div>
+
+          <div class="send-csv mb-4" style="display: none;">
+            <i class="fas fa-file-csv"></i>
+            CSV Download 
+
+            <a href="<?php echo url('history-search/print-csv')?>" target="_blank">
+              <button class="btn btn-primary float-right"> 
+                Download
+              </button>
+            </a>
+          </div>
+        
+          <hr>
+
+          <label>Send to</label>
+          <input type="text" name="sendemail" class="form-control mb-2" placeholder="email address...">
+          <button class="btn btn-primary">Send</button>
+        </div>
       </div>
     </div>
       

@@ -104,35 +104,26 @@
       <br>  
 
       <form>
-        <div class="row">
-          <div class="form-group row col-md-6">
-            <label class="col-md-1 col-form-label">
-              <b>Dari</b>
+        <div class="form-inline mb-2">
+          <label class="center-mobile mr-sm-2" for="from">
+            <b>Dari</b>
+          </label>
+          <input id="from" type="text" class="form-control mb-2 mr-sm-2 col-md-2" name="from">
+
+          <label class="center-mobile mr-sm-2" for="to">
+            <b>hingga</b>
+          </label>
+          <input id="to" type="text" class="form-control mb-2 mr-sm-2" name="to">
+
+          <div class="d-flex">
+            <label class="sr-only" for="keywords">
+              Search
             </label>
-
-            <div class="col-md-4">
-              <input id="from" type="text" class="form-control" name="from">
-            </div>
-
-            <label class="col-md-1 col-form-label" style="padding-left: 0;">
-              <b>hingga</b>
-            </label>
-
-            <div class="col-md-4">
-              <input id="to" type="text" class="form-control" name="to">
-            </div>
-          </div>
-
-          <div class="form-group row col-md-6">
-            <div class="offset-md-5 col-md-6" style="padding-right: 0;">
-              <input id="keywords" type="text" class="form-control" name="keywords">
-            </div>
-
-            <div class="col-md-1">
-              <button class="btn btn-primary">
-                Search
-              </button>
-            </div>
+            <input id="keywords" type="text" class="form-control mb-2 mr-sm-2" name="keywords" placeholder="username...">
+                
+            <button class="btn btn-primary mb-2">
+              Search
+            </button>
           </div>
         </div>
 

@@ -41,7 +41,7 @@
             $listgroup = $listgroup.'- '.$group->group_name.'<br>';
           }
       ?>
-          <span class="tooltipstered" title="<?php echo $listgroup ?>">
+          <span class="tooltipstered txt" title="<?php echo $listgroup ?>">
             <?php echo $groups->count().' groups'?>       
           </span>
       <?php

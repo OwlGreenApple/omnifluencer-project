@@ -68,6 +68,7 @@
 
         $('.tooltipstered').tooltipster({
           contentAsHTML: true,
+          trigger: 'ontouchstart' in window || navigator.maxTouchPoints ? 'click' : 'hover',
         });
       }
     });
@@ -165,32 +166,32 @@
       <h2><b>History</b></h2>  
       
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5 col-12 mb-10">
           <h5>
             Select bulk action, save or add it to group
           </h5>    
         </div>
 
-        <div class="col-md-7" align="right">
-          <button class="btn btn-primary" id="btn-compare">
+        <div class="col-md-7 col-12" align="right">
+          <button class="btn btn-primary mb-10" id="btn-compare">
             <i class="fas fa-chart-bar"></i>
             Compare
           </button>
-          <button class="btn btn-primary" id="btn-save">
+          <button class="btn btn-primary mb-10" id="btn-save">
             <i class="fas fa-folder-plus"></i> 
             Add to group
           </button>
-          <button class="btn btn-primary" id="btn-save-global">
+          <button class="btn btn-primary mb-10" id="btn-save-global">
             <i class="fas fa-save"></i> 
             Save
           </button>
-          <button class="btn btn-danger">
+          <button class="btn btn-danger mb-10">
             <i class="far fa-trash-alt"></i> Delete
           </button>     
         </div>
       </div>
       
-      <div class="card col-md-12" style="display: none">
+      <div class="card col-md-12" style="display: none;">
         <div class="card-body row">
           <div class="col-md-1" align="center">  
             <i class="fas fa-exclamation-circle icon-exclamation" style="font-size:30px;color:#FF8717;"></i>
@@ -211,36 +212,25 @@
       <br>  
 
       <form>
-        <div class="row">
-          <div class="form-group row col-md-6">
-            <label class="col-md-1 col-12 col-form-label">
-              <b>Dari</b>
-            </label>
+        <div class="form-inline mb-2">
+          <label class="center-mobile mr-sm-2" for="from">
+            <b>Dari</b>
+          </label>
+          <input id="from" type="text" class="form-control mb-2 mr-sm-2 col-md-2" name="from">
 
-            <div class="col-md-4 col-12">
-              <input id="from" type="text" class="form-control" name="from">
-            </div>
+          <label class="center-mobile mr-sm-2" for="to">
+            <b>hingga</b>
+          </label>
+          <input id="to" type="text" class="form-control mb-2 mr-sm-2" name="to">
 
-            <label class="col-md-1 col-12 col-form-label" style="padding-left: 0;">
-              <b>hingga</b>
-            </label>
-
-            <div class="col-md-4 col-12">
-              <input id="to" type="text" class="form-control" name="to">
-            </div>
-          </div>
-
-          <div class="form-group row col-md-6">
-            <div class="offset-md-5 col-md-6" style="padding-right: 0;">
-              <input id="keywords" type="text" class="form-control" name="keywords">
-            </div>
-
-            <div class="col-md-1">
-              <button class="btn btn-primary">
-                Search
-              </button>
-            </div>
-          </div>
+          <label class="sr-only" for="keywords">
+            Search
+          </label>
+          <input id="keywords" type="text" class="form-control mb-2 mr-sm-2" name="keywords" placeholder="username...">
+              
+          <button class="btn btn-primary mb-2">
+            Search
+          </button>
         </div>
 
         <div class="check-mobile">

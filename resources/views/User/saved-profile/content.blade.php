@@ -30,7 +30,7 @@
             $listgroup = $listgroup.'- '.$group->group_name.'<br>';
           }
       ?>
-          <span class="tooltipstered" title="<?php echo $listgroup ?>">
+          <span class="tooltipstered txt" title="<?php echo $listgroup ?>">
             <?php echo $groups->count().' groups'?>       
           </span>
       <?php
@@ -40,19 +40,17 @@
       ?>
     </td> 
     <td data-label="Action">
-      <a href="<?php echo url('history-search/print-pdf').'/'.$account->accountid ?>" target="_blank">
-        <button class="btn btn-primary">
-          <i class="fas fa-file-pdf"></i>
-        </button>
-      </a>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#send-file">
+        <i class="fas fa-file-pdf"></i>
+      </button>
 
       <a href="<?php echo url('history-search/print-csv').'/'.$account->accountid ?>" target="_blank">
-        <button class="btn btn-primary">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#send-file">
           <i class="fas fa-file-csv"></i>
         </button>
       </a>
 
-      <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">
+      <button type="button" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">
         <i class="far fa-trash-alt"></i>
       </button>
     </td>

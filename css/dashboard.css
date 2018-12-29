@@ -162,17 +162,6 @@ ul ul a {
   align-items: center;
 }
 
-.profpic-header {
-  max-width:40px;
-  border-radius: 50%;
-  border: 2px solid #12425B;
-}
-
-.profpic-header-big {
-  max-width:60px;
-  border-radius: 50%;
-}
-
 .submenu-navbar {
   color:#12425B;
   font-size: 15px;  
@@ -180,30 +169,6 @@ ul ul a {
 
 .icon-menu {
   margin-right: 15px;
-}
-
-/* Dropdown profpic */
-.profpic-menu {
-  min-width:250px;
-  padding-bottom:0;
-}
-
-.menu-signout {
-  background-color: #EFEFEF;
-  padding: 5px;
-  text-align: right;
-}
-
-/* Dropdown notification */
-.menu-viewnotif {
-  background-color: #66B4FF;
-  padding: 5px;
-  color: #fff;
-  text-align: center;
-}
-
-.menu-viewnotif > a:hover {
-  color: black;
 }
 
 /* Reflink */

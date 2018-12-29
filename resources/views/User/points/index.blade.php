@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="col-md-4 col-12 center-mobile" align="right">
-                  Total points : {{Auth::user()->point}}pts
+                  <h5><b>Total points : {{Auth::user()->point}}</b></h5>
                 </div>
               </div>
               <br>  
