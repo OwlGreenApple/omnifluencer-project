@@ -62,4 +62,14 @@ class GroupController extends Controller
                         ->with('accounts',$accounts);
       return $arr;
     }
+
+    public function delete_saved_profile(Request $request)
+    {
+      $saved = Save::find($request->id)->delete();
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Delete saved profile berhasil';
+
+      return $arr;
+    }
 }

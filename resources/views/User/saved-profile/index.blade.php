@@ -71,10 +71,13 @@
     });
   }
 
-  function delete_history(){
+  function delete_profile(){
     $.ajax({
       type : 'GET',
-      url : "<?php echo url('/search/delete-history') ?>",
+      url : "<?php echo url('/saved-profile/delete') ?>",
+      headers: {
+        'X-CSRFToken': $('meta[name="token"]').attr('content')
+      },
       data: {
         id : $('#id_delete').val(),
       },
@@ -93,9 +96,10 @@
         if(data.status=='success'){
           refresh_page();
         } else {
-          if(data.message=='kuota habis'){
-            $('#info-kuota').modal('show');
-          }
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
         }
       }
     });
@@ -152,6 +156,49 @@
       }
     });
   }
+
+  function send_email (){
+    if($('#sendemail').val()==''){
+      $('#pesan').html('Silahkan isi email terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show();
+    } else {
+      $.ajax({
+        type : 'GET',
+        url : "<?php echo url('/send_email') ?>",
+        data: { 
+          email: $('#sendemail').val(),
+          id: $('#id-profile').val(),
+          type: $('#email-type').val(),
+        },
+        dataType: 'text',
+        beforeSend: function()
+        {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        },
+        success: function(result) {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+
+          var data = jQuery.parseJSON(result);
+
+          if(data.status=='success'){
+            $('#pesan').html(data.message);
+            $('#pesan').removeClass('alert-warning');
+            $('#pesan').addClass('alert-success');
+            $('#pesan').show();
+          } else {
+            $('#pesan').html(data.message);
+            $('#pesan').removeClass('alert-success');
+            $('#pesan').addClass('alert-warning');
+            $('#pesan').show();
+          }
+        }
+      });
+    }  
+  }
 </script>
 
 <input type="hidden" name="id_delete" id="id_delete">
@@ -181,6 +228,8 @@
       </div>
     
       <hr>
+
+      <div id="pesan" class="alert"></div>
 
       <br>  
 
@@ -289,13 +338,14 @@
       <div class="modal-body">
 
         <input type="hidden" name="email-type" id="email-type">
+        <input type="hidden" name="id-profile" id="id-profile">
 
         <div class="container">
           <div class="send-pdf mb-4">
             <i class="fas fa-file-pdf"></i>
             PDF Download 
 
-            <a href="<?php echo url('history-search/print-pdf')?>" target="_blank">
+            <a id="link-pdf" href="#" target="_blank">
               <button class="btn btn-primary float-right"> 
                 Download
               </button>
@@ -306,7 +356,7 @@
             <i class="fas fa-file-csv"></i>
             CSV Download 
 
-            <a href="<?php echo url('history-search/print-csv')?>" target="_blank">
+            <a id="link-csv" href="#" target="_blank">
               <button class="btn btn-primary float-right"> 
                 Download
               </button>
@@ -316,8 +366,10 @@
           <hr>
 
           <label>Send to</label>
-          <input type="text" name="sendemail" class="form-control mb-2" placeholder="email address...">
-          <button class="btn btn-primary">Send</button>
+          <input type="text" name="sendemail" class="form-control mb-2" placeholder="email address..." id="sendemail">
+          <button class="btn btn-primary" id="btn-send" data-dismiss="modal">
+            Send
+          </button>
         </div>
       </div>
     </div>
@@ -338,8 +390,29 @@
     $('#id_delete').val($(this).attr('data-id'));
   });
 
+  $( "body" ).on( "click", ".btn-profile", function() {
+    var id = $(this).attr('data-id');
+    var type = $(this).attr('data-type');
+    $('#email-type').val(type);
+    $('#id-profile').val(id);
+
+    if(type=='pdf'){
+      $("#link-pdf").prop("href", "<?php echo url('print-pdf')?>"+'/'+id);
+      $('.send-pdf').show();
+      $('.send-csv').hide();
+    } else {
+      $("#link-csv").prop("href", "<?php echo url('print-csv')?>"+'/'+id);
+      $('.send-csv').show();
+      $('.send-pdf').hide();
+    }
+  });
+
+  $( "body" ).on( "click", "#btn-send", function() {
+    send_email();
+  });
+
   $( "body" ).on( "click", "#btn-delete-ok", function() {
-    delete_history();
+    delete_profile();
   });
 
   $( "body" ).on( "click", "#btn-save", function() {

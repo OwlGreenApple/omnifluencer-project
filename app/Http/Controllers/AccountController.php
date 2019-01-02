@@ -9,13 +9,23 @@ use App\User;
 use App\Group;
 use App\Save;
 
-use Auth,PDF,Excel;
+use App\Mail\ProfileEmail;
+
+use Auth,PDF,Excel,Mail,Validator;
 use PHPExcel_Worksheet_Drawing;
 
 class AccountController extends Controller
 {
   protected $cookie_search = "history_search";
   protected $cookie_delete = "delete_search";
+
+  protected function validator(array $data){
+    $rules = [
+      'email' => 'required|string|email|max:255',
+    ];
+
+    return Validator::make($data, $rules);
+  }
 
   public function index(){
     return view('user.search.index');
@@ -247,9 +257,9 @@ class AccountController extends Controller
       'account' => $account,   
     );
 
-    $pdf = PDF::loadView('user.history-search.pdf', $data);
+    $pdf = PDF::loadView('user.pdf-profile', $data);
 
-    return $pdf->stream();
+    return $pdf->download('omnifluencer.pdf');
   }
 
   public function print_csv($id){
@@ -299,6 +309,22 @@ class AccountController extends Controller
           //$sheet->fromArray($data);
         });
       })->download();
+  }
+
+  public function send_email(Request $request){
+    $validator = $this->validator($request->all());
+
+    if(!$validator->fails()){
+      Mail::to($request->email)->queue(new ProfileEmail($request->email,$request->type,$request->id));
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Email berhasil terkirim';
+    } else {
+      $arr['status'] = 'error';
+      $arr['message'] = $validator->errors()->first();
+    }
+
+    return $arr;
   }
 
   public function get_groups(){
