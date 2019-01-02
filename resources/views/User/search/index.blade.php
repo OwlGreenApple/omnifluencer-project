@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<script type="text/javascript">
+<!--<script type="text/javascript">
   $(document).ready(function() {
     refresh_page();
     $('.counter').counterUp({
@@ -159,7 +159,7 @@
       
     </div>
   </div>
-</div>
+</div>-->
 
 <!-- Modal Confirm Delete -->
 <div class="modal fade" id="confirm-delete" role="dialog">

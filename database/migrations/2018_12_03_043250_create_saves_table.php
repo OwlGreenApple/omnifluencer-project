@@ -17,8 +17,9 @@ class CreateSavesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('type');
-            $table->integer('account_id');
-            $table->integer('post_id');
+            $table->integer('account_id')->nullable();
+            $table->integer('post_id')->nullable();
+            $table->integer('group_id');
             $table->timestamps();
         });
     }

@@ -36,6 +36,43 @@ Route::group(['middleware' => ['web','auth']], function() {
   Route::get('/history-search/load-history-search','AccountController@load_history_search');
   Route::get('/history-search/print-pdf/{id}','AccountController@print_pdf');
   Route::get('/history-search/print-csv/{id}','AccountController@print_csv');
+  Route::get('/history-search/get-groups','AccountController@get_groups');
+  Route::get('/history-search/add-groups','AccountController@add_groups');
+  Route::get('/history-search/create-groups','AccountController@create_groups');
+
+  //Edit Profile
+  Route::get('/edit-profile','ProfileController@index_edit');
+  Route::post('/edit-profile/edit','ProfileController@edit_profile');
+
+  //Change Password
+  Route::get('/change-password','ProfileController@index_changepass');
+  Route::post('/change-password/change','ProfileController@change_password');
+
+  //Dashboard 
+  Route::get('/dashboard','ProfileController@index_dashboard');
+
+  //Points 
+  Route::get('/points','PointController@index');  
+  Route::get('/points/load-points','PointController@load_points'); 
+
+  //Compare History
+  Route::get('/compare-history','CompareController@index_history');
+  Route::get('/compare-history/load-history-compare','CompareController@load_history_compare');
+  Route::get('/compare-history/print-pdf/{id}','CompareController@print_pdf');
+  Route::get('/compare-history/print-csv/{id}','CompareController@print_csv');
+
+  //Groups
+  Route::get('/groups','GroupController@index');
+  Route::get('/groups/load-groups','GroupController@load_groups');
+  Route::get('/groups/{id}/{group_name}','GroupController@index_list');
+  Route::get('/groups/load-list-group','GroupController@load_list_group');
+
+  //Saved Profile
+  Route::get('/saved-profile','GroupController@index_saved');
+  Route::get('/saved-profile/load-accounts','GroupController@load_saved_accounts');
+
+  //Notification 
+  Route::get('/notifications','NotificationController@index');
 });
 
 //Search

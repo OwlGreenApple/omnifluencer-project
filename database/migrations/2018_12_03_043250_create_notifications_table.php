@@ -17,7 +17,9 @@ class CreateNotificationsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('notification');
-            $table->smallInteger('status')->default(0)->nullable();
+            $table->smallInteger('is_read')->default(0);
+            $table->string('type');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }
