@@ -13,13 +13,12 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::connection('mysql2')->create('orders', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('no_order');
           $table->bigInteger('user_id');
           $table->integer('jmlpoin');
           $table->double('total');
-          $table->timestamp('tanggal_pesan');
           $table->smallInteger('status')->default(0);
           $table->text('buktibayar')->nullable();
           $table->text('keterangan')->nullable();

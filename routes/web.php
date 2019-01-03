@@ -97,4 +97,9 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/print-csv-compare/{id}','CompareController@print_csv');
   Route::get('/print-pdf-bulk','AccountController@print_pdf_bulk');
   Route::get('/print-csv-bulk','AccountController@print_csv_bulk');
+
+  //pricing
+  Route::get('/pricing','OrderController@pricing');
+  Route::get('/checkout/{id}','OrderController@checkout');
+  Route::post('/confirm-payment','OrderController@confirm_payment');
 });
