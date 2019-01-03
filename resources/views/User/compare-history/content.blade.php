@@ -37,21 +37,17 @@
       {{ date("Y/m/d", strtotime($compare->created_at))  }}
     </td> 
     <td data-label="Action">
-      <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$compare->id}}">
-        <i class="far fa-trash-alt"></i>
+      <button type="button" class="btn btn-primary btn-profile" data-id="{{$compare->id}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
+        <i class="fas fa-file-pdf"></i>
       </button>
 
-      <a href="<?php echo url('compare-history/print-pdf').'/'.$compare->id ?>" target="_blank">
-        <button class="btn btn-primary">
-          <i class="fas fa-file-pdf"></i>
-        </button>
-      </a>
+      <button type="button" class="btn btn-primary btn-profile" data-id="{{$compare->id}}" data-type="csv" data-toggle="modal" data-target="#send-file">
+        <i class="fas fa-file-csv"></i>
+      </button>
 
-      <a href="<?php echo url('compare-history/print-csv').'/'.$compare->id ?>" target="_blank">
-        <button class="btn btn-primary">
-          <i class="fas fa-file-csv"></i>
-        </button>
-      </a>
+      <button type="button" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$compare->id}}">
+        <i class="far fa-trash-alt"></i>
+      </button>
     </td>
   </tr>
 @endforeach

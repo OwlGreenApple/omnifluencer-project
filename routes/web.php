@@ -34,8 +34,6 @@ Route::group(['middleware' => ['web','auth']], function() {
   //History Search
   Route::get('/history-search','AccountController@index_history');
   Route::get('/history-search/load-history-search','AccountController@load_history_search');
-  Route::get('/history-search/print-pdf/{id}','AccountController@print_pdf');
-  Route::get('/history-search/print-csv/{id}','AccountController@print_csv');
   Route::get('/history-search/get-groups','AccountController@get_groups');
   Route::get('/history-search/add-groups','AccountController@add_groups');
   Route::get('/history-search/create-groups','AccountController@create_groups');
@@ -58,8 +56,7 @@ Route::group(['middleware' => ['web','auth']], function() {
   //Compare History
   Route::get('/compare-history','CompareController@index_history');
   Route::get('/compare-history/load-history-compare','CompareController@load_history_compare');
-  Route::get('/compare-history/print-pdf/{id}','CompareController@print_pdf');
-  Route::get('/compare-history/print-csv/{id}','CompareController@print_csv');
+  Route::get('/compare-history/delete','CompareController@delete_compare');
 
   //Groups
   Route::get('/groups','GroupController@index');
@@ -70,9 +67,18 @@ Route::group(['middleware' => ['web','auth']], function() {
   //Saved Profile
   Route::get('/saved-profile','GroupController@index_saved');
   Route::get('/saved-profile/load-accounts','GroupController@load_saved_accounts');
+  Route::get('/saved-profile/delete','GroupController@delete_saved_profile');
 
   //Notification 
   Route::get('/notifications','NotificationController@index');
+
+  //Download PDF CSV and Send To
+  Route::get('/send_email','AccountController@send_email');
+  Route::get('/print-pdf/{id}','AccountController@print_pdf');
+  Route::get('/print-csv/{id}','AccountController@print_csv');
+  Route::get('/send-email-compare','CompareController@send_email');
+  Route::get('/print-pdf-compare/{id}','CompareController@print_pdf');
+  Route::get('/print-csv-compare/{id}','CompareController@print_csv');
 });
 
 //Search

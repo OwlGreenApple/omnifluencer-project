@@ -41,14 +41,17 @@
         use App\Notification;
         use App\Helpers\Helper;
 
-        $countnotif = Notification::where('user_id',Auth::user()->id)
+        $countnotif = 0;
+        if(Auth::check()){
+          $countnotif = Notification::where('user_id',Auth::user()->id)
                       ->where('is_read',0)
                       ->count();
 
-        $notification = Notification::where('user_id',Auth::user()->id)
+          $notification = Notification::where('user_id',Auth::user()->id)
                   ->orderBy('created_at','desc')
                   ->take(5)
                   ->get();
+        }
   ?>
 
   <script type="text/javascript">

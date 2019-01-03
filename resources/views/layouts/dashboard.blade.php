@@ -74,7 +74,17 @@
         $('.div-loading').removeClass('background-load');
         $('.div-loading').removeClass('bg-sidebar');
       }
-    });      
+    });   
+
+    $(document).on('click', '#reflink-box', function (e) {
+      $(this).select();
+    });   
+
+    function copylink(){
+      $("#reflink-box").select();
+      document.execCommand("copy");
+      $('#reflink-copy').modal('show');
+    } 
   </script>
 
   <!-- Navbar -->
@@ -92,7 +102,7 @@
           </span>
         </label>
           
-        <input type="text" name="reflink" class="col-md-6 col-4" id="reflink-box" value="<?php echo url('/').'/ref/'.Auth::user()->referral_link ?>">
+        <input type="text" name="reflink" class="col-md-6 col-4" id="reflink-box" value="<?php echo url('/').'/ref/'.Auth::user()->referral_link ?>" readonly="readonly">
         <button class="btn btn-default btn-sm btn-copy" onclick="copylink()">
           Copy
         </button>    
@@ -312,6 +322,31 @@
     </div>
   </footer>
   
+  <!-- Modal Referral Link -->
+  <div class="modal fade" id="reflink-copy" role="dialog">
+    <div class="modal-dialog">
+      
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modaltitle">
+            Referral Link
+          </h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          Copy referral link berhasil!
+        </div>
+        <div class="modal-footer" id="foot">
+          <button class="btn btn-primary" data-dismiss="modal">
+            OK
+          </button>
+        </div>
+      </div>
+        
+    </div>
+  </div>
+
   <!--Loading Bar-->
   <div class="div-loading">
     <div id="loader" style="display: none;"></div>  
