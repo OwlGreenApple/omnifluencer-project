@@ -62,9 +62,39 @@
         if(data.status=='success'){
           refresh_page();
         } else {
-          if(data.message=='kuota habis'){
-            $('#info-kuota').modal('show');
-          }
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
+  }
+
+  function delete_compare_bulk(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/compare-history/delete-bulk') ?>",
+      data: $('form').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          refresh_page();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
         }
       }
     });
@@ -114,8 +144,6 @@
   }
 </script>
 
-<input type="hidden" name="id_delete" id="id_delete">
-
 <style type="text/css">
   .icon-arrow{
     color: #2089F6;
@@ -135,7 +163,7 @@
         </div>
 
         <div class="col-md-7" align="right">
-          <button class="btn btn-danger">
+          <button class="btn btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>     
         </div>
@@ -213,6 +241,9 @@
       </div>
       <div class="modal-body">
         Are you sure you want to delete?
+
+        <input type="hidden" name="id_delete" id="id_delete">
+        <input type="hidden" name="delete_type" id="delete_type">
       </div>
       <div class="modal-footer" id="foot">
         <button class="btn btn-primary" id="btn-delete-ok" data-dismiss="modal">
@@ -318,10 +349,20 @@
 
   $( "body" ).on( "click", ".btn-delete", function() {
     $('#id_delete').val($(this).attr('data-id'));
+    $('#delete_type').val('one'); 
+  });
+
+  $( "body" ).on( "click", ".btn-delete-bulk", function()
+  {
+    $('#delete_type').val('bulk');
   });
 
   $( "body" ).on( "click", "#btn-delete-ok", function() {
-    delete_compare();
+    if($('#delete_type').val()=='bulk'){
+      delete_compare_bulk();
+    } else {
+      delete_compare();
+    }
   });
 
   $( "body" ).on( "click", "#btn-save", function() {

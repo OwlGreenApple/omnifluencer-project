@@ -81,9 +81,67 @@
       });
     }  
   }
-</script>
 
-<input type="hidden" name="id_delete" id="id_delete">
+  function delete_member(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/groups/delete-member') ?>",
+      data: {
+        id : $('#id_delete').val(),
+      },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          refresh_page();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
+  }
+
+  function delete_member_bulk(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/groups/delete-member-bulk') ?>",
+      data: $('form').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          refresh_page();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
+  }
+</script>
 
 <div class="container">
   <div class="row justify-content-center">
@@ -99,13 +157,13 @@
         </div>
 
         <div class="col-md-7" align="right">
-          <button class="btn btn-primary">
+          <button class="btn btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
             <i class="fas fa-file-pdf"></i> PDF
           </button>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
             <i class="fas fa-file-csv"></i> CSV
           </button>
-          <button class="btn btn-danger">
+          <button class="btn btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>     
         </div>
@@ -152,6 +210,9 @@
       </div>
       <div class="modal-body">
         Are you sure you want to delete?
+
+        <input type="hidden" name="id_delete" id="id_delete">
+        <input type="hidden" name="delete_type" id="delete_type">
       </div>
       <div class="modal-footer" id="foot">
         <button class="btn btn-primary" id="btn-delete-ok" data-dismiss="modal">
@@ -238,20 +299,51 @@
     }
   });
 
+  $( "body" ).on( "click", ".btn-pdf", function() {
+    $('#email-type').val('pdf');
+
+    $("#link-pdf").prop("href", "<?php echo url('print-pdf-bulk')?>"+'?'+$('form').serialize());
+    $('.send-pdf').show();
+    $('.send-csv').hide();
+  });
+
+  $( "body" ).on( "click", ".btn-csv", function() {
+    $('#email-type').val('csv');
+
+    $("#link-csv").prop("href", "<?php echo url('print-csv-bulk')?>"+'?'+$('form').serialize());
+    $('.send-csv').show();
+    $('.send-pdf').hide();
+  });
+
   $( "body" ).on( "click", "#btn-send", function() {
     send_email();
   });
   
   $( "body" ).on( "click", ".btn-delete", function() {
     $('#id_delete').val($(this).attr('data-id'));
+    $('#delete_type').val('one');
+  });
+
+  $( "body" ).on( "click", ".btn-delete-bulk", function()
+  {
+    $('#delete_type').val('bulk');
   });
 
   $( "body" ).on( "click", "#btn-delete-ok", function() {
-    delete_history();
+    if($('#delete_type').val()=='bulk'){
+      delete_member_bulk();
+    } else {
+      delete_member();
+    }
   });
 
   $(document).on('click', '#checkAll', function (e) {
     $('input:checkbox').not(this).prop('checked', this.checked);
+  });
+
+  $(document).on( "change", ".checkaccid", function() {
+    var id = $(this).attr('data-id');
+    $(".checksaveid-"+id).prop('checked',this.checked);
   });
 
   $(document).on('click', '.pagination a', function (e) {

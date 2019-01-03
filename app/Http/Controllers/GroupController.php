@@ -72,4 +72,56 @@ class GroupController extends Controller
 
       return $arr;
     }
+
+    public function delete_saved_profile_bulk(Request $request)
+    {
+      foreach ($request->saveid as $id) {
+        $saved = Save::find($id)->delete(); 
+      }
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Delete saved profile berhasil';
+
+      return $arr;
+    }
+
+    public function delete_member_group(Request $request)
+    {
+      $member = Save::find($request->id)->delete();
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Delete group member berhasil';
+
+      return $arr;
+    }
+
+    public function delete_member_group_bulk(Request $request)
+    {
+      foreach ($request->saveid as $id) {
+        $member = Save::find($id)->delete();
+      }
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Delete group member berhasil';
+
+      return $arr;
+    }
+
+    public function delete_group(Request $request){
+
+      foreach ($request->groupid as $id) {
+        $group = Group::find($id);
+
+        $member = Save::where('group_id',$group->id)
+                    ->where('user_id',Auth::user()->id)
+                    ->delete();
+
+        $group = $group->delete();
+      }
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Delete group berhasil';
+
+      return $arr;
+    }
 }
