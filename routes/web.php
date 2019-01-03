@@ -79,6 +79,11 @@ Route::group(['middleware' => ['web','auth']], function() {
   Route::get('/send-email-compare','CompareController@send_email');
   Route::get('/print-pdf-compare/{id}','CompareController@print_pdf');
   Route::get('/print-csv-compare/{id}','CompareController@print_csv');
+  
+  //pricing
+  Route::get('/pricing','OrderController@pricing');
+  Route::get('/checkout/{id}','OrderController@checkout');
+  Route::post('/confirm-payment','OrderController@confirm_payment');
 });
 
 //Search

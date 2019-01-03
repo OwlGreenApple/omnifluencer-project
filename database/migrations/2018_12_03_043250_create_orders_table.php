@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
           $table->bigInteger('user_id');
           $table->integer('jmlpoin');
           $table->double('total');
-          $table->timestamp('tanggal_pesan');
           $table->smallInteger('status')->default(0);
           $table->text('buktibayar')->nullable();
           $table->text('keterangan')->nullable();

@@ -113,7 +113,7 @@
               <a class="nav-link" href="#">Blog</a>
             </li>
             <li class="nav-item" style="border-right: 1px solid black">
-              <a class="nav-link" href="#">Pricing</a>
+              <a class="nav-link" href="{{url('pricing')}}">Pricing</a>
             </li>
 
             <!-- Authentication Links -->
