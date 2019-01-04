@@ -10,6 +10,7 @@ use App\Group;
 use App\Save;
 
 use App\Mail\ProfileEmail;
+use App\Mail\ProfileBulkEmail;
 
 use Auth,PDF,Excel,Mail,Validator;
 use PHPExcel_Worksheet_Drawing;
@@ -257,9 +258,14 @@ class AccountController extends Controller
       'account' => $account,   
     );
 
-    $pdf = PDF::loadView('user.pdf-profile', $data);
+    $pdf = PDF::loadView('user.pdf-profile', $data)
+            ->setOption('margin-bottom', '0mm')
+            ->setOption('margin-top', '0mm')
+            ->setOption('margin-right', '0mm')
+            ->setOption('margin-left', '0mm');
 
-    return $pdf->download('omnifluencer.pdf');
+    //return $pdf->download('omnifluencer.pdf');
+    return $pdf->stream();
   }
 
   public function print_csv($id){
@@ -308,7 +314,7 @@ class AccountController extends Controller
           });
           //$sheet->fromArray($data);
         });
-      })->download();
+      })->download('xlsx');
   }
 
   public function send_email(Request $request){
@@ -316,6 +322,22 @@ class AccountController extends Controller
 
     if(!$validator->fails()){
       Mail::to($request->email)->queue(new ProfileEmail($request->email,$request->type,$request->id));
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Email berhasil terkirim';
+    } else {
+      $arr['status'] = 'error';
+      $arr['message'] = $validator->errors()->first();
+    }
+
+    return $arr;
+  }
+
+  public function send_email_bulk(Request $request){
+    $validator = $this->validator($request->all());
+
+    if(!$validator->fails()){
+      Mail::to($request->email)->queue(new ProfileBulkEmail($request->email,$request->type,$request->accountid));
 
       $arr['status'] = 'success';
       $arr['message'] = 'Email berhasil terkirim';
@@ -436,11 +458,13 @@ class AccountController extends Controller
     $filename = 'omnifluencer';
 
     $Excel_file = Excel::create($filename, function($excel) use ($request) {
-        $excel->sheet('list', function($sheet) use ($request) {
 
-          $cell1 = 2;
-          $cell2 = 4;
-          foreach ($request->accountid as $id) {
+      $i = 1;
+      foreach ($request->accountid as $id) {
+        $sheetname = 'Sheet'.$i;
+
+        $excel->sheet($sheetname, function($sheet) use ($id) {
+
             $account = Account::find($id); 
 
             $username = '@'.$account->username;
@@ -472,10 +496,9 @@ class AccountController extends Controller
             $sheet->cell('C9', function($cell) {
               $cell->setValue('Avg Comment Per Post');   
             });
-          }
-          
-          //$sheet->fromArray($data);
         });
-      })->download();
+        $i++;
+      }
+    })->download('xlsx');
   }
 }

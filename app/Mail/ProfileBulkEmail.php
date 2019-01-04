@@ -1,0 +1,112 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+use App\Account;
+use PDF,Excel,Auth; 
+
+class ProfileBulkEmail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    protected $emaildata;
+    protected $type;
+    protected $bulkid;
+
+    public function __construct($emaildata,$type,$bulkid)
+    {
+        $this->emaildata = $emaildata;
+        $this->type = $type;
+        $this->bulkid = $bulkid;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+       if($this->type=='pdf'){
+        $account = [];
+        foreach ($this->bulkid as $id) {
+          $account[] = Account::find($id); 
+        }
+
+        $data = array(
+          'account' => $account,   
+        );
+
+        $pdf = PDF::loadView('user.pdf-profile', $data);
+
+        return $this->from('omnifluencer@gmail.com', 'Omnifluencer')
+                    ->subject('[Omnifluencer] Profile Document')
+                    ->attachData($pdf->output(), "profile.pdf")
+                    ->view('emails.profile-docs')
+                    ->with($this->emaildata);
+      } else {
+        $store = '/storage/app/'.Auth::user()->email.'/profilebulk.xlsx';
+
+        $bulkid = $this->bulkid;
+
+        $Excel_file = Excel::create('profilebulk', function($excel) use ($bulkid) {
+          $i = 1;
+          foreach ($bulkid as $id) {
+            $sheetname = 'Sheet'.$i;
+
+            $excel->sheet($sheetname, function($sheet) use ($id) {
+
+                $account = Account::find($id); 
+
+                $username = '@'.$account->username;
+                $sheet->cell('B2', $username); 
+                $sheet->cell('B3', $account->eng_rate); 
+
+                $sheet->cell('B4', $account->jml_post); 
+                $sheet->cell('B5', function($cell) {
+                  $cell->setValue('Post');   
+                });
+                $sheet->cell('B6', $account->jml_followers); 
+                $sheet->cell('B7', function($cell) {
+                  $cell->setValue('Followers');   
+                });
+                $sheet->cell('B8', $account->jml_following); 
+                $sheet->cell('B9', function($cell) {
+                  $cell->setValue('Following');   
+                });
+                
+                $sheet->cell('C4', date("M d Y", strtotime($account->lastpost))); 
+                $sheet->cell('C5', function($cell) {
+                  $cell->setValue('Last Post');   
+                });
+                $sheet->cell('C6', $account->jml_likes); 
+                $sheet->cell('C7', function($cell) {
+                  $cell->setValue('Avg Like Per Post');   
+                });
+                $sheet->cell('C8', $account->jml_comments); 
+                $sheet->cell('C9', function($cell) {
+                  $cell->setValue('Avg Comment Per Post');   
+                });
+            });
+            $i++;
+          }
+        })->store('xlsx',storage_path('app/'.Auth::user()->email));
+
+        return $this->from('omnifluencer@gmail.com', 'Omnifluencer')
+                    ->subject('[Omnifluencer] Profile Document')
+                    ->attach(asset($store))
+                    ->view('emails.profile-docs')
+                    ->with($this->emaildata);
+      }
+    }
+}

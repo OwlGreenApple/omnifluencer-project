@@ -304,7 +304,7 @@
             <h4><b>Info for Free Member</b></h4>  
             * <b>Free Member</b> hanya dapat menampilkan 10 history pencarian terakhir<br>  
             * <b>Free Member</b> tidak dapat mengelompokkan ke dalam suatu grup dari hasil pencarian <br>  
-            * <b>Free Member</b> hanya mendapatkan file .CSV sesuai dengan 10 history pencarian terakhir <br> 
+            * <b>Free Member</b> hanya mendapatkan file .XLSX sesuai dengan 10 history pencarian terakhir <br> 
             <br>  
             ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. <button class="btn btn-primary"><i class="fas fa-star"></i> Upgrade To Pro</button>
           </div>
@@ -470,8 +470,8 @@
           </div>
 
           <div class="send-csv mb-4" style="display: none;">
-            <i class="fas fa-file-csv"></i>
-            CSV Download 
+            <i class="fas fa-file-excel"></i>
+            Excel Download 
 
             <a id="link-csv" href="#" target="_blank">
               <button class="btn btn-primary float-right"> 

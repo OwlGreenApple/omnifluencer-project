@@ -149,7 +149,7 @@ class CompareController extends Controller
           
           //$sheet->fromArray($data);
         });
-      })->download('csv');
+      })->download('xlsx');
   }
 
   public function send_email(Request $request){

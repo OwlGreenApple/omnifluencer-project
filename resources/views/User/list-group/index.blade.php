@@ -82,6 +82,50 @@
     }  
   }
 
+  function send_email_bulk(){
+    if($('#sendemail').val()==''){
+      $('#pesan').html('Silahkan isi email terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show();
+    } else {
+      var myObject = { 
+        email: $('#sendemail').val(),
+        type: $('#email-type').val(),
+      };
+
+      $.ajax({
+        type : 'GET',
+        url : "<?php echo url('/send-email-bulk') ?>",
+        data: $('form').serialize()+'&'+$.param(myObject),
+        dataType: 'text',
+        beforeSend: function()
+        {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        },
+        success: function(result) {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+
+          var data = jQuery.parseJSON(result);
+
+          if(data.status=='success'){
+            $('#pesan').html(data.message);
+            $('#pesan').removeClass('alert-warning');
+            $('#pesan').addClass('alert-success');
+            $('#pesan').show();
+          } else {
+            $('#pesan').html(data.message);
+            $('#pesan').removeClass('alert-success');
+            $('#pesan').addClass('alert-warning');
+            $('#pesan').show();
+          }
+        }
+      });
+    }
+  }
+
   function delete_member(){
     $.ajax({
       type : 'GET',
@@ -161,7 +205,7 @@
             <i class="fas fa-file-pdf"></i> PDF
           </button>
           <button class="btn btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
-            <i class="fas fa-file-csv"></i> CSV
+            <i class="fas fa-file-excel"></i> Excel
           </button>
           <button class="btn btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
@@ -171,13 +215,19 @@
       
       <hr>
 
+      <div id="pesan" class="alert"></div>
+
       <br>  
 
       <form>
+        <div class="check-mobile">
+          <input class="checkAll" type="checkbox" name="checkAll"> Check All
+        </div>
+
         <table class="table">
           <thead align="center">
             <th>
-              <input type="checkbox" name="checkAll" id="checkAll">
+              <input type="checkbox" name="checkAll" class="checkAll"\>
             </th>
             <th class="header" action="username">
               Instagram
@@ -242,6 +292,7 @@
       <div class="modal-body">
 
         <input type="hidden" name="email-type" id="email-type">
+        <input type="hidden" name="send-type" id="send-type">
         <input type="hidden" name="id-profile" id="id-profile">
 
         <div class="container">
@@ -257,8 +308,8 @@
           </div>
 
           <div class="send-csv mb-4" style="display: none;">
-            <i class="fas fa-file-csv"></i>
-            CSV Download 
+            <i class="fas fa-file-excel"></i>
+            Excel Download 
 
             <a id="link-csv" href="#" target="_blank">
               <button class="btn btn-primary float-right"> 
@@ -286,6 +337,7 @@
     var id = $(this).attr('data-id');
     var type = $(this).attr('data-type');
     $('#email-type').val(type);
+    $('#send-type').val('one');
     $('#id-profile').val(id);
 
     if(type=='pdf'){
@@ -301,6 +353,7 @@
 
   $( "body" ).on( "click", ".btn-pdf", function() {
     $('#email-type').val('pdf');
+    $('#send-type').val('bulk');
 
     $("#link-pdf").prop("href", "<?php echo url('print-pdf-bulk')?>"+'?'+$('form').serialize());
     $('.send-pdf').show();
@@ -309,6 +362,7 @@
 
   $( "body" ).on( "click", ".btn-csv", function() {
     $('#email-type').val('csv');
+    $('#send-type').val('bulk');
 
     $("#link-csv").prop("href", "<?php echo url('print-csv-bulk')?>"+'?'+$('form').serialize());
     $('.send-csv').show();
@@ -316,7 +370,11 @@
   });
 
   $( "body" ).on( "click", "#btn-send", function() {
-    send_email();
+    if($('#send-type').val()=='one'){
+      send_email();
+    } else {
+      send_email_bulk();
+    }
   });
   
   $( "body" ).on( "click", ".btn-delete", function() {
@@ -337,7 +395,7 @@
     }
   });
 
-  $(document).on('click', '#checkAll', function (e) {
+  $(document).on('click', '.checkAll', function (e) {
     $('input:checkbox').not(this).prop('checked', this.checked);
   });
 

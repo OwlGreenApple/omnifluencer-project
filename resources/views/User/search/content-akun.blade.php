@@ -1,57 +1,57 @@
 <?php use App\Helpers\Helper; ?>
-<div align="center">
-  <img src="{{$account->prof_pic}}" style="max-width:180px"><br>
-  <p><?php echo '@'.$account->username ?></p>
+
+<div class="photos">
+  <img class="mx-auto d-block" src="{{$account->prof_pic}}" />
+</div>
+<div class="names">
+  <h3><?php echo '@'.$account->username ?></h3>
   <p>{{$account->username}}</p>
-  <p>
-    <span class="counter">
-      <?php 
-        $eng_rate = $account->eng_rate*100;
-        echo $eng_rate;
-      ?>    
-    </span>
-    %
-  </p>
-
 </div>
-
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-4">
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_post,2); ?></b>
-    </h4>
-    <h5>Post</h5>
-    <br>
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_followers,2); ?></b>
-    </h4>
-    <h5>Followers</h5>
-    <br>
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_following,2); ?></b>
-    </h4>
-    <h5>Following</h5>
-  </div>
-
-  <div class="col-md-4">
-    <h4>
-      <b>{{ date("M d Y", strtotime($account->lastpost))  }}</b>
-    </h4>
-    <h5>Last Post</h5>
-    <br>
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_likes,2); ?></b>
-    </h4>
-    <h5>Avg Like Per Post</h5>
-    <br>
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_comments,2); ?></b>
-    </h4>
-    <h5>Avg Comment Per Post</h5>
-  </div>
+<div class="top-stats">
+  <h3>11,968</h3>
+  <p>Total Influenced</p>
 </div>
-
-<div>
-  <?php echo session()->get('account_search') ?>
+<div class="status">
+  <div class="row">
+    <div class="col-6">
+      <p class="number-stat">
+        <?php echo Helper::abbreviate_number($account->jml_followers,2); ?>
+      </p>
+      <p class="desc-stat">Followers</p>
+    </div>
+    <div class="col-6">
+      <p class="number-stat">
+        {{ date("M d Y", strtotime($account->lastpost))  }}
+      </p>
+      <p class="desc-stat">Last Posts</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <p class="number-stat">
+        <?php echo Helper::abbreviate_number($account->jml_post,2); ?>
+      </p>
+      <p class="desc-stat">Posts</p>
+    </div>
+    <div class="col-6">
+      <p class="number-stat">
+        <?php echo Helper::abbreviate_number($account->jml_likes,2); ?>
+      </p>
+      <p class="desc-stat">Avg Like Per Post</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <p class="number-stat">
+        <?php echo Helper::abbreviate_number($account->jml_following,2); ?>
+      </p>
+      <p class="desc-stat">Following</p>
+    </div>
+    <div class="col-6">
+      <p class="number-stat">
+        <?php echo Helper::abbreviate_number($account->jml_comments,2); ?>
+      </p>
+      <p class="desc-stat">Avg Comment Per Post</p>
+    </div>
+  </div>
 </div>

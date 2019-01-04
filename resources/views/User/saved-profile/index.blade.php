@@ -383,8 +383,8 @@
           </div>
 
           <div class="send-csv mb-4" style="display: none;">
-            <i class="fas fa-file-csv"></i>
-            CSV Download 
+            <i class="fas fa-file-excel"></i>
+            Excel Download 
 
             <a id="link-csv" href="#" target="_blank">
               <button class="btn btn-primary float-right"> 

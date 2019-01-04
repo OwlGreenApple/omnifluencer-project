@@ -48,7 +48,6 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/history-search/save-groups','AccountController@save_groups');
   Route::get('/history-search/delete-history-bulk','AccountController@delete_history_bulk');
 
-
   //Edit Profile
   Route::get('/edit-profile','ProfileController@index_edit');
   Route::post('/edit-profile/edit','ProfileController@edit_profile');
@@ -97,6 +96,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/print-csv-compare/{id}','CompareController@print_csv');
   Route::get('/print-pdf-bulk','AccountController@print_pdf_bulk');
   Route::get('/print-csv-bulk','AccountController@print_csv_bulk');
+  Route::get('/send-email-bulk','AccountController@send_email_bulk');
 
   //pricing
   Route::get('/pricing','OrderController@pricing');
