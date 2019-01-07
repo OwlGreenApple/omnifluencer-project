@@ -372,73 +372,6 @@ hr.wh {
   font-size: 14px;
 }
 
-@media (max-width: 767px) {
-
-  .comparison td:first-child,
-  .comparison th:first-child {
-    display: none;
-  }
-
-  .comparison tbody tr:nth-child(odd) {
-    display: table-row;
-    background: #F7F7F7;
-  }
-
-  .comparison .row {
-    background: #FFF;
-  }
-
-  .comparison td,
-  .comparison th {
-    border: 1px solid #CCC;
-  }
-
-  .price-info {
-    border-top: 0 !important;
-
-  }
-
-}
-
-@media (max-width: 639px) {
-  .comparison .price-buy {
-    padding: 5px 10px;
-  }
-
-  .comparison td,
-  .comparison th {
-    padding: 10px 5px;
-  }
-
-  .comparison .hide-mobile {
-    display: none;
-  }
-
-  .comparison .price-now span {
-    font-size: 16px;
-  }
-
-  .comparison .price-small {
-    font-size: 16px !important;
-    top: 0;
-    left: 0;
-  }
-
-  .comparison .qbse,
-  .comparison .qbo {
-    font-size: 12px;
-    padding: 10px 5px;
-  }
-
-  .comparison .price-buy {
-    margin-top: 10px;
-  }
-
-  .compare-heading {
-    font-size: 13px;
-  }
-}
-
 
 /*FOOTER*/
 footer {
@@ -528,4 +461,82 @@ footer p {
   padding: 0;
   margin-left: 5px;
   font-size: 14px;
+}
+
+
+/*MEDIA QUERIES*/
+@media (max-width: 639px) {
+  .page-title h1 {
+    font-size: 30px;
+  }
+
+  .pg-title {
+    padding-top: 10px;
+    font-size: 16px;
+  }
+  
+  .comparison .price-buy {
+    padding: 5px 10px;
+  }
+
+  .comparison td,
+  .comparison th {
+    padding: 10px 5px;
+  }
+
+  .comparison .hide-mobile {
+    display: none;
+  }
+
+  .comparison .price-now span {
+    font-size: 16px;
+  }
+
+  .comparison .price-small {
+    font-size: 16px !important;
+    top: 0;
+    left: 0;
+  }
+
+  .comparison .qbse,
+  .comparison .qbo {
+    font-size: 12px;
+    padding: 10px 5px;
+  }
+
+  .comparison .price-buy {
+    margin-top: 10px;
+  }
+
+  .compare-heading {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .comparison td:first-child,
+  .comparison th:first-child {
+    display: none;
+  }
+
+  .comparison tbody tr:nth-child(odd) {
+    display: table-row;
+    background: #F7F7F7;
+  }
+
+  .comparison .row {
+    background: #FFF;
+  }
+
+  .comparison td,
+  .comparison th {
+    border: 1px solid #CCC;
+  }
+
+  .price-info {
+    border-top: 0 !important;
+
+  }
+
 }

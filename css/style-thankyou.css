@@ -257,3 +257,23 @@ footer p {
   margin-left: 5px;
   font-size: 14px;
 }
+
+/*MEDIA QUERIES*/
+@media (max-width: 575.98px) {
+  .page-title h1 {
+    font-size: 30px;
+  }
+
+  .pg-title {
+    padding-top: 10px;
+    font-size: 16px;
+  }
+
+  hr.orn {
+    width: 33%;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {}
+
+@media (min-width: 768px) and (max-width: 991.98px) {}

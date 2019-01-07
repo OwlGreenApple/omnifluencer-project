@@ -84,7 +84,7 @@
         Engagement Rate
       </div>
       <div class="col-xs-6">
-        12980<br>
+        <?php echo $account->eng_rate*$account->jml_followers ?><br>
         Total Influenced
       </div>
     </div>

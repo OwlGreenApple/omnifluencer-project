@@ -6,6 +6,7 @@ body,
 html {
   width: 100%;
   height: 100%;
+  background-image: none;
 }
 
 
@@ -20,76 +21,6 @@ h6 {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 700;
 }
-
-
-/*NAVBAR*/
-.navbar {
-  min-height: 70px !important;
-  background-color: #fff;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border: none !important;
-}
-
-.nav-link {
-  font-weight: 400;
-  color: #1A1A1A !important;
-}
-
-.nav-link:hover {
-  color: #1E6CC6 !important;
-}
-
-*,
-*:before,
-*:after {
-  padding: 0px;
-  margin: 0px;
-  transition: 0.3s;
-}
-
-.nav > .btn-primary {
-  background-color: #fff;
-  font-weight: 400;
-  border-top: none;
-  border-right: none;
-  border-bottom: 2px solid #1E6CC6;
-  border-left: none;
-  border-radius: 0;
-  color: #1E6CC6;
-  position: relative;
-  z-index: 1;
-  cursor: pointer;
-  background: transparent;
-}
-
-.nav > .btn-primary:before {
-  display: block;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 0px;
-  height: 100%;
-  z-index: -1;
-  content: "";
-  background: #1E6CC6;
-}
-
-.nav > .btn-primary:hover {
-  background-color: #fff;
-  font-weight: 400;
-  border-radius: 0;
-  border-top: none;
-  border-right: none;
-  border-bottom: 2px solid #1E6CC6;
-  border-left: none;
-  color: #fff;
-}
-
-.btn-primary:hover:before {
-  width: 100%;
-}
-
 
 /*HR*/
 hr.orn {
@@ -110,7 +41,7 @@ hr.wh {
 
 /*PAGE TITLE*/
 .page-title {
-  background-image: url(../img/new-bg.jpg);
+  background-image: url(../design/new-bg.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center top;
@@ -122,6 +53,7 @@ hr.wh {
   width: 100%;
   padding-top: 100px;
   padding-bottom: 100px;
+  margin: 0;
 }
 
 .page-title h1 {
@@ -177,7 +109,7 @@ hr.wh {
 .card {
   margin-top: 20px;
   background-color: #FCFCFC;
-  border-color: #DCDCDC;
+  border: 1px solid #DCDCDC;
 }
 
 .card-body h1 {
@@ -283,3 +215,24 @@ footer p {
   margin-left: 5px;
   font-size: 14px;
 }
+
+
+/*MEDIA QUERIES*/
+@media (max-width: 575.98px) {
+  .page-title h1 {
+    font-size: 30px;
+  }
+
+  .pg-title {
+    padding-top: 10px;
+    font-size: 16px;
+  }
+
+  hr.orn {
+    width: 33%;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {}
+
+@media (min-width: 768px) and (max-width: 991.98px) {}

@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="{{ asset('css/style-login.css') }}" rel="stylesheet">
+
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-8 col-12">
 
       @if (session('error') )
         <div class="col-md-12 alert alert-danger">
@@ -16,57 +18,41 @@
         </div>
       @endif
 
-      <div class="card">
-        <div class="card-header">{{ __('Login') }}</div>
-
-        <div class="card-body">
-          <form method="POST" action="{{ route('login') }}">
+      <div class="signup">
+        <div class="signup-content">
+          <form method="POST" id="signup-form" class="signup-form" action="{{ route('login') }}">
             @csrf
 
-            <div class="form-group row">
-              <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+            <h2 class="form-title">Please input your<br>Email & Password</h2>
 
-              <div class="col-md-6">
-                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+            <div class="form-group">
+              <label for="email" class="label-title-test">  Masukkan Email:
+              </label>
+              <input id="email" type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }} " name="email" value="{{ old('email') }}" placeholder="Your Email" required autofocus>
 
-                @if ($errors->has('email'))
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('email') }}</strong>
-                  </span>
-                @endif
-              </div>
+              @if ($errors->has('email'))
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $errors->first('email') }}</strong>
+                </span>
+              @endif
             </div>
 
-            <div class="form-group row">
-              <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+            <div class="form-group">
+              <label class="label-title-test" for="password">Masukkan Password:</label>
 
-              <div class="col-md-6">
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+              <input id="password" type="password" class="form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
+              <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
 
-                @if ($errors->has('password'))
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('password') }}</strong>
-                  </span>
-                @endif
-              </div>
+              @if ($errors->has('password'))
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $errors->first('password') }}</strong>
+                </span>
+              @endif
             </div>
 
-            <div class="form-group row">
-              <div class="col-md-6 offset-md-4">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                  <label class="form-check-label" for="remember">
-                    {{ __('Remember Me') }}
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group row mb-0">
-              <div class="col-md-8 offset-md-4">
-                <button type="submit" class="btn btn-primary">
-                  {{ __('Login') }}
+            <div class="form-group form-group-mob">
+                <button type="submit" class="btn btn-primary form-submit pointer">
+                  Sign In
                 </button>
 
                 @if (Route::has('password.request'))
@@ -74,8 +60,12 @@
                     {{ __('Forgot Your Password?') }}
                   </a>
                 @endif
-              </div>
             </div>
+
+            <p class="loginhere">
+              Don't have an account ? <a href="{{url('register')}}" class="loginhere-link">Sign Up here</a>
+            </p>
+
           </form>
         </div>
       </div>
