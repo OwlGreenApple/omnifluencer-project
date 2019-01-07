@@ -25,6 +25,12 @@ Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//pricing
+Route::get('/pricing','OrderController@pricing');
+Route::get('/checkout/{id}','OrderController@checkout');
+Route::post('/confirm-payment','OrderController@confirm_payment');
+Route::get('/register-payment','OrderController@register_payment');
+  
 Route::group(['middleware' => ['web','auth']], function() {
 
   //Referral
@@ -80,10 +86,6 @@ Route::group(['middleware' => ['web','auth']], function() {
   Route::get('/print-pdf-compare/{id}','CompareController@print_pdf');
   Route::get('/print-csv-compare/{id}','CompareController@print_csv');
   
-  //pricing
-  Route::get('/pricing','OrderController@pricing');
-  Route::get('/checkout/{id}','OrderController@checkout');
-  Route::post('/confirm-payment','OrderController@confirm_payment');
 });
 
 //Search
