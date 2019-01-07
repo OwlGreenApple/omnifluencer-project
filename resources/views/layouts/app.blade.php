@@ -103,7 +103,7 @@
                   Sign Up
                 </a>
               </li>
-              <button class="btn btn-primary navbar-btn d-none d-sm-none d-md-none d-lg-block">
+              <button class="btn btn-primary navbar-btn d-none d-sm-none d-md-none d-lg-block btn-signup">
                 Sign Up
               </button>
             @else
@@ -195,7 +195,7 @@
       </div>
     </nav>
 
-    <main class="py-4">
+    <main>
       @yield('content')
     </main>
 
@@ -276,5 +276,13 @@
     </div>
 
   </div>
+
+<script type="text/javascript">
+  $( "body" ).on( "click", ".btn-signup", function() {
+    window.location.href = "{{url('register')}}";
+  });
+  
+</script>
+
 </body>
 </html>

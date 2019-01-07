@@ -30,12 +30,15 @@ Route::get('/ref/{rand}','ReferralController@refer');
 //Route verifyemail
 Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
 
+//FAQ
+Route::get('/faq','HomeController@index_faq');
+Route::get('/statics','HomeController@index_statics');
+
 //pricing
 Route::get('/pricing','OrderController@pricing');
 Route::get('/checkout/{id}','OrderController@checkout');
 Route::post('/confirm-payment','OrderController@confirm_payment');
 Route::get('/register-payment','OrderController@register_payment');
-  
 
 Route::group(['middleware' => ['web','auth']], function() 
 {

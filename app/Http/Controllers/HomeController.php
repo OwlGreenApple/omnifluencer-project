@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function index_faq(){
+      return view('faq');
+    }
+
+    public function index_statics(){
+      return view('statics');
+    }
 }
