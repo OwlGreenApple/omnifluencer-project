@@ -11,8 +11,11 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Referral;
 use App\HistorySearch;
+use App\Order;
 
 use App\Mail\ConfirmEmail;
+
+use App\Helpers\Helper;
 
 use Carbon, Crypt, Mail;
 
@@ -93,6 +96,37 @@ class RegisterController extends Controller
         $user_giver->point = $user_giver->point+20;
         $user_giver->save();
       } 
+      
+      if ($data['price']<>"") {
+        //create order 
+        $dt = Carbon::now();
+        $order = new Order;
+        $str = 'OMNI'.$dt->format('ymdHi');
+        $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
+        $order->no_order = $order_number;
+        $order->user_id = $user->id;
+        $order->package = $data["namapaket"];
+        $order->jmlpoin = 0;
+        $order->total = $data['price'];
+        $order->discount = 0;
+        $order->status = 0;
+        $order->buktibayar = "";
+        $order->keterangan = "";
+        $order->save();
+        
+        //mail order to user 
+        $emaildata = [
+            'order' => $order,
+            'user' => $user,
+            'nama_paket' => $data['namapaket'],
+            'no_order' => $order_number,
+        ];
+        Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+          $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+          $message->to($user->email);
+          $message->subject('[Omnifluencer] Order Nomor '.$order_number);
+        });
+      }
 
       return $user;
     }

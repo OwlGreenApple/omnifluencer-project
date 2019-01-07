@@ -22,6 +22,8 @@
         <div class="signup-content">
           <form method="POST" action="{{ route('register') }}" id="signup-form" class="signup-form">
             @csrf
+            <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
+            <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
 
             <h2 class="form-title">Create an Omnifluencer<br>account within a minutes</h2>
 
