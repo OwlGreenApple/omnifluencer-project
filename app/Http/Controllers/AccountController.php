@@ -10,6 +10,7 @@ use App\Group;
 use App\Save;
 
 use App\Mail\ProfileEmail;
+use App\Mail\ProfileBulkEmail;
 
 use Auth,PDF,Excel,Mail,Validator;
 use PHPExcel_Worksheet_Drawing;
@@ -257,9 +258,14 @@ class AccountController extends Controller
       'account' => $account,   
     );
 
-    $pdf = PDF::loadView('user.pdf-profile', $data);
+    $pdf = PDF::loadView('user.pdf-profile', $data)
+            ->setOption('margin-bottom', '0mm')
+            ->setOption('margin-top', '0mm')
+            ->setOption('margin-right', '0mm')
+            ->setOption('margin-left', '0mm');
 
-    return $pdf->download('omnifluencer.pdf');
+    //return $pdf->download('omnifluencer.pdf');
+    return $pdf->stream();
   }
 
   public function print_csv($id){
@@ -308,7 +314,7 @@ class AccountController extends Controller
           });
           //$sheet->fromArray($data);
         });
-      })->download();
+      })->download('xlsx');
   }
 
   public function send_email(Request $request){
@@ -316,6 +322,22 @@ class AccountController extends Controller
 
     if(!$validator->fails()){
       Mail::to($request->email)->queue(new ProfileEmail($request->email,$request->type,$request->id));
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Email berhasil terkirim';
+    } else {
+      $arr['status'] = 'error';
+      $arr['message'] = $validator->errors()->first();
+    }
+
+    return $arr;
+  }
+
+  public function send_email_bulk(Request $request){
+    $validator = $this->validator($request->all());
+
+    if(!$validator->fails()){
+      Mail::to($request->email)->queue(new ProfileBulkEmail($request->email,$request->type,$request->accountid));
 
       $arr['status'] = 'success';
       $arr['message'] = 'Email berhasil terkirim';
@@ -373,5 +395,110 @@ class AccountController extends Controller
     $arr['message'] = '';
 
     return $arr;
+  }
+
+  public function save_groups(Request $request){
+    foreach ($request->accountid as $accountid) {
+      $checksave = Save::where('user_id',Auth::user()->id)
+                      ->where('account_id',$accountid)
+                      ->where('group_id',0)
+                      ->first();
+
+      if(is_null($checksave)){
+        $save = new Save;
+        $save->user_id = Auth::user()->id;
+        $save->type = 'influencer';
+        $save->account_id = $accountid;
+        $save->group_id = 0;
+        $save->save();
+      }
+    }
+
+    $arr['status'] = 'success';
+    $arr['message'] = 'Berhasil menyimpan history ke <b>"Saved Profile"</b>';
+
+    return $arr;
+  }
+
+  public function delete_history_bulk(Request $request){
+    $arr['status'] = 'success';
+    $arr['message'] = '';
+
+    foreach ($request->historyid as $id) {
+      $history = HistorySearch::find($id)->delete(); 
+    }
+
+    return $arr;
+  }
+
+  public function print_pdf_bulk(Request $request){
+    $user = User::find(Auth::user()->id);
+    $user->count_pdf = $user->count_pdf + 1;
+    $user->save();
+
+    $account = [];
+    foreach ($request->accountid as $id) {
+      $account[] = Account::find($id); 
+    }
+
+    $data = array(
+      'account' => $account,   
+    );
+
+    $pdf = PDF::loadView('user.pdf-profile', $data);
+
+    return $pdf->download('omnifluencer.pdf');
+  }
+
+  public function print_csv_bulk(Request $request){
+    $user = User::find(Auth::user()->id);
+    $user->count_csv = $user->count_csv + 1;
+    $user->save();
+
+    $filename = 'omnifluencer';
+
+    $Excel_file = Excel::create($filename, function($excel) use ($request) {
+
+      $i = 1;
+      foreach ($request->accountid as $id) {
+        $sheetname = 'Sheet'.$i;
+
+        $excel->sheet($sheetname, function($sheet) use ($id) {
+
+            $account = Account::find($id); 
+
+            $username = '@'.$account->username;
+            $sheet->cell('B2', $username); 
+            $sheet->cell('B3', $account->eng_rate); 
+
+            $sheet->cell('B4', $account->jml_post); 
+            $sheet->cell('B5', function($cell) {
+              $cell->setValue('Post');   
+            });
+            $sheet->cell('B6', $account->jml_followers); 
+            $sheet->cell('B7', function($cell) {
+              $cell->setValue('Followers');   
+            });
+            $sheet->cell('B8', $account->jml_following); 
+            $sheet->cell('B9', function($cell) {
+              $cell->setValue('Following');   
+            });
+            
+            $sheet->cell('C4', date("M d Y", strtotime($account->lastpost))); 
+            $sheet->cell('C5', function($cell) {
+              $cell->setValue('Last Post');   
+            });
+            $sheet->cell('C6', $account->jml_likes); 
+            $sheet->cell('C7', function($cell) {
+              $cell->setValue('Avg Like Per Post');   
+            });
+            $sheet->cell('C8', $account->jml_comments); 
+            $sheet->cell('C9', function($cell) {
+              $cell->setValue('Avg Comment Per Post');   
+            });
+        });
+        $i++;
+      }
+    })->download('xlsx');
   }
 }

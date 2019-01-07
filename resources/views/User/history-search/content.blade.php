@@ -5,7 +5,8 @@
 @foreach($accounts as $account)
   <tr>
     <td align="center">
-      <input type="checkbox" name="accountid[]" value="{{$account->accountid}}">
+      <input type="checkbox" name="accountid[]" value="{{$account->accountid}}" class="checkaccid" data-id="{{$account->id}}">
+      <input type="checkbox" class="checkhisid-{{$account->id}}" name="historyid[]" value="{{$account->id}}" style="display: none;">
     </td>
     <td data-label="Instagram">
       <img src="{{$account->prof_pic}}" style="max-width:50px; border-radius:50%;">
@@ -61,7 +62,7 @@
       </button>
 
       <button type="button" class="btn btn-primary btn-profile" data-id="{{$account->accountid}}" data-type="csv" data-toggle="modal" data-target="#send-file">
-        <i class="fas fa-file-csv"></i>
+        <i class="fas fa-file-excel"></i>
       </button>
       
       <button type="button" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">

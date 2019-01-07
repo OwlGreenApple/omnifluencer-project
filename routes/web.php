@@ -11,11 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
+
+//Home
+Route::get('/home', 'AccountController@index')
+      ->name('home');
+Route::get('/', 'AccountController@index');
+
+//Search
+Route::get('/search','AccountController@index');
+Route::get('/search/load-search','AccountController@load_search');
+Route::get('/search/load-history','AccountController@load_history');  
+Route::get('/search/delete-history','AccountController@delete_history');
 
 //Route generate halaman register berdasarkan referral link
 Route::get('/ref/{rand}','ReferralController@refer');
@@ -23,7 +30,10 @@ Route::get('/ref/{rand}','ReferralController@refer');
 //Route verifyemail
 Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['web','auth']], function() 
+{
+  //Compare 
+  Route::get('/compare','CompareController@index');
 
 //pricing
 Route::get('/pricing','OrderController@pricing');
@@ -43,6 +53,8 @@ Route::group(['middleware' => ['web','auth']], function() {
   Route::get('/history-search/get-groups','AccountController@get_groups');
   Route::get('/history-search/add-groups','AccountController@add_groups');
   Route::get('/history-search/create-groups','AccountController@create_groups');
+  Route::get('/history-search/save-groups','AccountController@save_groups');
+  Route::get('/history-search/delete-history-bulk','AccountController@delete_history_bulk');
 
   //Edit Profile
   Route::get('/edit-profile','ProfileController@index_edit');
@@ -63,17 +75,22 @@ Route::group(['middleware' => ['web','auth']], function() {
   Route::get('/compare-history','CompareController@index_history');
   Route::get('/compare-history/load-history-compare','CompareController@load_history_compare');
   Route::get('/compare-history/delete','CompareController@delete_compare');
+  Route::get('/compare-history/delete-bulk','CompareController@delete_compare_bulk');
 
   //Groups
   Route::get('/groups','GroupController@index');
   Route::get('/groups/load-groups','GroupController@load_groups');
   Route::get('/groups/{id}/{group_name}','GroupController@index_list');
   Route::get('/groups/load-list-group','GroupController@load_list_group');
+  Route::get('/groups/delete-member','GroupController@delete_member_group');
+  Route::get('/groups/delete-member-bulk','GroupController@delete_member_group_bulk');
+  Route::get('/groups/delete-group','GroupController@delete_group');
 
   //Saved Profile
   Route::get('/saved-profile','GroupController@index_saved');
   Route::get('/saved-profile/load-accounts','GroupController@load_saved_accounts');
   Route::get('/saved-profile/delete','GroupController@delete_saved_profile');
+  Route::get('/saved-profile/delete-bulk','GroupController@delete_saved_profile_bulk');
 
   //Notification 
   Route::get('/notifications','NotificationController@index');
@@ -85,12 +102,8 @@ Route::group(['middleware' => ['web','auth']], function() {
   Route::get('/send-email-compare','CompareController@send_email');
   Route::get('/print-pdf-compare/{id}','CompareController@print_pdf');
   Route::get('/print-csv-compare/{id}','CompareController@print_csv');
-  
+  Route::get('/print-pdf-bulk','AccountController@print_pdf_bulk');
+  Route::get('/print-csv-bulk','AccountController@print_csv_bulk');
+  Route::get('/send-email-bulk','AccountController@send_email_bulk');
+
 });
-
-//Search
-  Route::get('/search','AccountController@index');
-  Route::get('/search/load-search','AccountController@load_search');
-  Route::get('/search/load-history','AccountController@load_history');  
-  Route::get('/search/delete-history','AccountController@delete_history');
-

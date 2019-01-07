@@ -96,9 +96,39 @@
         if(data.status=='success'){
           refresh_page();
         } else {
-          if(data.message=='kuota habis'){
-            $('#info-kuota').modal('show');
-          }
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
+  }
+
+  function delete_history_bulk(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/history-search/delete-history-bulk') ?>",
+      data: $('form').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          refresh_page();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
         }
       }
     });
@@ -198,9 +228,39 @@
       });
     }  
   }
-</script>
 
-<input type="hidden" name="id_delete" id="id_delete">
+  function save_group(){
+    $.ajax({
+        type : 'GET',
+        url : "<?php echo url('/history-search/save-groups') ?>",
+        data: $('form').serialize(),
+        dataType: 'text',
+        beforeSend: function()
+        {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        },
+        success: function(result) {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+
+          var data = jQuery.parseJSON(result);
+
+          if(data.status=='success'){
+            $('#pesan').html(data.message);
+            $('#pesan').removeClass('alert-warning');
+            $('#pesan').addClass('alert-success');
+            $('#pesan').show();
+          } else {
+            $('#pesan').html(data.message);
+            $('#pesan').removeClass('alert-success');
+            $('#pesan').addClass('alert-warning');
+            $('#pesan').show();
+          }
+        }
+      });
+  }
+</script>
 
 <div class="container">
   <div class="row justify-content-center">
@@ -220,6 +280,7 @@
             <i class="fas fa-chart-bar"></i>
             Compare
           </button>
+
           <button class="btn btn-primary mb-10" id="btn-save">
             <i class="fas fa-folder-plus"></i> 
             Add to group
@@ -228,7 +289,7 @@
             <i class="fas fa-save"></i> 
             Save
           </button>
-          <button class="btn btn-danger mb-10">
+          <button class="btn btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>     
         </div>
@@ -243,7 +304,7 @@
             <h4><b>Info for Free Member</b></h4>  
             * <b>Free Member</b> hanya dapat menampilkan 10 history pencarian terakhir<br>  
             * <b>Free Member</b> tidak dapat mengelompokkan ke dalam suatu grup dari hasil pencarian <br>  
-            * <b>Free Member</b> hanya mendapatkan file .CSV sesuai dengan 10 history pencarian terakhir <br> 
+            * <b>Free Member</b> hanya mendapatkan file .XLSX sesuai dengan 10 history pencarian terakhir <br> 
             <br>  
             ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. <button class="btn btn-primary"><i class="fas fa-star"></i> Upgrade To Pro</button>
           </div>
@@ -328,6 +389,9 @@
       </div>
       <div class="modal-body">
         Apakah Anda yakin untuk menghapus histori ini?
+
+        <input type="hidden" name="id_delete" id="id_delete">
+        <input type="hidden" name="delete_type" id="delete_type">
       </div>
       <div class="modal-footer" id="foot">
         <button class="btn btn-danger" id="btn-delete-ok" data-dismiss="modal">
@@ -406,8 +470,8 @@
           </div>
 
           <div class="send-csv mb-4" style="display: none;">
-            <i class="fas fa-file-csv"></i>
-            CSV Download 
+            <i class="fas fa-file-excel"></i>
+            Excel Download 
 
             <a id="link-csv" href="#" target="_blank">
               <button class="btn btn-primary float-right"> 
@@ -452,6 +516,11 @@
     send_email();
   });
 
+  $( "body" ).on( "click", "#btn-save-global", function()
+  {
+    save_group();
+  });
+
   $( "body" ).on( "keypress", "#input-group", function(e)
   {
       if(e.which == 13)
@@ -465,12 +534,26 @@
     refresh_page();
   });
 
-  $( "body" ).on( "click", ".btn-delete", function() {
-    $('#id_delete').val($(this).attr('data-id'));
+  $( "body" ).on( "click", "#btn-compare", function() {
+    console.log($('.checkaccid').val());
   });
 
+  $( "body" ).on( "click", ".btn-delete", function() {
+    $('#id_delete').val($(this).attr('data-id'));
+    $('#delete_type').val('one');
+  });
+
+  $( "body" ).on( "click", ".btn-delete-bulk", function()
+  {
+    $('#delete_type').val('bulk');
+  });
+  
   $( "body" ).on( "click", "#btn-delete-ok", function() {
-    delete_history();
+    if($('#delete_type').val()=='bulk'){
+      delete_history_bulk();
+    } else {
+      delete_history();
+    }
   });
 
   $( "body" ).on( "click", "#btn-save", function() {
@@ -484,6 +567,11 @@
   $( "body" ).on( "click", "#btn-create-group", function() {
     $('#input-group').show();
     $("#input-group").focus();
+  });
+
+  $(document).on( "change", ".checkaccid", function() {
+    var id = $(this).attr('data-id');
+    $(".checkhisid-"+id).prop('checked',this.checked);
   });
 
   $(document).on('click', '.checkAll', function (e) {

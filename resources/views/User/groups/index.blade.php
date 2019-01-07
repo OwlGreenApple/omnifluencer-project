@@ -36,6 +36,35 @@
       }
     });
   }
+
+  function delete_group(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/groups/delete-group') ?>",
+      data: $('form').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          refresh_page();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
+  }
 </script>
 
 <div class="container">
@@ -51,7 +80,7 @@
         </div>
 
         <div class="col-md-7" align="right">
-          <button class="btn btn-danger">
+          <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>
         </div>
@@ -61,13 +90,47 @@
       
       <br>
 
-      <div id="content"></div>
+      <form>
+        <div id="content"></div>
+      </form>
 
     </div>
   </div>
 </div>
 
+<!-- Modal Confirm Delete -->
+<div class="modal fade" id="confirm-delete" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Delete Confirmation
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete?
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-primary" id="btn-delete-ok" data-dismiss="modal">
+          Yes
+        </button>
+        <button class="btn" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
 <script type="text/javascript">
+  $( "body" ).on( "click", "#btn-delete-ok", function() {
+    delete_group();
+  });
+
   $( "body" ).on( "dblclick", ".div-group", function() {
     var idgroup = $(this).attr('data-id');
     var groupname = $(this).attr('data-name');

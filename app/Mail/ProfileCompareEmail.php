@@ -45,7 +45,7 @@ class ProfileCompareEmail extends Mailable
                     ->view('emails.profile-docs')
                     ->with($this->emaildata);
       } else {
-        $store = '/storage/app/'.Auth::user()->email.'/profile-compare.csv';
+        $store = '/storage/app/'.Auth::user()->email.'/profile-compare.xlsx';
         $data = $this->data;
 
         $Excel_file = Excel::create('profile-compare', function($excel) use ($data) {
@@ -92,7 +92,7 @@ class ProfileCompareEmail extends Mailable
             }
             //$sheet->fromArray($data);
           });
-        })->store('csv',storage_path('app/'.Auth::user()->email));
+        })->store('xlsx',storage_path('app/'.Auth::user()->email));
 
         return $this->from('omnifluencer@gmail.com', 'Omnifluencer')
                     ->subject('[Omnifluencer] Profile Document')

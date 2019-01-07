@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" type="text/css" href="tooltipster/dist/css/tooltipster.main.min.css" />
   <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
 
   <script>
     $(document).ready(function() {
@@ -69,40 +70,16 @@
   <div id="app">
     <nav class="navbar navbar-fluid navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}" style="padding: 0px; margin-left: 0;">
-          <img src="{{asset('design/logo-color-web.png')}}" style="height: 40px; width: auto;">
+        <a class="navbar-brand" href="#" style="padding: 0px; margin-left: 0;">
+          <img src="{{asset('design/logobrand.png')}}" style="height: 40px; width: auto;">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Left Side Of Navbar 
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('referral')}}">
-                Referral  
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('search')}}">
-                Search
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('history-search')}}">
-                History Search
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('edit-profile')}}">
-                Edit Profile
-              </a>
-            </li>
-          </ul>-->
-
           <!-- Right Side Of Navbar -->
-          <ul class="nav navbar-nav ml-auto">
+          <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="#">FAQ</a>
             </li>
@@ -115,15 +92,20 @@
             <li class="nav-item" style="border-right: 1px solid black">
               <a class="nav-link" href="{{url('pricing')}}">Pricing</a>
             </li>
-
+          
             <!-- Authentication Links -->
             @guest
               <li class="nav-item">
-                <a class="nav-link" href="#">Sign In</a>
+                <a class="nav-link" href="{{url('login')}}">Sign In</a>
               </li>
-              <button class="btn btn-primary navbar-btn">
+              <li class="nav-item">
+                <a class="nav-link d-block d-sm-block d-md-block d-lg-none" href="{{url('register')}}">
+                  Sign Up
+                </a>
+              </li>
+              <button class="btn btn-primary navbar-btn d-none d-sm-none d-md-none d-lg-block">
                 Sign Up
-              </button> 
+              </button>
             @else
               <li class="nav-item">
                 <a class="nav-link" href="{{asset('dashboard')}}">
@@ -208,55 +190,91 @@
               </div>
             </li>             
             @endguest
-            
-            
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-            <!-- Authentication Links 
-            @guest
-              <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-              </li>
-              <li class="nav-item">
-                @if (Route::has('register'))
-                  <a class="nav-link" href="{{ route('register') }}">
-                    {{ __('Register') }}
-                  </a>
-                @endif
-              </li>
-            @else
-              <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                  {{ Auth::user()->name }} 
-                  <span class="caret"></span>
-                </a>
+    <main class="py-4">
+      @yield('content')
+    </main>
 
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{ route('logout') }}"
-                      onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest-->
-            </ul>
+    <footer class="container-fluid py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-lg-3 col-md-12 col-sm-12">
+              <div class="logo-part">
+                <img src="{{asset('design/logobrand.png')}}" class="w-75">
+                <p>Use this tool as test data for an automated system or find your next pen</p>
+                <span>Copyright © 2019 Omnifluencer. All rights reserved.</span>
+              </div>
+            </div>
+            <div class="col d-none d-sm-none d-md-none d-lg-block">
+              <h6>Omnifluencer</h6>
+              <div class="row">
+                <div class="col">
+                  <ul>
+                    <li> <a href="#"> Home</a> </li>
+                    <li> <a href="#"> About Us</a> </li>
+                    <li> <a href="#"> Blog</a> </li>
+                    <li> <a href="#"> Pricing</a> </li>
+                    <li> <a href="#"> Points</a> </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col d-none d-sm-none d-md-none d-lg-block">
+              <h6> Helps</h6>
+              <div class="row ">
+                <div class="col">
+                  <ul>
+                    <li> <a href="#"> FAQs</a> </li>
+                    <li> <a href="#"> Terms & Conditions</a> </li>
+                    <li> <a href="#"> Privacy Policy</a> </li>
+                    <li> <a href="#"> Disclaimer</a> </li>
+                    <li> <a href="#"> Learn More</a> </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col d-none d-sm-none d-md-none d-lg-block">
+              <h6> Contact</h6>
+              <div class="row ">
+                <div class="col">
+                  <ul>
+                    <li> <a href="#"> support@omnifluencer.com</a> </li>
+                    <li> <a href="#"> Send Us a Query</a> </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 d-none d-sm-none d-md-none d-lg-block">
+              <h6> Newsletter</h6>
+              <p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
+              <form class="form-inline form-inline-btm" action="/action_page.php">
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                <div class="form-check">
+                </div>
+                <button type="submit" class="btn btn-primary btn-primary-btm">Submit</button>
+              </form>
+              <div class="social">
+                <a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-
-        <!--Loading Bar-->
-        <div class="div-loading">
-          <div id="loader" style="display: none;"></div>  
-        </div>
-
+      </div>
     </div>
+  </footer>
+
+    <!--Loading Bar-->
+    <div class="div-loading">
+      <div id="loader" style="display: none;"></div>  
+    </div>
+
+  </div>
 </body>
 </html>

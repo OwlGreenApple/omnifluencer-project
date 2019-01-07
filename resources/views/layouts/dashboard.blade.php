@@ -62,17 +62,15 @@
 
       $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
-        $('.div-loading').addClass('background-load');
-        $('.div-loading').addClass('bg-sidebar');
+        $('.div-bgsidebar').addClass('bg-sidebar');
       });
     });
 
-    $(document).click(function(e) {
+    $(document).on('click', function (e) {
       var sidebar = $("#sidebar, #sidebarCollapse");
       if (!sidebar.is(e.target) && sidebar.has(e.target).length === 0) {
         sidebar.removeClass('active');
-        $('.div-loading').removeClass('background-load');
-        $('.div-loading').removeClass('bg-sidebar');
+        $('.div-bgsidebar').removeClass('bg-sidebar');
       }
     });   
 
@@ -349,6 +347,11 @@
 
   <!--Loading Bar-->
   <div class="div-loading">
+    <div id="loader" style="display: none;"></div>  
+  </div>
+
+  <!--Background Sidebar-->
+  <div class="div-bgsidebar">
     <div id="loader" style="display: none;"></div>  
   </div>
 

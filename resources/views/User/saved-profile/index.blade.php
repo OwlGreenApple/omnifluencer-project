@@ -105,6 +105,35 @@
     });
   }
 
+  function delete_profile_bulk(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/saved-profile/delete-bulk') ?>",
+      data: $('form').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          refresh_page();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
+  }
+
   function add_groups(){
     $.ajax({
       type : 'GET',
@@ -201,8 +230,6 @@
   }
 </script>
 
-<input type="hidden" name="id_delete" id="id_delete">
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-11">
@@ -221,7 +248,7 @@
             <i class="fas fa-folder-plus"></i> 
             Add to group
           </button>
-          <button class="btn btn-danger">
+          <button class="btn btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>     
         </div>
@@ -275,6 +302,9 @@
       </div>
       <div class="modal-body">
         Are you sure you want to delete?
+
+        <input type="hidden" name="id_delete" id="id_delete">
+        <input type="hidden" name="delete_type" id="delete_type">
       </div>
       <div class="modal-footer" id="foot">
         <button class="btn btn-primary" id="btn-delete-ok" data-dismiss="modal">
@@ -353,8 +383,8 @@
           </div>
 
           <div class="send-csv mb-4" style="display: none;">
-            <i class="fas fa-file-csv"></i>
-            CSV Download 
+            <i class="fas fa-file-excel"></i>
+            Excel Download 
 
             <a id="link-csv" href="#" target="_blank">
               <button class="btn btn-primary float-right"> 
@@ -388,6 +418,17 @@
 
   $( "body" ).on( "click", ".btn-delete", function() {
     $('#id_delete').val($(this).attr('data-id'));
+    $('#delete_type').val('one');
+  });
+
+  $( "body" ).on( "click", ".btn-delete-bulk", function()
+  {
+    $('#delete_type').val('bulk');
+  });
+
+  $(document).on( "change", ".checkaccid", function() {
+    var id = $(this).attr('data-id');
+    $(".checksaveid-"+id).prop('checked',this.checked);
   });
 
   $( "body" ).on( "click", ".btn-profile", function() {
@@ -412,7 +453,11 @@
   });
 
   $( "body" ).on( "click", "#btn-delete-ok", function() {
-    delete_profile();
+    if($('#delete_type').val()=='bulk'){
+      delete_profile_bulk();
+    } else {
+      delete_profile();
+    }
   });
 
   $( "body" ).on( "click", "#btn-save", function() {

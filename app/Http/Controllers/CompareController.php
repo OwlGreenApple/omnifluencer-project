@@ -21,6 +21,28 @@ class CompareController extends Controller
     return Validator::make($data, $rules);
   }
 
+  public function index(Request $request){
+    return view('user.compare.index')
+            ->with('id1',$request->id1)
+            ->with('id2',$request->id2)
+            ->with('id3',$request->id3)
+            ->with('id4',$request->id4);
+  }
+
+  public function load_compare(Request $request){
+    $acc1 = Account::find($request->id1);
+    $acc2 = Account::find($request->id2);
+    $acc3 = Account::find($request->id3);
+    $acc4 = Account::find($request->id4);
+
+    $accounts = array($acc1,$acc2,$acc3,$acc4);
+
+    $arr['view'] = (string) view('user.compare.index')
+                      ->with('accounts',$accounts);
+
+    return $arr;
+  }
+
     public function index_history(){
       return view('user.compare-history.index');
     }
@@ -127,7 +149,7 @@ class CompareController extends Controller
           
           //$sheet->fromArray($data);
         });
-      })->download('csv');
+      })->download('xlsx');
   }
 
   public function send_email(Request $request){
@@ -165,6 +187,19 @@ class CompareController extends Controller
   public function delete_compare(Request $request){
     $compare = HistoryCompare::find($request->id)
                 ->delete();
+
+    $arr['status'] = 'success';
+    $arr['message'] = 'Delete berhasil';
+
+    return $arr;
+  }
+
+  public function delete_compare_bulk(Request $request){
+
+    foreach ($request->compareid as $id) {
+      $compare = HistoryCompare::find($id)
+                ->delete(); 
+    }
 
     $arr['status'] = 'success';
     $arr['message'] = 'Delete berhasil';

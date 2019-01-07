@@ -52,7 +52,7 @@ class ProfileEmail extends Mailable
                     ->view('emails.profile-docs')
                     ->with($this->emaildata);
       } else {
-        $store = '/storage/app/'.Auth::user()->email.'/profile.csv';
+        $store = '/storage/app/'.Auth::user()->email.'/profile.xlsx';
 
         $Excel_file = Excel::create('profile', function($excel) use ($account) {
           $excel->sheet('list', function($sheet) use ($account) {
@@ -87,7 +87,7 @@ class ProfileEmail extends Mailable
             });
             //$sheet->fromArray($data);
           });
-        })->store('csv',storage_path('app/'.Auth::user()->email));
+        })->store('xlsx',storage_path('app/'.Auth::user()->email));
 
         return $this->from('omnifluencer@gmail.com', 'Omnifluencer')
                     ->subject('[Omnifluencer] Profile Document')
