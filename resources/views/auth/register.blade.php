@@ -22,6 +22,8 @@
         <div class="card-body">
           <form method="POST" action="{{ route('register') }}">
             @csrf
+            <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
+            <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
 
             <div class="form-group row">
               <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
