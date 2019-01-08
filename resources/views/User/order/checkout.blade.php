@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+  <link href="{{ asset('css/style-payment.css') }}" rel="stylesheet">
+
   <script type="text/javascript">
     $(document).ready(function() {
       $( "#select-auto-manage" ).change(function() {
@@ -10,6 +12,7 @@
       $( "#select-auto-manage" ).change();
     });
   </script>
+
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -24,10 +27,12 @@
               {{ csrf_field() }}
               <input type="hidden" id="price" name="price">
               <input type="hidden" id="namapaket" name="namapaket">
+
               <h2 class="form-title">Choose Your Packages</h2>
+
               <div class="form-group">
                 <label class="label-title-test" for="formGroupExampleInput">Pilih Paket:</label>
-                <select class="form-control" name="select-auto-manage" id="select-auto-manage">
+                <select class="form-control form-control-lg" name="select-auto-manage" id="select-auto-manage" style="width: 100%">
                     <option data-price="150000" data-paket="Pro Monthly" value="{{$id}}" <?php if ($id==1) echo "selected"; ?>>Pro Monthly - IDR 150.000,-/mo</option>
                     <option data-price="200000" data-paket="Premium Yearly" value="{{$id}}" <?php if ($id==3) echo "selected"; ?>>Premium Yearly - IDR 200.000,-/mo</option>
                     <option data-price="550000" data-paket="Pro Yearly" value="{{$id}}" <?php if ($id==2) echo "selected"; ?>>Pro Yearly - IDR 550.000,-/year</option>

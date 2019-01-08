@@ -17,6 +17,7 @@
   <script type="text/javascript" src="tooltipster/dist/js/tooltipster.bundle.min.js"></script>
   <!--<script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>-->
   <script defer src="{{asset('js/all.js')}}"></script>
+  <script src="{{ asset('js/datepicker.js') }}"></script>
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -24,6 +25,7 @@
   <link rel="stylesheet" type="text/css" href="tooltipster/dist/css/tooltipster.bundle.min.css" />
   <link href="{{ asset('css/all.css') }}" rel="stylesheet">
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
 
   <script>
     $(document).ready(function() {

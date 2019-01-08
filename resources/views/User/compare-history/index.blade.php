@@ -9,7 +9,10 @@
   $(document).ready(function() {
     //function saat klik pagination
     refresh_page();
-  
+
+    $('.formatted-date').datepicker({
+      dateFormat: 'yy/mm/dd',
+    });
   });
 
   function refresh_page(){
@@ -22,6 +25,8 @@
       url : currentPage,
       data: {
         keywords : $('#keywords').val(),
+        from : $('#from').val(),
+        to : $('#to').val(),
       },
       dataType: 'text',
       beforeSend: function()
@@ -180,12 +185,12 @@
           <label class="center-mobile mr-sm-2" for="from">
             <b>Dari</b>
           </label>
-          <input id="from" type="text" class="form-control mb-2 mr-sm-2 col-md-2" name="from">
+          <input id="from" type="text" class="form-control mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
 
           <label class="center-mobile mr-sm-2" for="to">
             <b>hingga</b>
           </label>
-          <input id="to" type="text" class="form-control mb-2 mr-sm-2" name="to">
+          <input id="to" type="text" class="form-control mb-2 mr-sm-2 formatted-date" name="to">
 
           <div class="d-flex">
             <label class="sr-only" for="keywords">
@@ -193,7 +198,7 @@
             </label>
             <input id="keywords" type="text" class="form-control mb-2 mr-sm-2" name="keywords" placeholder="username...">
                 
-            <button class="btn btn-primary mb-2">
+            <button type="button" class="btn btn-primary mb-2 btn-search">
               Search
             </button>
           </div>

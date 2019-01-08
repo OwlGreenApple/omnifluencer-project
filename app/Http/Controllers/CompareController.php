@@ -9,7 +9,7 @@ use App\Account;
 
 use App\Mail\ProfileCompareEmail;
 
-use Auth,PDF,Excel,Validator,Mail;
+use Auth,PDF,Excel,Validator,Mail,Carbon;
 
 class CompareController extends Controller
 {
@@ -47,9 +47,30 @@ class CompareController extends Controller
       return view('user.compare-history.index');
     }
 
-    public function load_history_compare(){
-      $compares = HistoryCompare::where('user_id',Auth::user()->id)
-                  ->orderBy('created_at','desc')
+    public function load_history_compare(Request $request){
+      $compares = HistoryCompare::leftjoin('accounts as acc1','history_compares.account_id_1','acc1.id')
+              ->leftjoin('accounts as acc2','history_compares.account_id_2','acc2.id')
+              ->leftjoin('accounts as acc3','history_compares.account_id_3','acc3.id')
+              ->leftjoin('accounts as acc4','history_compares.account_id_4','acc4.id')
+              ->select('history_compares.*','acc1.username as acc1username','acc2.username as acc2username','acc3.username as acc3username','acc4.username as acc4username')
+              ->where('history_compares.user_id',Auth::user()->id)
+              ->where(function($query) use ($request) {
+                  $query->where('acc1.username','like','%'.$request->keywords.'%')
+                        ->orWhere('acc2.username','like','%'.$request->keywords.'%')
+                        ->orWhere('acc3.username','like','%'.$request->keywords.'%')
+                        ->orWhere('acc4.username','like','%'.$request->keywords.'%');
+                });
+
+      if($request->from!=null and $request->to!=null){
+        $dt = Carbon::createFromFormat("Y/m/d h:i:s", $request->from.' 00:00:00'); 
+
+        $dt1 = Carbon::createFromFormat("Y/m/d h:i:s", $request->to.' 00:00:00');
+
+        $compares = $compares->whereDate("history_compares.created_at",">=",$dt)
+                ->whereDate("history_compares.created_at","<=",$dt1);
+      }
+
+      $compares = $compares->orderBy('history_compares.created_at','desc')
                   ->paginate(15);
 
       $arr['view'] = (string) view('user.compare-history.content')
@@ -106,13 +127,17 @@ class CompareController extends Controller
 
     $Excel_file = Excel::create($filename, function($excel) use ($data) {
         $excel->sheet('list', function($sheet) use ($data) {
-          /*$objDrawing = new PHPExcel_Worksheet_Drawing;
-          $objDrawing->setPath(public_path('img/headerKop.png')); //your image path
-          $objDrawing->setCoordinates('A2');
-          $objDrawing->setWorksheet($sheet);*/
-          
-          $cell1 = 'B';
-          $cell2 = 'C';
+        
+          $sheet->cell('B3', 'Engagement Rate'); 
+          $sheet->cell('B4', 'Total Influenced'); 
+          $sheet->cell('B5', 'Post'); 
+          $sheet->cell('B6', 'Followers'); 
+          $sheet->cell('B7', 'Following'); 
+          $sheet->cell('B8', 'Last Post'); 
+          $sheet->cell('B9', 'Avg Like Per Post'); 
+          $sheet->cell('B10', 'Avg Comment Per Post'); 
+
+          $cell = 'C';
 
           foreach ($data as $account) {
             if(is_null($account)){
@@ -120,36 +145,21 @@ class CompareController extends Controller
             }
 
             $username = '@'.$account->username;
-            $sheet->cell($cell1.'2', $username); 
-            $sheet->cell($cell1.'3', $account->eng_rate); 
-            $sheet->cell($cell1.'4', $account->jml_post);
-            $sheet->cell($cell1.'5', function($cell) {
-              $cell->setValue('Post');   
-            });
-            $sheet->cell($cell1.'6', $account->jml_followers); 
-            $sheet->cell($cell1.'7', function($cell) {
-              $cell->setValue('Followers');   
-            });
-            $sheet->cell($cell1.'8', $account->jml_following); 
-            $sheet->cell($cell1.'9', function($cell) {
-              $cell->setValue('Following');   
-            });
-            
-            $sheet->cell($cell2.'4', date("M d Y", strtotime($account->lastpost))); 
-            $sheet->cell($cell2.'5', function($cell) {
-              $cell->setValue('Last Post');   
-            });
-            $sheet->cell($cell2.'6', $account->jml_likes); 
-            $sheet->cell($cell2.'7', function($cell) {
-              $cell->setValue('Avg Like Per Post');   
-            });
-            $sheet->cell($cell2.'8', $account->jml_comments); 
-            $sheet->cell($cell2.'9', function($cell) {
-              $cell->setValue('Avg Comment Per Post');   
-            });   
+            $sheet->cell($cell.'2', $username); 
+            $sheet->cell($cell.'3', $account->eng_rate*100); 
 
-            $cell1++; $cell1++; 
-            $cell2++; $cell2++; 
+            $influence = round($account->eng_rate*$account->jml_followers);
+            $sheet->cell($cell.'4', $influence); 
+
+            $sheet->cell($cell.'5', $account->jml_post);
+            $sheet->cell($cell.'6', $account->jml_followers); 
+            $sheet->cell($cell.'7', $account->jml_following); 
+            
+            $sheet->cell($cell.'8', date("M d Y", strtotime($account->lastpost))); 
+            $sheet->cell($cell.'9', $account->jml_likes);
+            $sheet->cell($cell.'10', $account->jml_comments); 
+
+            $cell++;
           }
           
           //$sheet->fromArray($data);
