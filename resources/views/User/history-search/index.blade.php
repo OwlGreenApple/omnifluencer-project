@@ -16,6 +16,37 @@
     });
   });
 
+  function check_compare(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/compare/check') ?>",
+      data: $('form').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          // refresh_page();
+          window.location.href = "<?php echo url('compare'); ?>/"+data.message;
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
+  }
+
+
   function get_groups(){
     $.ajax({
       type : 'GET',
@@ -535,7 +566,8 @@
   });
 
   $( "body" ).on( "click", "#btn-compare", function() {
-    console.log($('.checkaccid').val());
+    // console.log($('.checkaccid').val());
+    check_compare();
   });
 
   $( "body" ).on( "click", ".btn-delete", function() {

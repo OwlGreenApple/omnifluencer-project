@@ -32,7 +32,7 @@ class AccountController extends Controller
     return view('user.search.index');
   }
 
-  public function igcallback($url){
+  public static function igcallback($url){
     $c = curl_init();
 
     curl_setopt($c, CURLOPT_URL, $url);
@@ -47,17 +47,18 @@ class AccountController extends Controller
     return $arr_res;
   }
 
-  public function create_account($arr_res){
+  public static function create_account($arr_res){
     $account = new Account;
     $account->ig_id = $arr_res["pk"];
-    $account->username = $arr_res["username"];
+    $account->username = strtolower($arr_res["username"]);
     $account->prof_pic = $arr_res["hd_profile_pic_url_info"]["url"];
     $account->jml_following = $arr_res["following_count"];
     $account->jml_followers = $arr_res["follower_count"];
     $account->jml_post = $arr_res["media_count"];
 
     $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"];
-    $arr_res2 = $this->igcallback($url2);
+    // $arr_res2 = $this->igcallback($url2);
+    $arr_res2 = AccountController::igcallback($url2);
 
     if($arr_res2!=null){
       $count = 0;
