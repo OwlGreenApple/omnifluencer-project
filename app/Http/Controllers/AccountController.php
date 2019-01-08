@@ -446,9 +446,14 @@ class AccountController extends Controller
       'account' => $account,   
     );
 
-    $pdf = PDF::loadView('user.pdf-profile', $data);
+    $pdf = PDF::loadView('user.pdf-profile', $data)
+                  ->setOption('margin-bottom', '0mm')
+                  ->setOption('margin-top', '0mm')
+                  ->setOption('margin-right', '0mm')
+                  ->setOption('margin-left', '0mm');
 
-    return $pdf->download('omnifluencer.pdf');
+    //return $pdf->download('omnifluencer.pdf');
+    return $pdf->stream();
   }
 
   public function print_csv_bulk(Request $request){

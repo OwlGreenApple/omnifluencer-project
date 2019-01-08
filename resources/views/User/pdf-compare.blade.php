@@ -1,8 +1,14 @@
 <?php use App\Helpers\Helper; ?>
 
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
 
-<div class="col-md-12 row" align="center">
+<div id="bg-page">
+  <img src="{{asset('design/new-bg.jpg')}}">
+</div>
+
+
+<div class="col-md-12 info compare" align="center">
 
   @foreach($data as $account)
     <?php 
@@ -10,13 +16,21 @@
         continue;
       }  
     ?>
-    <div class="col-md-3">
-      <img src="{{$account->prof_pic}}" style="max-width: 150px"><br>
+    <div class="col-md-3 inline">
+      <img class="profpic" src="{{$account->prof_pic}}" style="max-width: 150px"><br>
       <?php echo '@'.$account->username ?> <br>
 
       <div class="row">
-        <div class="col-md-2"></div>
         <div class="col-md-4">
+          <span class="info-value">
+            <b>
+              <?php echo Helper::abbreviate_number(round($account->eng_rate*$account->jml_followers),2) ?>  
+            </b>
+          </span><br>
+          <span class="info-label">
+            Total Influenced
+          </span>
+
           <h4>
             <b><?php echo Helper::abbreviate_number($account->jml_post,2); ?></b>
           </h4>

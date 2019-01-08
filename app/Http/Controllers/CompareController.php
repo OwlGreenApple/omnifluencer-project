@@ -181,9 +181,14 @@ class CompareController extends Controller
     );
 
     $pdf = PDF::loadView('user.pdf-compare',$data)
-                ->setOrientation('landscape');
+                ->setOrientation('landscape')
+                ->setOption('margin-bottom', '0mm')
+                ->setOption('margin-top', '0mm')
+                ->setOption('margin-right', '0mm')
+                ->setOption('margin-left', '0mm');
 
-    return $pdf->download('omnifluencer.pdf');
+    //return $pdf->download('omnifluencer.pdf');
+    return $pdf->stream();
   }
 
   public function print_csv($id){

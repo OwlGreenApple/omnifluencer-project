@@ -1,0 +1,80 @@
+.info-box { 
+    border:3px solid #1372d4;
+    padding:30px;
+    margin: 10px;
+    background-color: #F8F8F8;
+  }  
+
+  .info { 
+    background-color: #fff; 
+    padding-top: 100px;
+    padding-bottom:50px;
+  }
+
+  .logo { padding-top: 40px; padding-bottom: 80px; }
+
+  #bg-page { position: fixed; z-index:-20;}
+
+  .saved-on { 
+    position: absolute; 
+    top: 230px; 
+    right: 30px; 
+    font-size: 15px;
+  }
+
+  .profpic { 
+    position: absolute; 
+    top: 130px; 
+    left: 400px; 
+    max-width: 180px;
+    border-radius: 50%;
+  }
+
+  .inline {
+    display: inline-block;
+  }
+
+  .info-value { 
+    font-size: 30px;
+    color: #1372d4;
+  }
+
+  .info-label {
+    font-size: 20px;
+    color: #1372d4;
+  }
+
+  .username {
+    font-size: 25px;
+    color: #1372d4;
+  }
+
+  .name {
+    font-size: 40px;
+    font-weight: 600;
+    color: #1372d4;
+  }
+
+  .engrate {
+    height: 210px;
+    width: 210px;
+    position: relative;
+    margin-right: 10px;
+  }
+
+  .engrate-circle {
+    position: absolute;
+  }
+
+  .engrate-txt {
+    z-index: 10;
+    position: absolute;
+    left: 55px;
+    top: 55px;
+  }
+
+  div.page {
+    position: relative;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
