@@ -34,6 +34,7 @@
       $('.tooltipstered').tooltipster({
         contentAsHTML: true,
       });
+      $(".div-loading").hide();
     });
   </script>
 </head>

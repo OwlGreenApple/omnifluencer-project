@@ -43,7 +43,10 @@ Route::get('/register-payment','OrderController@register_payment');
 Route::group(['middleware' => ['web','auth']], function() 
 {
   //Compare 
-  Route::get('/compare','CompareController@index');
+  Route::get('/compare/{keywords}','CompareController@index');
+  Route::get('/compare/check','CompareController@check');
+  Route::get('/compare/load-search','CompareController@load_search');
+  Route::get('/compare/load-compare','CompareController@load_compare');
 
   //Referral
   Route::get('/referral','ReferralController@index');

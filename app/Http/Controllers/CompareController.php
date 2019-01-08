@@ -9,6 +9,8 @@ use App\Account;
 
 use App\Mail\ProfileCompareEmail;
 
+use App\Http\Controllers\AccountController;
+
 use Auth,PDF,Excel,Validator,Mail,Carbon;
 
 class CompareController extends Controller
@@ -21,7 +23,7 @@ class CompareController extends Controller
     return Validator::make($data, $rules);
   }
 
-  public function index(Request $request){
+  public function index($keywords=""){
     return view('user.compare.index')
             ->with('id1',$request->id1)
             ->with('id2',$request->id2)
@@ -29,13 +31,115 @@ class CompareController extends Controller
             ->with('id4',$request->id4);
   }
 
+  public function check(Request $request){
+    $arr['status'] = 'success';
+    $arr['message'] = '';
+
+    // pengecekan maximum 4 yang terselect
+    if ( count($request->accountid)>4) { 
+      $arr['status'] = 'error';
+      return $arr;
+    }
+    
+    $message = "";
+    $i = 0;
+    $len = count($request->accountid);
+    foreach ($request->accountid as $accountid) {
+      $account = Account::find($accountid);
+      if (!is_null($account)) {
+        $message .= $account->username;
+        if ($i <> $len - 1) {
+          $message .= "-";
+        }
+      }
+      $i++;
+    }
+    $arr['message'] = $message;
+    return $arr;
+  }
+
+  public function load_search(Request $request){
+    // load akun 
+    $account = Account::where('username',$request->keywords)->first();
+    if(is_null($account)){
+      $url = "http://cmx.space/get-user-data/".$request->keywords;
+
+      $arr_res = AccountController::igcallback($url);
+      
+      if($arr_res!=null){
+        $account = AccountController::create_account($arr_res);
+      } else {
+        $arr['status'] = 'error';
+        $arr['message'] = '<b>Warning!</b> Username tidak ditemukan!';
+        return $arr;
+      }
+    }
+
+    // panggil function compare dibawah
+    $arr_compare = array(
+      "id1"=>-1,
+      "id2"=>-1,
+      "id3"=>-1,
+      "id4"=>-1,
+    );
+    if ($request->part==1) {
+      $arr_compare["id1"]=$account->id;
+    }
+    if ($request->part==2) {
+      $arr_compare["id2"]=$account->id;
+    }
+    if ($request->part==3) {
+      $arr_compare["id3"]=$account->id;
+    }
+    if ($request->part==4) {
+      $arr_compare["id4"]=$account->id;
+    }
+    $this->do_compare($arr_compare);
+  }
+  
+  public function do_compare($arr){
+    $user = Auth::user();
+    //cari ada user ngga yang search compare kurang dari 1 jam dari now 
+    $history_compare = HistoryCompare::where("user_id",$user->id)
+                        ->whereRaw("updated_at > date_sub(now(), interval 1 hour)")
+                        ->first();
+    if (is_null($history_compare)){
+      //klo ga ada create new 
+      $history_compare = new HistoryCompare;
+      $history_compare->user_id=$user->id;
+    }
+    else {
+    }
+    //update data
+    if ($arr["id1"]<>-1) {
+      $history_compare->account_id_1=$arr["id1"];
+    }
+    if ($arr["id2"]<>-1) {
+      $history_compare->account_id_2=$arr["id2"];
+    }
+    if ($arr["id3"]<>-1) {
+      $history_compare->account_id_3=$arr["id3"];
+    }
+    if ($arr["id4"]<>-1) {
+      $history_compare->account_id_4=$arr["id4"];
+    }
+    $history_compare->save();
+  }
+
   public function load_compare(Request $request){
-    $acc1 = Account::find($request->id1);
+    /*$acc1 = Account::find($request->id1);
     $acc2 = Account::find($request->id2);
     $acc3 = Account::find($request->id3);
-    $acc4 = Account::find($request->id4);
+    $acc4 = Account::find($request->id4);*/
 
     $accounts = array($acc1,$acc2,$acc3,$acc4);
+    $arr_compare = array(
+      "id1"=>$request->id1,
+      "id2"=>$request->id2,
+      "id3"=>$request->id3,
+      "id4"=>$request->id4,
+    );
+    $this->do_compare($arr_compare);
 
     $arr['view'] = (string) view('user.compare.index')
                       ->with('accounts',$accounts);
