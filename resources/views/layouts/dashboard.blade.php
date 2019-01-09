@@ -159,18 +159,26 @@
           </ul>
         </span>
 
+        <?php 
+          $profpic = null;
+
+          if(Auth::user()->prof_pic!=null){
+            $profpic = Storage::url(Auth::user()->prof_pic);
+          }
+        ?>
+
         <span class="submenu-header">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                <img class="profpic-header" src="{{Auth::user()->prof_pic}}">
+                <img class="profpic-header" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
               </a>
 
               <div class="dropdown-menu dropdown-menu-right profpic-menu" aria-labelledby="navbarDropdown">
                 <div class="container" style="padding-bottom: 10px;">
                   <div class="row">
                     <div class="col-md-4" align="center">
-                      <img class="profpic-header-big" src="{{Auth::user()->prof_pic}}">
+                      <img class="profpic-header-big" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
                     </div>
 
                     <div class="col-md-8" align="left">

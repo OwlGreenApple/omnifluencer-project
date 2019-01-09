@@ -64,6 +64,7 @@ Route::group(['middleware' => ['web','auth']], function()
   //Edit Profile
   Route::get('/edit-profile','ProfileController@index_edit');
   Route::post('/edit-profile/edit','ProfileController@edit_profile');
+  Route::get('/edit-profile/delete-photo','ProfileController@delete_photo');
 
   //Change Password
   Route::get('/change-password','ProfileController@index_changepass');

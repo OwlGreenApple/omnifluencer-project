@@ -27,7 +27,6 @@ class ProfileController extends Controller
     }
 
     public function edit_profile(Request $request){
-      dd($request->all());
       $user = User::find(Auth::user()->id);
 
       $validator = $this->validator($request->all());
@@ -40,13 +39,13 @@ class ProfileController extends Controller
         //$user->location = $request->location;
 
         if($request->hasFile('fileprofpic')){
-          if($user->profpic!=''){
+          /*if($user->prof_pic!=''){
             Storage::delete($user->profpic);
-          }
+          }*/
 
-          $path = Storage::putFile('profpic', $request->file('profpic'),'public');
+          $path = Storage::disk('s3')->putFile('profpic', $request->file('fileprofpic'),'public');
           
-          $user->profpic = $path;
+          $user->prof_pic = $path;
         }
 
         $user->save();
@@ -57,6 +56,21 @@ class ProfileController extends Controller
         $arr['status'] = 'error';
         $arr['message'] = $validator->errors()->first();
       }
+
+      return $arr;
+    }
+
+    public function delete_photo(){
+      $user = User::find(Auth::user()->id);
+
+      if($user->prof_pic!=''){
+        Storage::delete($user->profpic);
+        $user->prof_pic = null;
+        $user->save();
+      }
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Delete profile picture berhasil';
 
       return $arr;
     }

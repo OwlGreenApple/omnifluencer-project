@@ -63,13 +63,20 @@
 
       <br>  
 
+      <?php  
+        $profpic = null;
+
+        if(Auth::user()->prof_pic!=null){
+          $profpic = Storage::url(Auth::user()->prof_pic);
+        }
+      ?>
       <div class="row">
         <div class="col-md-7">
           <div class="card">  
             <div class="card-body">
               <div class="row"> 
                 <div class="col-md-2 col-12" align="center">  
-                  <img class="profpic" src="<?php echo Auth::user()->prof_pic ?>">    
+                  <img class="profpic" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
                 </div>
 
                 <div class="col-md-6 col-12 center-mobile"> 

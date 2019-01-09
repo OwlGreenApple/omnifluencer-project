@@ -7,6 +7,24 @@
   <h3><?php echo '@'.$account->username ?></h3>
   <p>{{$account->username}}</p>
 </div>
+
+<div class="names">
+  <div class="progress blue">
+    <span class="progress-left">
+      <span class="progress-bar"></span>
+    </span>
+    <span class="progress-right">
+      <span class="progress-bar"></span>
+    </span>
+    <div class="progress-value">
+      <span class="counter">
+        <?php echo round($account->eng_rate*100,2) ?>
+      </span>% <br>
+      Engagement Rate
+    </div>
+  </div>
+</div>
+
 <div class="top-stats">
   <h3>11,968</h3>
   <p>Total Influenced</p>

@@ -13,9 +13,12 @@
   <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
-  <script src="{{ asset('js/noframework.waypoints.min.js') }}"></script>
+  <!--<script src="{{ asset('js/noframework.waypoints.min.js') }}"></script>-->
+  <!--<script src="{{ asset('js/waypoints.js') }}"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
   <script type="text/javascript" src="tooltipster/dist/js/tooltipster.main.min.js"></script>
   <script defer src="{{asset('js/all.js')}}"></script>
+  <script src="{{ asset('js/numscroller-1.0.js') }}"></script>
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">

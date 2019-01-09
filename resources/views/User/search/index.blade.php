@@ -4,11 +4,11 @@
 <script type="text/javascript">
   $(document).ready(function() {
     refresh_page();
-    $('.counter').counterUp({
-        delay: 10,
-        time: 1000
-    });
   });
+
+   jQuery(document).ready(function($) {
+            $('.counter').counterUp();
+        });
 
   $( "body" ).on( "click", ".btn-search", function() {
     refresh_page();
@@ -51,6 +51,30 @@
         if(data.status == 'success'){
           $('#pesan').hide();
           $('.content-akun').html(data.view);
+          $('.counter').counterUp({
+            delay: 10,
+            time: 1000,
+            formatter: function (n) {
+              return Math.round(n * 100) / 100;
+            }
+          });
+
+          $('.progress.blue .progress-left .progress-bar').waypoint(function() {
+            $('.progress.blue .progress-left .progress-bar').css({
+              animation: "loading-1 0.6s linear forwards 0.6s",
+              opacity: "1"
+            });
+            }, { offset: '100%' }
+          );
+          
+          $('.progress .progress-right .progress-bar').waypoint(function() {
+            $('.progress .progress-right .progress-bar').css({
+              animation: "loading-1 0.5s linear forwards",
+              opacity: "1"
+            });
+            }, { offset: '100%' }
+          );
+
           load_history();
         } else {
           if(data.message=='kuota habis'){
@@ -135,7 +159,9 @@
 </script>
 
 <style type="text/css">
-  
+  .bigModal{
+    height: 430px;
+  }
 </style>
 
 <section class="page-title">
@@ -369,13 +395,15 @@
 
 <!-- Modal Info Kuota -->
 <div class="modal fade" id="info-kuota" role="dialog" >
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     
     <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-body bg-kuota">
-        Kuota telah habis. <br>
-        Silahkan Sign up untuk melanjutkan.
+    <div class="modal-content bigModal">
+      <div class="modal-body bg-kuota" align="left">
+        <span class="kuota-txt mr-auto">
+          Kuota telah habis. <br>
+          Silahkan Sign up untuk <br> melanjutkan.
+        </span>
       </div>
       <div class="modal-footer" id="foot">
         <a class="mr-auto" href="{{url('login')}}">
@@ -394,23 +422,4 @@
       
   </div>
 </div>
-
-          <!-- Modal Delete -->
-          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="deleteModalTitle">Delete Confirmation</h5>
-                  <button type="button" class="btn btn-link close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                  <button type="button" class="btn btn-danger dangcust" data-dismiss="modal">Delete</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End Modal Delete -->
 @endsection

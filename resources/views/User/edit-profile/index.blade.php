@@ -2,16 +2,16 @@
 
 @section('content')
 <script type="text/javascript">
-  $(document).ready(function() {
-    
-  });
-
   $( "body" ).on( "click", "#btn-edit", function() {
     edit_profile();
   });
 
   $( "body" ).on( "click", "#btn-upload-profpic", function() {
     $('#fileprofpic').trigger('click');
+  });
+
+  $( "body" ).on( "click", "#btn-delete-ok", function() {
+    delete_photo();
   });
 
   $(document).on('change', "#fileprofpic", function (e) {
@@ -67,6 +67,37 @@
       reader.readAsDataURL(input.files[0]);
     }
   }
+
+  function delete_photo(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/edit-profile/delete-photo') ?>",
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        
+        if(data.status=='success'){
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-warning');
+          $('#pesan').addClass('alert-success');
+          $('#pesan').show();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });  
+  }
 </script>
 
 <div class="container">
@@ -81,23 +112,30 @@
 
       <div class="alert" id="pesan"></div>
 
-      <?php if(is_null($user->profpic)) { 
-              $src = asset('/design/profpic-user.png');
-            } else {
-              $src = $user->profpic;
-            }
+      <?php 
+        if(is_null($user->profpic)) { 
+          $src = asset('/design/profpic-user.png');
+        } else {
+          $src = $user->profpic;
+        }
+
+        $profpic = null;
+
+        if(Auth::user()->prof_pic!=null){
+          $profpic = Storage::url(Auth::user()->prof_pic);
+        }
       ?>
 
       <div class="row">
         <div class="col-md-2 col-12 mb-20" align="center">
-          <img id="profpic" class="profpic img-img" src="<?php echo $src ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')" style="cursor: pointer; max-width: 100px; border-radius: 50%;">  
+          <img id="profpic" class="profpic img-img" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')" style="cursor: pointer; max-width: 100px; border-radius: 50%;">  
         </div>
 
         <div class="col-md-9 col-12 center-mobile mb-20">
           <button class="btn btn-primary" id="btn-upload-profpic" style="margin-right: 5px;">
             Upload new picture
           </button>
-          <button class="btn btn-danger">
+          <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete">
             Delete
           </button>          
         </div>
@@ -147,6 +185,34 @@
         </div>
       </form>
     </div>
+  </div>
+</div>
+
+<!-- Modal Confirm Delete -->
+<div class="modal fade" id="confirm-delete" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Delete Confirmation
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Delete your profile picture?
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-danger" id="btn-delete-ok" data-dismiss="modal">
+          Delete
+        </button>
+        <button class="btn" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+      
   </div>
 </div>
 @endsection
