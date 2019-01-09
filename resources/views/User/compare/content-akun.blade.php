@@ -1,11 +1,13 @@
-<?php use App\Helpers\Helper; ?>
+<?php use App\Helpers\Helper; 
+$count= count($accounts);
+?>
 
 @foreach($accounts as $account)
   <div class="col-md-3" align="center">
-    <img src="{{$account->prof_pic}}" style="max-width:180px">
+    <img src="{{$account->prof_pic}}" class="" >
     <br>
-    <p><?php echo '@'.$account->username ?></p>
-    <p>{{$account->username}}</p>
+    <p class="p1"><?php echo '@'.$account->username ?></p>
+    <h5 >{{$account->username}}</h5>
     <p>
       <span class="counter">
         <?php 
@@ -47,3 +49,8 @@
     <h5>Avg Comment Per Post</h5>
   </div>
 @endforeach
+<?php for($i=$count;$i<=4;$i++){ ?>
+<div class="col-md-3" align="center">
+&nbsp
+</div>
+<?php } ?>
