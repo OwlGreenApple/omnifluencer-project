@@ -24,11 +24,37 @@ class CompareController extends Controller
   }
 
   public function index($keywords=""){
+    $arr1 = explode("-",$keywords);
+
+    $arr_compare = array(
+      "username1"=>"",
+      "username2"=>"",
+      "username3"=>"",
+      "username4"=>"",
+    );
+    $arr_compare["username1"] = "";
+    $arr_compare["username2"] = "";
+    $arr_compare["username3"] = "";
+    $arr_compare["username4"] = "";
+
+    if (isset($arr1[0])) {
+      $arr_compare["username1"] = $arr1[0];
+    }
+    if (isset($arr1[1])) {
+      $arr_compare["username2"] = $arr1[1];
+    }
+    if (isset($arr1[2])) {
+      $arr_compare["username3"] = $arr1[2];
+    }
+    if (isset($arr1[3])) {
+      $arr_compare["username4"] = $arr1[3];
+    }
+
     return view('user.compare.index')
-            ->with('id1',$request->id1)
-            ->with('id2',$request->id2)
-            ->with('id3',$request->id3)
-            ->with('id4',$request->id4);
+            ->with('username1',$arr_compare["username1"])
+            ->with('username2',$arr_compare["username2"])
+            ->with('username3',$arr_compare["username3"])
+            ->with('username4',$arr_compare["username4"]);
   }
 
   public function check(Request $request){
@@ -127,24 +153,44 @@ class CompareController extends Controller
   }
 
   public function load_compare(Request $request){
-    /*$acc1 = Account::find($request->id1);
-    $acc2 = Account::find($request->id2);
-    $acc3 = Account::find($request->id3);
-    $acc4 = Account::find($request->id4);*/
+    $acc1 = Account::where("username",$request->id1)->first();
+    $acc2 = Account::where("username",$request->id2)->first();
+    $acc3 = Account::where("username",$request->id3)->first();
+    $acc4 = Account::where("username",$request->id4)->first();
 
-    $accounts = array($acc1,$acc2,$acc3,$acc4);
+    // $accounts = array($acc1,$acc2,$acc3,$acc4);
+    $accounts = array();
     $arr_compare = array(
-      "id1"=>$request->id1,
-      "id2"=>$request->id2,
-      "id3"=>$request->id3,
-      "id4"=>$request->id4,
+      "id1"=>-1,
+      "id2"=>-1,
+      "id3"=>-1,
+      "id4"=>-1,
     );
+    if (!is_null($acc1)){
+      $arr_compare["id1"] = $acc1->id;
+      $accounts[] = $acc1;
+    }
+    if (!is_null($acc2)){
+      $arr_compare["id2"] = $acc2->id;
+      $accounts[] = $acc2;
+    }
+    if (!is_null($acc3)){
+      $arr_compare["id3"] = $acc3->id;
+      $accounts[] = $acc3;
+    }
+    if (!is_null($acc4)){
+      $arr_compare["id4"] = $acc4->id;
+      $accounts[] = $acc4;
+    }
+    
     $this->do_compare($arr_compare);
 
-    $arr['view'] = (string) view('user.compare.index')
+    $arr['status'] = "success";
+    $arr['view'] = (string) view('user.compare.content-akun')
                       ->with('accounts',$accounts);
 
     return $arr;
+    // return "asd";
   }
 
     public function index_history(){

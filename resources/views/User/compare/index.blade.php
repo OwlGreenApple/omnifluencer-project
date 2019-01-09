@@ -34,7 +34,8 @@
         if(data.status == 'success'){
           $('#pesan').hide();
           $('#content-akun').html(data.view);
-          load_history();
+          
+          // load_history();
         } else {
           if(data.message=='kuota habis'){
             $('#info-kuota').modal('show');
@@ -58,10 +59,10 @@
       type : 'GET',
       url : "<?php echo url('/compare/load-compare') ?>",
       data: {
-        id1:'{{$id1}}',
-        id2:'{{$id2}}',
-        id3:'{{$id3}}',
-        id4:'{{$id4}}',
+        id1:$("#keywords1").val(),
+        id2:$("#keywords2").val(),
+        id3:$("#keywords3").val(),
+        id4:$("#keywords4").val(),
       },
       dataType: 'text',
       beforeSend: function()
@@ -78,7 +79,8 @@
         if(data.status == 'success'){
           $('#pesan').hide();
           $('#content-akun').html(data.view);
-          load_history();
+          // console.log(data.view);
+          // load_history();
         } else {
           if(data.message=='kuota habis'){
             $('#info-kuota').modal('show');
@@ -108,7 +110,7 @@
       <form>
         @csrf         
         <div class="form-group row" style="margin-left: 1px;">
-          <input id="keywords" class="form-control col-md-6 col-xs-12" name="search" placeholder="username">
+          <input id="keywords1" class="form-control col-md-6 col-xs-12" name="search" placeholder="username" value="{{$username1}}">
           <button type="button" class="btn btn-primary btn-search" data-part="1" style="margin-left: 13px; margin-right: 13px;"> Search </button>
         </div>
       </form> 
@@ -119,7 +121,7 @@
       <form>
         @csrf         
         <div class="form-group row" style="margin-left: 1px;">
-          <input id="keywords" class="form-control col-md-6 col-xs-12" name="search" placeholder="username">
+          <input id="keywords2" class="form-control col-md-6 col-xs-12" name="search" placeholder="username" value="{{$username2}}">
           <button type="button" class="btn btn-primary btn-search" data-part="2" style="margin-left: 13px; margin-right: 13px;"> Search </button>
         </div>
       </form> 
@@ -130,7 +132,7 @@
       <form>
         @csrf         
         <div class="form-group row" style="margin-left: 1px;">
-          <input id="keywords" class="form-control col-md-6 col-xs-12" name="search" placeholder="username">
+          <input id="keywords3" class="form-control col-md-6 col-xs-12" name="search" placeholder="username" value="{{$username3}}">
           <button type="button" class="btn btn-primary btn-search" data-part="3" style="margin-left: 13px; margin-right: 13px;"> Search </button>
         </div>
       </form> 
@@ -141,14 +143,14 @@
       <form>
         @csrf         
         <div class="form-group row" style="margin-left: 1px;">
-          <input id="keywords" class="form-control col-md-6 col-xs-12" name="search" placeholder="username">
+          <input id="keywords4" class="form-control col-md-6 col-xs-12" name="search" placeholder="username" value="{{$username4}}">
           <button type="button" class="btn btn-primary btn-search" data-part="4" style="margin-left: 13px; margin-right: 13px;"> Search </button>
         </div>
       </form> 
     </div>
   </div>
 
-  <div class="row justify-content-center" id="content">
+  <div class="row justify-content-center" id="content-akun">
   </div>
 
 </div>
