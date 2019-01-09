@@ -60,15 +60,6 @@ class Helper
     return $newtime;
   }
 
-  /**
-   * Get generated string from 1 Database Table
-   *
-   * @param $model MODELS
-   * @param $field STRING field name
-   * @param $field STRING field name
-   *
-   * @return string
-   */
   public static function autoGenerateID($model, $field, $search, $pad_length, $pad_string = '0')
   {
     $tb = $model->select(DB::raw("substr(".$field.", ".strval(strlen($search)+1).") as lastnum"))

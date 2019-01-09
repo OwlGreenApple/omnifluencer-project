@@ -172,7 +172,7 @@ hr.wh {
 }
 
 .form-control {
-  width: 300px !important;
+  width: 300px;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -232,8 +232,8 @@ input[type="text"] {
 }
 
 .form-group .form-control {
-  width: 250px !important;
-  height: 40px !important;
+  width: 250px;
+  height: 40px;
 }
 
 .btn-sbmt {
@@ -1372,3 +1372,7 @@ footer span {
     font-size: 14px;
   }
 }
+
+.bg-kuota {
+    background-image: url(../design/bg-kuota.jpeg);
+  }  

@@ -134,6 +134,10 @@
 
 </script>
 
+<style type="text/css">
+  
+</style>
+
 <section class="page-title">
   <div class="container">
     <div class="row">
@@ -364,15 +368,12 @@
 </div>
 
 <!-- Modal Info Kuota -->
-<div class="modal fade" id="info-kuota" role="dialog">
+<div class="modal fade" id="info-kuota" role="dialog" >
   <div class="modal-dialog">
     
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
+      <div class="modal-body bg-kuota">
         Kuota telah habis. <br>
         Silahkan Sign up untuk melanjutkan.
       </div>
@@ -394,24 +395,6 @@
   </div>
 </div>
 
-<!-- Modal Compare -->
-          <div class="modal fade" id="compareModal" tabindex="-1" role="dialog" aria-labelledby="compareModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="compareModalTitle">Compare Confirmation</h5>
-                  <button type="button" class="btn btn-link close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                  <button type="button" class="btn btn-success sucust" data-dismiss="modal">Kembali</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End Modal Compare -->
           <!-- Modal Delete -->
           <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">

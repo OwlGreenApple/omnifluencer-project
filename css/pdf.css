@@ -1,4 +1,9 @@
-.info-box { 
+  * {
+    color: #1372d4;
+  }
+
+  /* Profile */
+  .info-box { 
     border:3px solid #1372d4;
     padding:30px;
     margin: 10px;
@@ -36,23 +41,19 @@
 
   .info-value { 
     font-size: 30px;
-    color: #1372d4;
   }
 
   .info-label {
     font-size: 20px;
-    color: #1372d4;
   }
 
   .username {
     font-size: 25px;
-    color: #1372d4;
   }
 
   .name {
     font-size: 40px;
     font-weight: 600;
-    color: #1372d4;
   }
 
   .engrate {
@@ -77,4 +78,62 @@
     position: relative;
     page-break-after: always;
     page-break-inside: avoid;
+  }
+
+  /* Compare */
+  .info-compare {
+    background-color: #fff; 
+    padding-top: 50px;
+    padding-bottom: 60px;
+    margin-top: 100px;
+  }
+
+  .logo-rotate { position:absolute; top:550px; left: 20px;}
+
+  .profpic-compare {
+    position: absolute; 
+    top: -150px;
+    max-width: 180px;
+    border-radius: 50%;
+  }
+
+  .div-compare {
+    position: relative;
+    padding: 0px 60px;
+  }
+
+  .engrate-compare {
+    position: relative;
+    width: 125px;
+    height: 125px;
+    margin: 10px 0px;
+  }
+
+  .engrate-circle-compare {
+    position: absolute;
+  }
+
+  .engrate-txt-compare {
+    z-index: 10;
+    position: absolute;
+    left: 18px;
+    top: 29px;
+    font-size: 17px;
+  }
+
+  .info-box-compare {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 17px;
+  }
+
+  .username-compare {
+    font-size: 23px !important;
+  }
+
+  .saved-on-compare { 
+    position: absolute; 
+    top: 950px; 
+    left: 30px; 
+    font-size: 15px;
   }

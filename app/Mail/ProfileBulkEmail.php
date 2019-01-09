@@ -69,34 +69,33 @@ class ProfileBulkEmail extends Mailable
                 $account = Account::find($id); 
 
                 $username = '@'.$account->username;
-                $sheet->cell('B2', $username); 
-                $sheet->cell('B3', $account->eng_rate); 
+                $sheet->cell('C2', $username); 
 
-                $sheet->cell('B4', $account->jml_post); 
-                $sheet->cell('B5', function($cell) {
-                  $cell->setValue('Post');   
-                });
-                $sheet->cell('B6', $account->jml_followers); 
-                $sheet->cell('B7', function($cell) {
-                  $cell->setValue('Followers');   
-                });
-                $sheet->cell('B8', $account->jml_following); 
-                $sheet->cell('B9', function($cell) {
-                  $cell->setValue('Following');   
-                });
+                $sheet->cell('B3', 'Engagement Rate'); 
+                $sheet->cell('C3', $account->eng_rate*100); 
+
+                $influence = round($account->eng_rate*$account->jml_followers);
+
+                $sheet->cell('B4', 'Total Influenced'); 
+                $sheet->cell('C4', $influence);
+
+                $sheet->cell('B5', 'Post'); 
+                $sheet->cell('C5', $account->jml_post);
+
+                $sheet->cell('B6', 'Followers'); 
+                $sheet->cell('C6', $account->jml_followers);
+
+                $sheet->cell('B7', 'Following'); 
+                $sheet->cell('C7', $account->jml_following);
                 
-                $sheet->cell('C4', date("M d Y", strtotime($account->lastpost))); 
-                $sheet->cell('C5', function($cell) {
-                  $cell->setValue('Last Post');   
-                });
-                $sheet->cell('C6', $account->jml_likes); 
-                $sheet->cell('C7', function($cell) {
-                  $cell->setValue('Avg Like Per Post');   
-                });
-                $sheet->cell('C8', $account->jml_comments); 
-                $sheet->cell('C9', function($cell) {
-                  $cell->setValue('Avg Comment Per Post');   
-                });
+                $sheet->cell('B8', 'Last Post'); 
+                $sheet->cell('C8', date("M d Y", strtotime($account->lastpost)));
+
+                $sheet->cell('B9', 'Avg Like Per Post'); 
+                $sheet->cell('C9', $account->jml_likes);
+
+                $sheet->cell('B10', 'Avg Comment Per Post'); 
+                $sheet->cell('C10', $account->jml_comments);
             });
             $i++;
           }

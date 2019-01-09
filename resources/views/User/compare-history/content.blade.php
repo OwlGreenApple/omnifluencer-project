@@ -6,29 +6,22 @@
       <input type="checkbox" name="compareid[]" value="{{$compare->id}}">
     </td>
     <td data-label="Instagram">
-      <?php  
-        $account1 = Account::where('id',$compare->account_id_1)->select('accounts.username')->first();
-        $account2 = Account::where('id',$compare->account_id_2)->select('accounts.username')->first();
-      ?>
-
-      {{'@'.$account1->username}} 
+      {{'@'.$compare->acc1username}} 
       <i class="fas fa-arrows-alt-h icon-arrow"></i> 
-      {{'@'.$account2->username}}
+      {{'@'.$compare->acc2username}}
 
       <?php 
         if(!is_null($compare->account_id_3)){
-          $account3 = Account::where('id',$compare->account_id_3)->select('accounts.username')->first();
       ?>
           <i class="fas fa-arrows-alt-h icon-arrow"></i> 
-          {{'@'.$account3->username}}          
+          {{'@'.$compare->acc3username}}          
       <?php  
         }
 
         if(!is_null($compare->account_id_4)){
-          $account4 = Account::where('id',$compare->account_id_4)->select('accounts.username')->first();
       ?>
           <i class="fas fa-arrows-alt-h icon-arrow"></i> 
-          {{'@'.$account4->username}}          
+          {{'@'.$compare->acc4username}}          
       <?php } ?>
     </td>
     <td data-label="Date">
