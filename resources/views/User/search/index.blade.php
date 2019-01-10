@@ -59,21 +59,23 @@
             }
           });
 
-          $('.progress.blue .progress-left .progress-bar').waypoint(function() {
-            $('.progress.blue .progress-left .progress-bar').css({
-              animation: "loading-1 0.6s linear forwards 0.6s",
-              opacity: "1"
-            });
+          /*$('.progress.blue .progress-left .progress-bar').waypoint(function() {
+            // $('.progress.blue .progress-left .progress-bar').css({
+              // animation: "loading-1 0.6s linear forwards 0.6s",
+              // opacity: "1"
+            // });
+            console.log("asd");
             }, { offset: '100%' }
-          );
+          );*/
           
-          $('.progress .progress-right .progress-bar').waypoint(function() {
-            $('.progress .progress-right .progress-bar').css({
-              animation: "loading-1 0.5s linear forwards",
-              opacity: "1"
-            });
+          /*$('.progress .progress-right .progress-bar').waypoint(function() {
+            // $('.progress .progress-right .progress-bar').css({
+              // animation: "loading-1 0.5s linear forwards",
+              // opacity: "1"
+            // });
+            console.log("www");
             }, { offset: '100%' }
-          );
+          );*/
 
           load_history();
         } else {
@@ -197,7 +199,7 @@
           </div>
         </div>
           
-        <div class="col-12">
+        <div class="col-12" id="div-progress">
           <div class="history justify-content-center">
 
             <div class="col-12 col-md-6 d-sm-block d-md-none content-akun"></div>

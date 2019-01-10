@@ -5,13 +5,19 @@ $(document).ready(function () {
     });
 
 	var st_price;
+    $(".monthly-button").show();
+    $(".yearly-button").hide();
     $('.onoffswitch-checkbox').on('click', function () {
     	if ( $(this).prop('checked') ){
     		$('.price-now span.price_pro').text('IDR 197');
     		$('.price-now span.price_premium').text('IDR 297');
+        $(".monthly-button").show();
+        $(".yearly-button").hide();
     	}else{
-    		$('.price-now span.price_pro').text('IDR 250');
-    		$('.price-now span.price_premium').text('IDR 450');
+    		$('.price-now span.price_pro').text('IDR 550');
+    		$('.price-now span.price_premium').text('IDR 700');
+        $(".monthly-button").hide();
+        $(".yearly-button").show();
     	}
     });
 

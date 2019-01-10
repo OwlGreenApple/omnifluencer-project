@@ -73,3 +73,31 @@
     </div>
   </div>
 </div>
+
+<script>
+var distance = $('#div-progress').offset().top * 25/100,
+    $window = $(window);
+function check_loading(){
+  // console.log($window.scrollTop());
+  // console.log(distance);
+    if ( $window.scrollTop() >= distance ) {
+      // console.log("www");
+            $('.progress.blue .progress-left .progress-bar').css({
+              animation: "loading-1 0.6s linear forwards 0.6s",
+              opacity: "1"
+            });
+            $('.progress .progress-right .progress-bar').css({
+              animation: "loading-1 0.5s linear forwards",
+              opacity: "1"
+            });
+    }
+}
+check_loading();
+$window.scroll(function() {
+  check_loading();
+});
+</script>
+
+
+
+
