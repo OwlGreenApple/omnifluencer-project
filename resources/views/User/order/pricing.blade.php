@@ -185,7 +185,14 @@
           </div>
         </td>
         <td>
-          <div>
+          <div class="monthly-button">
+            <a href="{{url('checkout/1')}}">
+              <button class="btn btn-primary select-price btn-primary-prc" data-package="1">
+                SELECT
+              </button>
+            </a>
+          </div>
+          <div class="yearly-button">
             <a href="{{url('checkout/2')}}">
               <button class="btn btn-primary select-price btn-primary-prc" data-package="1">
                 SELECT
@@ -194,8 +201,15 @@
           </div>
         </td>
         <td>
-          <div>
+          <div class="monthly-button">
             <a href="{{url('checkout/3')}}">
+              <button class="btn btn-primary select-price btn-primary-prc" data-package="1">
+                SELECT
+              </button>
+            </a>
+          </div>
+          <div class="yearly-button">
+            <a href="{{url('checkout/4')}}">
               <button class="btn btn-primary select-price btn-primary-prc" data-package="1">
                 SELECT
               </button>

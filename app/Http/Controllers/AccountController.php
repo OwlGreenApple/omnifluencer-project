@@ -8,6 +8,7 @@ use App\HistorySearch;
 use App\User;
 use App\Group;
 use App\Save;
+use App\Subscribe;
 
 use App\Mail\ProfileEmail;
 use App\Mail\ProfileBulkEmail;
@@ -530,5 +531,24 @@ class AccountController extends Controller
         $i++;
       }
     })->download('xlsx');
+  }
+
+  public function subscribe_email(Request $request){
+    //pengecekan email 
+    $validator = Validator::make(["email"=>$request->email], [
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:subscribers'],
+    ]);
+    
+    if(!$validator->fails()) {
+      //input data
+      $subscribe = new Subscribe;
+      $subscribe->email = $request->email;
+      $subscribe->save();
+    }
+    else {
+      return $validator->errors()->first();
+    }
+    
+    return "email subscribed";
   }
 }
