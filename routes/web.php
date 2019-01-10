@@ -13,6 +13,9 @@
 
 Auth::routes();
 
+//Auth
+Route::post('post-register', 'Auth\RegisterController@post_register');
+
 //Home
 Route::get('/home', 'AccountController@index')
       ->name('home');

@@ -313,44 +313,57 @@
         </div>
 
         <div class="col-md-7 col-12" align="right">
-          <button class="btn btn-primary mb-10" id="btn-compare">
-            <i class="fas fa-chart-bar"></i>
-            Compare
-          </button>
+          @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+            <button class="btn btn-primary mb-10" id="btn-compare">
+              <i class="fas fa-chart-bar"></i>
+              Compare
+            </button>
 
-          <button class="btn btn-primary mb-10" id="btn-save">
-            <i class="fas fa-folder-plus"></i> 
-            Add to group
-          </button>
-          <button class="btn btn-primary mb-10" id="btn-save-global">
-            <i class="fas fa-save"></i> 
-            Save
-          </button>
-          <button class="btn btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
-            <i class="far fa-trash-alt"></i> Delete
-          </button>     
+            <button class="btn btn-primary mb-10" id="btn-save">
+              <i class="fas fa-folder-plus"></i> 
+              Add to group
+            </button>
+            <button class="btn btn-primary mb-10" id="btn-save-global">
+              <i class="fas fa-save"></i> 
+              Save
+            </button>
+            <button class="btn btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
+              <i class="far fa-trash-alt"></i> Delete
+            </button>  
+          @endif   
         </div>
       </div>
       
-      <div class="card col-md-12" style="display: none;">
+      <div class="card col-md-12 <?php if(Auth::user()->membership=='premium') echo 'd-none' ?>">
         <div class="card-body row">
           <div class="col-md-1" align="center">  
             <i class="fas fa-exclamation-circle icon-exclamation" style="font-size:30px;color:#FF8717;"></i>
           </div>
           <div class="col-md-11"> 
-            <h4><b>Info for Free Member</b></h4>  
-            * <b>Free Member</b> hanya dapat menampilkan 10 history pencarian terakhir<br>  
-            * <b>Free Member</b> tidak dapat mengelompokkan ke dalam suatu grup dari hasil pencarian <br>  
-            * <b>Free Member</b> hanya mendapatkan file .XLSX sesuai dengan 10 history pencarian terakhir <br> 
-            <br>  
-            ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. <button class="btn btn-primary"><i class="fas fa-star"></i> Upgrade To Pro</button>
+            <div class="<?php if(Auth::user()->membership=='pro') echo 'd-none' ?>">
+              <h4><b>Info for Free Member</b></h4>  
+              * <b>Free Member</b> hanya dapat menampilkan 5 history pencarian terakhir<br>  
+              * <b>Free Member</b> tidak dapat mengelompokkan ke dalam suatu grup dari hasil pencarian <br>  
+              * <b>Free Member</b> tidak dapat melakukan compare dari hasil pencarian <br> 
+              <br>  
+              ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. <button class="btn btn-primary"><i class="fas fa-star"></i> Upgrade To Pro</button>  
+            </div>
+            
+            <div class="<?php if(Auth::user()->membership=='free') echo 'd-none' ?>">
+              <h4><b>Info for Pro Member</b></h4>  
+              * <b>Pro Member</b> hanya dapat menampilkan 25 history pencarian terakhir<br>  
+              * <b>Pro Member</b> tidak dapat melakukan Save & Send Influencers List .XLSX <br>  
+              * <b>Pro Member</b> hanya dapat melakukan compare dari 2 hasil pencarian <br> 
+              <br>  
+              ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. <button class="btn btn-primary"><i class="fas fa-star"></i> Upgrade To Premium</button>  
+            </div>
           </div>
         </div>
       </div>
 
       <hr>
 
-      <div id="pesan" class="alert"></div>
+      <div id="pesan" class="alert d-none"></div>
 
       <br>  
 

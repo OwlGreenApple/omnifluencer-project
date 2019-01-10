@@ -12,6 +12,8 @@ use App\User;
 use App\Referral;
 use App\HistorySearch;
 use App\Order;
+use App\Notification;
+use App\PointLog;
 
 use App\Mail\ConfirmEmail;
 
@@ -60,11 +62,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
+      return Validator::make($data, [
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:6', 'confirmed'],
+      ]);
     }
 
     /**
@@ -73,6 +75,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
     protected function create(array $data)
     { 
       $user = User::create([
@@ -93,8 +96,41 @@ class RegisterController extends Controller
         $referral->user_id_giver = $user_giver->id;
         $referral->save();
 
+        /* Notif + point log user taker */
+        $notif = new Notification;
+        $notif->user_id = $user->id;
+        $notif->notification = 'Extra +10 points for you';
+        $notif->type = 'point';
+        $notif->keterangan = 'Congratulations! You get an extra +10 points from registering your account';
+        $notif->save();
+
+        $pointlog = new PointLog;
+        $pointlog->user_id = $user->id;
+        $pointlog->jml_point = 10;
+        $pointlog->poin_before = 0;
+        $pointlog->poin_after = 10;
+        $pointlog->keterangan = 'Initial Poin';
+        $pointlog->save();
+
+        /* Notif + point log user giver */
+        $notif = new Notification;
+        $notif->user_id = $user_giver->id;
+        $notif->notification = 'Extra +20 points for you';
+        $notif->type = 'point';
+        $notif->keterangan = 'Congratulations! You get an extra +20 points from referral link ('.$user->email.')';
+        $notif->save();
+
+        $pointlog = new PointLog;
+        $pointlog->user_id = $user_giver->id;
+        $pointlog->jml_point = 20;
+        $pointlog->poin_before = $user_giver->point;
+        $pointlog->poin_after = $user_giver->point + 10;
+        $pointlog->keterangan = 'Referral Link from '.$user->email;
+        $pointlog->save();
+
         $user_giver->point = $user_giver->point+20;
         $user_giver->save();
+
       } 
       
       if ($data['price']<>"") {
@@ -145,6 +181,38 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request){
+      $validator = $this->validator($request->all());
+
+      if(!$validator->fails()) {
+        $user = $this->create($request->all());
+
+        $register_time = Carbon::now()->toDateTimeString();
+        $confirmcode = Hash::make($user->email.$register_time);
+        $user->confirm_code = $confirmcode;
+        $user->save();
+        
+        $this->check_history($user);
+
+        $secret_data = [
+          'email' => $user->email,
+          'register_time' => $register_time,
+          'confirm_code' => $confirmcode,
+        ];
+      
+        $emaildata = [
+          'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
+          'user' => $user,
+          'password' => $request->password,
+        ];
+        
+        Mail::to($user->email)->queue(new ConfirmEmail($emaildata));
+        return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
+      } else {
+        return redirect("register")->with("error",$validator->errors()->first());
+      }
+    }
+
+    public function post_register(Request $request){
       $validator = $this->validator($request->all());
 
       if(!$validator->fails()) {

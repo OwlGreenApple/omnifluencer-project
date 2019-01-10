@@ -14,6 +14,20 @@
     refresh_page();
   });
 
+  $( "body" ).on( "click", ".register-link", function(e) 
+  {
+    e.preventDefault();
+    $('.signup-content').show();
+    $('.login-content').hide();
+  });
+
+  $( "body" ).on( "click", ".loginhere-link", function(e)
+  {
+    e.preventDefault();
+    $('.signup-content').hide();
+    $('.login-content').show();
+  });
+
   $( "body" ).on( "click", ".btn-delete", function() {
     $('#id_delete').val($(this).attr('data-id'));
   });
@@ -164,6 +178,17 @@
   }
 </style>
 
+@if (session('error') )
+  <div class="col-md-12 alert alert-danger">
+    <strong>Warning!</strong> {{session('error')}}
+  </div>
+@endif
+@if (session('success') )
+  <div class="col-md-12 alert alert-success">
+    <strong>Success!</strong> {{session('success')}}
+  </div>
+@endif
+
 <section class="page-title">
   <div class="container">
     <div class="row">
@@ -180,9 +205,14 @@
 
 <section class="content">
   <div class="container">
+    
+    <div id="pesan" class="alert"></div>
+
     <div class="row">
       <div class="col-12 col-md-6">
+
         <div class="col-12">
+
           <div class="history justify-content-center">
             <h3>Enter Instagram username<br>and tap Enter!</h3>
             <form class="form-inline d-flex justify-content-center" action="/action_page.php">
@@ -300,12 +330,15 @@
         </div>
       </div>
     </div>
-  
-    <div class="row">
-      <div class="col-12 d-flex justify-content-center">
-        <button type="submit" class="btn btn-default btn-sbmt-btm grads" data-toggle="modal" data-target=".bd-example-modal-lg" data-whatever="join"><span>JOIN NOW!</span></button>
+    
+    @guest
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <button type="submit" class="btn btn-default btn-sbmt-btm grads" data-toggle="modal" data-target=".bd-example-modal-lg" data-whatever="join"><span>JOIN NOW!</span></button>
+        </div>
       </div>
-    </div>
+    @endguest
+
   </div>
 </section>
 
@@ -319,33 +352,75 @@
         <div class="col-lg-7 col-md-12 col-sm-12">
           <div class="modal-body modal-body-form">
             <div class="signup-content">
-              <form method="POST" id="signup-form" class="signup-form">
+              <form method="POST" action="{{url('post-register')}}" id="signup-form" class="signup-form">
+                @csrf
                 <h2 class="form-title">Create an Omnifluencer<br>account within a minutes</h2>
+
+                <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
+                <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
+
                 <div class="form-group form-group-mob">
-                  <label class="label-title-test" for="formGroupExampleInput">
+                  <label class="label-title-test" for="name">
                     Masukkan Nama Lengkap:
                   </label>
-                  <input type="text" class="form-input" name="name" id="name" placeholder="Your Full Name" />
+                  <input type="text" class="form-input{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" name="name" id="name" placeholder="Your Full Name" required autofocus />
+
+                  @if ($errors->has('name'))
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('name') }}</strong>
+                    </span>
+                  @endif
                 </div>
+
                 <div class="form-group form-group-mob">
-                  <label class="label-title-test" for="formGroupExampleInput">
+                  <label class="label-title-test" for="email">
                     Masukkan Email:
                   </label>
-                  <input type="email" class="form-input" name="email" placeholder="Your Email" />
+                  <input id="email" type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" name="email" placeholder="Your Email" required/>
+
+                  @if ($errors->has('email'))
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                  @endif
                 </div>
+
                 <div class="form-group form-group-mob">
-                  <label class="label-title-test" for="formGroupExampleInput">
+                  <label class="label-title-test" for="password">
                     Masukkan Password:
                   </label>
-                  <input type="password" class="form-input" name="password" id="password" placeholder="Password" />
+
+                  <input type="password" class="form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" placeholder="Password" required />
                   <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+
+                  @if ($errors->has('password'))
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                  @endif
                 </div>
+
                 <div class="form-group form-group-mob">
-                  <label class="label-title-test" for="formGroupExampleInput">
+                  <label class="label-title-test" for="password-confirm">
                     Konfirmasi Password:
                   </label>
-                  <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Confirm your password" />
+                  <input type="password" class="form-input" name="password_confirmation" id="password-confirm" placeholder="Confirm your password" required/>
                 </div>
+
+                <div class="form-group">
+                  <label class="label-title-test" for="gender">
+                    Gender:
+                  </label>
+
+                  <label class="radio-inline col-md-3">
+                    <input type="radio" name="gender" value="1" checked> Male
+                  </label>
+
+                  <label class="radio-inline col-md-4">
+                    <input type="radio" name="gender" value="0"> Female
+                  </label>
+                </div>
+
                 <div class="form-group form-group-mob">
                   <label for="agree-term" class="label-agree-term"><span><span></span></span>Dengan mendaftar, saya setuju dengan <a href="#" class="term-service">Terms of service</a></label>
                 </div>
@@ -354,8 +429,57 @@
                 </div>
               </form>
               <p class="loginhere">
-                Have already an account ? <a href="#" class="loginhere-link">Sign In Here</a>
+                Have already an account ? <a href="{{url('login')}}" class="loginhere-link">Sign In Here</a>
               </p>
+            </div>
+
+            <div class="login-content">
+              <form method="POST" id="signup-form" class="signup-form" action="{{ route('login') }}">
+                @csrf
+
+                <h2 class="form-title">Please input your<br>Email & Password</h2>
+
+                <div class="form-group">
+                  <label for="email" class="label-title-test">  Masukkan Email:
+                  </label>
+                  <input id="email" type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }} " name="email" value="{{ old('email') }}" placeholder="Your Email" required autofocus>
+
+                  @if ($errors->has('email'))
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                  @endif
+                </div>
+
+                <div class="form-group">
+                  <label class="label-title-test" for="password">Masukkan Password:</label>
+
+                  <input id="password" type="password" class="form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
+                  <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+
+                  @if ($errors->has('password'))
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                  @endif
+                </div>
+
+                <div class="form-group form-group-mob">
+                    <button type="submit" class="btn btn-primary form-submit pointer">
+                      Sign In
+                    </button>
+
+                    @if (Route::has('password.request'))
+                      <a class="btn btn-link" href="{{ route('password.request') }}">
+                        {{ __('Forgot Your Password?') }}
+                      </a>
+                    @endif
+                </div>
+
+                <p class="loginhere">
+                  Don't have an account ? <a href="#" class="register-link">Sign Up here</a>
+                </p>
+              </form>
             </div>
           </div>
         </div>

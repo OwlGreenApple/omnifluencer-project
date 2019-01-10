@@ -74,7 +74,7 @@
   <div id="app">
     <nav class="navbar navbar-fluid navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#" style="padding: 0px; margin-left: 0;">
+        <a class="navbar-brand" href="{{url('/')}}" style="padding: 0px; margin-left: 0;">
           <img src="{{asset('design/logobrand.png')}}" style="height: 40px; width: auto;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -157,16 +157,24 @@
                 </div>
               </li>
 
+              <?php 
+                $profpic = null;
+
+                if(Auth::user()->prof_pic!=null){
+                  $profpic = Storage::url(Auth::user()->prof_pic);
+                }
+              ?>
+
               <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                <img class="profpic-header" src="{{Auth::user()->prof_pic}}">
+                <img class="profpic-header" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
               </a>
 
               <div class="dropdown-menu dropdown-menu-right profpic-menu" aria-labelledby="navbarDropdown">
                 <div class="container" style="padding-bottom: 10px;">
                   <div class="row">
                     <div class="col-md-4" align="center">
-                      <img class="profpic-header-big" src="{{Auth::user()->prof_pic}}">
+                      <img class="profpic-header-big" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
                     </div>
 
                     <div class="col-md-8" align="left">

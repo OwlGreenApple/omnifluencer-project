@@ -39,7 +39,12 @@
         </div>
         
         <div class="col-md-4">
-          <div class="card dashboard">
+          <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership=='free') echo 'd-block' ?>">
+            <i class="fas fa-star"></i> 
+            Upgrade To Pro
+          </button>
+
+          <div class="card dashboard <?php if(Auth::user()->membership=='free') echo 'save-pdf' ?>">
             <div class="card-header pdf">
               <h5>Total Save As PDF</h5>
             </div>
@@ -53,7 +58,13 @@
         </div>
 
         <div class="col-md-4">
-          <div class="card dashboard">
+
+          <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership!='premium') echo 'd-block' ?>">
+            <i class="fas fa-star"></i> 
+            Upgrade To Pro
+          </button>
+
+          <div class="card dashboard <?php if(Auth::user()->membership!='premium') echo 'save-csv' ?>">
             <div class="card-header csv">
               <h5>Total Save As Excel</h5> 
             </div>

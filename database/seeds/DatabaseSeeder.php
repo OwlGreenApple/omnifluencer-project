@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         'is_confirm' => 1,
         'confirm_code' => null,
         'last_login' => null,
-        'status_membership' => 1, //pro
+        'membership' => 'premium', 
         'referral_link' => null,
       ]);
 
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         'is_confirm' => 1,
         'confirm_code' => null,
         'last_login' => null,
-        'status_membership' => 1, //pro
+        'membership' => 'premium', 
         'referral_link' => null,
       ]);
 
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         'is_confirm' => 1,
         'confirm_code' => null,
         'last_login' => null,
-        'status_membership' => 1, //pro
+        'membership' => 'premium',
         'referral_link' => null,
       ]);
 
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
         'is_confirm' => 1,
         'confirm_code' => 'tes'.uniqid(),
         'last_login' => null,
-        'status_membership' => 0, //free
+        'membership' => 'premium',
         'referral_link' => uniqid(),
       ]);
     }
