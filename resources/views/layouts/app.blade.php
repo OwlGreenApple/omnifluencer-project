@@ -257,11 +257,12 @@
             <div class="col-3 d-none d-sm-none d-md-none d-lg-block">
               <h6> Newsletter</h6>
               <p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
-              <form class="form-inline form-inline-btm" action="/action_page.php">
+              <form class="form-inline form-inline-btm" >
+                @csrf
                 <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
                 <div class="form-check">
                 </div>
-                <button type="submit" class="btn btn-primary btn-primary-btm">Submit</button>
+                <button id="button-subscribe" class="btn btn-primary btn-primary-btm">Submit</button>
               </form>
               <div class="social">
                 <a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
@@ -284,6 +285,36 @@
 <script type="text/javascript">
   $( "body" ).on( "click", ".btn-signup", function() {
     window.location.href = "{{url('register')}}";
+  });
+  $( "body" ).on( "click", "#button-subscribe", function(e) {
+    e.preventDefault();
+    $.ajax({
+      type : 'post',
+      url : "<?php echo url('/subscribe-email') ?>",
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },      
+      data: {
+        email: $("#email").val(),
+      },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        alert(result);
+        // var data = jQuery.parseJSON(result);
+
+        // if(data.status == 'success'){
+        // } else {
+        // }
+      }
+    });
   });
   
 </script>

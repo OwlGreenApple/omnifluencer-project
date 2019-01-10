@@ -40,6 +40,8 @@ Route::get('/checkout/{id}','OrderController@checkout');
 Route::post('/confirm-payment','OrderController@confirm_payment');
 Route::get('/register-payment','OrderController@register_payment');
 
+Route::post('/subscribe-email','AccountController@subscribe_email');
+
 Route::group(['middleware' => ['web','auth']], function() 
 {
   //Compare 
