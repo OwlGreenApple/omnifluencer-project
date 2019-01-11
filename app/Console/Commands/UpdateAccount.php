@@ -92,7 +92,7 @@ class UpdateAccount extends Command
             //var_dump($arr_res2);
             foreach ($arr_res2 as $arr) {
               var_dump($count);
-              if($count>=6){
+              if($count>=20){
                 break;
               } else {
                 $jmllike = $jmllike + $arr["like_count"];
@@ -114,7 +114,8 @@ class UpdateAccount extends Command
             $account->lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
             $account->jml_likes = floor($ratalike);
             $account->jml_comments = floor($ratacomment);
-            $account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
+            //$account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
+            $account->eng_rate = ($jmllike + $jmlcomment)/$account->jml_followers;
           
             var_dump('ratalike = '.floor($ratalike));
             var_dump('ratacomment = '.floor($ratacomment));

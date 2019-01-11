@@ -201,12 +201,15 @@
         </div>
 
         <div class="col-md-7" align="right">
-          <button class="btn btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
-            <i class="fas fa-file-pdf"></i> PDF
-          </button>
-          <button class="btn btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
-            <i class="fas fa-file-excel"></i> Excel
-          </button>
+          @if(Auth::user()->membership=='premium')
+            <button class="btn btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
+              <i class="fas fa-file-pdf"></i> PDF
+            </button>
+            <button class="btn btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
+              <i class="fas fa-file-excel"></i> Excel
+            </button>
+          @endif
+          
           <button class="btn btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>     

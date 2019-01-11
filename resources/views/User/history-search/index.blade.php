@@ -363,7 +363,7 @@
 
       <hr>
 
-      <div id="pesan" class="alert d-none"></div>
+      <div id="pesan" class="alert"></div>
 
       <br>  
 

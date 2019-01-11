@@ -3,20 +3,28 @@ $count= count($accounts);
 ?>
 
 @foreach($accounts as $account)
-  <div class="col-md-3" align="center">
+  <div class="col-md-3 div-progress" align="center">
     <img src="{{$account->prof_pic}}" class="" >
     <br>
     <p class="p1"><?php echo '@'.$account->username ?></p>
     <h5 >{{$account->username}}</h5>
-    <p>
-      <span class="counter">
-        <?php 
-          $eng_rate = $account->eng_rate*100;
-          echo $eng_rate;
-        ?>    
-      </span>
-      %
-    </p>
+
+    <div class="names">
+      <div class="progress blue">
+        <span class="progress-left">
+          <span class="progress-bar"></span>
+        </span>
+        <span class="progress-right">
+          <span class="progress-bar"></span>
+        </span>
+        <div class="progress-value">
+          <span class="counter">
+            <?php echo round($account->eng_rate*100,2) ?>
+          </span>% <br>
+          Engagement Rate
+        </div>
+      </div>
+    </div>
 
     <h4>
       <b><?php echo Helper::abbreviate_number($account->jml_post,2); ?></b>
@@ -49,8 +57,41 @@ $count= count($accounts);
     <h5>Avg Comment Per Post</h5>
   </div>
 @endforeach
-<?php for($i=$count;$i<=4;$i++){ ?>
-<div class="col-md-3" align="center">
-&nbsp
-</div>
-<?php } ?>
+
+@if(Auth::user()->membership=='pro')
+  <?php for($i=$count;$i<2;$i++){ ?>
+    <div class="col-md-3" align="center">
+      &nbsp
+    </div>
+  <?php } ?>
+@elseif (Auth::user()->membership=='premium')
+  <?php for($i=$count;$i<=4;$i++){ ?>
+    <div class="col-md-3" align="center">
+      &nbsp
+    </div>
+  <?php } ?>
+@endif
+
+<script>
+  var distance = $('.div-progress').offset().top * 25/100,
+      $window = $(window);
+  function check_loading(){
+    // console.log($window.scrollTop());
+    // console.log(distance);
+      if ( $window.scrollTop() >= distance ) {
+        // console.log("www");
+              $('.progress.blue .progress-left .progress-bar').css({
+                animation: "loading-1 0.6s linear forwards 0.6s",
+                opacity: "1"
+              });
+              $('.progress .progress-right .progress-bar').css({
+                animation: "loading-1 0.5s linear forwards",
+                opacity: "1"
+              });
+      }
+  }
+  check_loading();
+  $window.scroll(function() {
+    check_loading();
+  });
+</script>

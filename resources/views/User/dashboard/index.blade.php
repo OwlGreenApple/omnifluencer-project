@@ -61,7 +61,13 @@
 
           <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership!='premium') echo 'd-block' ?>">
             <i class="fas fa-star"></i> 
-            Upgrade To Pro
+            <?php  
+              if(Auth::user()->membership=='free'){
+                echo 'Upgrade To Pro';
+              } else if(Auth::user()->membership=='pro'){
+                echo 'Upgrade To Premium';
+              }
+            ?>
           </button>
 
           <div class="card dashboard <?php if(Auth::user()->membership!='premium') echo 'save-csv' ?>">

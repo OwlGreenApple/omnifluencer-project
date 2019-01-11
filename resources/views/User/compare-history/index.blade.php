@@ -176,7 +176,7 @@
       
       <hr>
 
-      <div id="pesan" class="alert"></div>
+      <div id="pesan" class="alert d-none"></div>
 
       <br>  
 

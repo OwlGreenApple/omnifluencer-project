@@ -5,10 +5,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     refresh_page();
-    $('.counter').counterUp({
-        delay: 10,
-        time: 1000
-    });
+    $('.counter').counterUp();
   });
 
   $( "body" ).on( "click", ".btn-search", function() {
@@ -35,6 +32,14 @@
         if(data.status == 'success'){
           $('#pesan').hide();
           $('#content-akun').html(data.view);
+          
+          $('.counter').counterUp({
+            delay: 10,
+            time: 1000,
+            formatter: function (n) {
+              return Math.round(n * 100) / 100;
+            }
+          });
           
           // load_history();
         } else {
@@ -80,6 +85,16 @@
         if(data.status == 'success'){
           $('#pesan').hide();
           $('#content-akun').html(data.view);
+          $("#link-download").prop("href", "<?php echo url('print-pdf-compare')?>"+'/'+data.id);
+
+          $('.counter').counterUp({
+            delay: 10,
+            time: 1000,
+            formatter: function (n) {
+              return Math.round(n * 100) / 100;
+            }
+          });
+
           // console.log(data.view);
           // load_history();
         } else {
@@ -95,9 +110,10 @@
       }
     });
   }
+
 </script>
 
-<div class="container-fluid">
+<div class="container">
 
   <div class="alert" id="pesan"></div>
 
@@ -128,7 +144,12 @@
 
   <div class="row" align="center">
     <div class="col-md-2">
-      <a href="{{url('home')}}"><button class="btn back-to-home">back to home</button></a>
+      <a href="{{url('home')}}">
+        <button class="btn back-to-home">
+          <i class="fas fa-arrow-left"></i>
+          Back To Home
+        </button>
+      </a>
     </div>
   </div>
 
@@ -163,35 +184,37 @@
       </form> 
     </div>
 
-    <div class="col-md-3" align="center">
-      <p class="enter-username">Enter Instagram username and tap Enter!</p>
-      <form>
-        @csrf
-        <div class="form-group row search-bar">
-          <div class="col-md-9 col-xs-12">
-            <input id="keywords3" class="form-control" name="search" placeholder="username" value="{{$username3}}">
+    @if(Auth::user()->membership=='premium')
+      <div class="col-md-3" align="center">
+        <p class="enter-username">Enter Instagram username and tap Enter!</p>
+        <form>
+          @csrf
+          <div class="form-group row search-bar">
+            <div class="col-md-9 col-xs-12">
+              <input id="keywords3" class="form-control" name="search" placeholder="username" value="{{$username3}}">
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <button type="button" class="btn btn-primary btn-search" data-part="3"> Search </button>
+            </div>
           </div>
-          <div class="col-md-3 col-xs-12">
-            <button type="button" class="btn btn-primary btn-search" data-part="3"> Search </button>
-          </div>
-        </div>
-      </form> 
-    </div>
+        </form> 
+      </div>
 
-    <div class="col-md-3" align="center">
-      <p class="enter-username">Enter Instagram username and tap Enter!</p>
-      <form>
-        @csrf
-        <div class="form-group row search-bar">
-          <div class="col-md-9 col-xs-12">
-            <input id="keywords4" class="form-control" name="search" placeholder="username" value="{{$username4}}">
+      <div class="col-md-3" align="center">
+        <p class="enter-username">Enter Instagram username and tap Enter!</p>
+        <form>
+          @csrf
+          <div class="form-group row search-bar">
+            <div class="col-md-9 col-xs-12">
+              <input id="keywords4" class="form-control" name="search" placeholder="username" value="{{$username4}}">
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <button type="button" class="btn btn-primary btn-search" data-part="4"> Search </button>
+            </div>
           </div>
-          <div class="col-md-3 col-xs-12">
-            <button type="button" class="btn btn-primary btn-search" data-part="4"> Search </button>
-          </div>
-        </div>
-      </form> 
-    </div>
+        </form> 
+      </div>
+    @endif
   </div>
 
   <div class="row justify-content-center search-content" id="content-akun">
@@ -199,7 +222,11 @@
 
 
   <div class="col-md-12" align="center">
-    <button class="btn btn-download-result"> Download Result </button>
+    <a id="link-download" href="#" target="_blank">
+      <button class="btn btn-download-result"> 
+        Download Result 
+      </button>
+    </a>
   </div>
 
 </div>

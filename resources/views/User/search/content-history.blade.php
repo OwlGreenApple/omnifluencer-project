@@ -1,8 +1,9 @@
-<?php if(!is_null($accounts) && count($accounts)) { ?>
+<form class="form-compare">
+  <?php if(!is_null($accounts) && count($accounts)) { ?>
 
     <div class="col">
       <div class="rowcom">
-        <button type="submit" class="btn btn-default btn-compare grads" data-toggle="modal" data-target="#compareModal" data-whatever="compare" style="display: none">
+        <button type="button" class="btn btn-default btn-compare grads" data-toggle="modal" data-target="#compareModal" data-whatever="compare" style="display: none">
           <span>Compare</span>
         </button>
         <h3>Here is your search history</h3>
@@ -14,7 +15,7 @@
         <div class="col-1">
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="boxcompare" value="{{$account->id}}" class="boxcompare" style="display: none">
+              <input type="checkbox" name="accountid[]" value="{{$account->accountid}}" class="boxcompare" style="display: none">
             </label>
           </div>
         </div>
@@ -50,3 +51,4 @@
 <?php } else { ?>
   <p>There is no history</p>
 <?php } ?>
+</form>

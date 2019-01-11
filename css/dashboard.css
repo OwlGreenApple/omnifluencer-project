@@ -362,7 +362,7 @@ sub {
 .btn-upgrade {
   position: absolute;
   top: 120px;
-  left: 30%;
+  left: 27%;
   z-index: 10;
   margin: 0 auto;
   text-align: center;

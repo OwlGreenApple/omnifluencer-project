@@ -16,7 +16,7 @@
   <!--<script src="{{ asset('js/noframework.waypoints.min.js') }}"></script>-->
   <!--<script src="{{ asset('js/waypoints.js') }}"></script>-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
-  <script type="text/javascript" src="tooltipster/dist/js/tooltipster.main.min.js"></script>
+  <script type="text/javascript" src="{{asset('tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
   <script defer src="{{asset('js/all.js')}}"></script>
   <script src="{{ asset('js/numscroller-1.0.js') }}"></script>
 
@@ -28,7 +28,7 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  <link rel="stylesheet" type="text/css" href="tooltipster/dist/css/tooltipster.main.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
   <link href="{{ asset('css/all.css') }}" rel="stylesheet">
   <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
 
@@ -36,8 +36,8 @@
     $(document).ready(function() {
       $('.tooltipstered').tooltipster({
         contentAsHTML: true,
+        trigger: 'ontouchstart' in window || navigator.maxTouchPoints ? 'click' : 'hover',
       });
-      $(".div-loading").hide();
     });
   </script>
 </head>
@@ -85,7 +85,9 @@
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">FAQ</a>
+              <a class="nav-link" href="{{url('faq')}}">
+                FAQ
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
@@ -228,11 +230,16 @@
               <div class="row">
                 <div class="col">
                   <ul>
-                    <li> <a href="#"> Home</a> </li>
+                    <li> 
+                      <a href="{{url('/')}}"> Home</a> 
+                    </li>
                     <li> <a href="#"> About Us</a> </li>
                     <li> <a href="#"> Blog</a> </li>
-                    <li> <a href="#"> Pricing</a> </li>
-                    <li> <a href="#"> Points</a> </li>
+                    <li> 
+                      <a href="{{url('pricing')}}"> 
+                        Pricing
+                      </a> 
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -242,7 +249,11 @@
               <div class="row ">
                 <div class="col">
                   <ul>
-                    <li> <a href="#"> FAQs</a> </li>
+                    <li> 
+                      <a href="{{url('faq')}}"> 
+                        FAQs
+                      </a> 
+                    </li>
                     <li> <a href="#"> Terms & Conditions</a> </li>
                     <li> <a href="#"> Privacy Policy</a> </li>
                     <li> <a href="#"> Disclaimer</a> </li>

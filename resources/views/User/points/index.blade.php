@@ -71,7 +71,7 @@
         }
       ?>
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7 h-40">
           <div class="card">  
             <div class="card-body">
               <div class="row"> 
@@ -81,11 +81,16 @@
 
                 <div class="col-md-6 col-12 center-mobile"> 
                   <h4><b>{{Auth::user()->name}}</b></h4>
-                  <i>Free Membership</i>
+                  <i>Free Membership</i> <br>
+                  <i>No expired</i>
                 </div>
 
                 <div class="col-md-4 col-12 center-mobile" align="right">
-                  <h5><b>Total points : {{Auth::user()->point}}</b></h5>
+                  <span><b>Total points :</b></span> <br>
+                  <p>
+                    <i class="fas fa-coins"></i>
+                    <span style="font-size: 28px;margin-left: 5px;">{{Auth::user()->point}}</span>
+                  </p>
                 </div>
               </div>
               <br>  
@@ -107,14 +112,14 @@
           </div>
         </div>  
 
-        <div class="col-md-5">
+        <div class="col-md-5 h-60">
           <div class="card">  
             <!--<div class="card-header membership" align="center">
               <h3>PRO MEMBER</h3>
             </div>-->
             <div class="card-body" align="center">
               <p>
-                Upgrade to pro membership? <br>
+                Upgrade to <b>Pro Membership?</b> <br>
                 Click button below
               </p>
               <button class="btn btn-primary">

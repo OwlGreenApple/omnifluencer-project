@@ -117,5 +117,9 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/print-pdf-bulk','AccountController@print_pdf_bulk');
   Route::get('/print-csv-bulk','AccountController@print_csv_bulk');
   Route::get('/send-email-bulk','AccountController@send_email_bulk');
+});
 
+Route::group(['middleware' => ['web','auth','admin']], function()
+{
+  Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
