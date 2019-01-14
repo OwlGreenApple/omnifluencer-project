@@ -222,6 +222,7 @@
         </a>
       </div>
 
+      @if(Auth::user()->is_admin==0)
       <ul class="list-unstyled components">
         <li class="<?php if(Request::is('dashboard')) echo 'active' ?>">
           <span class="submenu-navbar">
@@ -279,6 +280,15 @@
           </span>
         </li>
 
+        <li class="<?php if(Request::is('orders')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('orders')}}">
+              <i class="fas fa-shopping-cart icon-menu"></i>
+              Orders
+            </a>
+          </span>
+        </li>
+
         <li class="<?php if(Request::is('edit-profile') or Request::is('change-password')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="#settingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -301,6 +311,35 @@
           </ul>
         </li>
       </ul>
+      @else
+      <ul class="list-unstyled components">
+        <li class="<?php if(Request::is('list-order')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('list-order')}}">
+              <i class="fas fa-shopping-cart icon-menu"></i>
+              Orders
+            </a>
+          </span>
+        </li>
+
+        <li class="<?php if(Request::is('edit-profile') or Request::is('change-password')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="#settingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+              <i class="fas fa-cog icon-menu"></i>
+              Setting
+            </a>
+          </span>
+          
+          <ul class="collapse list-unstyled" id="settingSubmenu">
+            <li class="<?php if(Request::is('change-password')) echo 'active' ?>">
+              <a href="{{url('change-password')}}">
+                Change Password
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      @endif
     </nav>
 
     <!-- Page Content -->

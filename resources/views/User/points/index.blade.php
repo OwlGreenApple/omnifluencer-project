@@ -81,8 +81,15 @@
 
                 <div class="col-md-6 col-12 center-mobile"> 
                   <h4><b>{{Auth::user()->name}}</b></h4>
-                  <i>Free Membership</i> <br>
-                  <i>No expired</i>
+                  <i>{{ucfirst(Auth::user()->membership)}} Membership</i> <br>
+                  <i>
+                    @if(Auth::user()->membership=='free')
+                      No Expired
+                    @else 
+                      Expire on : 
+                      {{date('d-m-Y',strtotime(Auth::user()->valid_until))}}
+                    @endif
+                  </i>
                 </div>
 
                 <div class="col-md-4 col-12 center-mobile" align="right">
@@ -122,7 +129,7 @@
                 Upgrade to <b>Pro Membership?</b> <br>
                 Click button below
               </p>
-              <button class="btn btn-primary">
+              <button class="btn btn-primary btn-upgrade-poin" data-upgrade="pro">
                 <i class="fas fa-star"></i> 
                 Upgrade To Pro
               </button>
@@ -165,7 +172,10 @@
 
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-redeem" role="tabpanel" aria-labelledby="nav-redeem-tab">
-              
+          <br>
+
+          @include('user.points.content-redeem')
+
         </div>
 
         <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
@@ -227,6 +237,15 @@
   $( "body" ).on( "click", "#btn-create-group", function() {
     $('#input-group').show();
     $("#input-group").focus();
+  });
+
+  $( "body" ).on( "click", ".btn-upgrade-poin", function(e){
+    $('.nav-tabs a[href="#nav-redeem"]').tab('show');
+
+    var targetSec = $(this).attr('data-upgrade');
+    $('html, body').animate({
+      scrollTop: $('#' + targetSec).offset().top
+    }, 1000);
   });
 
   $(document).on('click', '#checkAll', function (e) {

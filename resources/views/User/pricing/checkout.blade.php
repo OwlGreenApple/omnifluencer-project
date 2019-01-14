@@ -34,7 +34,7 @@
                 <label class="label-title-test" for="formGroupExampleInput">Pilih Paket:</label>
                 <select class="form-control form-control-lg" name="select-auto-manage" id="select-auto-manage" style="width: 100%">
                     <option data-price="150000" data-paket="Pro Monthly" value="{{$id}}" <?php if ($id==1) echo "selected"; ?>>Pro Monthly - IDR 150.000,-/mo</option>
-                    <option data-price="200000" data-paket="Premium Yearly" value="{{$id}}" <?php if ($id==3) echo "selected"; ?>>Premium Yearly - IDR 200.000,-/mo</option>
+                    <option data-price="200000" data-paket="Premium Monthly" value="{{$id}}" <?php if ($id==3) echo "selected"; ?>>Premium Monthly - IDR 200.000,-/mo</option>
                     <option data-price="550000" data-paket="Pro Yearly" value="{{$id}}" <?php if ($id==2) echo "selected"; ?>>Pro Yearly - IDR 550.000,-/year</option>
                     <option data-price="700000" data-paket="Premium Yearly" value="{{$id}}" <?php if ($id==4) echo "selected"; ?>>Premium Yearly - IDR 700.000,-/year</option>
                 </select>

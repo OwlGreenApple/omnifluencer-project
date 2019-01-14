@@ -117,9 +117,20 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/print-pdf-bulk','AccountController@print_pdf_bulk');
   Route::get('/print-csv-bulk','AccountController@print_csv_bulk');
   Route::get('/send-email-bulk','AccountController@send_email_bulk');
+
+  //Order
+  Route::get('/orders','OrderController@index_order');
+  Route::get('/orders/load-order','OrderController@load_order');
+  Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
 });
 
 Route::group(['middleware' => ['web','auth','admin']], function()
 {
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+  //List Order
+  Route::get('/list-order','OrderController@index_list_order');
+  Route::get('/list-order/load-order','OrderController@load_list_order');
+  Route::get('/list-order/confirm','OrderController@confirm_order');
+
 });
