@@ -9,25 +9,46 @@
   $(document).ready(function() {
     //function saat klik pagination
     refresh_page();
-
-    $('.formatted-date').datepicker({
-      dateFormat: 'yy/mm/dd',
+    
+    $('#save-group').on('hidden.bs.modal', function () {
+      $('#input-group').val('');
+      $('#input-group').hide();
     });
   });
 
+  function get_groups(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('history-search/get-groups') ?>",
+      data: {
+        keywords : $('#keywords').val(),
+      },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        $('#list-group').html(data.view);
+
+        $('#save-group').modal('show');
+      }
+    });
+  }
+
   function refresh_page(){
     if(currentPage==''){
-      currentPage = "<?php echo url('/compare-history/load-history-compare') ?>";
+      currentPage = "<?php echo url('/saved-profile/load-accounts') ?>";
     } 
 
     $.ajax({
       type : 'GET',
       url : currentPage,
-      data: {
-        keywords : $('#keywords').val(),
-        from : $('#from').val(),
-        to : $('#to').val(),
-      },
       dataType: 'text',
       beforeSend: function()
       {
@@ -41,14 +62,22 @@
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
         $('#pager').html(data.pager);
+
+        $('.tooltipstered').tooltipster({
+          contentAsHTML: true,
+          trigger: 'ontouchstart' in window || navigator.maxTouchPoints ? 'click' : 'hover',
+        });
       }
     });
   }
 
-  function delete_compare(){
+  function delete_profile(){
     $.ajax({
       type : 'GET',
-      url : "<?php echo url('/compare-history/delete') ?>",
+      url : "<?php echo url('/saved-profile/delete') ?>",
+      headers: {
+        'X-CSRFToken': $('meta[name="token"]').attr('content')
+      },
       data: {
         id : $('#id_delete').val(),
       },
@@ -76,10 +105,10 @@
     });
   }
 
-  function delete_compare_bulk(){
+  function delete_profile_bulk(){
     $.ajax({
       type : 'GET',
-      url : "<?php echo url('/compare-history/delete-bulk') ?>",
+      url : "<?php echo url('/saved-profile/delete-bulk') ?>",
       data: $('form').serialize(),
       dataType: 'text',
       beforeSend: function()
@@ -105,6 +134,58 @@
     });
   }
 
+  function add_groups(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/history-search/add-groups') ?>",
+      data: $('form').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          refresh_page();
+        } 
+      }
+    });
+  }
+
+  function create_groups(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/history-search/create-groups') ?>",
+      data: { 
+        groupname:$('#input-group').val() 
+      },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          $('#input-group').val('');
+          $('#input-group').hide();
+          get_groups();
+        } 
+      }
+    });
+  }
+
   function send_email (){
     if($('#sendemail').val()==''){
       $('#pesan').html('Silahkan isi email terlebih dahulu');
@@ -114,7 +195,7 @@
     } else {
       $.ajax({
         type : 'GET',
-        url : "<?php echo url('/send-email-compare') ?>",
+        url : "<?php echo url('/send_email') ?>",
         data: { 
           email: $('#sendemail').val(),
           id: $('#id-profile').val(),
@@ -149,61 +230,37 @@
   }
 </script>
 
-<style type="text/css">
-  .icon-arrow{
-    color: #2089F6;
-  }
-</style>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-11">
 
-      <h2><b>Compare History</b></h2>  
+      <h2><b>Saved Profile</b></h2>  
       
       <div class="row">
         <div class="col-md-5">
           <h5>
-            Show you previous history comparison
+            Select bulk action, save or add it to group
           </h5>    
         </div>
 
         <div class="col-md-7" align="right">
+          <button class="btn btn-primary" id="btn-save">
+            <i class="fas fa-folder-plus"></i> 
+            Add to group
+          </button>
           <button class="btn btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>     
         </div>
       </div>
-      
+    
       <hr>
 
-      <div id="pesan" class="alert d-none"></div>
+      <div id="pesan" class="alert"></div>
 
       <br>  
 
       <form>
-        <div class="form-inline mb-2">
-          <label class="center-mobile mr-sm-2" for="from">
-            <b>Dari</b>
-          </label>
-          <input id="from" type="text" class="form-control mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
-
-          <label class="center-mobile mr-sm-2" for="to">
-            <b>hingga</b>
-          </label>
-          <input id="to" type="text" class="form-control mb-2 mr-sm-2 formatted-date" name="to">
-
-          <div class="d-flex">
-            <label class="sr-only" for="keywords">
-              Search
-            </label>
-            <input id="keywords" type="text" class="form-control mb-2 mr-sm-2" name="keywords" placeholder="username...">
-                
-            <button type="button" class="btn btn-primary mb-2 btn-search">
-              Search
-            </button>
-          </div>
-        </div>
-
         <div class="check-mobile">
           <input class="checkAll" type="checkbox" name="checkAll"> Check All
         </div>
@@ -217,11 +274,10 @@
               Instagram
             </th>
             <th class="header" action="created_at">
-              Date
+              Saved Date
             </th>
-            <th class="header">
-              Action
-            </th>
+            <th>Groups</th>
+            <th>Action</th>
           </thead>
           <tbody id="content"></tbody>
         </table>
@@ -256,6 +312,40 @@
         </button>
         <button class="btn" data-dismiss="modal">
           Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
+<!-- Modal Save Group -->
+<div class="modal fade" id="save-group" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Save to group
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <button class="col-md-12" id="btn-create-group">
+          + Create new group
+        </button>
+        
+        <input class="col-md-12 form-control" type="text" name="input-group" id="input-group">
+
+        <form id="form-groups">
+          <div id="list-group"></div>
+        </form>
+
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-primary" id="btn-add-group" data-dismiss="modal">
+          Add
         </button>
       </div>
     </div>
@@ -318,6 +408,29 @@
 </div>
 
 <script type="text/javascript">
+  $( "body" ).on( "keypress", "#input-group", function(e)
+  {
+      if(e.which == 13)
+      {
+        create_groups();
+      }
+  });  
+
+  $( "body" ).on( "click", ".btn-delete", function() {
+    $('#id_delete').val($(this).attr('data-id'));
+    $('#delete_type').val('one');
+  });
+
+  $( "body" ).on( "click", ".btn-delete-bulk", function()
+  {
+    $('#delete_type').val('bulk');
+  });
+
+  $(document).on( "change", ".checkaccid", function() {
+    var id = $(this).attr('data-id');
+    $(".checksaveid-"+id).prop('checked',this.checked);
+  });
+
   $( "body" ).on( "click", ".btn-profile", function() {
     var id = $(this).attr('data-id');
     var type = $(this).attr('data-type');
@@ -325,11 +438,11 @@
     $('#id-profile').val(id);
 
     if(type=='pdf'){
-      $("#link-pdf").prop("href", "<?php echo url('print-pdf-compare')?>"+'/'+id);
+      $("#link-pdf").prop("href", "<?php echo url('print-pdf')?>"+'/'+id);
       $('.send-pdf').show();
       $('.send-csv').hide();
     } else {
-      $("#link-csv").prop("href", "<?php echo url('print-csv-compare')?>"+'/'+id);
+      $("#link-csv").prop("href", "<?php echo url('print-csv')?>"+'/'+id);
       $('.send-csv').show();
       $('.send-pdf').hide();
     }
@@ -339,34 +452,11 @@
     send_email();
   });
 
-  $( "body" ).on( "keypress", "#input-group", function(e)
-  {
-      if(e.which == 13)
-      {
-        create_groups();
-      }
-  });  
-
-  $( "body" ).on( "click", ".btn-search", function() {
-    currentPage = '';
-    refresh_page();
-  });
-
-  $( "body" ).on( "click", ".btn-delete", function() {
-    $('#id_delete').val($(this).attr('data-id'));
-    $('#delete_type').val('one'); 
-  });
-
-  $( "body" ).on( "click", ".btn-delete-bulk", function()
-  {
-    $('#delete_type').val('bulk');
-  });
-
   $( "body" ).on( "click", "#btn-delete-ok", function() {
     if($('#delete_type').val()=='bulk'){
-      delete_compare_bulk();
+      delete_profile_bulk();
     } else {
-      delete_compare();
+      delete_profile();
     }
   });
 

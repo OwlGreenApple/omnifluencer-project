@@ -348,6 +348,24 @@ sub {
   color: #E82739;
 }
 
+.icon-poin {
+  margin-top:10px;
+  margin-right: 5px;
+}
+
+.card-point {
+  padding: 0px;
+}  
+
+.info-point {
+  padding:10px 20px;
+}
+
+.desc-point {
+  font-size: 14px;
+  font-weight: 600;
+}
+
 /* Dashboard */
 .save-pdf {
   opacity: 0.4;
