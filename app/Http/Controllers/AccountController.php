@@ -116,6 +116,25 @@ class AccountController extends Controller
       }
 
       if(Auth::check()){
+        /* pengecekan membership */
+        if(Auth::user()->membership=='free'){
+          $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
+
+          if($currenthistory->count()>=5){
+            $arr['status'] = 'error';
+            $arr['message'] = '<b>Warning!</b> Free user hanya dapat menyimpan history search sebanyak 5';
+            return $arr;
+          }
+        } else if(Auth::user()->membership=='pro'){
+          $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
+
+          if($currenthistory->count()>=10){
+            $arr['status'] = 'error';
+            $arr['message'] = '<b>Warning!</b> Pro user hanya dapat menyimpan history search sebanyak 10';
+            return $arr;
+          }
+        } 
+
         $history = new HistorySearch;
         $history->account_id = $account->id;
         $history->user_id = Auth::user()->id;
@@ -154,7 +173,7 @@ class AccountController extends Controller
 
     if(Auth::check()){
       $accounts = HistorySearch::join('accounts','accounts.id','=','history_searchs.account_id')
-          ->select('history_searchs.*','accounts.username','accounts.prof_pic')
+          ->select('history_searchs.*','accounts.id as accountid','accounts.username','accounts.prof_pic')
           ->where('history_searchs.user_id',Auth::user()->id)
           ->orderBy('history_searchs.created_at','desc');
 
@@ -260,6 +279,11 @@ class AccountController extends Controller
   }
 
   public function print_pdf($id){
+
+    if(Auth::user()->membership=='free'){
+      return abort(403);
+    }
+
     $user = User::find(Auth::user()->id);
     $user->count_pdf = $user->count_pdf + 1;
     $user->save();
@@ -281,6 +305,11 @@ class AccountController extends Controller
   }
 
   public function print_csv($id){
+
+    if(Auth::user()->membership=='free' or Auth::user()->membership=='pro'){
+      return abort(403);
+    }
+
     $user = User::find(Auth::user()->id);
     $user->count_csv = $user->count_csv + 1;
     $user->save();
@@ -440,6 +469,11 @@ class AccountController extends Controller
   }
 
   public function print_pdf_bulk(Request $request){
+
+    if(Auth::user()->membership=='free' or Auth::user()->membership=='pro'){
+      return abort(403);
+    }
+
     $user = User::find(Auth::user()->id);
     $user->count_pdf = $user->count_pdf + 1;
     $user->save();
@@ -464,6 +498,11 @@ class AccountController extends Controller
   }
 
   public function print_csv_bulk(Request $request){
+
+    if(Auth::user()->membership=='free' or Auth::user()->membership=='pro'){
+      return abort(403);
+    }
+
     $user = User::find(Auth::user()->id);
     $user->count_csv = $user->count_csv + 1;
     $user->save();

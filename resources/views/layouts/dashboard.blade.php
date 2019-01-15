@@ -14,7 +14,7 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
   <script src="{{ asset('js/noframework.waypoints.min.js') }}"></script>
-  <script type="text/javascript" src="tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+  <script type="text/javascript" src="{{asset('tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
   <!--<script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>-->
   <script defer src="{{asset('js/all.js')}}"></script>
   <script src="{{ asset('js/datepicker.js') }}"></script>
@@ -22,7 +22,7 @@
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="tooltipster/dist/css/tooltipster.bundle.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
   <link href="{{ asset('css/all.css') }}" rel="stylesheet">
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
   <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
@@ -222,6 +222,7 @@
         </a>
       </div>
 
+      @if(Auth::user()->is_admin==0)
       <ul class="list-unstyled components">
         <li class="<?php if(Request::is('dashboard')) echo 'active' ?>">
           <span class="submenu-navbar">
@@ -241,38 +242,49 @@
           </span>
         </li>
 
-        <li class="<?php if(Request::is('compare-history')) echo 'active' ?>">
-          <span class="submenu-navbar">
-            <a href="{{url('compare-history')}}">
-              <i class="fas fa-chart-bar icon-menu"></i>
-              Compare History
-            </a>
-          </span>
-        </li>
+        <?php if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro') { ?>
+          <li class="<?php if(Request::is('compare-history')) echo 'active' ?>">
+            <span class="submenu-navbar">
+              <a href="{{url('compare-history')}}">
+                <i class="fas fa-chart-bar icon-menu"></i>
+                Compare History
+              </a>
+            </span>
+          </li>
 
-        <li class="<?php if(Request::is('saved-profile')) echo 'active' ?>">
-          <span class="submenu-navbar">
-            <a href="{{url('saved-profile')}}">
-              <i class="fas fa-save icon-menu"></i>
-              Saved Profile
-            </a>
-          </span>
-        </li>
+          <li class="<?php if(Request::is('saved-profile')) echo 'active' ?>">
+            <span class="submenu-navbar">
+              <a href="{{url('saved-profile')}}">
+                <i class="fas fa-save icon-menu"></i>
+                Saved Profile
+              </a>
+            </span>
+          </li>
 
-        <li class="<?php if(Request::is('groups')) echo 'active' ?>">
-          <span class="submenu-navbar">
-            <a href="{{url('groups')}}">
-              <i class="fas fa-folder-plus icon-menu"></i>
-              Groups
-            </a>
-          </span>
-        </li>
+          <li class="<?php if(Request::is('groups')) echo 'active' ?>">
+            <span class="submenu-navbar">
+              <a href="{{url('groups')}}">
+                <i class="fas fa-folder-plus icon-menu"></i>
+                Groups
+              </a>
+            </span>
+          </li>
+        <?php } ?>
 
         <li class="<?php if(Request::is('points')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="{{url('points')}}">
               <i class="fas fa-coins icon-menu"></i>
               Points
+            </a>
+          </span>
+        </li>
+
+        <li class="<?php if(Request::is('orders')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('orders')}}">
+              <i class="fas fa-shopping-cart icon-menu"></i>
+              Orders
             </a>
           </span>
         </li>
@@ -299,6 +311,35 @@
           </ul>
         </li>
       </ul>
+      @else
+      <ul class="list-unstyled components">
+        <li class="<?php if(Request::is('list-order')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('list-order')}}">
+              <i class="fas fa-shopping-cart icon-menu"></i>
+              Orders
+            </a>
+          </span>
+        </li>
+
+        <li class="<?php if(Request::is('edit-profile') or Request::is('change-password')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="#settingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+              <i class="fas fa-cog icon-menu"></i>
+              Setting
+            </a>
+          </span>
+          
+          <ul class="collapse list-unstyled" id="settingSubmenu">
+            <li class="<?php if(Request::is('change-password')) echo 'active' ?>">
+              <a href="{{url('change-password')}}">
+                Change Password
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      @endif
     </nav>
 
     <!-- Page Content -->

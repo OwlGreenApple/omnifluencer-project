@@ -24,6 +24,11 @@ class CompareController extends Controller
   }
 
   public function index($keywords=""){
+    //pengecekan membership
+    if(Auth::user()->membership=='free'){
+      return abort(403);
+    } 
+
     $arr1 = explode("-",$keywords);
 
     $arr_compare = array(
@@ -44,6 +49,11 @@ class CompareController extends Controller
       $arr_compare["username2"] = $arr1[1];
     }
     if (isset($arr1[2])) {
+      //pengecekan membership
+      if(Auth::user()->membership=='pro'){
+        return abort(403);
+      }
+
       $arr_compare["username3"] = $arr1[2];
     }
     if (isset($arr1[3])) {
@@ -61,10 +71,23 @@ class CompareController extends Controller
     $arr['status'] = 'success';
     $arr['message'] = '';
 
-    // pengecekan maximum 4 yang terselect
-    if ( count($request->accountid)>4) { 
+    // pengecekan membership
+    if(Auth::user()->membership=='free'){
       $arr['status'] = 'error';
+      $arr['message'] = 'Free user tidak dapat melakukan compare';
       return $arr;
+    } else if(Auth::user()->membership=='pro'){
+      if ( count($request->accountid)>2) { 
+        $arr['status'] = 'error';
+        $arr['message'] = 'Maksimum compare pro user adalah 2 akun';
+        return $arr;
+      }
+    } else {
+      if ( count($request->accountid)>4) { 
+        $arr['status'] = 'error';
+        $arr['message'] = 'Maksimum compare adalah 4 akun';
+        return $arr;
+      }
     }
     
     $message = "";
@@ -87,6 +110,7 @@ class CompareController extends Controller
   public function load_search(Request $request){
     // load akun 
     $account = Account::where('username',$request->keywords)->first();
+
     if(is_null($account)){
       $url = "http://cmx.space/get-user-data/".$request->keywords;
 
@@ -150,6 +174,8 @@ class CompareController extends Controller
       $history_compare->account_id_4=$arr["id4"];
     }
     $history_compare->save();
+
+    return $history_compare->id;
   }
 
   public function load_compare(Request $request){
@@ -183,17 +209,23 @@ class CompareController extends Controller
       $accounts[] = $acc4;
     }
     
-    $this->do_compare($arr_compare);
+    $id_history = $this->do_compare($arr_compare);
 
     $arr['status'] = "success";
     $arr['view'] = (string) view('user.compare.content-akun')
                       ->with('accounts',$accounts);
+    $arr['id'] = $id_history;
 
     return $arr;
     // return "asd";
   }
 
     public function index_history(){
+      //pengecekan membership 
+      if(Auth::user()->membership=='free'){
+        return abort(403);
+      }
+
       return view('user.compare-history.index');
     }
 
@@ -231,6 +263,11 @@ class CompareController extends Controller
     }
 
   public function print_pdf($id){
+
+    if(Auth::user()->membership=='free'){
+      return abort(403);
+    }
+
     $user = User::find(Auth::user()->id);
     $user->count_pdf = $user->count_pdf + 1;
     $user->save();
@@ -259,6 +296,11 @@ class CompareController extends Controller
   }
 
   public function print_csv($id){
+
+    if(Auth::user()->membership=='free' or Auth::user()->membership=='pro'){
+      return abort(403);
+    }
+
     $user = User::find(Auth::user()->id);
     $user->count_csv = $user->count_csv + 1;
     $user->save();

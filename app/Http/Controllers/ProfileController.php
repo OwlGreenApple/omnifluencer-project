@@ -39,11 +39,12 @@ class ProfileController extends Controller
         //$user->location = $request->location;
 
         if($request->hasFile('fileprofpic')){
-          /*if($user->prof_pic!=''){
-            Storage::delete($user->profpic);
-          }*/
+          if($user->prof_pic!=''){
+            Storage::delete($user->prof_pic);
+          }
 
-          $path = Storage::disk('s3')->putFile('profpic', $request->file('fileprofpic'),'public');
+          $folder = Auth::user()->email.'/profpic';
+          $path = Storage::disk('s3')->putFile($folder, $request->file('fileprofpic'),'public');
           
           $user->prof_pic = $path;
         }

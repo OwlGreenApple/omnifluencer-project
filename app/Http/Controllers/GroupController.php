@@ -11,6 +11,9 @@ use Auth;
 class GroupController extends Controller
 {
     public function index(){
+      if(Auth::user()->membership=='free'){
+        return abort(403);
+      }
       return view('user.groups.index');
     }
 
@@ -46,6 +49,11 @@ class GroupController extends Controller
     }
 
     public function index_saved(){
+
+      if(Auth::user()->membership=='free'){
+        return abort(403);
+      }
+      
       return view('user.saved-profile.index');
     }
 

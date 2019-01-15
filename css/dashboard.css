@@ -338,3 +338,33 @@ sub {
   font-size: 18px;
   font-weight: 300;
 }
+
+/* Poin history */
+.poinplus {
+  color: #409AF7;
+}
+
+.poinmin {
+  color: #E82739;
+}
+
+/* Dashboard */
+.save-pdf {
+  opacity: 0.4;
+  position: relative;
+}
+
+.save-csv {
+  opacity: 0.4;
+  position: relative;
+}
+
+.btn-upgrade {
+  position: absolute;
+  top: 120px;
+  left: 27%;
+  z-index: 10;
+  margin: 0 auto;
+  text-align: center;
+  display: none;
+}

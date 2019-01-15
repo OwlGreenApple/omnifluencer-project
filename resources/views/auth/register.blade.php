@@ -7,17 +7,6 @@
   <div class="row justify-content-center">
     <div class="col-md-8 col-12">
 
-      @if (session('error') )
-        <div class="col-md-12 alert alert-danger">
-          <strong>Warning!</strong> {{session('error')}}
-        </div>
-      @endif
-      @if (session('success') )
-        <div class="col-md-12 alert alert-success">
-          <strong>Success!</strong> {{session('success')}}
-        </div>
-      @endif
-
       <div class="signup">
         <div class="signup-content">
           <form method="POST" action="{{ route('register') }}" id="signup-form" class="signup-form">
@@ -27,10 +16,21 @@
 
             <h2 class="form-title">Create an Omnifluencer<br>account within a minutes</h2>
 
+            @if (session('error') )
+              <div class="col-md-12 alert alert-danger">
+                <strong>Warning!</strong> {{session('error')}}
+              </div>
+            @endif
+            @if (session('success') )
+              <div class="col-md-12 alert alert-success">
+                <strong>Success!</strong> {{session('success')}}
+              </div>
+            @endif
+      
             <div class="form-group">
               <label class="label-title-test" for="name">Masukkan Nama Lengkap:</label>
 
-              <input id="name" type="text" class="form-input{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Your Full Name"  required autofocus>
+              <input id="name" type="text" class="form-input form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Your Full Name"  required autofocus>
 
               @if ($errors->has('name'))
                 <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                 Masukkan Email:
               </label>
 
-              <input id="email" type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Your Email" required>
+              <input id="email" type="email" class="form-input form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Your Email" required>
 
               @if ($errors->has('email'))
                 <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
                 Masukkan Password:
               </label>
 
-              <input id="password" type="password" class="form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
+              <input id="password" type="password" class="form-input form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
 
               @if ($errors->has('password'))
                 <span class="invalid-feedback" role="alert">
@@ -72,7 +72,7 @@
                 Konfirmasi Password:
               </label>
 
-              <input id="password-confirm" type="password" class="form-input" name="password_confirmation" placeholder="Confirm your password" required>
+              <input id="password-confirm" type="password" class="form-input form-control" name="password_confirmation" placeholder="Confirm your password" required>
             </div>
 
             <div class="form-group">
