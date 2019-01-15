@@ -56,6 +56,7 @@ h3{
   color: #1e88f5;
   margin-top:63px;
   margin-bottom:78px;
+  background-color:#fff;
 }
 
 .enter-username{
@@ -86,20 +87,42 @@ h3{
   margin-top:39px;
   margin-bottom:107px;
   img{
-    max-width:180px;
+    max-width:140px;
     border-radius: 50%;
+    border: 3px solid #fff;
+
+    @media (max-width:768px){
+      max-width:110px;
+    }
   }
   h4{
-    font-size:40px;
+    font-size:30px;
+    color:#fff;
+
+    @media (max-width:768px){
+      font-size:23px;
+    }
+  }
+  h5.username{
+    font-size:24px;
+    font-weight:600;
     color:#fff;
   }
   h5{
-    font-size:22px;
+    font-size:20px;
+    font-weight:400;
     color:#fff;
+
+    @media (max-width:768px){
+      font-size:17px;
+    }
   }
   p{
     color:#fff;
-    font-size:33px;
+    font-size:18px;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom:0px;
   }
 }
 
@@ -117,6 +140,28 @@ h3{
   color: #ffffff;
   padding :10px 45px;
   margin-bottom:105px;
+}
+
+.progress {
+  @media (max-width:768px){
+    width:110px;
+    height:110px;
+    line-height:110px;
+  }
+  .progress-value {
+    @media (max-width:768px){
+      font-size:20px;
+      line-height:95px;
+    }
+  }
+}
+
+.div-progress {
+  margin-bottom:40px;
+}
+
+.search-bar > .form-control {
+  width:100% !important;
 }
 
 /*MEDIA QUERIES*/

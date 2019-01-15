@@ -138,18 +138,18 @@ class OrderController extends Controller
     $valid=null;
     if(substr($order->package,0,3) === "Pro"){
       if($order->package=='Pro Monthly'){
-        $valid = new DateTime("+1 months");;
+        $valid = new DateTime("+1 months");
       } else if($order->package=='Pro Yearly'){
-        $valid = new DateTime("+12 months");;
+        $valid = new DateTime("+12 months");
       }
       $user->valid_until = $valid;
       $user->membership = 'pro';
 
     } else if(substr($order->package,0,7) === "Premium"){
       if($order->package=='Premium Monthly'){
-        $valid = new DateTime("+1 months");;
+        $valid = new DateTime("+1 months");
       } else if($order->package=='Premium Yearly'){
-        $valid = new DateTime("+12 months");;
+        $valid = new DateTime("+12 months");
       }
       $user->valid_until = $valid;
       $user->membership = 'premium';

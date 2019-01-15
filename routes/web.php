@@ -83,7 +83,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/points','PointController@index');  
   Route::get('/points/load-points','PointController@load_points'); 
   Route::get('/points/{id}','PointController@index_redeem');
-  Route::get('/points/{id}/redeem','PointController@redeem-point');
+  Route::get('/redeem-point','PointController@redeem_point');
 
 
   //Compare History

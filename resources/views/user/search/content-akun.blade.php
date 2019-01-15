@@ -26,7 +26,7 @@
 </div>
 
 <div class="top-stats">
-  <h3>11,968</h3>
+  <h3><?php echo Helper::abbreviate_number(round($account->eng_rate*$account->jml_followers),2) ?></h3>
   <p>Total Influenced</p>
 </div>
 <div class="status">

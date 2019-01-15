@@ -3,13 +3,13 @@ $count= count($accounts);
 ?>
 
 @foreach($accounts as $account)
-  <div class="col-md-3 div-progress" align="center">
+  <div class="col-md-3 col-6 div-progress" align="center">
     <img src="{{$account->prof_pic}}" class="" >
     <br>
     <p class="p1"><?php echo '@'.$account->username ?></p>
-    <h5 >{{$account->username}}</h5>
+    <h5 class="username">{{$account->username}}</h5>
 
-    <div class="names">
+    <div class="names mb-4">
       <div class="progress blue">
         <span class="progress-left">
           <span class="progress-bar"></span>
@@ -40,7 +40,7 @@ $count= count($accounts);
       <b><?php echo Helper::abbreviate_number($account->jml_following,2); ?></b>
     </h4>
     <h5>Following</h5>
-
+    <br>
     <h4>
       <b>{{ date("M d Y", strtotime($account->lastpost))  }}</b>
     </h4>

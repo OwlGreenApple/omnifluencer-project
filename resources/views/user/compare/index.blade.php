@@ -113,34 +113,29 @@
 
 </script>
 
+<style type="text/css">
+  .form-control {
+    width: 100% !important;
+  }  
+</style>
+
+<section class="page-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>Comparison Influencer</h1>
+        <hr class="orn">
+        <p class="pg-title">If you are in the market for a computer, there are a number of factors to consider. Will it be used for your home, your office or perhaps even your home office combo? </p>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<hr class="wh">
+
 <div class="container">
 
   <div class="alert" id="pesan"></div>
-
-  <div class="col-md-12" align="center">
-    <h3>Comparison Influencer</h3>
-  </div>
-
-  <div class="row">
-    <div class="col-md-2 col-md-offset-5" style="margin:0 auto;">
-      <hr class="hr-1">
-    </div>
-  </div>
-
-  <div class="col-md-12" align="center">
-    <p class="description-compare">
-      if you are in the market for a computer, there are a <br>
-      number of factors to consider. Will it be used for your <br>
-      home, your office or perhaps even your home office <br>
-      combo?
-    </p>
-  </div>
-
-  <div class="row" align="center">
-    <div class="col-md-12">
-      <hr class="hr-2">
-    </div>
-  </div>
 
   <div class="row" align="center">
     <div class="col-md-2">
@@ -154,30 +149,30 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-md-3" align="center">
+    <div class="col-md-3 col-6" align="center">
       <p class="enter-username">Enter Instagram username and tap Enter!</p>
       <form>
         @csrf
         <div class="form-group row search-bar">
-          <div class="col-md-9 col-xs-12">
+          <div class="col-md-9 col-12">
             <input id="keywords1" class="form-control " name="search" placeholder="username" value="{{$username1}}">
           </div>
-          <div class="col-md-3 col-xs-12">
+          <div class="col-md-3 col-12 pl-0">
             <button type="button" class="btn btn-primary btn-search" data-part="1"> Search </button>
           </div>
         </div>
       </form> 
     </div>
 
-    <div class="col-md-3" align="center">
+    <div class="col-md-3 col-6" align="center">
       <p class="enter-username">Enter Instagram username and tap Enter!</p>
       <form>
         @csrf
         <div class="form-group row search-bar">
-          <div class="col-md-9 col-xs-12">
+          <div class="col-md-9 col-12">
             <input id="keywords2" class="form-control" name="search" placeholder="username" value="{{$username2}}">
           </div>
-          <div class="col-md-3 col-xs-12">
+          <div class="col-md-3 col-12 pl-0">
             <button type="button" class="btn btn-primary btn-search" data-part="2"> Search </button>
           </div>
         </div>
@@ -185,30 +180,30 @@
     </div>
 
     @if(Auth::user()->membership=='premium')
-      <div class="col-md-3" align="center">
+      <div class="col-md-3 col-6" align="center">
         <p class="enter-username">Enter Instagram username and tap Enter!</p>
         <form>
           @csrf
           <div class="form-group row search-bar">
-            <div class="col-md-9 col-xs-12">
+            <div class="col-md-9 col-12">
               <input id="keywords3" class="form-control" name="search" placeholder="username" value="{{$username3}}">
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-12 pl-0">
               <button type="button" class="btn btn-primary btn-search" data-part="3"> Search </button>
             </div>
           </div>
         </form> 
       </div>
 
-      <div class="col-md-3" align="center">
+      <div class="col-md-3 col-6" align="center">
         <p class="enter-username">Enter Instagram username and tap Enter!</p>
         <form>
           @csrf
           <div class="form-group row search-bar">
-            <div class="col-md-9 col-xs-12">
+            <div class="col-md-9 col-12">
               <input id="keywords4" class="form-control" name="search" placeholder="username" value="{{$username4}}">
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-12 pl-0">
               <button type="button" class="btn btn-primary btn-search" data-part="4"> Search </button>
             </div>
           </div>
