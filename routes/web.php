@@ -82,6 +82,9 @@ Route::group(['middleware' => ['web','auth']], function()
   //Points 
   Route::get('/points','PointController@index');  
   Route::get('/points/load-points','PointController@load_points'); 
+  Route::get('/points/{id}','PointController@index_redeem');
+  Route::get('/points/{id}/redeem','PointController@redeem-point');
+
 
   //Compare History
   Route::get('/compare-history','CompareController@index_history');
