@@ -18,6 +18,9 @@
   <!--<script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>-->
   <script defer src="{{asset('js/all.js')}}"></script>
   <script src="{{ asset('js/datepicker.js') }}"></script>
+  <script src="{{ asset('DataTables/DataTables/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('js/moment.js') }}"></script>
+  <script src="{{ asset('js/datetime-moment.js') }}"></script>
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -26,6 +29,7 @@
   <link href="{{ asset('css/all.css') }}" rel="stylesheet">
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
   <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
+  <link href="{{ asset('DataTables/DataTables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
 
   <script>
     $(document).ready(function() {
@@ -318,6 +322,15 @@
             <a href="{{url('list-order')}}">
               <i class="fas fa-shopping-cart icon-menu"></i>
               Orders
+            </a>
+          </span>
+        </li>
+
+        <li class="<?php if(Request::is('list-user')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('list-user')}}">
+              <i class="fas fa-users icon-menu"></i>
+              Users
             </a>
           </span>
         </li>

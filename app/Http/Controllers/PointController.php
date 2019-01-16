@@ -32,21 +32,21 @@ class PointController extends Controller
 
       switch ($id) {
         case 1 :
-          $namapaket = 'Upgrade to Pro Monthly';
-          $point = 2500;
+          $namapaket = 'Free Upgrade to Pro 1 Month';
+          $point = 200;
           break;
         case 2 :
+          $namapaket = 'Free Upgrade to Premium 1 Month';
+          $point = 1000;
+          break;
+        /*case 3 :
           $namapaket = 'Upgrade to Pro Yearly';
           $point = 7500;
-          break;
-        case 3 :
-          $namapaket = 'Upgrade to Premium Monthly';
-          $point = 5000;
-          break;
-        case 4 :
+          break;*/
+        /*case 4 :
           $namapaket = 'Upgrade to Premium Yearly';
           $point = 10000;
-          break;
+          break;*/
       }
       
       return view('user.points.index-redeem')
@@ -63,27 +63,27 @@ class PointController extends Controller
         case 1 :
           $user->membership = 'pro';
           $user->valid_until = new DateTime("+1 months");
-          $keterangan = 'Upgrade to Pro Monthly';
-          $point = 2500;
+          $keterangan = 'Free Upgrade to Pro 1 Month';
+          $point = 200;
           break;
         case 2 :
+          $user->membership = 'premium';
+          $user->valid_until = new DateTime("+1 months");
+          $keterangan = 'Free Upgrade to Premium 1 Month';
+          $point = 1000;
+          break;
+        /*case 3 :
           $user->membership = 'pro';
           $user->valid_until = new DateTime("+12 months");
           $keterangan = 'Upgrade to Pro Yearly';
           $point = 7500;
-          break;
-        case 3 :
-          $user->membership = 'premium';
-          $user->valid_until = new DateTime("+1 months");
-          $keterangan = 'Upgrade to Premium Monthly';
-          $point = 5000;
-          break;
-        case 4 :
+          break;*/
+        /*case 4 :
           $user->membership = 'premium';
           $user->valid_until = new DateTime("+12 months");
           $keterangan = 'Upgrade to Premium Yearly';
           $point = 10000;
-          break;
+          break;*/
       }
 
       if(Auth::user()->point<$point){

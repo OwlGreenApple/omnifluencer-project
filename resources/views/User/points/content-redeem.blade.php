@@ -8,11 +8,11 @@
 
         <div class="info-point">
           <span class="desc-point">
-            Upgrade to Pro Monthly  
+            Free Upgrade to <br> Pro 1 Month
           </span>
           <br>
           <i class="fas fa-coins icon-poin"></i>
-          2500 points
+          200 points
         </div>      
       </div>
     </div>
@@ -27,17 +27,17 @@
 
         <div class="info-point">
           <span class="desc-point">
-            Upgrade to Pro Yearly
+            Free Upgrade to <br> Premium 1 Month
           </span>
           <br>
           <i class="fas fa-coins icon-poin"></i>
-          7500 points
+          1000 points
         </div>
       </div>
     </div>
   </div> 
-
-  <div class="col-md-3">
+  
+  <!--<div class="col-md-3">
     <div class="card">
       <div class="card-body card-point">
         <a href="{{url('points/3')}}">
@@ -46,17 +46,17 @@
 
         <div class="info-point">
           <span class="desc-point">
-            Upgrade to Premium Monthly
+            Upgrade to Pro Yearly
           </span>
           <br>
           <i class="fas fa-coins icon-poin"></i>
-          5000 points
+          7500 points
         </div>
       </div>
     </div>
-  </div> 
+  </div>-->
 
-  <div class="col-md-3">
+  <!--<div class="col-md-3">
     <div class="card">
       <div class="card-body card-point">
         <a href="{{url('points/4')}}">
@@ -73,5 +73,5 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>--> 
 </div>

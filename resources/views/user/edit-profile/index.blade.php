@@ -177,6 +177,16 @@
         </div>
 
         <div class="form-group">
+          <label class="col-sm-4 col-form-label">
+            Logo
+          </label>
+
+          <div class="col-md-11">
+            <input type="file" class="form-control" name="filelogo" id="filelogo" accept="image/*">
+          </div>
+        </div>
+
+        <div class="form-group">
           <div class="col-md-12">
             <button type="button" class="btn btn-primary" id="btn-edit">
               Update Profile

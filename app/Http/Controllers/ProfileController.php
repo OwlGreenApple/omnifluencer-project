@@ -49,6 +49,17 @@ class ProfileController extends Controller
           $user->prof_pic = $path;
         }
 
+        if($request->hasFile('filelogo')){
+          if($user->logo!=''){
+            Storage::delete($user->logo);
+          }
+
+          $folder = Auth::user()->email.'/logo';
+          $path = Storage::disk('s3')->putFile($folder, $request->file('filelogo'),'public');
+          
+          $user->logo = $path;
+        }
+
         $user->save();
 
         $arr['status'] = 'success';

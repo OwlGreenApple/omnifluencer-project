@@ -9,8 +9,13 @@
   });
 
   $( "body" ).on( "click", ".btn-search", function() {
+    var keywords = $("#keywords1").val()+'-'+$("#keywords2").val()+'-'+$("#keywords3").val()+'-'+$("#keywords4").val();
+    var url = "{{url('compare')}}"+'/'+keywords;
+  
+    window.location.replace(url);
+
     // refresh_page();
-    $.ajax({
+    /*$.ajax({
       type : 'GET',
       url : "<?php echo url('/compare/load-search') ?>",
       data: {
@@ -53,11 +58,13 @@
           }
         }
       }
-    });
+    });*/
   });
   
   $( "body" ).on( "click", ".btn-delete", function() {
-    $('#id_delete').val($(this).attr('data-id'));
+    var col = $(this).attr('data-col');
+    $('.akun-'+col).hide();
+    $('#keywords'+col).val('');
   });
 
   function refresh_page(col=0){
@@ -148,16 +155,20 @@
     </div>
   </div>
 
+  <div class="col-12 pc-none">
+    <p class="enter-username">Enter Instagram username and tap Enter!</p>
+  </div>
+
   <div class="row justify-content-center">
     <div class="col-md-3 col-6" align="center">
-      <p class="enter-username">Enter Instagram username and tap Enter!</p>
+      <p class="enter-username mobile-none">Enter Instagram username and tap Enter!</p>
       <form>
         @csrf
         <div class="form-group row search-bar">
           <div class="col-md-9 col-12">
             <input id="keywords1" class="form-control " name="search" placeholder="username" value="{{$username1}}">
           </div>
-          <div class="col-md-3 col-12 pl-0">
+          <div class="col-md-3 col-12 pl-0 mobile-none">
             <button type="button" class="btn btn-primary btn-search" data-part="1"> Search </button>
           </div>
         </div>
@@ -165,14 +176,14 @@
     </div>
 
     <div class="col-md-3 col-6" align="center">
-      <p class="enter-username">Enter Instagram username and tap Enter!</p>
+      <p class="enter-username mobile-none">Enter Instagram username and tap Enter!</p>
       <form>
         @csrf
         <div class="form-group row search-bar">
-          <div class="col-md-9 col-12">
+          <div class="col-md-9 col-12 pl-none">
             <input id="keywords2" class="form-control" name="search" placeholder="username" value="{{$username2}}">
           </div>
-          <div class="col-md-3 col-12 pl-0">
+          <div class="col-md-3 col-12 pl-0 mobile-none">
             <button type="button" class="btn btn-primary btn-search" data-part="2"> Search </button>
           </div>
         </div>
@@ -181,14 +192,14 @@
 
     @if(Auth::user()->membership=='premium')
       <div class="col-md-3 col-6" align="center">
-        <p class="enter-username">Enter Instagram username and tap Enter!</p>
+        <p class="enter-username mobile-none">Enter Instagram username and tap Enter!</p>
         <form>
           @csrf
           <div class="form-group row search-bar">
             <div class="col-md-9 col-12">
               <input id="keywords3" class="form-control" name="search" placeholder="username" value="{{$username3}}">
             </div>
-            <div class="col-md-3 col-12 pl-0">
+            <div class="col-md-3 col-12 pl-0 mobile-none">
               <button type="button" class="btn btn-primary btn-search" data-part="3"> Search </button>
             </div>
           </div>
@@ -196,20 +207,24 @@
       </div>
 
       <div class="col-md-3 col-6" align="center">
-        <p class="enter-username">Enter Instagram username and tap Enter!</p>
+        <p class="enter-username mobile-none">Enter Instagram username and tap Enter!</p>
         <form>
           @csrf
           <div class="form-group row search-bar">
-            <div class="col-md-9 col-12">
+            <div class="col-md-9 col-12 pl-none">
               <input id="keywords4" class="form-control" name="search" placeholder="username" value="{{$username4}}">
             </div>
             <div class="col-md-3 col-12 pl-0">
-              <button type="button" class="btn btn-primary btn-search" data-part="4"> Search </button>
+              <button type="button" class="btn btn-primary btn-search mobile-none" data-part="4"> Search </button>
             </div>
           </div>
         </form> 
       </div>
     @endif
+  </div>
+
+  <div class="col-12 pc-none search-bar mt-3" align="center">
+    <button type="button" class="btn btn-primary btn-search"> Search </button>
   </div>
 
   <div class="row justify-content-center search-content" id="content-akun">

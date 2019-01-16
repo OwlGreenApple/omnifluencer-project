@@ -1,61 +1,74 @@
 <?php use App\Helpers\Helper; 
 $count= count($accounts);
+
+$col = 1;
 ?>
 
 @foreach($accounts as $account)
   <div class="col-md-3 col-6 div-progress" align="center">
-    <img src="{{$account->prof_pic}}" class="" >
-    <br>
-    <p class="p1"><?php echo '@'.$account->username ?></p>
-    <h5 class="username">{{$account->username}}</h5>
+    &nbsp
+    <div class="akun-{{$col}}">
+      <img src="{{$account->prof_pic}}">
 
-    <div class="names mb-4">
-      <div class="progress blue">
-        <span class="progress-left">
-          <span class="progress-bar"></span>
-        </span>
-        <span class="progress-right">
-          <span class="progress-bar"></span>
-        </span>
-        <div class="progress-value">
-          <span class="counter">
-            <?php echo round($account->eng_rate*100,2) ?>
-          </span>% <br>
-          Engagement Rate
+      <div class="btn-delete" data-col="{{$col}}">
+        <i class="icon ion-md-close"></i>  
+      </div>
+
+      <br>
+      <p class="p1"><?php echo '@'.$account->username ?></p>
+      <h5 class="username">{{$account->username}}</h5>
+
+      <div class="names mb-4">
+        <div class="progress blue">
+          <span class="progress-left">
+            <span class="progress-bar"></span>
+          </span>
+          <span class="progress-right">
+            <span class="progress-bar"></span>
+          </span>
+          <div class="progress-value">
+            <span class="counter">
+              <?php echo round($account->eng_rate*100,2) ?>
+            </span>% <br>
+            Engagement Rate
+          </div>
         </div>
       </div>
-    </div>
 
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_post,2); ?></b>
-    </h4>
-    <h5>Post</h5>
-    <br>
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_followers,2); ?></b>
-    </h4>
-    <h5>Followers</h5>
-    <br>
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_following,2); ?></b>
-    </h4>
-    <h5>Following</h5>
-    <br>
-    <h4>
-      <b>{{ date("M d Y", strtotime($account->lastpost))  }}</b>
-    </h4>
-    <h5>Last Post</h5>
-    <br>
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_likes,2); ?></b>
-    </h4>
-    <h5>Avg Like Per Post</h5>
-    <br>
-    <h4>
-      <b><?php echo Helper::abbreviate_number($account->jml_comments,2); ?></b>
-    </h4>
-    <h5>Avg Comment Per Post</h5>
+      <h4>
+        <b><?php echo Helper::abbreviate_number($account->jml_post,2); ?></b>
+      </h4>
+      <h5>Post</h5>
+      <br>
+      <h4>
+        <b><?php echo Helper::abbreviate_number($account->jml_followers,2); ?></b>
+      </h4>
+      <h5>Followers</h5>
+      <br>
+      <h4>
+        <b><?php echo Helper::abbreviate_number($account->jml_following,2); ?></b>
+      </h4>
+      <h5>Following</h5>
+      <br>
+      <h4>
+        <b>{{ date("M d Y", strtotime($account->lastpost))  }}</b>
+      </h4>
+      <h5>Last Post</h5>
+      <br>
+      <h4>
+        <b><?php echo Helper::abbreviate_number($account->jml_likes,2); ?></b>
+      </h4>
+      <h5>Avg Like Per Post</h5>
+      <br>
+      <h4>
+        <b><?php echo Helper::abbreviate_number($account->jml_comments,2); ?></b>
+      </h4>
+      <h5>Avg Comment Per Post</h5>
+    </div>
   </div>
+
+  <?php $col++; ?>
+  
 @endforeach
 
 @if(Auth::user()->membership=='pro')

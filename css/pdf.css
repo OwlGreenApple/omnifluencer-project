@@ -13,10 +13,10 @@
   .info { 
     background-color: #fff; 
     padding-top: 100px;
-    padding-bottom:50px;
+    padding-bottom:100px;
   }
 
-  .logo { padding-top: 40px; padding-bottom: 80px; }
+  .logo { padding-top: 90px; padding-bottom: 100px; }
 
   #bg-page { position: fixed; z-index:-20;}
 
@@ -29,7 +29,7 @@
 
   .profpic { 
     position: absolute; 
-    top: 130px; 
+    top: 180px; 
     left: 400px; 
     max-width: 180px;
     border-radius: 50%;

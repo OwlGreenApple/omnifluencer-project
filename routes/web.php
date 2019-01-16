@@ -136,4 +136,9 @@ Route::group(['middleware' => ['web','auth','admin']], function()
   Route::get('/list-order/load-order','OrderController@load_list_order');
   Route::get('/list-order/confirm','OrderController@confirm_order');
 
+  //List User
+  Route::get('/list-user','UserController@index');
+  Route::get('/list-user/load-user','UserController@load_user');
+  Route::get('/list-user/point-log','UserController@point_log');
+  Route::get('/list-user/referral-log','UserController@referral_log');
 });
