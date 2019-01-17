@@ -2,10 +2,15 @@
 
 @section('content')
 <script type="text/javascript">
-  var currentPage = '';
+  var table;
 
   $(document).ready(function() {
-    //function saat klik pagination
+    table = $('#myTable').DataTable({
+      destroy: true,
+      "order": [],
+    });
+    $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
+
     refresh_page();
 
     $('.formatted-date').datepicker({
@@ -14,13 +19,10 @@
   });
 
   function refresh_page(){
-    if(currentPage==''){
-      currentPage = "<?php echo url('/list-order/load-order') ?>";
-    } 
-
+    table.destroy();
     $.ajax({
       type : 'GET',
-      url : currentPage,
+      url : "<?php echo url('/list-order/load-order') ?>",
       dataType: 'text',
       beforeSend: function()
       {
@@ -33,7 +35,12 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        $('#pager').html(data.pager);
+        
+        table = $('#myTable').DataTable({
+                destroy: true,
+                "order": [],
+            });
+
       }
     });
   }
@@ -121,7 +128,7 @@
       <br>  
 
       <form>
-        <table class="table">
+        <table class="table" id="myTable">
           <thead align="center">
             <th class="header" action="no_order">
               No Order

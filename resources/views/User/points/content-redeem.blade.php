@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3" id="pro">
+  <div class="col-md-3 col-6" id="pro">
     <div class="card">
       <div class="card-body card-point">
         <a href="{{url('points/1')}}">
@@ -18,7 +18,7 @@
     </div>
   </div>    
 
-  <div class="col-md-3">
+  <div class="col-md-3 col-6">
     <div class="card">
       <div class="card-body card-point">
         <a href="{{url('points/2')}}">
@@ -37,7 +37,7 @@
     </div>
   </div> 
   
-  <!--<div class="col-md-3">
+  <!--<div class="col-md-3 col-6">
     <div class="card">
       <div class="card-body card-point">
         <a href="{{url('points/3')}}">
@@ -56,7 +56,7 @@
     </div>
   </div>-->
 
-  <!--<div class="col-md-3">
+  <!--<div class="col-md-3 col-6">
     <div class="card">
       <div class="card-body card-point">
         <a href="{{url('points/4')}}">

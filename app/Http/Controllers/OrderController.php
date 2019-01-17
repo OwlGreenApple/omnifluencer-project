@@ -120,12 +120,12 @@ class OrderController extends Controller
     $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id')  
                 ->select('orders.*','users.email')
                 ->orderBy('created_at','descend')
-                ->paginate(15);
+                ->get();
 
     $arr['view'] = (string) view('admin.list-order.content')
                       ->with('orders',$orders);
-    $arr['pager'] = (string) view('admin.list-order.pagination')
-                      ->with('orders',$orders); 
+    /*$arr['pager'] = (string) view('admin.list-order.pagination')
+                      ->with('orders',$orders); */
 
     return $arr;
   }

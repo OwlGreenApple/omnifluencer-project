@@ -278,7 +278,7 @@ class AccountController extends Controller
     return $arr;
   }
 
-  public function print_pdf($id){
+  public function print_pdf($id,$type){
 
     if(Auth::user()->membership=='free'){
       return abort(403);
@@ -294,11 +294,22 @@ class AccountController extends Controller
       'account' => $account,   
     );
 
-    $pdf = PDF::loadView('user.pdf-profile', $data)
+    if($type=='plain'){
+      $pdf = PDF::loadView('user.pdf-profile-plain', $data)
+            ->setPaper('a4')
+            ->setOrientation('landscape')
             ->setOption('margin-bottom', '0mm')
             ->setOption('margin-top', '0mm')
             ->setOption('margin-right', '0mm')
             ->setOption('margin-left', '0mm');
+    } else {
+      $pdf = PDF::loadView('user.pdf-profile', $data)
+            ->setPaper('a4')
+            ->setOption('margin-bottom', '0mm')
+            ->setOption('margin-top', '0mm')
+            ->setOption('margin-right', '0mm')
+            ->setOption('margin-left', '0mm');
+    }
 
     //return $pdf->download('omnifluencer.pdf');
     return $pdf->stream();
@@ -469,7 +480,6 @@ class AccountController extends Controller
   }
 
   public function print_pdf_bulk(Request $request){
-
     if(Auth::user()->membership=='free' or Auth::user()->membership=='pro'){
       return abort(403);
     }
@@ -487,12 +497,23 @@ class AccountController extends Controller
       'account' => $account,   
     );
 
-    $pdf = PDF::loadView('user.pdf-profile', $data)
-                  ->setOption('margin-bottom', '0mm')
-                  ->setOption('margin-top', '0mm')
-                  ->setOption('margin-right', '0mm')
-                  ->setOption('margin-left', '0mm');
-
+    if($request->type=='plain'){
+      $pdf = PDF::loadView('user.pdf-profile-plain', $data)
+            ->setPaper('a4')
+            ->setOrientation('landscape')
+            ->setOption('margin-bottom', '0mm')
+            ->setOption('margin-top', '0mm')
+            ->setOption('margin-right', '0mm')
+            ->setOption('margin-left', '0mm');
+    } else {
+      $pdf = PDF::loadView('user.pdf-profile', $data)
+            ->setPaper('a4')
+            ->setOption('margin-bottom', '0mm')
+            ->setOption('margin-top', '0mm')
+            ->setOption('margin-right', '0mm')
+            ->setOption('margin-left', '0mm');
+    }
+    
     //return $pdf->download('omnifluencer.pdf');
     return $pdf->stream();
   }

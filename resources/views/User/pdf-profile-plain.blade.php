@@ -7,204 +7,230 @@
         foreach ($account as $acc) {
 ?>
   <div class="page">
-    <div id="bg-page">
-      <img src="{{asset('design/new-bg.jpg')}}">
-    </div>
+    @if(Auth::user()->logo==null)
+      <div class="col-xs-12 logo" align="center">
+        <img src="{{asset('design/logobrand.png')}}" class="logouser">
+      </div>
+    @else 
+      <div class="col-xs-12 logo" align="center">
+        <img src="{{asset('design/logodummy.png')}}" class="logouser">
+      </div>
+    @endif
 
-    <div class="col-xs-12 logo" align="center">
-      <img src="{{asset('design/logobrand.png')}}">
-    </div>
     <br>
 
-    <div class="col-xs-12" align="center">
-      <img class="profpic" src="{{$acc->prof_pic}}">
-      <br>
-    </div>
-    
-    <div class="col-xs-12 info" align="center">
-      <span class="saved-on">
-        saved on : {{ date("d F Y") }}
-      </span>
-      <span class="username">
-        <?php echo '@'.$acc->username ?>
-      </span> <br>
-      <span class="name">
-        {{$acc->username}}
-      </span> <br>
-      
-      <div style="margin-top:50px; margin-bottom: 50px;">
-        <div class="col-xs-6 inline engrate">
-          <img class="engrate-circle" src="{{asset('design/engrate-circle.png')}}" style="width: 100%;">
-          <div class="engrate-txt">
-            <span class="info-value">
-              <?php $engrate = $acc->eng_rate*100 ?>
-              <b>{{round($engrate,2)}}</b>%
-            </span><br>
-            <span class="info-label">Engagement<br>Rate</span>
-          </div>
-        </div>
-
-        <div class="col-xs-6 inline engrate">
-          <div class="engrate-txt">
-            <span class="info-value">
-              <b>
-                <?php echo Helper::abbreviate_number(round($acc->eng_rate*$acc->jml_followers),2) ?>  
-              </b>
-            </span><br>
-            <span class="info-label">
-              Total Influenced
-            </span>
-          </div>
-        </div>
+    <div class="inline col-akun" align="center">
+      <div class="col-xs-12">
+        <img class="profpic-plain" src="{{$acc->prof_pic}}">
+        <br>
       </div>
 
-      <div>
-        <div class="col-xs-4 info-box inline">
-          <span class="info-value">
-            <b><?php echo Helper::abbreviate_number($acc->jml_post,2); ?></b>
-          </span><br>
-          <span class="info-label">Total Posts</span>
-        </div>
-
-        <div class="col-xs-4 info-box inline">
-          <span class="info-value">
-            <b><?php echo Helper::abbreviate_number($acc->jml_followers,2); ?></b>
-          </span><br>
-          <span class="info-label">Followers</span>
-        </div>
-
-        <div class="col-xs-4 info-box inline">
-          <span class="info-value">
-            <b><?php echo Helper::abbreviate_number($acc->jml_following,2); ?></b>
-          </span><br>
-          <span class="info-label">Following</span>
-        </div>
+      <div class="div-username" align="center">
+        <span class="username-plain">
+          <?php echo '@'.$acc->username ?>
+        </span> <br>
+        <span class="name">
+          {{$acc->username}}
+        </span> <br>
       </div>
 
-      <div>
-        <div class="col-xs-4 info-box inline">
-          <span class="info-value">
-            <b>{{ date("M d Y", strtotime($acc->lastpost))  }}</b>
-          </span><br>
-          <span class="info-label">Last Post</span>
-        </div>
-
-        <div class="col-xs-4 info-box inline">
-          <span class="info-value">
-            <b><?php echo Helper::abbreviate_number($acc->jml_likes,2); ?></b>
-          </span><br>
-          <span class="info-label">Avg Like Per Post</span>
-        </div>
-
-        <div class="col-xs-4 info-box inline">
-          <span class="info-value">
-            <b><?php echo Helper::abbreviate_number($acc->jml_comments,2); ?></b>
-          </span><br>
-          <span class="info-label">
-            Avg Comment Per Post
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-<?php } 
-    } else { ?>
-  <div id="bg-page">
-    <img src="{{asset('design/new-bg.jpg')}}">
-  </div>
-
-  <div class="col-xs-12 logo" align="center">
-    <img src="{{asset('design/logobrand.png')}}">
-  </div>
-  <br>
-
-  <div class="col-xs-12" align="center">
-    <img class="profpic" src="{{$account->prof_pic}}">
-    <br>
-  </div>
-  <div class="col-xs-12 info" align="center">
-    <span class="saved-on">
-      saved on : {{ date("d F Y") }}
-    </span>
-    <span class="username">
-      <?php echo '@'.$account->username ?>
-    </span> <br>
-    <span class="name">
-      {{$account->username}}
-    </span> <br>
-    
-    <div style="margin-top:50px; margin-bottom: 50px;">
-      <div class="col-xs-6 inline engrate">
+      <div class="col-xs-6 inline engrate" align="center">
         <img class="engrate-circle" src="{{asset('design/engrate-circle.png')}}" style="width: 100%;">
         <div class="engrate-txt">
           <span class="info-value">
-            <?php $engrate = $account->eng_rate*100 ?>
+            <?php $engrate = $acc->eng_rate*100 ?>
             <b>{{round($engrate,2)}}</b>%
           </span><br>
-          <span class="info-label">Engagement<br>Rate</span>
-        </div>
-      </div>
-
-      <div class="col-xs-6 inline engrate">
-        <div class="engrate-txt">
-          <span class="info-value">
-            <b>
-              <?php echo Helper::abbreviate_number(round($account->eng_rate*$account->jml_followers),2) ?>  
-            </b>
-          </span><br>
           <span class="info-label">
-            Total Influenced
+            Engagement<br>Rate
           </span>
         </div>
       </div>
     </div>
 
-    <div>
-      <div class="col-xs-4 info-box inline">
-        <span class="info-value">
-          <b><?php echo Helper::abbreviate_number($account->jml_post,2); ?></b>
+    <div class="inline col-info" align="center">
+      <div class="col-xs-6 div-influenced" align="center">  
+        <span class="info-value-plain">
+          <b>
+            <?php echo Helper::abbreviate_number(round($acc->eng_rate*$acc->jml_followers),2) ?>  
+          </b>
         </span><br>
-        <span class="info-label">Total Posts</span>
+        <span class="info-label-plain">
+          Total Influenced
+        </span>  
       </div>
 
-      <div class="col-xs-4 info-box inline">
-        <span class="info-value">
-          <b><?php echo Helper::abbreviate_number($account->jml_followers,2); ?></b>
-        </span><br>
-        <span class="info-label">Followers</span>
+      <div class="info-1">
+        <div class="col-xs-4 infobox-plain inline" align="center">
+          <span class="info-value-plain">
+            <b><?php echo Helper::abbreviate_number($acc->jml_post,2); ?></b>
+          </span><br>
+          <span class="info-labelsm-plain">Total Posts</span>
+        </div>
+
+        <div class="col-xs-4 infobox-plain inline" align="center">
+          <span class="info-value-plain">
+            <b><?php echo Helper::abbreviate_number($acc->jml_followers,2); ?></b>
+          </span><br>
+          <span class="info-labelsm-plain">Followers</span>
+        </div>
+
+        <div class="col-xs-4 infobox-plain inline" align="center">
+          <span class="info-value-plain">
+            <b><?php echo Helper::abbreviate_number($acc->jml_following,2); ?></b>
+          </span><br>
+          <span class="info-labelsm-plain">Following</span>
+        </div>  
       </div>
 
-      <div class="col-xs-4 info-box inline">
-        <span class="info-value">
-          <b><?php echo Helper::abbreviate_number($account->jml_following,2); ?></b>
-        </span><br>
-        <span class="info-label">Following</span>
+      <div>
+        <div class="col-xs-4 infobox-plain inline" align="center">
+          <span class="info-value-plain">
+            <b><?php echo Helper::abbreviate_number($acc->jml_likes,2); ?></b>
+          </span><br>
+          <span class="info-labelsm-plain">
+            Avg Like<br>Per Post
+          </span>
+        </div>
+
+        <div class="col-xs-4 infobox-plain inline" align="center">
+          <span class="info-value-plain">
+            <b><?php echo Helper::abbreviate_number($acc->jml_comments,2); ?></b>
+          </span><br>
+          <span class="info-labelsm-plain">
+            Avg Comment<br>Per Post
+          </span>
+        </div>
+
+        <div class="col-xs-4 infobox-plain inline" align="center">
+          <span class="info-value-plain">
+            <b>{{ date("M d 'y", strtotime($acc->lastpost))  }}</b>
+          </span><br>
+          <span class="info-labelsm-plain">Last Post</span>
+        </div> 
       </div>
     </div>
 
-    <div>
-      <div class="col-xs-4 info-box inline">
-        <span class="info-value">
-          <b>{{ date("M d Y", strtotime($account->lastpost))  }}</b>
-        </span><br>
-        <span class="info-label">Last Post</span>
-      </div>
+    @if(Auth::user()->logo!=null)
+      <img src="{{asset('design/logobrand.png')}}" class="logo-footer" style="bottom:-230px">
+    @endif  
 
-      <div class="col-xs-4 info-box inline">
-        <span class="info-value">
-          <b><?php echo Helper::abbreviate_number($account->jml_likes,2); ?></b>
-        </span><br>
-        <span class="info-label">Avg Like Per Post</span>
-      </div>
+    <span class="saved-on-footer" style="bottom:-230px">
+      {{url('/')}} | Saved on {{ date("d F Y") }}
+    </span>
+  </div>
+<?php } 
+    } else { ?>
+  
+  @if(Auth::user()->logo==null)
+    <div class="col-xs-12 logo" align="center">
+      <img src="{{asset('design/logobrand.png')}}" class="logouser">
+    </div>
+  @else 
+    <div class="col-xs-12 logo" align="center">
+      <img src="{{asset('design/logodummy.png')}}" class="logouser">
+    </div>
+  @endif
 
-      <div class="col-xs-4 info-box inline">
+  <br>
+
+  <div class="inline col-akun" align="center">
+    <div class="col-xs-12">
+      <img class="profpic-plain" src="{{$account->prof_pic}}">
+      <br>
+    </div>
+
+    <div class="div-username" align="center">
+      <span class="username-plain">
+        <?php echo '@'.$account->username ?>
+      </span> <br>
+      <span class="name">
+        {{$account->username}}
+      </span> <br>
+    </div>
+
+    <div class="col-xs-6 inline engrate" align="center">
+      <img class="engrate-circle" src="{{asset('design/engrate-circle.png')}}" style="width: 100%;">
+      <div class="engrate-txt">
         <span class="info-value">
-          <b><?php echo Helper::abbreviate_number($account->jml_comments,2); ?></b>
+          <?php $engrate = $account->eng_rate*100 ?>
+          <b>{{round($engrate,2)}}</b>%
         </span><br>
         <span class="info-label">
-          Avg Comment Per Post
+          Engagement<br>Rate
         </span>
       </div>
     </div>
   </div>
+
+  <div class="inline col-info" align="center">
+    <div class="col-xs-6 div-influenced" align="center">  
+      <span class="info-value-plain">
+        <b>
+          <?php echo Helper::abbreviate_number(round($account->eng_rate*$account->jml_followers),2) ?>  
+        </b>
+      </span><br>
+      <span class="info-label-plain">
+        Total Influenced
+      </span>  
+    </div>
+
+    <div class="info-1">
+      <div class="col-xs-4 infobox-plain inline" align="center">
+        <span class="info-value-plain">
+          <b><?php echo Helper::abbreviate_number($account->jml_post,2); ?></b>
+        </span><br>
+        <span class="info-labelsm-plain">Total Posts</span>
+      </div>
+
+      <div class="col-xs-4 infobox-plain inline" align="center">
+        <span class="info-value-plain">
+          <b><?php echo Helper::abbreviate_number($account->jml_followers,2); ?></b>
+        </span><br>
+        <span class="info-labelsm-plain">Followers</span>
+      </div>
+
+      <div class="col-xs-4 infobox-plain inline" align="center">
+        <span class="info-value-plain">
+          <b><?php echo Helper::abbreviate_number($account->jml_following,2); ?></b>
+        </span><br>
+        <span class="info-labelsm-plain">Following</span>
+      </div>  
+    </div>
+
+    <div>
+      <div class="col-xs-4 infobox-plain inline" align="center">
+        <span class="info-value-plain">
+          <b><?php echo Helper::abbreviate_number($account->jml_likes,2); ?></b>
+        </span><br>
+        <span class="info-labelsm-plain">
+          Avg Like<br>Per Post
+        </span>
+      </div>
+
+      <div class="col-xs-4 infobox-plain inline" align="center">
+        <span class="info-value-plain">
+          <b><?php echo Helper::abbreviate_number($account->jml_comments,2); ?></b>
+        </span><br>
+        <span class="info-labelsm-plain">
+          Avg Comment<br>Per Post
+        </span>
+      </div>
+
+      <div class="col-xs-4 infobox-plain inline" align="center">
+        <span class="info-value-plain">
+          <b>{{ date("M d 'y", strtotime($account->lastpost))  }}</b>
+        </span><br>
+        <span class="info-labelsm-plain">Last Post</span>
+      </div> 
+    </div>
+  </div>
+
+  @if(Auth::user()->logo!=null)
+    <img src="{{asset('design/logobrand.png')}}" class="logo-footer">
+  @endif  
+
+  <span class="saved-on-footer">
+    {{url('/')}} | Saved on {{ date("d F Y") }}
+  </span>
 <?php } ?>

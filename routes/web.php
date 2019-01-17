@@ -112,7 +112,7 @@ Route::group(['middleware' => ['web','auth']], function()
 
   //Download PDF CSV and Send To
   Route::get('/send_email','AccountController@send_email');
-  Route::get('/print-pdf/{id}','AccountController@print_pdf');
+  Route::get('/print-pdf/{id}/{type}','AccountController@print_pdf');
   Route::get('/print-csv/{id}','AccountController@print_csv');
   Route::get('/send-email-compare','CompareController@send_email');
   Route::get('/print-pdf-compare/{id}','CompareController@print_pdf');

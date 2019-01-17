@@ -375,11 +375,26 @@
             <i class="fas fa-file-pdf"></i>
             PDF Download 
 
-            <a id="link-pdf" href="#" target="_blank">
-              <button class="btn btn-primary float-right"> 
-                Download
-              </button>
-            </a>
+            <form class="row" id="formPDF">
+              <div class="col-md-9 col-8">
+                <select name="type" class="form-control">
+                  <option value="colorful">
+                    Colorful
+                  </option>
+                  <option value="plain">
+                    Plain
+                  </option>
+                </select>  
+              </div>
+              
+              <div class="col-md-3 col-4">
+                <a id="link-pdf" href="#" target="_blank">
+                  <button type="button" class="btn btn-primary float-right"> 
+                    Download
+                  </button>
+                </a>  
+              </div>
+            </form>
           </div>
 
           <div class="send-csv mb-4" style="display: none;">
@@ -438,7 +453,7 @@
     $('#id-profile').val(id);
 
     if(type=='pdf'){
-      $("#link-pdf").prop("href", "<?php echo url('print-pdf')?>"+'/'+id);
+      $("#link-pdf").prop("href", "<?php echo url('print-pdf')?>"+'/'+id+'/colorful');
       $('.send-pdf').show();
       $('.send-csv').hide();
     } else {
@@ -473,6 +488,17 @@
     $("#input-group").focus();
   });
 
+  $( "body" ).on( "change", "select", function()
+  {
+    var text = $("#link-pdf").attr('href');
+    var parts = text.split('/');
+    var loc = parts.pop();
+    var new_text = parts.join('/');
+
+    $("#link-pdf").prop("href", new_text+'/'+ this.value);
+    //alert( this.value );
+  });
+  
   $(document).on('click', '.checkAll', function (e) {
     $('input:checkbox').not(this).prop('checked', this.checked);
   });
