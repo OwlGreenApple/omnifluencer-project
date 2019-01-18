@@ -35,7 +35,6 @@
         var data = jQuery.parseJSON(result);
 
         if(data.status == 'success'){
-          $('#pesan').hide();
           $('#content-akun').html(data.view);
           
           $('.counter').counterUp({
@@ -51,10 +50,8 @@
           if(data.message=='kuota habis'){
             $('#info-kuota').modal('show');
           } else {
-            $('#pesan').html(data.message);
-            $('#pesan').removeClass('alert-success');
-            $('#pesan').addClass('alert-warning');
-            $('#pesan').show();
+            $('#message').html(data.message);
+            $('#modal-pesan').modal('show');
           }
         }
       }
@@ -90,9 +87,8 @@
         var data = jQuery.parseJSON(result);
 
         if(data.status == 'success'){
-          $('#pesan').hide();
           $('#content-akun').html(data.view);
-          $("#link-download").prop("href", "<?php echo url('print-pdf-compare')?>"+'/'+data.id);
+          $("#link-download").prop("href", "<?php echo url('print-pdf-compare')?>"+'/'+data.id+'/colorful');
 
           $('.counter').counterUp({
             delay: 10,
@@ -108,10 +104,8 @@
           if(data.message=='kuota habis'){
             $('#info-kuota').modal('show');
           } else {
-            $('#pesan').html(data.message);
-            $('#pesan').removeClass('alert-success');
-            $('#pesan').addClass('alert-warning');
-            $('#pesan').show();
+            $('#message').html(data.message);
+            $('#modal-pesan').modal('show');
           }
         }
       }
@@ -142,7 +136,7 @@
 
 <div class="container">
 
-  <div class="alert" id="pesan"></div>
+  <!--<div class="alert" id="pesan"></div>-->
 
   <div class="row" align="center">
     <div class="col-md-2">

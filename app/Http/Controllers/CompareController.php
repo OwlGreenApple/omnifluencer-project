@@ -262,7 +262,7 @@ class CompareController extends Controller
       return $arr;
     }
 
-  public function print_pdf($id){
+  public function print_pdf($id,$type){
 
     if(Auth::user()->membership=='free'){
       return abort(403);
@@ -284,12 +284,23 @@ class CompareController extends Controller
             )
     );
 
-    $pdf = PDF::loadView('user.pdf-compare',$data)
+    if($type=='plain'){
+      $pdf = PDF::loadView('user.pdf-compare-plain',$data)
+                ->setPaper('a4')
                 ->setOrientation('landscape')
                 ->setOption('margin-bottom', '0mm')
                 ->setOption('margin-top', '0mm')
                 ->setOption('margin-right', '0mm')
                 ->setOption('margin-left', '0mm');
+    } else {
+      $pdf = PDF::loadView('user.pdf-compare',$data)
+                ->setPaper('a4')
+                ->setOrientation('landscape')
+                ->setOption('margin-bottom', '0mm')
+                ->setOption('margin-top', '0mm')
+                ->setOption('margin-right', '0mm')
+                ->setOption('margin-left', '0mm');
+    }
 
     //return $pdf->download('omnifluencer.pdf');
     return $pdf->stream();
@@ -340,7 +351,7 @@ class CompareController extends Controller
             $sheet->cell($cell.'2', $username); 
             $sheet->cell($cell.'3', $account->eng_rate*100); 
 
-            $influence = round($account->eng_rate*$account->jml_followers);
+            $influence = round($account->total_influenced);
             $sheet->cell($cell.'4', $influence); 
 
             $sheet->cell($cell.'5', $account->jml_post);

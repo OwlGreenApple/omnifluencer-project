@@ -7,13 +7,14 @@
     border:3px solid #1372d4;
     padding:30px;
     margin: 10px;
+    width: 200px;
     background-color: #F8F8F8;
   }  
 
   .info { 
     background-color: #fff; 
-    padding-top: 100px;
-    padding-bottom:100px;
+    padding-top: 130px;
+    padding-bottom:180px;
   }
 
   .logo { 
@@ -46,8 +47,20 @@
     font-size: 30px;
   }
 
+  .info-value.date{
+    font-size: 25px;
+  }
+
+  .info-value.influence{
+    font-size: 40px;
+  }
+
   .info-label {
     font-size: 20px;
+  }
+
+  .info-label.influence {
+    font-size: 30px;
   }
 
   .username {
@@ -86,17 +99,21 @@
   /* Compare */
   .info-compare {
     background-color: #fff; 
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 60px;
-    margin-top: 100px;
+    margin-top: 50px;
   }
 
-  .logo-rotate { position:absolute; top:550px; left: 20px;}
+  .logo-rotate { 
+    padding-top:20px; 
+  }
 
   .profpic-compare {
     position: absolute; 
-    top: -150px;
-    max-width: 180px;
+    top: -100px;
+    left: 50%;
+    margin-left: -70px;
+    max-width: 125px;
     border-radius: 50%;
   }
 
@@ -134,16 +151,9 @@
     font-size: 23px !important;
   }
 
-  .saved-on-compare { 
-    position: absolute; 
-    top: 950px; 
-    left: 30px; 
-    font-size: 15px;
-  }
-
   /* Plain */
   .logouser {
-    width:300px;
+    max-height: 90px;
     margin-top: -50px;
   }
 
@@ -167,12 +177,20 @@
     width: 180px;
   }
 
+  .logo-footer.profile {
+    bottom:100px;
+  }
+
   .saved-on-footer { 
     position: absolute;
     bottom:20px;
     right: 20px; 
     font-size: 15px;
     color: #626262;
+  }
+
+  .saved-on-footer.profile {
+    bottom:100px;
   }
 
   .info-value-plain { 

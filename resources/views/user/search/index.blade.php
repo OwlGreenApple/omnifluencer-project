@@ -65,7 +65,6 @@
         var data = jQuery.parseJSON(result);
 
         if(data.status == 'success'){
-          $('#pesan').hide();
           $('.content-akun').html(data.view);
           $('.counter').counterUp({
             delay: 10,
@@ -98,10 +97,8 @@
           if(data.message=='kuota habis'){
             $('#info-kuota').modal('show');
           } else {
-            $('#pesan').html(data.message);
-            $('#pesan').removeClass('alert-success');
-            $('#pesan').addClass('alert-warning');
-            $('#pesan').show();
+            $('#message').html(data.message);
+            $('#modal-pesan').modal('show');
           }
         }
       }
@@ -195,10 +192,8 @@
           // refresh_page();
           window.location.href = "<?php echo url('compare'); ?>/"+data.message;
         } else {
-          $('#pesan').html(data.message);
-          $('#pesan').removeClass('alert-success');
-          $('#pesan').addClass('alert-warning');
-          $('#pesan').show();
+          $('#message').html(data.message);
+          $('#modal-pesan').modal('show');
         }
       }
     });
@@ -240,7 +235,7 @@
 <section class="content">
   <div class="container">
     
-    <div id="pesan" class="alert"></div>
+    <!--<div id="pesan" class="alert"></div>-->
 
     <div class="row">
       <div class="col-12 col-md-6">

@@ -115,7 +115,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/print-pdf/{id}/{type}','AccountController@print_pdf');
   Route::get('/print-csv/{id}','AccountController@print_csv');
   Route::get('/send-email-compare','CompareController@send_email');
-  Route::get('/print-pdf-compare/{id}','CompareController@print_pdf');
+  Route::get('/print-pdf-compare/{id}/{type}','CompareController@print_pdf');
   Route::get('/print-csv-compare/{id}','CompareController@print_csv');
   Route::get('/print-pdf-bulk','AccountController@print_pdf_bulk');
   Route::get('/print-csv-bulk','AccountController@print_csv_bulk');
@@ -141,4 +141,9 @@ Route::group(['middleware' => ['web','auth','admin']], function()
   Route::get('/list-user/load-user','UserController@load_user');
   Route::get('/list-user/point-log','UserController@point_log');
   Route::get('/list-user/referral-log','UserController@referral_log');
+
+  //List Accounts
+  Route::get('/list-account','AccountController@index_account');
+  Route::get('/list-account/load-account','AccountController@load_account');
+  Route::get('/list-account/view-log','AccountController@view_account_log');
 });

@@ -115,7 +115,11 @@ class UpdateAccount extends Command
             $account->jml_likes = floor($ratalike);
             $account->jml_comments = floor($ratacomment);
             //$account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
-            $account->eng_rate = ($jmllike + $jmlcomment)/$account->jml_followers;
+
+            if($account->jml_followers>0){
+              $account->eng_rate = ($jmllike + $jmlcomment)/$account->jml_followers;
+              $account->total_influenced = $account->eng_rate*$account->jml_followers;
+            }
           
             var_dump('ratalike = '.floor($ratalike));
             var_dump('ratacomment = '.floor($ratacomment));
@@ -133,7 +137,12 @@ class UpdateAccount extends Command
           $accountlog->lastpost = $account->lastpost;
           $accountlog->jml_likes = $account->jml_likes;
           $accountlog->jml_comments = $account->jml_comments;
-          $accountlog->eng_rate = $account->eng_rate;
+
+          if($account->jml_followers>0){
+            $accountlog->eng_rate = $account->eng_rate;
+            $accountlog->total_influenced = $account->total_influenced;  
+          }
+          
           $accountlog->save();
         }
         sleep(0.1);

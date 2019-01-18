@@ -11,16 +11,21 @@
       <img src="{{asset('design/new-bg.jpg')}}">
     </div>
 
-    <div class="col-xs-12 logo" align="center">
-      <img src="{{asset('design/logobrand.png')}}">
-    </div>
-    <br>
+    @if(Auth::user()->logo==null)
+      <div class="col-xs-12 logo" align="center">
+        <img src="{{asset('design/logobrand.png')}}">
+      </div>
+    @else 
+      <div class="col-xs-12 logo" align="center">
+        <img src="{{asset('design/logodummy.png')}}" class="logouser">
+      </div>
+    @endif
 
     <div class="col-xs-12" align="center">
       <img class="profpic" src="{{$acc->prof_pic}}">
       <br>
     </div>
-    
+
     <div class="col-xs-12 info" align="center">
       <span class="saved-on">
         saved on : {{ date("d F Y") }}
@@ -44,14 +49,14 @@
           </div>
         </div>
 
-        <div class="col-xs-6 inline engrate">
+        <div class="col-xs-6 inline engrate" style="width: 300px">
           <div class="engrate-txt">
-            <span class="info-value">
+            <span class="info-value influence">
               <b>
-                <?php echo Helper::abbreviate_number(round($acc->eng_rate*$acc->jml_followers),2) ?>  
+                <?php echo Helper::abbreviate_number(round($acc->total_influenced),2) ?>  
               </b>
             </span><br>
-            <span class="info-label">
+            <span class="info-label influence">
               Total Influenced
             </span>
           </div>
@@ -83,7 +88,7 @@
 
       <div>
         <div class="col-xs-4 info-box inline">
-          <span class="info-value">
+          <span class="info-value date">
             <b>{{ date("M d Y", strtotime($acc->lastpost))  }}</b>
           </span><br>
           <span class="info-label">Last Post</span>
@@ -106,6 +111,14 @@
         </div>
       </div>
     </div>
+
+    @if(Auth::user()->logo!=null)
+      <img src="{{asset('design/logobrand.png')}}" class="logo-footer profile" style="bottom:15px">
+    @endif 
+
+    <span class="saved-on-footer profile" style="bottom:15px">
+      {{url('/')}} | Saved on {{ date("d F Y") }}
+    </span>
   </div>
 <?php } 
     } else { ?>
@@ -113,15 +126,21 @@
     <img src="{{asset('design/new-bg.jpg')}}">
   </div>
 
-  <div class="col-xs-12 logo" align="center">
-    <img src="{{asset('design/logobrand.png')}}">
-  </div>
-  <br>
+  @if(Auth::user()->logo==null)
+    <div class="col-xs-12 logo" align="center">
+      <img src="{{asset('design/logobrand.png')}}">
+    </div>
+  @else 
+    <div class="col-xs-12 logo" align="center">
+      <img src="{{asset('design/logodummy.png')}}" class="logouser">
+    </div>
+  @endif
 
   <div class="col-xs-12" align="center">
     <img class="profpic" src="{{$account->prof_pic}}">
     <br>
   </div>
+
   <div class="col-xs-12 info" align="center">
     <span class="saved-on">
       saved on : {{ date("d F Y") }}
@@ -145,14 +164,14 @@
         </div>
       </div>
 
-      <div class="col-xs-6 inline engrate">
+      <div class="col-xs-6 inline engrate" style="width: 300px">
         <div class="engrate-txt">
-          <span class="info-value">
+          <span class="info-value influence">
             <b>
-              <?php echo Helper::abbreviate_number(round($account->eng_rate*$account->jml_followers),2) ?>  
+              <?php echo Helper::abbreviate_number(round($account->total_influenced),2) ?>  
             </b>
           </span><br>
-          <span class="info-label">
+          <span class="info-label influence">
             Total Influenced
           </span>
         </div>
@@ -184,7 +203,7 @@
 
     <div>
       <div class="col-xs-4 info-box inline">
-        <span class="info-value">
+        <span class="info-value date">
           <b>{{ date("M d Y", strtotime($account->lastpost))  }}</b>
         </span><br>
         <span class="info-label">Last Post</span>
@@ -207,4 +226,12 @@
       </div>
     </div>
   </div>
+
+  @if(Auth::user()->logo!=null)
+    <img src="{{asset('design/logobrand.png')}}" class="logo-footer profile">
+  @endif  
+
+  <span class="saved-on-footer profile">
+    {{url('/')}} | Saved on {{ date("d F Y") }}
+  </span>
 <?php } ?>

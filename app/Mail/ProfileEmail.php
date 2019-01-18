@@ -62,7 +62,7 @@ class ProfileEmail extends Mailable
             $sheet->cell('B3', 'Engagement Rate'); 
             $sheet->cell('C3', $account->eng_rate*100); 
 
-            $influence = round($account->eng_rate*$account->jml_followers);
+            $influence = round($account->total_influenced);
 
             $sheet->cell('B4', 'Total Influenced'); 
             $sheet->cell('C4', $influence);

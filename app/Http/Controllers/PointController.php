@@ -98,13 +98,12 @@ class PointController extends Controller
       $pointlog->user_id = Auth::user()->id;
       $pointlog->jml_point = $point;
       $pointlog->poin_before = Auth::user()->point;
+      $pointlog->poin_after = Auth::user()->point-$point;
+      $pointlog->keterangan = $keterangan;
+      $pointlog->save();
 
       $user->point = $user->point - $point;
       $user->save();
-
-      $pointlog->poin_after = Auth::user()->point;
-      $pointlog->keterangan = $keterangan;
-      $pointlog->save();
       
       $arr['status'] = 'success';
       $arr['message'] = 'Redeem point berhasil';

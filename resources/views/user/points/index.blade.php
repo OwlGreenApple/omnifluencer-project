@@ -125,13 +125,21 @@
               <h3>PRO MEMBER</h3>
             </div>-->
             <div class="card-body" align="center">
+              <?php  
+                $member = '';
+                if(Auth::user()->membership=='free'){
+                  $member = 'Pro';
+                } else if(Auth::user()->membership == 'pro'){
+                  $member = 'Premium';
+                }
+              ?>
               <p>
-                Upgrade to <b>Pro Membership?</b> <br>
+                Upgrade to <b>{{$member}} Membership?</b> <br>
                 Click button below
               </p>
               <button class="btn btn-primary btn-upgrade-poin" data-upgrade="pro">
                 <i class="fas fa-star"></i> 
-                Upgrade To Pro
+                Upgrade To {{$member}}
               </button>
                 <!--Importance <br> 
                 Design <br> 
@@ -143,16 +151,26 @@
         </div>
       </div>
 
-      <div class="card col-md-12">
+      <div class="card col-md-12 <?php if(Auth::user()->membership=='premium') echo 'd-none' ?>">
         <div class="card-body row">
           <div class="col-md-1" align="center">  
             <i class="fas fa-exclamation-circle icon-exclamation" style="font-size:30px;color:#FF8717;"></i>
           </div>
           <div class="col-md-11"> 
-            <h4><b>What is PRO MEMBER?</b></h4>  
-            * <b>PRO Member</b> dapat menampilkan seluruh history pencarian <br>  
-            * <b>PRO Member</b> dapat mengelompokkan ke dalam suatu grup dari hasil pencarian <br>  
-            * <b>PRO Member</b> mendapatkan file .PDF dan .CSV dari seluruh history pencarian 
+            <div class="<?php if(Auth::user()->membership=='pro') echo 'd-none' ?>">
+              <h4><b>What is PRO MEMBER?</b></h4>  
+              * <b>Pro Member</b> dapat menampilkan 25 history pencarian terakhir<br>  
+              * <b>Pro Member</b> dapat mengelompokkan ke dalam suatu grup dari hasil pencarian <br>  
+              * <b>Pro Member</b> dapat melakukan compare dari 2 hasil pencarian <br> 
+              <br>    
+            </div>
+            
+            <div class="<?php if(Auth::user()->membership=='free') echo 'd-none' ?>">
+              <h4><b>What is PREMIUM MEMBER?</b></h4>  
+              * <b>Premium Member</b> dapat menampilkan history pencarian tanpa batas<br>  
+              * <b>Premium Member</b> dapat melakukan Save & Send Influencers Report .PDF dan List .XLSX <br>  
+              * <b>Premium Member</b> dapat melakukan compare dari 4 hasil pencarian <br>   
+            </div>
           </div>
         </div>
       </div>

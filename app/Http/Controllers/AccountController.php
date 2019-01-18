@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Account;
+use App\AccountLog;
 use App\HistorySearch;
 use App\User;
 use App\Group;
@@ -66,7 +67,7 @@ class AccountController extends Controller
       $jmlcomment = 0;
             
       foreach ($arr_res2 as $arr) {
-        if($count>=6){
+        if($count>=20){
           break;
         } else {
           $jmllike = $jmllike + $arr["like_count"];
@@ -84,9 +85,29 @@ class AccountController extends Controller
       $account->lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
       $account->jml_likes = floor($ratalike);
       $account->jml_comments = floor($ratacomment);
-      $account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
+
+      if($account->jml_followers>0){
+        $account->eng_rate = ($jmllike + $jmlcomment)/$account->jml_followers;
+        $account->total_influenced = $account->eng_rate*$account->jml_followers;
+      }
     }
     $account->save();
+
+    $accountlog = new AccountLog;
+    $accountlog->account_id = $account->id;
+    $accountlog->jml_followers = $account->jml_followers;
+    $accountlog->jml_following = $account->jml_following;
+    $accountlog->jml_post = $account->jml_post;
+    $accountlog->lastpost = $account->lastpost;
+    $accountlog->jml_likes = $account->jml_likes;
+    $accountlog->jml_comments = $account->jml_comments;
+
+    if($account->jml_followers>0){
+      $accountlog->eng_rate = $account->eng_rate;
+      $accountlog->total_influenced = $account->total_influenced;
+    }
+
+    $accountlog->save();
 
     return $account;
   }
@@ -110,7 +131,7 @@ class AccountController extends Controller
           $account = $this->create_account($arr_res);
         } else {
           $arr['status'] = 'error';
-          $arr['message'] = '<b>Warning!</b> Username tidak ditemukan!';
+          $arr['message'] = 'Username tidak ditemukan!';
           return $arr;
         }
       }
@@ -337,7 +358,7 @@ class AccountController extends Controller
           $sheet->cell('B3', 'Engagement Rate'); 
           $sheet->cell('C3', $account->eng_rate*100); 
 
-          $influence = round($account->eng_rate*$account->jml_followers);
+          $influence = round($account->total_influenced);
 
           $sheet->cell('B4', 'Total Influenced'); 
           $sheet->cell('C4', $influence);
@@ -546,7 +567,7 @@ class AccountController extends Controller
             $sheet->cell('B3', 'Engagement Rate'); 
             $sheet->cell('C3', $account->eng_rate*100); 
 
-            $influence = round($account->eng_rate*$account->jml_followers);
+            $influence = round($account->total_influenced);
 
             $sheet->cell('B4', 'Total Influenced'); 
             $sheet->cell('C4', $influence);
@@ -590,6 +611,27 @@ class AccountController extends Controller
       return $validator->errors()->first();
     }
     
-    return "email subscribed";
+    return "Email subscribed";
+  }
+
+  public function index_account(){
+    return view('admin.list-account.index');
+  }
+
+  public function load_account(Request $request){
+    $accounts = Account::All();
+
+    $arr['view'] = (string) view('admin.list-account.content')->with('accounts',$accounts);
+
+    return $arr;
+  }
+
+  public function view_account_log(Request $request){
+    $logs = AccountLog::where('account_id',$request->id)
+              ->get();
+
+    $arr['view'] = (string) view('admin.list-account.content-log')->with('logs',$logs);
+    
+    return $arr;
   }
 }

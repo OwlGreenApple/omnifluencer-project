@@ -3,13 +3,6 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
 
-<style type="text/css">
- 
-</style>
-
-<div id="bg-page">
-  <img src="{{asset('design/new-bg.jpg')}}">
-</div>
 
 @if(Auth::user()->logo==null)
   <div class="col-xs-12 logo-rotate" align="center">

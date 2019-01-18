@@ -52,7 +52,7 @@
       <div class="col-xs-6 div-influenced" align="center">  
         <span class="info-value-plain">
           <b>
-            <?php echo Helper::abbreviate_number(round($acc->eng_rate*$acc->jml_followers),2) ?>  
+            <?php echo Helper::abbreviate_number(round($acc->total_influenced),2) ?>  
           </b>
         </span><br>
         <span class="info-label-plain">
@@ -167,7 +167,7 @@
     <div class="col-xs-6 div-influenced" align="center">  
       <span class="info-value-plain">
         <b>
-          <?php echo Helper::abbreviate_number(round($account->eng_rate*$account->jml_followers),2) ?>  
+          <?php echo Helper::abbreviate_number(round($account->total_influenced),2) ?>  
         </b>
       </span><br>
       <span class="info-label-plain">

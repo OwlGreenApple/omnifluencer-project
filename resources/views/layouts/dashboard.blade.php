@@ -188,7 +188,9 @@
                     <div class="col-md-8" align="left">
                       <b>{{Auth::user()->name}}</b><br>
                       {{Auth::user()->point}} Points<br>
-                      Change Password
+                      <a class="menu-pass" href="{{url('change-password')}}">
+                        Change Password  
+                      </a>
                     </div>  
                   </div>   
                 </div>
@@ -331,6 +333,15 @@
             <a href="{{url('list-user')}}">
               <i class="fas fa-users icon-menu"></i>
               Users
+            </a>
+          </span>
+        </li>
+
+        <li class="<?php if(Request::is('list-account')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('list-account')}}">
+              <i class="fas fa-users icon-menu"></i>
+              Accounts
             </a>
           </span>
         </li>

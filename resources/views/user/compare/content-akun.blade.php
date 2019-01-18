@@ -36,10 +36,19 @@ $col = 1;
       </div>
 
       <h4>
+        <b>
+          <?php echo Helper::abbreviate_number(round($account->total_influenced),2) ?>    
+        </b>
+      </h4>
+      <h5>Total Influenced</h5>
+      <br>
+
+      <h4>
         <b><?php echo Helper::abbreviate_number($account->jml_post,2); ?></b>
       </h4>
       <h5>Post</h5>
       <br>
+
       <h4>
         <b><?php echo Helper::abbreviate_number($account->jml_followers,2); ?></b>
       </h4>

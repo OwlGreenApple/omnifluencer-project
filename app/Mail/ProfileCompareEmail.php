@@ -71,7 +71,7 @@ class ProfileCompareEmail extends Mailable
               $sheet->cell($cell.'2', $username); 
               $sheet->cell($cell.'3', $account->eng_rate*100); 
 
-              $influence = round($account->eng_rate*$account->jml_followers);
+              $influence = round($account->total_influenced);
               $sheet->cell($cell.'4', $influence); 
 
               $sheet->cell($cell.'5', $account->jml_post);

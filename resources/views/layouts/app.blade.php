@@ -182,7 +182,9 @@
                     <div class="col-md-8" align="left">
                       <b>{{Auth::user()->name}}</b><br>
                       {{Auth::user()->point}} Points<br>
-                      Change Password
+                      <a class="menu-pass" href="{{url('change-password')}}">
+                        Change Password  
+                      </a>
                     </div>  
                   </div>   
                 </div>
@@ -301,6 +303,31 @@
 
   </div>
 
+  <!-- Modal Pesan -->
+  <div class="modal fade" id="modal-pesan" role="dialog">
+    <div class="modal-dialog">
+      
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modaltitle">
+            Message
+          </h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body" id="message"></div>
+
+        <div class="modal-footer" align="center">
+          <button class="btn btn-primary" data-dismiss="modal">
+            OK
+          </button>
+        </div>
+      </div>
+        
+    </div>
+  </div>
+
 <script type="text/javascript">
   $( "body" ).on( "click", ".btn-signup", function() {
     window.location.href = "{{url('register')}}";
@@ -326,7 +353,9 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
 
-        alert(result);
+        $('#message').html(result);
+        $('#modal-pesan').modal('show');
+
         // var data = jQuery.parseJSON(result);
 
         // if(data.status == 'success'){

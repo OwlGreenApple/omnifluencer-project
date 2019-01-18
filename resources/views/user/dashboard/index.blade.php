@@ -39,10 +39,12 @@
         </div>
         
         <div class="col-md-4">
-          <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership=='free') echo 'd-block' ?>">
-            <i class="fas fa-star"></i> 
-            Upgrade To Pro
-          </button>
+          <a href="{{url('points')}}">
+            <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership=='free') echo 'd-block' ?>">
+              <i class="fas fa-star"></i> 
+              Upgrade To Pro
+            </button>
+          </a>
 
           <div class="card dashboard <?php if(Auth::user()->membership=='free') echo 'save-pdf' ?>">
             <div class="card-header pdf">
@@ -59,17 +61,19 @@
 
         <div class="col-md-4">
 
-          <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership!='premium') echo 'd-block' ?>">
-            <i class="fas fa-star"></i> 
-            <?php  
-              if(Auth::user()->membership=='free'){
-                echo 'Upgrade To Pro';
-              } else if(Auth::user()->membership=='pro'){
-                echo 'Upgrade To Premium';
-              }
-            ?>
-          </button>
-
+          <a href="{{url('points')}}">
+            <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership!='premium') echo 'd-block' ?>">
+              <i class="fas fa-star"></i> 
+              <?php  
+                if(Auth::user()->membership=='free'){
+                  echo 'Upgrade To Pro';
+                } else if(Auth::user()->membership=='pro'){
+                  echo 'Upgrade To Premium';
+                }
+              ?>
+            </button>  
+          </a>
+          
           <div class="card dashboard <?php if(Auth::user()->membership!='premium') echo 'save-csv' ?>">
             <div class="card-header csv">
               <h5>Total Save As Excel</h5> 

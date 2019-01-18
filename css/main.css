@@ -194,6 +194,14 @@ body {
   text-align: right;
 }
 
+a.menu-pass {
+  color: #212529 !important;
+}
+
+a.menu-pass:hover {
+  color: #1E6CC6 !important;
+}
+
 /* Dropdown notification */
 .menu-viewnotif {
   background-color: #66B4FF;
