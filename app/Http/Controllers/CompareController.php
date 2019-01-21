@@ -71,6 +71,13 @@ class CompareController extends Controller
     $arr['status'] = 'success';
     $arr['message'] = '';
 
+    //pengecekan id 
+    if(!isset($request->accountid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih akun terlebih dahulu';
+      return $arr;
+    }
+
     // pengecekan membership
     if(Auth::user()->membership=='free'){
       $arr['status'] = 'error';
@@ -413,6 +420,13 @@ class CompareController extends Controller
   }
 
   public function delete_compare_bulk(Request $request){
+    //Pengecekkan id 
+    if(!isset($request->compareid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih history terlebih dahulu';
+
+      return $arr;
+    }
 
     foreach ($request->compareid as $id) {
       $compare = HistoryCompare::find($id)

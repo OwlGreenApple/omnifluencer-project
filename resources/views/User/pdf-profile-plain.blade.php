@@ -116,7 +116,8 @@
     @endif  
 
     <span class="saved-on-footer" style="bottom:-230px">
-      {{url('/')}} | Saved on {{ date("d F Y") }}
+      <!--{{url('/')}} | Saved on {{ date("d F Y") }}-->
+      www.omnifluencer.com | Saved on {{ date("d F Y") }}
     </span>
   </div>
 <?php } 
@@ -231,6 +232,7 @@
   @endif  
 
   <span class="saved-on-footer">
-    {{url('/')}} | Saved on {{ date("d F Y") }}
+    <!--{{url('/')}} | Saved on {{ date("d F Y") }}-->
+    www.omnifluencer.com | Saved on {{ date("d F Y") }}
   </span>
 <?php } ?>

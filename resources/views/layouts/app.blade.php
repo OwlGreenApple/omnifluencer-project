@@ -141,6 +141,11 @@
                           <i class="fas fa-star" style="margin-right: 5px"></i>
                           {{$notif->notification}}
                         </span>
+                      @else 
+                        <span class="notif-promo">
+                          <i class="fas fa-shopping-cart" style="margin-right: 5px"></i>
+                          {{$notif->notification}}
+                        </span>
                       @endif
                       <span style="float: right;font-size: 12px;">
                         <?php 

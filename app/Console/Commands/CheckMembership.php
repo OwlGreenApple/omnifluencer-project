@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\User;
+use App\UserLog;
 use DateTime;
 
 class CheckMembership extends Command
@@ -49,6 +50,14 @@ class CheckMembership extends Command
           $user->membership = 'free';
           $user->valid_until = null;
           $user->save();
+
+          $userlog = new UserLog;
+          $userlog->user_id = $user->id;
+          $userlog->type = 'membership';
+          $userlog->value = $user->membership;
+          $userlog->keterangan = 'Cron check membership valid_until';
+          $userlog->save();
+          
         }
       }
     }

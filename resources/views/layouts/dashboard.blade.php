@@ -143,6 +143,11 @@
                         <i class="fas fa-star" style="margin-right: 5px"></i>
                         {{$notif->notification}}
                       </span>
+                    @else 
+                      <span class="notif-promo">
+                        <i class="fas fa-shopping-cart" style="margin-right: 5px"></i>
+                        {{$notif->notification}}
+                      </span>
                     @endif
                     <span style="float: right;font-size: 12px;">
                       <?php 
@@ -319,20 +324,20 @@
       </ul>
       @else
       <ul class="list-unstyled components">
+        <li class="<?php if(Request::is('list-user')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('list-user')}}">
+              <i class="fas fa-user-circle icon-menu"></i>
+              Users
+            </a>
+          </span>
+        </li>
+
         <li class="<?php if(Request::is('list-order')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="{{url('list-order')}}">
               <i class="fas fa-shopping-cart icon-menu"></i>
               Orders
-            </a>
-          </span>
-        </li>
-
-        <li class="<?php if(Request::is('list-user')) echo 'active' ?>">
-          <span class="submenu-navbar">
-            <a href="{{url('list-user')}}">
-              <i class="fas fa-users icon-menu"></i>
-              Users
             </a>
           </span>
         </li>

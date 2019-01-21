@@ -3,7 +3,7 @@
 @foreach($compares as $compare)
   <tr>
     <td align="center">
-      <input type="checkbox" name="compareid[]" value="{{$compare->id}}">
+      <input type="checkbox" class="checkcompareid" name="compareid[]" value="{{$compare->id}}">
     </td>
     <td data-label="Instagram">
       {{'@'.$compare->acc1username}} 

@@ -160,6 +160,7 @@
         var data = jQuery.parseJSON(result);
 
         if(data.status=='success'){
+          $('#pesan').hide();
           refresh_page();
         } else {
           $('#pesan').html(data.message);
@@ -190,7 +191,17 @@
 
         if(data.status=='success'){
           refresh_page();
-        } 
+
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-warning');
+          $('#pesan').addClass('alert-success');
+          $('#pesan').show();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
       }
     });
   }
@@ -296,6 +307,14 @@
           }
         }
       });
+  }
+
+  function check_id(){
+    if ($(".checkaccid:checked").length > 0){
+      return true;
+    } else {
+      return false;
+    }
   }
 </script>
 
@@ -566,6 +585,7 @@
     $('#email-type').val(type);
     $('#id-profile').val(id);
 
+    $("select").val("colorful");
     if(type=='pdf'){
       $("#link-pdf").prop("href", "<?php echo url('print-pdf')?>"+'/'+id+'/colorful');
       $('.send-pdf').show();
@@ -583,7 +603,14 @@
 
   $( "body" ).on( "click", "#btn-save-global", function()
   {
-    save_group();
+    if(check_id()){
+      save_group();
+    } else {
+      $('#pesan').html('Pilih akun terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show(); 
+    }
   });
 
   $( "body" ).on( "keypress", "#input-group", function(e)
@@ -601,7 +628,16 @@
 
   $( "body" ).on( "click", "#btn-compare", function() {
     // console.log($('.checkaccid').val());
-    check_compare();
+
+    if(check_id()){
+      check_compare();
+    } else {
+      $('#pesan').html('Pilih akun terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show();
+    }
+    
   });
 
   $( "body" ).on( "click", ".btn-delete", function() {
@@ -609,9 +645,17 @@
     $('#delete_type').val('one');
   });
 
-  $( "body" ).on( "click", ".btn-delete-bulk", function()
+  $( "body" ).on( "click", ".btn-delete-bulk", function(e)
   {
-    $('#delete_type').val('bulk');
+    if(check_id()){
+      $('#delete_type').val('bulk');
+    } else {
+      e.stopPropagation();
+      $('#pesan').html('Pilih akun terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show();
+    }
   });
   
   $( "body" ).on( "click", "#btn-delete-ok", function() {
@@ -627,7 +671,15 @@
   });
 
   $( "body" ).on( "click", "#btn-add-group", function() {
-    add_groups();
+    if(check_id()){
+      add_groups();
+    } else {
+      $('#save_group').modal('hide');
+      $('#pesan').html('Pilih akun terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show();
+    }
   });
 
   $( "body" ).on( "click", "#btn-create-group", function() {

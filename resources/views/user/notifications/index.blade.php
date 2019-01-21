@@ -21,6 +21,8 @@
                   <i class="fas fa-coins notif notif-point"></i>
                 @elseif($notif->type=='promo')
                   <i class="fas fa-star notif notif-promo"></i>
+                @else 
+                  <i class="fas fa-shopping-cart notif notif-promo"></i>
                 @endif
               </td>
               <td>
@@ -29,6 +31,10 @@
                     {{$notif->notification}}
                   </span>
                 @elseif($notif->type=='promo')
+                  <span class="notif notif-promo">
+                    {{$notif->notification}}
+                  </span>
+                @else
                   <span class="notif notif-promo">
                     {{$notif->notification}}
                   </span>

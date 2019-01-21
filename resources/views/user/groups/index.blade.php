@@ -56,6 +56,11 @@
 
         if(data.status=='success'){
           refresh_page();
+
+          $('#pesan').html(data.message);
+          $('#pesan').addClass('alert-success');
+          $('#pesan').removeClass('alert-warning');
+          $('#pesan').show();
         } else {
           $('#pesan').html(data.message);
           $('#pesan').removeClass('alert-success');
@@ -64,6 +69,14 @@
         }
       }
     });
+  }
+
+  function check_id(){
+    if ($(".groupcheck:checked").length > 0){
+      return true;
+    } else {
+      return false;
+    }
   }
 </script>
 
@@ -80,7 +93,7 @@
         </div>
 
         <div class="col-md-7" align="right">
-          <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">
+          <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>
         </div>
@@ -88,6 +101,8 @@
     
       <hr>
       
+      <div id="pesan" class="alert"></div>
+
       <br>
 
       <form>
@@ -127,6 +142,16 @@
 </div>
 
 <script type="text/javascript">
+  $( "body" ).on( "click", ".btn-delete", function(e) {
+    if(!check_id()){
+      e.stopPropagation();
+      $('#pesan').html('Pilih group terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show();
+    }
+  });
+
   $( "body" ).on( "click", "#btn-delete-ok", function() {
     delete_group();
   });
