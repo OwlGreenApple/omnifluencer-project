@@ -17,7 +17,7 @@ class CreateHistoryComparesTable extends Migration
             $table->increments('id');
             $table->biginteger('user_id');
             $table->biginteger('account_id_1');
-            $table->biginteger('account_id_2');
+            $table->biginteger('account_id_2')->nullable();
             $table->biginteger('account_id_3')->nullable();
             $table->biginteger('account_id_4')->nullable();
             $table->integer('jml_compare')->default(0);

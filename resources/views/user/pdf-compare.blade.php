@@ -111,8 +111,8 @@
   @endif
   
   <span class="saved-on-footer">
-    <!--{{url('/')}} | Saved on {{ date("d F Y") }}-->
-    www.omnifluencer.com | Saved on {{ date("d F Y") }}
+    <!--{{url('/')}} | calculated on {{ date("d F Y") }}-->
+    www.omnifluencer.com | calculated on {{ date("d F Y") }}
   </span>
 
 </div>

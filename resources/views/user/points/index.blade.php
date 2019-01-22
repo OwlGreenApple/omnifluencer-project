@@ -139,7 +139,7 @@
               </p>
               <button class="btn btn-primary btn-upgrade-poin" data-upgrade="pro">
                 <i class="fas fa-star"></i> 
-                Upgrade To {{$member}}
+                Redeem your point
               </button>
                 <!--Importance <br> 
                 Design <br> 

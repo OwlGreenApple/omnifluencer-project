@@ -272,7 +272,7 @@
             </span>
           </li>
 
-          <li class="<?php if(Request::is('groups')) echo 'active' ?>">
+          <li class="<?php if(Request::is('groups') or Request::is('groups/*')) echo 'active' ?>">
             <span class="submenu-navbar">
               <a href="{{url('groups')}}">
                 <i class="fas fa-folder-plus icon-menu"></i>
@@ -282,7 +282,7 @@
           </li>
         <?php } ?>
 
-        <li class="<?php if(Request::is('points')) echo 'active' ?>">
+        <li class="<?php if(Request::is('points') or Request::is('points/*')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="{{url('points')}}">
               <i class="fas fa-coins icon-menu"></i>

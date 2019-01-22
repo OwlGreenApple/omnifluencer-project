@@ -28,7 +28,7 @@
 
     <div class="col-xs-12 info" align="center">
       <!--<span class="saved-on">
-        saved on : {{ date("d F Y") }}
+        calculated on : {{ date("d F Y") }}
       </span>-->
       <span class="username">
         <?php echo '@'.$acc->username ?>
@@ -113,12 +113,12 @@
     </div>
 
     @if(Auth::user()->logo!=null)
-      <img src="{{asset('design/logobrand.png')}}" class="logo-footer profile" style="bottom:15px">
+      <img src="{{asset('design/logobrand.png')}}" class="logo-footer profile" style="bottom:110px">
     @endif 
 
-    <span class="saved-on-footer profile" style="bottom:15px">
-      <!--{{url('/')}} | Saved on {{ date("d F Y") }}-->
-      www.omnifluencer.com | Saved on {{ date("d F Y") }}
+    <span class="saved-on-footer profile" style="bottom:110px">
+      <!--{{url('/')}} | calculated on {{ date("d F Y") }}-->
+      www.omnifluencer.com | calculated on {{ date("d F Y") }}
     </span>
   </div>
 <?php } 
@@ -144,7 +144,7 @@
 
   <div class="col-xs-12 info" align="center">
     <!--<span class="saved-on">
-      saved on : {{ date("d F Y") }}
+      calculated on : {{ date("d F Y") }}
     </span>-->
     <span class="username">
       <?php echo '@'.$account->username ?>
@@ -233,7 +233,7 @@
   @endif  
 
   <span class="saved-on-footer profile">
-    <!--{{url('/')}} | Saved on {{ date("d F Y") }}-->
-    www.omnifluencer.com | Saved on {{ date("d F Y") }}
+    <!--{{url('/')}} | calculated on {{ date("d F Y") }}-->
+    www.omnifluencer.com | calculated on {{ date("d F Y") }}
   </span>
 <?php } ?>

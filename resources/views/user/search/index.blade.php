@@ -11,7 +11,9 @@
         });
 
   $( "body" ).on( "click", ".btn-search", function() {
-    refresh_page();
+    if($('#keywords').val()!=''){
+      refresh_page();
+    }
   });
 
   $( "body" ).on( "click", ".register-link", function(e) 
@@ -41,9 +43,22 @@
       e.preventDefault();
       $('#info-kuota').modal('show');
     <?php } else { ?>
-      check_compare();
+      if(check_id()){
+        check_compare();
+      } else {
+        $('#message').html('Pilih akun terlebih dahulu');
+        $('#modal-pesan').modal('show');
+      }
     <?php } ?>
   });
+
+  function check_id(){
+    if ($(".boxcompare:checked").length > 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   function load_search(){
     $.ajax({

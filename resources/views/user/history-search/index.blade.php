@@ -365,7 +365,13 @@
               * <b>Free Member</b> tidak dapat mengelompokkan ke dalam suatu grup dari hasil pencarian <br>  
               * <b>Free Member</b> tidak dapat melakukan compare dari hasil pencarian <br> 
               <br>  
-              ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. <button class="btn btn-primary"><i class="fas fa-star"></i> Upgrade To Pro</button>  
+              ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. 
+              <a href="{{url('pricing')}}">
+                <button class="btn btn-primary">
+                  <i class="fas fa-star"></i> 
+                  Upgrade To Pro
+                </button>  
+              </a>
             </div>
             
             <div class="<?php if(Auth::user()->membership=='free') echo 'd-none' ?>">
@@ -374,7 +380,13 @@
               * <b>Pro Member</b> tidak dapat melakukan Save & Send Influencers List .XLSX <br>  
               * <b>Pro Member</b> hanya dapat melakukan compare dari 2 hasil pencarian <br> 
               <br>  
-              ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. <button class="btn btn-primary"><i class="fas fa-star"></i> Upgrade To Premium</button>  
+              ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. 
+              <a href="{{url('pricing')}}">
+                <button class="btn btn-primary">
+                  <i class="fas fa-star"></i> 
+                  Upgrade To Premium
+                </button>  
+              </a>
             </div>
           </div>
         </div>
