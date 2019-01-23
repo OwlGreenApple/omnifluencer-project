@@ -184,8 +184,12 @@ body {
 
 /* Dropdown profpic */
 .profpic-menu {
-  min-width:270px;
+  min-width:340px;
   padding-bottom:0;
+}
+
+.profpic-menu.prof {
+  min-width:270px;
 }
 
 .menu-signout {

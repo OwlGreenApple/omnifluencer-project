@@ -5,7 +5,11 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\User;
 use App\UserLog;
-use DateTime;
+use App\Notification;
+
+use App\Mail\ExpiredMembershipMail;
+
+use Mail,DateTime;
 
 class CheckMembership extends Command
 {
@@ -45,6 +49,16 @@ class CheckMembership extends Command
       foreach ($users as $user) {
         $now = new DateTime();
         $date = new DateTime($user->valid_until);
+        $interval = $date->diff($now)->format('%d');
+        var_dump($interval);
+        if($interval==5){
+          $notif = new Notification;
+          $notif->user_id = $user->id;
+          $notif->notification = 'Masa aktif membership akan berakhir';
+          $notif->keterangan = 'Masa aktif membership Anda akan berakhir dalam 5 hari. Segera perpanjang melalui order maupun redeem point.';
+          $notif->type = 'promo';
+          $notif->save();
+        }
 
         if($date < $now){
           $user->membership = 'free';
@@ -57,7 +71,15 @@ class CheckMembership extends Command
           $userlog->value = $user->membership;
           $userlog->keterangan = 'Cron check membership valid_until';
           $userlog->save();
-          
+
+          $notif = new Notification;
+          $notif->user_id = $user->id;
+          $notif->notification = 'Masa aktif membership berakhir';
+          $notif->keterangan = 'Masa aktif membership Anda telah berakhir. Segera perpanjang melalui order maupun redeem point.';
+          $notif->type = 'promo';
+          $notif->save();
+
+          Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email));
         }
       }
     }

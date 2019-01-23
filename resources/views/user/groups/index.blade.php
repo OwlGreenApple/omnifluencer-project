@@ -157,6 +157,8 @@
   });
 
   $( "body" ).on( "dblclick", ".div-group", function() {
+    $(this).find('.groupcheck').prop('checked', true);
+
     var idgroup = $(this).attr('data-id');
     var groupname = $(this).attr('data-name');
 

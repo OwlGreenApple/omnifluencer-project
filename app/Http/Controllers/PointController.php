@@ -8,6 +8,8 @@ use App\PointLog;
 use App\User;
 use App\UserLog;
 
+use App\Http\Controllers\OrderController;
+
 use Auth, DateTime;
 
 class PointController extends Controller
@@ -62,7 +64,8 @@ class PointController extends Controller
 
       switch ($request->id) {
         case 1 :
-          $valid = new DateTime("+1 months");
+          //$valid = new DateTime("+1 months");
+          $valid = OrderController::add_time($user,"+1 months");
 
           $userlog = new UserLog;
           $userlog->user_id = $user->id;
@@ -77,7 +80,8 @@ class PointController extends Controller
           $point = 200;
           break;
         case 2 :
-          $valid = new DateTime("+1 months");
+          //$valid = new DateTime("+1 months");
+          $valid = OrderController::add_time($user,"+1 months");
 
           $userlog = new UserLog;
           $userlog->user_id = $user->id;

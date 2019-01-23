@@ -177,7 +177,7 @@
                 <img class="profpic-header" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
               </a>
 
-              <div class="dropdown-menu dropdown-menu-right profpic-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu dropdown-menu-right profpic-menu prof" aria-labelledby="navbarDropdown">
                 <div class="container" style="padding-bottom: 10px;">
                   <div class="row">
                     <div class="col-md-4" align="center">

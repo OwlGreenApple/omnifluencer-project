@@ -28,7 +28,7 @@
           </span>
         </div>
         <div class="col-2 colmargbtn">
-          <button type="submit" class="btn btn-sm btn-link btn-delete" data-id="{{$account->id}}" data-toggle="modal" data-target="#confirm-delete" data-whatever="delete">
+          <button type="button" class="btn btn-sm btn-link btn-delete" data-id="{{$account->id}}" data-toggle="modal" data-target="#confirm-delete" data-whatever="delete">
             <i class="icon ion-md-close"></i>
           </button>
         </div>

@@ -12,6 +12,8 @@ use App\Order;
 use App\UserLog;
 use App\Notification;
 
+use App\Mail\ConfirmOrderMail;
+
 use App\Helpers\Helper;
 
 use Auth,Mail,Validator,Storage,DateTime;
@@ -132,17 +134,38 @@ class OrderController extends Controller
     return $arr;
   }
 
+  public static function add_time($user,$time){
+    if(is_null($user->valid_until)){
+      $valid = new DateTime($time);
+    } else {
+      $now = new DateTime();
+      $uservalid = new DateTime($user->valid_until);
+
+      if($uservalid<$now){
+        $valid = new DateTime($time);
+      } else {
+        $uservalid = strtotime($user->valid_until);
+        $valid = new DateTime (date("Y-m-d", strtotime($time, $uservalid)));
+      }
+    }
+
+    return $valid;
+  }
+
   public function confirm_order(Request $request){
     $order = Order::find($request->id);
     $order->status = 2;
     
     $user = User::find($order->user_id);
     $valid=null;
+
     if(substr($order->package,0,3) === "Pro"){
       if($order->package=='Pro Monthly'){
-        $valid = new DateTime("+1 months");
+        //$valid = new DateTime("+1 months");
+        $valid = $this->add_time($user,"+1 months");
       } else if($order->package=='Pro Yearly'){
-        $valid = new DateTime("+12 months");
+        //$valid = new DateTime("+12 months");
+        $valid = $this->add_time($user,"+12 months");
       }
 
       $userlog = new UserLog;
@@ -150,15 +173,18 @@ class OrderController extends Controller
       $userlog->type = 'membership';
       $userlog->value = 'pro';
       $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
+      //$userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid.')';
       $userlog->save();
 
       $user->valid_until = $valid;
       $user->membership = 'pro';
     } else if(substr($order->package,0,7) === "Premium"){
       if($order->package=='Premium Monthly'){
-        $valid = new DateTime("+1 months");
+        //$valid = new DateTime("+1 months");
+        $valid = $this->add_time($user,"+1 months");
       } else if($order->package=='Premium Yearly'){
-        $valid = new DateTime("+12 months");
+        //$valid = new DateTime("+12 months");
+        $valid = $this->add_time($user,"+12 months");
       }
 
       $userlog = new UserLog;
@@ -166,6 +192,7 @@ class OrderController extends Controller
       $userlog->type = 'membership';
       $userlog->value = 'premium';
       $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to premium('.$valid->format('Y-m-d h:i:s').')';
+      //$userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to premium('.$valid.')';
       $userlog->save();
 
       $user->valid_until = $valid;
@@ -182,6 +209,8 @@ class OrderController extends Controller
     $notif->type = 'order';
     $notif->keterangan = 'Order '.$order->no_order.' telah dikonfirmasi oleh admin. Terimakasih dan selamat menikmati layanan kami.';
     $notif->save();
+
+    Mail::to($user->email)->queue(new ConfirmOrderMail($request->email));
 
     $arr['status'] = 'success';
     $arr['message'] = 'Order berhasil dikonfirmasi';
