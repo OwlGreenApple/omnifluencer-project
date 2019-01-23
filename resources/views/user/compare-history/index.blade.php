@@ -147,6 +147,14 @@
       });
     }  
   }
+
+  function check_id(){
+    if ($(".checkcompareid:checked").length > 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
 </script>
 
 <style type="text/css">
@@ -176,7 +184,7 @@
       
       <hr>
 
-      <div id="pesan" class="alert d-none"></div>
+      <div id="pesan" class="alert"></div>
 
       <br>  
 
@@ -383,9 +391,17 @@
     $('#delete_type').val('one'); 
   });
 
-  $( "body" ).on( "click", ".btn-delete-bulk", function()
+  $( "body" ).on( "click", ".btn-delete-bulk", function(e)
   {
-    $('#delete_type').val('bulk');
+    if(check_id()){
+      $('#delete_type').val('bulk');
+    } else {
+      e.stopPropagation();
+      $('#pesan').html('Pilih history terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show();   
+    }
   });
 
   $( "body" ).on( "click", "#btn-delete-ok", function() {

@@ -27,7 +27,7 @@ class CreateAccountsTable extends Migration
             $table->timestamp('lastpost')->default(null)->nullable();
             $table->integer('jml_likes')->default(0);
             $table->integer('jml_comments')->default(0);
-            $table->double('eng_rate',8,4)->default(0);
+            $table->double('eng_rate',8,4)->default(0)->nullable();
             $table->string('twitter')->nullable();
             $table->string('web')->nullable();
             $table->string('nohp')->nullable();

@@ -31,140 +31,269 @@
   <table>
     <thead>
       <tr>
-        <th class="tl">
+        <th class="tl ">
         </th>
-        <th class="qbse compare-heading">
+        <th class="qbse compare-heading ">
           FREE
         </th>
-        <th class="qbse compare-heading">
+        <th class="qbse compare-heading ">
           PRO
         </th>
-        <th class="qbse compare-heading">
+        <th class="qbse compare-heading ">
           PREMIUM
         </th>
       </tr>
-      <tr>
-        <th class="price-info">
-          <div class="price-now features"><span>Features</span></div>
+      <tr class="">
+        <th class="price-info ">
+          <div class="price-now features">
+            <span>Features</span>
+          </div>
         </th>
-        <th class="price-info">
-          <div class="price-now"><span>IDR 0<span class="price-small">,-</span></span></div>
+        <th class="price-info ">
+          <div class="price-now"><span>0,-</span></div>
+          <div>
+            <a href="{{url('register')}}">
+              <button type="submit" class="btn btn-default btn-primary-free">
+                SELECT
+              </button>
+            </a>
+          </div>
         </th>
-        <th class="price-info">
-          <div class="price-now"><span class="nprice price_pro">IDR 197</span><span class="price-small">000,-</span></div>
+        <th class="price-info ">
+          <div class="price-now"><span class="nprice price_pro">197,000,-</span></div>
+
+          <div class="monthly-button">
+            <a href="{{url('checkout/1')}}">
+              <button class="btn select-price btn-default btn-primary-prc" data-package="1">
+                SELECT
+              </button>
+            </a>
+          </div>
+          <div class="yearly-button">
+            <a href="{{url('checkout/2')}}">
+              <button class="btn select-price btn-default btn-primary-prc" data-package="1">
+                SELECT
+              </button>
+            </a>
+          </div>
         </th>
-        <th class="price-info">
-          <div class="price-now"><span class="nprice price_premium">IDR 297</span><span class="price-small">000,-</span></div>
+        <th class="price-info ">
+          <div class="price-now"><span class="nprice price_premium">297,000,-</span></div>
+          
+          <div class="monthly-button">
+            <a href="{{url('checkout/3')}}">
+              <button class="btn btn-default select-price btn-primary-prc" data-package="1">
+                SELECT
+              </button>
+            </a>
+          </div>
+          <div class="yearly-button">
+            <a href="{{url('checkout/4')}}">
+              <button class="btn btn-default select-price btn-primary-prc" data-package="1">
+                SELECT
+              </button>
+            </a>
+          </div>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td></td>
-        <td colspan="3">Show History</td>
+        <td colspan="3">
+          Show History 
+          <span class="tooltipstered" title="Show History">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr class="compare-row">
-        <td>Show History</td>
+        <td>
+          Show History 
+          <span class="tooltipstered" title="Show History">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="tickblue">5</span></td>
         <td><span class="tickblue">25</span></td>
         <td><span class="tickblue">Unlimited</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="3">Save Profile</td>
+        <td colspan="3">
+          Save Profile 
+          <span class="tooltipstered" title="Save Profile">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr>
-        <td>Save Profile</td>
+        <td>
+          Save Profile 
+          <span class="tooltipstered" title="Save Profile">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">25</span></td>
         <td><span class="tickblue">Unlimited</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="3">Compare</td>
+        <td colspan="3">
+          Compare 
+          <span class="tooltipstered" title="Compare">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr class="compare-row">
-        <td>Compare</td>
+        <td>
+          Compare 
+          <span class="tooltipstered" title="Compare">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">Yes - 2</span></td>
         <td><span class="tickblue">Yes - 4</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="3">Compare From History</td>
+        <td colspan="3">
+          Compare From History 
+          <span class="tooltipstered" title="Compare From History">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr>
-        <td>Compare From History</td>
+        <td>
+          Compare From History 
+          <span class="tooltipstered" title="Compare From History">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">Yes - 2</span></td>
         <td><span class="tickblue">Yes - 4</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="3">Grouping</td>
+        <td colspan="3">
+          Grouping 
+          <span class="tooltipstered" title="Grouping">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr class="compare-row">
-        <td>Grouping</td>
+        <td>
+          Grouping 
+          <span class="tooltipstered" title="Grouping">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">&check;</span></td>
         <td><span class="tickblue">&check;</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="3">Bulk Group</td>
+        <td colspan="3">
+          Multi Group 
+          <span class="tooltipstered" title="Multi Group">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr>
-        <td>Bulk Group</td>
+        <td>
+          Multi Group 
+          <span class="tooltipstered" title="Multi Group">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">&check;</span></td>
         <td><span class="tickblue">&check;</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="3">Bulk Delete</td>
+        <td colspan="3">
+          Multi Delete 
+          <span class="tooltipstered" title="Multi Delete">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr class="compare-row">
-        <td>Bulk Delete</td>
+        <td>
+          Multi Delete 
+          <span class="tooltipstered" title="Multi Delete">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">&check;</span></td>
         <td><span class="tickblue">&check;</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="3">Save & Send Influencers Report .PDF</td>
+        <td colspan="3">
+          Influencer Report (PDF) 
+          <span class="tooltipstered" title="Influencer Report (PDF)">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr>
-        <td>Save & Send Influencers Report .PDF</td>
+        <td>
+          Influencer Report (PDF) 
+          <span class="tooltipstered" title="Influencer Report (PDF)">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">&check;</span></td>
         <td><span class="tickblue">&check;</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="3">Save & Send Influencers List .XLSX</td>
+        <td colspan="3">
+          Multi Influencers Report (PDF) 
+          <span class="tooltipstered" title="Multi Influencer Report (PDF)">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr class="compare-row">
-        <td>Save & Send Influencers List .XLSX</td>
+        <td>
+          Multi Influencers Report (PDF) 
+          <span class="tooltipstered" title="Multi Influencer Report (PDF)">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">&check;</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td colspan="3">Bulk Save .PDF</td>
+        <td colspan="3">
+          Multi Influencers List (Excel) 
+          <span class="tooltipstered" title="Multi Influencer List (Excel)">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
       </tr>
       <tr>
-        <td>Bulk Save .PDF</td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">Bulk Save .XLSX</td>
-      </tr>
-      <tr class="compare-row">
-        <td>Bulk Save .XLSX</td>
+        <td>
+          Multi Influencers List (Excel) 
+          <span class="tooltipstered" title="Multi Influencer List (Excel)">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">&check;</span></td>
@@ -178,7 +307,7 @@
         <td>
           <div>
             <a href="{{url('register')}}">
-              <button class="btn btn-primary select-price btn-primary-prc" data-package="1">
+              <button class="btn btn-default select-price btn-primary-free" data-package="1">
                 SELECT
               </button>
             </a>
@@ -187,14 +316,14 @@
         <td>
           <div class="monthly-button">
             <a href="{{url('checkout/1')}}">
-              <button class="btn btn-primary select-price btn-primary-prc" data-package="1">
+              <button class="btn select-price btn-success btn-primary-prc" data-package="1">
                 SELECT
               </button>
             </a>
           </div>
           <div class="yearly-button">
             <a href="{{url('checkout/2')}}">
-              <button class="btn btn-primary select-price btn-primary-prc" data-package="1">
+              <button class="btn select-price btn-success btn-primary-prc" data-package="1">
                 SELECT
               </button>
             </a>
@@ -203,14 +332,14 @@
         <td>
           <div class="monthly-button">
             <a href="{{url('checkout/3')}}">
-              <button class="btn btn-primary select-price btn-primary-prc" data-package="1">
+              <button class="btn btn-success select-price btn-primary-prc" data-package="1">
                 SELECT
               </button>
             </a>
           </div>
           <div class="yearly-button">
             <a href="{{url('checkout/4')}}">
-              <button class="btn btn-primary select-price btn-primary-prc" data-package="1">
+              <button class="btn btn-success select-price btn-primary-prc" data-package="1">
                 SELECT
               </button>
             </a>

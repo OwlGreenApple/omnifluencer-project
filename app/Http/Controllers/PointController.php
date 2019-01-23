@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\PointLog;
 use App\User;
+use App\UserLog;
 
 use Auth, DateTime;
 
@@ -61,14 +62,32 @@ class PointController extends Controller
 
       switch ($request->id) {
         case 1 :
+          $valid = new DateTime("+1 months");
+
+          $userlog = new UserLog;
+          $userlog->user_id = $user->id;
+          $userlog->type = 'membership';
+          $userlog->value = 'pro';
+          $userlog->keterangan = 'Redeem Point Pro 1 Month. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
+          $userlog->save();
+
           $user->membership = 'pro';
-          $user->valid_until = new DateTime("+1 months");
+          $user->valid_until = $valid;
           $keterangan = 'Free Upgrade to Pro 1 Month';
           $point = 200;
           break;
         case 2 :
+          $valid = new DateTime("+1 months");
+
+          $userlog = new UserLog;
+          $userlog->user_id = $user->id;
+          $userlog->type = 'membership';
+          $userlog->value = 'premium';
+          $userlog->keterangan = 'Redeem Point Premium 1 Month. From '.$user->membership.'('.$user->valid_until.') to premium('.$valid->format('Y-m-d h:i:s').')';
+          $userlog->save();
+
           $user->membership = 'premium';
-          $user->valid_until = new DateTime("+1 months");
+          $user->valid_until = $valid;
           $keterangan = 'Free Upgrade to Premium 1 Month';
           $point = 1000;
           break;

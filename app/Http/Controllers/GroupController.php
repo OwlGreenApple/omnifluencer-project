@@ -83,6 +83,12 @@ class GroupController extends Controller
 
     public function delete_saved_profile_bulk(Request $request)
     {
+      if(!isset($request->saveid)){
+        $arr['status'] = 'error';
+        $arr['message'] = 'Pilih akun terlebih dahulu';
+        return $arr;
+      }
+
       foreach ($request->saveid as $id) {
         $saved = Save::find($id)->delete(); 
       }
@@ -105,6 +111,12 @@ class GroupController extends Controller
 
     public function delete_member_group_bulk(Request $request)
     {
+      if(!isset($request->saveid)){
+        $arr['status'] = 'error';
+        $arr['message'] = 'Pilih akun terlebih dahulu';
+        return $arr;
+      }
+
       foreach ($request->saveid as $id) {
         $member = Save::find($id)->delete();
       }
@@ -116,6 +128,11 @@ class GroupController extends Controller
     }
 
     public function delete_group(Request $request){
+      if(!isset($request->groupid)){
+        $arr['status'] = 'error';
+        $arr['message'] = 'Pilih group terlebih dahulu';
+        return $arr;
+      }
 
       foreach ($request->groupid as $id) {
         $group = Group::find($id);

@@ -78,24 +78,7 @@
                 6. Dapat menyimpan dan mengirim report .pdf via email 
               @break
               @case(2)
-                1. Masa berlaku 1 tahun <br>
-                2. Dapat menampilkan 25 history search terakhir <br>
-                3. Dapat melakukan save profile sebanyak 25 kali <br>
-                4. Dapat melakukan compare untuk 2 akun <br>
-                5. Dapat melakukan grouping <br>
-                6. Dapat menyimpan dan mengirim report .pdf via email 
-              @break
-              @case(3)
                 1. Masa berlaku 1 bulan <br>
-                2. Dapat menampilkan history search tanpa batas (unlimited)<br>
-                3. Dapat melakukan save profile tanpa batas (unlimited)<br>
-                4. Dapat melakukan compare untuk 4 akun <br>
-                5. Dapat melakukan grouping <br>
-                6. Dapat menyimpan dan mengirim report .pdf via email <br>
-                7. Dapat menyimpan dan mengirim report .xlsx via email 
-              @break
-              @case(4)
-                1. Masa berlaku 1 tahun <br>
                 2. Dapat menampilkan history search tanpa batas (unlimited)<br>
                 3. Dapat melakukan save profile tanpa batas (unlimited)<br>
                 4. Dapat melakukan compare untuk 4 akun <br>

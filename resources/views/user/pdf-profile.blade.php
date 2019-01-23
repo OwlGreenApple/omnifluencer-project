@@ -8,7 +8,7 @@
 ?>
   <div class="page">
     <div id="bg-page">
-      <img src="{{asset('design/new-bg.jpg')}}">
+      <img src="{{asset('design/bg-pdf.jpg')}}">
     </div>
 
     @if(Auth::user()->logo==null)
@@ -27,9 +27,9 @@
     </div>
 
     <div class="col-xs-12 info" align="center">
-      <span class="saved-on">
-        saved on : {{ date("d F Y") }}
-      </span>
+      <!--<span class="saved-on">
+        calculated on : {{ date("d F Y") }}
+      </span>-->
       <span class="username">
         <?php echo '@'.$acc->username ?>
       </span> <br>
@@ -98,7 +98,7 @@
           <span class="info-value">
             <b><?php echo Helper::abbreviate_number($acc->jml_likes,2); ?></b>
           </span><br>
-          <span class="info-label">Avg Like Per Post</span>
+          <span class="info-label">Avg Like <br>Per Post</span>
         </div>
 
         <div class="col-xs-4 info-box inline">
@@ -106,24 +106,25 @@
             <b><?php echo Helper::abbreviate_number($acc->jml_comments,2); ?></b>
           </span><br>
           <span class="info-label">
-            Avg Comment Per Post
+            Avg Comment <br>Per Post
           </span>
         </div>
       </div>
     </div>
 
     @if(Auth::user()->logo!=null)
-      <img src="{{asset('design/logobrand.png')}}" class="logo-footer profile" style="bottom:15px">
+      <img src="{{asset('design/logobrand.png')}}" class="logo-footer profile" style="bottom:110px">
     @endif 
 
-    <span class="saved-on-footer profile" style="bottom:15px">
-      {{url('/')}} | Saved on {{ date("d F Y") }}
+    <span class="saved-on-footer profile" style="bottom:110px">
+      <!--{{url('/')}} | calculated on {{ date("d F Y") }}-->
+      www.omnifluencer.com | calculated on {{ date("d F Y") }}
     </span>
   </div>
 <?php } 
     } else { ?>
   <div id="bg-page">
-    <img src="{{asset('design/new-bg.jpg')}}">
+    <img src="{{asset('design/bg-pdf.jpg')}}">
   </div>
 
   @if(Auth::user()->logo==null)
@@ -142,9 +143,9 @@
   </div>
 
   <div class="col-xs-12 info" align="center">
-    <span class="saved-on">
-      saved on : {{ date("d F Y") }}
-    </span>
+    <!--<span class="saved-on">
+      calculated on : {{ date("d F Y") }}
+    </span>-->
     <span class="username">
       <?php echo '@'.$account->username ?>
     </span> <br>
@@ -213,7 +214,7 @@
         <span class="info-value">
           <b><?php echo Helper::abbreviate_number($account->jml_likes,2); ?></b>
         </span><br>
-        <span class="info-label">Avg Like Per Post</span>
+        <span class="info-label">Avg Like <br>Per Post</span>
       </div>
 
       <div class="col-xs-4 info-box inline">
@@ -221,7 +222,7 @@
           <b><?php echo Helper::abbreviate_number($account->jml_comments,2); ?></b>
         </span><br>
         <span class="info-label">
-          Avg Comment Per Post
+          Avg Comment <br> Per Post
         </span>
       </div>
     </div>
@@ -232,6 +233,7 @@
   @endif  
 
   <span class="saved-on-footer profile">
-    {{url('/')}} | Saved on {{ date("d F Y") }}
+    <!--{{url('/')}} | calculated on {{ date("d F Y") }}-->
+    www.omnifluencer.com | calculated on {{ date("d F Y") }}
   </span>
 <?php } ?>

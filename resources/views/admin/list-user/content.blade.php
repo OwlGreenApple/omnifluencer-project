@@ -22,6 +22,9 @@
       <button type="button" class="btn btn-primary btn-poin" data-toggle="modal" data-target="#point-log" data-id="{{$user->id}}">
         Point Log
       </button>
+      <button type="button" class="btn btn-primary btn-log" data-toggle="modal" data-target="#view-log" data-id="{{$user->id}}">
+        Log
+      </button>
       <button type="button" class="btn btn-primary btn-referral" data-toggle="modal" data-target="#referral-log" data-id="{{$user->id}}">
         Referral
       </button>

@@ -9,13 +9,13 @@ $(document).ready(function () {
     $(".yearly-button").hide();
     $('.onoffswitch-checkbox').on('click', function () {
     	if ( $(this).prop('checked') ){
-    		$('.price-now span.price_pro').text('IDR 197');
-    		$('.price-now span.price_premium').text('IDR 297');
+    		$('.price-now span.price_pro').text('197,000,-');
+    		$('.price-now span.price_premium').text('297,000,-');
         $(".monthly-button").show();
         $(".yearly-button").hide();
     	}else{
-    		$('.price-now span.price_pro').text('IDR 550');
-    		$('.price-now span.price_premium').text('IDR 700');
+    		$('.price-now span.price_pro').text('250,000,-');
+    		$('.price-now span.price_premium').text('450,000,-');
         $(".monthly-button").hide();
         $(".yearly-button").show();
     	}

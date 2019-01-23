@@ -403,9 +403,16 @@ class AccountController extends Controller
   }
 
   public function send_email_bulk(Request $request){
+    if(!isset($request->accountid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih akun terlebih dahulu';
+      return $arr;
+    }
+
     $validator = $this->validator($request->all());
 
     if(!$validator->fails()){
+
       Mail::to($request->email)->queue(new ProfileBulkEmail($request->email,$request->type,$request->accountid));
 
       $arr['status'] = 'success';
@@ -431,7 +438,20 @@ class AccountController extends Controller
 
   public function add_groups(Request $request){
     $arr['status'] = 'success';
-    $arr['message'] = '';
+    $arr['message'] = 'Add to group berhasil';
+
+    //Pengecekkan id 
+    if(!isset($request->accountid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih akun terlebih dahulu';
+
+      return $arr;
+    } else if(!isset($request->groupid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih group terlebih dahulu';
+
+      return $arr;
+    }
 
     foreach ($request->accountid as $accountid) {
       foreach ($request->groupid as $groupid) {
@@ -467,6 +487,14 @@ class AccountController extends Controller
   }
 
   public function save_groups(Request $request){
+    //Pengecekkan id 
+    if(!isset($request->accountid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih akun terlebih dahulu';
+
+      return $arr;
+    }
+
     foreach ($request->accountid as $accountid) {
       $checksave = Save::where('user_id',Auth::user()->id)
                       ->where('account_id',$accountid)
@@ -493,6 +521,14 @@ class AccountController extends Controller
     $arr['status'] = 'success';
     $arr['message'] = '';
 
+    //Pengecekkan id 
+    if(!isset($request->historyid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih history terlebih dahulu';
+
+      return $arr;
+    }
+
     foreach ($request->historyid as $id) {
       $history = HistorySearch::find($id)->delete(); 
     }
@@ -505,8 +541,14 @@ class AccountController extends Controller
       return abort(403);
     }
 
+    if(!isset($request->accountid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih akun terlebih dahulu';
+      return $arr;
+    }
+
     $user = User::find(Auth::user()->id);
-    $user->count_pdf = $user->count_pdf + 1;
+    $user->count_pdf = $user->count_pdf + count($request->accountid);
     $user->save();
 
     $account = [];
@@ -545,8 +587,14 @@ class AccountController extends Controller
       return abort(403);
     }
 
+    if(!isset($request->accountid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih akun terlebih dahulu';
+      return $arr;
+    }
+
     $user = User::find(Auth::user()->id);
-    $user->count_csv = $user->count_csv + 1;
+    $user->count_csv = $user->count_csv + count($request->accountid);
     $user->save();
 
     $filename = 'omnifluencer';

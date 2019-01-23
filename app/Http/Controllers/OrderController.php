@@ -9,6 +9,8 @@ use App\User;
 use App\Group;
 use App\Save;
 use App\Order;
+use App\UserLog;
+use App\Notification;
 
 use App\Helpers\Helper;
 
@@ -142,21 +144,44 @@ class OrderController extends Controller
       } else if($order->package=='Pro Yearly'){
         $valid = new DateTime("+12 months");
       }
+
+      $userlog = new UserLog;
+      $userlog->user_id = $user->id;
+      $userlog->type = 'membership';
+      $userlog->value = 'pro';
+      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
+      $userlog->save();
+
       $user->valid_until = $valid;
       $user->membership = 'pro';
-
     } else if(substr($order->package,0,7) === "Premium"){
       if($order->package=='Premium Monthly'){
         $valid = new DateTime("+1 months");
       } else if($order->package=='Premium Yearly'){
         $valid = new DateTime("+12 months");
       }
+
+      $userlog = new UserLog;
+      $userlog->user_id = $user->id;
+      $userlog->type = 'membership';
+      $userlog->value = 'premium';
+      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to premium('.$valid->format('Y-m-d h:i:s').')';
+      $userlog->save();
+
       $user->valid_until = $valid;
       $user->membership = 'premium';
     }
 
     $user->save();
     $order->save();
+
+    $notif = new Notification;
+    $notif->user_id = $user->id;
+    //$notif->notification = 'Order '.$order->no_order.' telah dikonfirmasi';
+    $notif->notification = 'Order telah dikonfirmasi';
+    $notif->type = 'order';
+    $notif->keterangan = 'Order '.$order->no_order.' telah dikonfirmasi oleh admin. Terimakasih dan selamat menikmati layanan kami.';
+    $notif->save();
 
     $arr['status'] = 'success';
     $arr['message'] = 'Order berhasil dikonfirmasi';

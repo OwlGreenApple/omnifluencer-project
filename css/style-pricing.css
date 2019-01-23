@@ -162,6 +162,10 @@ hr.wh {
 
 
 /*COMPARISION*/
+.tooltipstered {
+  z-index: 99999999999999999999999999999;
+}
+
 .comparison {
   max-width: 960px;
   margin: 0 auto;
@@ -177,6 +181,11 @@ hr.wh {
   border-spacing: 0;
   border-bottom: 1px solid #CCC;
   background-color: #FCFCFC;
+}
+
+thead tr:first-child th {
+  position: sticky;
+  top: 0;
 }
 
 .comparison td {
@@ -211,13 +220,13 @@ hr.wh {
 .comparison .tickblue {
   color: #0078C1;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .comparison .cross {
   color: #FF1744;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 400;
 }
 
 .comparison .tickgreen {
@@ -281,10 +290,13 @@ hr.wh {
 .comparison .price-now span {
   color: #1a1a1a;
   font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .comparison .price-now span {
   font-size: 30px;
+  padding-bottom: 50px;
 }
 
 .comparison .price-small {
@@ -302,15 +314,70 @@ hr.wh {
   color: #202020;
 }
 
-.btn-primary-prc {
-  width: 80px;
+.fonticon {
+  font-size: 14px;
+  color: #505050;
+}
+
+.btn-primary-free {
+  width: 75px;
   height: 30px;
   padding: 0;
   margin-left: 5px;
   font-size: 14px;
+  background-color: #c3c3c3;
+  border-color: transparent;
+  color: #fff;
+}
+
+.btn-primary-prc {
+  width: 75px;
+  height: 30px;
+  padding: 0;
+  margin-left: 5px;
+  font-size: 14px;
+  background-color: #2DAD35;
+  border-color: transparent;
+  color: #fff;
+}
+
+.btn-primary-prc:hover {
+  background-color: #12961a;
+  border-color: transparent;
+}
+
+.yearly-button {
+  display: none;
 }
 
 /*MEDIA QUERIES*/
+@media (max-width: 320px) {
+  .comparison .price-now span {
+    font-size: 16px !important;
+  }
+
+  .comparison td {
+    font-size: 14px !important;
+    font-weight: 600;
+  }
+
+  .comparison .tickblue {
+    color: #0078C1;
+    font-size: 14px !important;
+    font-weight: 400;
+  }
+  
+  .btn-primary-free {
+    width: 60px;
+    font-size: 12px;
+  }
+  
+  .btn-primary-prc {
+    width: 60px;
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 639px) {
   .page-title h1 {
     font-size: 30px;
@@ -335,7 +402,7 @@ hr.wh {
   }
 
   .comparison .price-now span {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .comparison .price-small {
@@ -356,6 +423,17 @@ hr.wh {
 
   .compare-heading {
     font-size: 13px;
+  }
+
+  .comparison td {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .comparison .tickblue {
+    color: #0078C1;
+    font-size: 16px !important;
+    font-weight: 400;
   }
 }
 

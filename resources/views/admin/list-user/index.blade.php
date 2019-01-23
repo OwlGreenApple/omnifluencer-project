@@ -5,6 +5,7 @@
   var table;
   var tablePoin;
   var tableRefer;
+  var tableLog;
 
   $(document).ready(function() {
     //function saat klik pagination
@@ -25,6 +26,12 @@
       "order": [],
     });
     $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );    
+
+    tableLog = $('#tableLog').DataTable({
+      destroy: true,
+      "order": [],
+    });
+    $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
 
     refresh_page();
 
@@ -115,6 +122,34 @@
                   });
       }
     });  
+  }
+
+  function get_log(){
+    tableLog.destroy();
+
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/list-user/view-log') ?>",
+      data : { id : $('#idlog').val() },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        $('#content-log').html(data.view);
+
+        tableLog = $('#tableLog').DataTable({
+                      destroy: true,
+                      "order": [],
+                  });
+      }
+    });
   }
 </script>
 
@@ -230,6 +265,36 @@
   </div>
 </div>
 
+<!-- Modal View Log -->
+<div class="modal fade" id="view-log" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Log
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table class="table" id="tableLog">
+
+          <input type="hidden" name="idlog" id="idlog">
+
+          <thead align="center">
+            <th>Type</th>
+            <th>Value</th>
+            <th>Keterangan</th>
+            <th>Created_at</th>
+          </thead>
+          <tbody id="content-log"></tbody>
+        </table>
+      </div>
+    </div>
+      
+  </div>
+</div>
 
 <script type="text/javascript">
   $( "body" ).on( "click", ".btn-poin", function() {
@@ -240,6 +305,11 @@
   $( "body" ).on( "click", ".btn-referral", function() {
     $('#idrefer').val($(this).attr('data-id'));
     get_referral_log();
+  });  
+
+  $( "body" ).on( "click", ".btn-log", function() {
+    $('#idlog').val($(this).attr('data-id'));
+    get_log();
   });  
 </script>
 @endsection

@@ -39,7 +39,7 @@
         </div>
         
         <div class="col-md-4">
-          <a href="{{url('points')}}">
+          <a href="{{url('pricing')}}">
             <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership=='free') echo 'd-block' ?>">
               <i class="fas fa-star"></i> 
               Upgrade To Pro
@@ -61,7 +61,7 @@
 
         <div class="col-md-4">
 
-          <a href="{{url('points')}}">
+          <a href="{{url('pricing')}}">
             <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership!='premium') echo 'd-block' ?>">
               <i class="fas fa-star"></i> 
               <?php  

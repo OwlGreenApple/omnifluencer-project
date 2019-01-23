@@ -9,10 +9,16 @@
   });
 
   $( "body" ).on( "click", ".btn-search", function() {
-    var keywords = $("#keywords1").val()+'-'+$("#keywords2").val()+'-'+$("#keywords3").val()+'-'+$("#keywords4").val();
-    var url = "{{url('compare')}}"+'/'+keywords;
-  
-    window.location.replace(url);
+    if(check_field()){
+      var keywords = $("#keywords1").val()+'-'+$("#keywords2").val()+'-'+$("#keywords3").val()+'-'+$("#keywords4").val();
+
+      var url = "{{url('compare')}}"+'/'+keywords;
+    
+      window.location.replace(url);
+    } else {
+      $('#message').html('Isi form terlebih dahulu');
+      $('#modal-pesan').modal('show');
+    }
 
     // refresh_page();
     /*$.ajax({
@@ -101,17 +107,30 @@
           // console.log(data.view);
           // load_history();
         } else {
-          if(data.message=='kuota habis'){
-            $('#info-kuota').modal('show');
-          } else {
-            $('#message').html(data.message);
-            $('#modal-pesan').modal('show');
-          }
+          $('#message').html(data.message);
+          $('#modal-pesan').modal('show');
         }
       }
     });
   }
 
+  function check_field(){
+    var member = '<?php echo Auth::user()->membership ?>';
+
+    if(member=='premium'){
+      if($('#keywords1').val()=='' && $('#keywords2').val()=='' && $('#keywords3').val()=='' && $('#keywords4').val()==''){
+        return false;
+      } else {
+        return true;
+      }
+    } else if(member == 'pro'){
+      if($('#keywords1').val()=='' && $('#keywords2').val()==''){
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
 </script>
 
 <style type="text/css">
@@ -137,6 +156,14 @@
 <div class="container">
 
   <!--<div class="alert" id="pesan"></div>-->
+  <!--@if(Session::has('error'))        
+    <script>
+      $(function() {
+        $('#message').html("{{session('error')}}");
+        $('#modal-pesan').modal('show');
+      });
+    </script>
+  @endif-->
 
   <div class="row" align="center">
     <div class="col-md-2">

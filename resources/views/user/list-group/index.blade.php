@@ -185,6 +185,14 @@
       }
     });
   }
+
+  function check_id(){
+    if ($(".checkaccid:checked").length > 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
 </script>
 
 <div class="container">
@@ -369,13 +377,21 @@
     }
   });
 
-  $( "body" ).on( "click", ".btn-pdf", function() {
-    $('#email-type').val('pdf');
-    $('#send-type').val('bulk');
+  $( "body" ).on( "click", ".btn-pdf", function(e) {
+    if(check_id()){
+      $('#email-type').val('pdf');
+      $('#send-type').val('bulk');
 
-    $("#link-pdf").prop("href", "<?php echo url('print-pdf-bulk')?>"+'?'+$('form').serialize());
-    $('.send-pdf').show();
-    $('.send-csv').hide();
+      $("#link-pdf").prop("href", "<?php echo url('print-pdf-bulk')?>"+'?'+$('form').serialize());
+      $('.send-pdf').show();
+      $('.send-csv').hide();
+    } else {
+      e.stopPropagation();
+      $('#pesan').html('Pilih akun terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show(); 
+    }
   });
 
   $( "body" ).on( "change", "select", function()
@@ -393,13 +409,21 @@
     }
   });
 
-  $( "body" ).on( "click", ".btn-csv", function() {
-    $('#email-type').val('csv');
-    $('#send-type').val('bulk');
+  $( "body" ).on( "click", ".btn-csv", function(e) {
+    if(check_id()){
+      $('#email-type').val('csv');
+      $('#send-type').val('bulk');
 
-    $("#link-csv").prop("href", "<?php echo url('print-csv-bulk')?>"+'?'+$('form').serialize());
-    $('.send-csv').show();
-    $('.send-pdf').hide();
+      $("#link-csv").prop("href", "<?php echo url('print-csv-bulk')?>"+'?'+$('form').serialize());
+      $('.send-csv').show();
+      $('.send-pdf').hide();
+    } else {
+      e.stopPropagation();
+      $('#pesan').html('Pilih akun terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show(); 
+    }
   });
 
   $( "body" ).on( "click", "#btn-send", function() {
@@ -415,9 +439,17 @@
     $('#delete_type').val('one');
   });
 
-  $( "body" ).on( "click", ".btn-delete-bulk", function()
+  $( "body" ).on( "click", ".btn-delete-bulk", function(e)
   {
-    $('#delete_type').val('bulk');
+    if(check_id()){
+      $('#delete_type').val('bulk');
+    } else {
+      e.stopPropagation();
+      $('#pesan').html('Pilih akun terlebih dahulu');
+      $('#pesan').removeClass('alert-success');
+      $('#pesan').addClass('alert-warning');
+      $('#pesan').show();   
+    }
   });
 
   $( "body" ).on( "click", "#btn-delete-ok", function() {

@@ -141,6 +141,7 @@ Route::group(['middleware' => ['web','auth','admin']], function()
   Route::get('/list-user/load-user','UserController@load_user');
   Route::get('/list-user/point-log','UserController@point_log');
   Route::get('/list-user/referral-log','UserController@referral_log');
+  Route::get('/list-user/view-log','UserController@view_log');
 
   //List Accounts
   Route::get('/list-account','AccountController@index_account');

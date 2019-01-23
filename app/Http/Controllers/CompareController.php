@@ -71,6 +71,13 @@ class CompareController extends Controller
     $arr['status'] = 'success';
     $arr['message'] = '';
 
+    //pengecekan id 
+    if(!isset($request->accountid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih akun terlebih dahulu';
+      return $arr;
+    }
+
     // pengecekan membership
     if(Auth::user()->membership=='free'){
       $arr['status'] = 'error';
@@ -178,11 +185,38 @@ class CompareController extends Controller
     return $history_compare->id;
   }
 
+  public function check_akun($account,$keywords){
+    if(is_null($account) and $keywords!=''){
+      $url = "http://cmx.space/get-user-data/".$keywords;
+
+      $arr_res = AccountController::igcallback($url);
+      
+      if($arr_res!=null){
+        $account = AccountController::create_account($arr_res);
+      } else {
+        return false;
+      }
+    }
+
+    return $account;
+  }
+
   public function load_compare(Request $request){
     $acc1 = Account::where("username",$request->id1)->first();
     $acc2 = Account::where("username",$request->id2)->first();
     $acc3 = Account::where("username",$request->id3)->first();
     $acc4 = Account::where("username",$request->id4)->first();
+
+    $acc1 = $this->check_akun($acc1,$request->id1);
+    $acc2 = $this->check_akun($acc2,$request->id2);
+    $acc3 = $this->check_akun($acc3,$request->id3);
+    $acc4 = $this->check_akun($acc4,$request->id4);
+
+    if($acc1===false || $acc2===false || $acc3===false || $acc4===false){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Username tidak ditemukan';
+      return $arr;
+    }
 
     // $accounts = array($acc1,$acc2,$acc3,$acc4);
     $accounts = array();
@@ -195,18 +229,29 @@ class CompareController extends Controller
     if (!is_null($acc1)){
       $arr_compare["id1"] = $acc1->id;
       $accounts[] = $acc1;
+    } else {
+      $accounts[] = null;
     }
+
     if (!is_null($acc2)){
       $arr_compare["id2"] = $acc2->id;
       $accounts[] = $acc2;
+    } else {
+      $accounts[] = null;
     }
+
     if (!is_null($acc3)){
       $arr_compare["id3"] = $acc3->id;
       $accounts[] = $acc3;
+    } else {
+      $accounts[] = null;
     }
+
     if (!is_null($acc4)){
       $arr_compare["id4"] = $acc4->id;
       $accounts[] = $acc4;
+    } else {
+      $accounts[] = null;
     }
     
     $id_history = $this->do_compare($arr_compare);
@@ -413,6 +458,13 @@ class CompareController extends Controller
   }
 
   public function delete_compare_bulk(Request $request){
+    //Pengecekkan id 
+    if(!isset($request->compareid)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Pilih history terlebih dahulu';
+
+      return $arr;
+    }
 
     foreach ($request->compareid as $id) {
       $compare = HistoryCompare::find($id)

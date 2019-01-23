@@ -4,7 +4,8 @@
 
   /* Profile */
   .info-box { 
-    border:3px solid #1372d4;
+    border:2px solid #1372d4;
+    border-radius: 15px;
     padding:30px;
     margin: 10px;
     width: 200px;
@@ -12,17 +13,17 @@
   }  
 
   .info { 
-    background-color: #fff; 
-    padding-top: 130px;
-    padding-bottom:180px;
+    /*background-color: #fff; */
+    padding-top: 145px;
+    padding-bottom:200px;
   }
 
   .logo { 
-    padding-top: 90px; 
-    padding-bottom: 100px; 
+    padding-top: 160px; 
+    padding-bottom: 60px; 
   }
 
-  #bg-page { position: fixed; z-index:-20;}
+  #bg-page { position:fixed; z-index:-20;}
 
   .saved-on { 
     position: absolute; 
@@ -33,7 +34,7 @@
 
   .profpic { 
     position: absolute; 
-    top: 180px; 
+    top: 245px; 
     left: 400px; 
     max-width: 180px;
     border-radius: 50%;
@@ -57,10 +58,12 @@
 
   .info-label {
     font-size: 20px;
+    color: #626262;  
   }
 
   .info-label.influence {
     font-size: 30px;
+    color: #626262;  
   }
 
   .username {
@@ -173,37 +176,37 @@
   .logo-footer{
     position: absolute;
     bottom:20px;
-    left: 20px;
+    left: 50px;
     width: 180px;
   }
 
   .logo-footer.profile {
-    bottom:100px;
+    bottom:125px;
   }
 
   .saved-on-footer { 
     position: absolute;
     bottom:20px;
-    right: 20px; 
+    right: 50px; 
     font-size: 15px;
     color: #626262;
   }
 
   .saved-on-footer.profile {
-    bottom:100px;
+    bottom:125px;
   }
 
   .info-value-plain { 
-    font-size: 40px;
+    font-size: 38px;
   }
 
   .info-label-plain {
-    font-size: 30px;
+    font-size: 26px;
     color: #626262;
   }
 
   .info-labelsm-plain {
-    font-size: 25px;
+    font-size: 24px;
     color: #626262;
   }
 
