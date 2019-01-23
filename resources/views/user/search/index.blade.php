@@ -396,7 +396,7 @@
         <div class="col-lg-7 col-md-12 col-sm-12">
           <div class="modal-body modal-body-form">
             <div class="signup-content">
-              <form method="POST" action="{{url('post-register')}}" id="signup-form" class="signup-form">
+              <form method="POST" action="{{url('post-register')}}" class="signup-form">
                 @csrf
                 <h2 class="form-title">Create an Omnifluencer<br>account within a minutes</h2>
 
@@ -420,7 +420,7 @@
                   <label class="label-title-test" for="email">
                     Masukkan Email:
                   </label>
-                  <input id="email" type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" name="email" placeholder="Your Email" required/>
+                  <input type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" name="email" placeholder="Your Email" required/>
 
                   @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
@@ -434,7 +434,7 @@
                     Masukkan Password:
                   </label>
 
-                  <input type="password" class="form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" placeholder="Password" required />
+                  <input type="password" class="form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required />
                   <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
 
                   @if ($errors->has('password'))
@@ -478,7 +478,7 @@
             </div>
 
             <div class="login-content">
-              <form method="POST" id="signup-form" class="signup-form" action="{{ route('login') }}">
+              <form method="POST" class="signup-form" action="{{ route('login') }}">
                 @csrf
 
                 <h2 class="form-title">Please input your<br>Email & Password</h2>
@@ -486,7 +486,7 @@
                 <div class="form-group">
                   <label for="email" class="label-title-test">  Masukkan Email:
                   </label>
-                  <input id="email" type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }} " name="email" value="{{ old('email') }}" placeholder="Your Email" required autofocus>
+                  <input type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }} " name="email" value="{{ old('email') }}" placeholder="Your Email" required autofocus>
 
                   @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
@@ -498,7 +498,7 @@
                 <div class="form-group">
                   <label class="label-title-test" for="password">Masukkan Password:</label>
 
-                  <input id="password" type="password" class="form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
+                  <input type="password" class="form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
                   <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
 
                   @if ($errors->has('password'))
