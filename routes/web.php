@@ -148,3 +148,5 @@ Route::group(['middleware' => ['web','auth','admin']], function()
   Route::get('/list-account/load-account','AccountController@load_account');
   Route::get('/list-account/view-log','AccountController@view_account_log');
 });
+
+Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
