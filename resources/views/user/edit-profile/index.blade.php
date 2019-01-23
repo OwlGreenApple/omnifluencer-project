@@ -2,6 +2,14 @@
 
 @section('content')
 <script type="text/javascript">
+  $(document).ready(function() {
+    var logo = '<?php echo Auth::user()->logo ?>';
+    
+    if(logo==null || logo==''){
+      $('#logouser').hide();
+    }
+  });
+
   $( "body" ).on( "click", "#btn-edit", function() {
     edit_profile();
   });
@@ -15,7 +23,12 @@
   });
 
   $(document).on('change', "#fileprofpic", function (e) {
-    readURL(this);
+    readURL(this,'#profpic');
+  });
+
+  $(document).on('change', "#filelogo", function (e) {
+    $('#logouser').show();
+    readURL(this,'#logouser');
   });
 
   function edit_profile(){
@@ -57,12 +70,12 @@
     });  
   }
 
-  function readURL(input) {
+  function readURL(input,selector) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
             
       reader.onload = function (e) {
-        $('#profpic').attr('src', e.target.result);
+        $(selector).attr('src', e.target.result);
       }
       reader.readAsDataURL(input.files[0]);
     }
@@ -128,7 +141,7 @@
 
       <div class="row">
         <div class="col-md-2 col-12 mb-20" align="center">
-          <img id="profpic" class="profpic img-img" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')" style="cursor: pointer; max-width: 100px; border-radius: 50%;">  
+          <img id="profpic" class="profpic img-img" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')" style="max-width: 100px; border-radius: 50%;">  
         </div>
 
         <div class="col-md-9 col-12 center-mobile mb-20">
@@ -183,6 +196,18 @@
 
           <div class="col-md-11">
             <input type="file" class="form-control" name="filelogo" id="filelogo" accept="image/*">
+          </div>
+
+          <?php  
+            $logo = null;
+
+            if(Auth::user()->logo!=null){
+              $logo = Storage::url(Auth::user()->logo);
+            }
+          ?>
+
+          <div class="col-md-11 mt-3">
+            <img id="logouser" class="profpic img-img" src="<?php echo $logo ?>" style="max-width: 200px; border: 1px solid #ced4da; padding: 10px;background:#fff;">  
           </div>
         </div>
 
