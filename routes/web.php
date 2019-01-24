@@ -13,6 +13,9 @@
 
 Auth::routes();
 
+//Tes
+Route::get('/tes-igcallback', 'TesController@tes_igcallback');
+
 //Auth
 Route::post('post-register', 'Auth\RegisterController@post_register');
 

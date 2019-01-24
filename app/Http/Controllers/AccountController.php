@@ -14,7 +14,7 @@ use App\Subscribe;
 use App\Mail\ProfileEmail;
 use App\Mail\ProfileBulkEmail;
 
-use Auth,PDF,Excel,Mail,Validator,Carbon;
+use Auth,PDF,Excel,Mail,Validator,Carbon,Datetime;
 
 class AccountController extends Controller
 {
@@ -33,7 +33,7 @@ class AccountController extends Controller
     return view('user.search.index');
   }
 
-  public static function igcallback($url){
+  public static function igcallback($url,$mode='json'){
     $c = curl_init();
 
     curl_setopt($c, CURLOPT_URL, $url);
@@ -44,8 +44,12 @@ class AccountController extends Controller
     $page = curl_exec($c);
     curl_close($c);
         
-    $arr_res = json_decode($page,true);
-    return $arr_res;
+    if($mode=='json'){
+      $arr_res = json_decode($page,true);
+      return $arr_res;
+    } else {
+      return $page;
+    }
   }
 
   public static function create_account($arr_res){
@@ -57,40 +61,65 @@ class AccountController extends Controller
     $account->jml_followers = $arr_res["follower_count"];
     $account->jml_post = $arr_res["media_count"];
 
-    $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"];
-    // $arr_res2 = $this->igcallback($url2);
-    $arr_res2 = AccountController::igcallback($url2);
+    $count = 0;
+    $jmllike = 0;
+    $jmlcomment = 0;
+    $end_cursor = null;
+    $private = false;
+    $lastpost = null;
+    //var_dump($arr_res2);
 
-    if($arr_res2!=null){
-      $count = 0;
-      $jmllike = 0;
-      $jmlcomment = 0;
-            
-      foreach ($arr_res2 as $arr) {
-        if($count>=20){
+    do {
+      $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
+      $arr_res2 = AccountController::igcallback($url2);    
+
+      $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
+      $arr_res3 = AccountController::igcallback($url3,'string');
+      $end_cursor = $arr_res3;
+
+      if($end_cursor=='InstagramAPI\Response\UserFeedResponse: Not authorized to view user.'){
+          $private = true;
           break;
-        } else {
-          $jmllike = $jmllike + $arr["like_count"];
-          if(array_key_exists('comment_count', $arr)){
-            $jmlcomment = $jmlcomment + $arr["comment_count"];          
-          } 
-          $count++;
+      }
+
+      if(!is_null($arr_res2) and !empty($arr_res2)){
+        if($count==0){
+          $lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
+        }
+
+        foreach ($arr_res2 as $arr) {
+          if($count>=20){
+            break;
+          } else {
+            $jmllike = $jmllike + $arr["like_count"];
+            if(array_key_exists('comment_count', $arr)){
+              $jmlcomment = $jmlcomment + $arr["comment_count"];  
+            } 
+            $count++;
+          }
         }
       }
+    } while ($count<20);
 
-      //hitung rata2 like + comment di 6 post terakhir 
+    //hitung rata2 like + comment di 20 post terakhir 
+    //check akun private atau nggak
+    if($private==false){
       $ratalike = $jmllike/$count;
       $ratacomment = $jmlcomment/$count;
-
-      $account->lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
-      $account->jml_likes = floor($ratalike);
-      $account->jml_comments = floor($ratacomment);
-
-      if($account->jml_followers>0){
-        $account->eng_rate = ($jmllike + $jmlcomment)/$account->jml_followers;
-        $account->total_influenced = $account->eng_rate*$account->jml_followers;
-      }
+    } else {
+      $ratalike = 0;
+      $ratacomment = 0;
     }
+
+    $account->lastpost = $lastpost;
+    $account->jml_likes = floor($ratalike);
+    $account->jml_comments = floor($ratacomment);
+
+    if($account->jml_followers>0){
+      $account->eng_rate = ($jmllike + $jmlcomment)/$account->jml_followers;
+      $account->total_influenced = $account->eng_rate*$account->jml_followers;
+    }
+
     $account->save();
 
     $accountlog = new AccountLog;
@@ -125,7 +154,7 @@ class AccountController extends Controller
       if(is_null($account)){
         $url = "http://cmx.space/get-user-data/".$request->keywords;
 
-        $arr_res = $this->igcallback($url);
+        $arr_res = AccountController::igcallback($url);
         
         if($arr_res!=null){
           $account = $this->create_account($arr_res);
@@ -149,16 +178,25 @@ class AccountController extends Controller
         } else if(Auth::user()->membership=='pro'){
           $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
 
-          if($currenthistory->count()>=10){
+          if($currenthistory->count()>=25){
             $arr['status'] = 'error';
-            $arr['message'] = '<b>Warning!</b> Pro user hanya dapat menyimpan history search sebanyak 10';
+            $arr['message'] = '<b>Warning!</b> Pro user hanya dapat menyimpan history search sebanyak 25';
             return $arr;
           }
         } 
 
-        $history = new HistorySearch;
-        $history->account_id = $account->id;
-        $history->user_id = Auth::user()->id;
+        $history = HistorySearch::where('user_id',Auth::user()->id) 
+                    ->where('account_id',$account->id)
+                    ->first();
+
+        if(is_null($history)){
+          $history = new HistorySearch;
+          $history->account_id = $account->id;
+          $history->user_id = Auth::user()->id;
+        } else {
+          $history->updated_at = new Datetime();
+        }
+ 
         $history->save();
 
         $user = User::find(Auth::user()->id);
@@ -196,7 +234,7 @@ class AccountController extends Controller
       $accounts = HistorySearch::join('accounts','accounts.id','=','history_searchs.account_id')
           ->select('history_searchs.*','accounts.id as accountid','accounts.username','accounts.prof_pic')
           ->where('history_searchs.user_id',Auth::user()->id)
-          ->orderBy('history_searchs.created_at','desc');
+          ->orderBy('history_searchs.updated_at','desc');
 
       $arr['count'] = $accounts->count();
       
@@ -288,7 +326,7 @@ class AccountController extends Controller
               ->whereDate("history_searchs.created_at","<=",$dt1);
     }
 
-    $accounts = $accounts->orderBy('history_searchs.created_at','desc')
+    $accounts = $accounts->orderBy('history_searchs.updated_at','desc')
           ->paginate(15);
 
     $arr['view'] = (string) view('user.history-search.content')

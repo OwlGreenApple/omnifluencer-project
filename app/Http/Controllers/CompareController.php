@@ -11,7 +11,7 @@ use App\Mail\ProfileCompareEmail;
 
 use App\Http\Controllers\AccountController;
 
-use Auth,PDF,Excel,Validator,Mail,Carbon;
+use Auth,PDF,Excel,Validator,Mail,Carbon,DateTime;
 
 class CompareController extends Controller
 {
@@ -133,11 +133,17 @@ class CompareController extends Controller
     }
 
     // panggil function compare dibawah
-    $arr_compare = array(
+    /*$arr_compare = array(
       "id1"=>-1,
       "id2"=>-1,
       "id3"=>-1,
       "id4"=>-1,
+    );*/
+    $arr_compare = array(
+      "id1"=>null,
+      "id2"=>null,
+      "id3"=>null,
+      "id4"=>null,
     );
     if ($request->part==1) {
       $arr_compare["id1"]=$account->id;
@@ -156,6 +162,7 @@ class CompareController extends Controller
   
   public function do_compare($arr){
     $user = Auth::user();
+    /*
     //cari ada user ngga yang search compare kurang dari 1 jam dari now 
     $history_compare = HistoryCompare::where("user_id",$user->id)
                         ->whereRaw("updated_at > date_sub(now(), interval 1 hour)")
@@ -182,7 +189,31 @@ class CompareController extends Controller
     }
     $history_compare->save();
 
-    return $history_compare->id;
+    return $history_compare->id;*/
+
+    $history_compare = HistoryCompare::where("user_id",$user->id)
+                        ->where("account_id_1",$arr["id1"])
+                        ->where("account_id_2",$arr["id2"])
+                        ->where("account_id_3",$arr["id3"])
+                        ->where("account_id_4",$arr["id4"])
+                        ->first();
+
+    if (is_null($history_compare)){
+      //klo ga ada create new 
+      $history_compare = new HistoryCompare;
+      $history_compare->user_id=$user->id;
+      //update data
+      $history_compare->account_id_1=$arr["id1"];
+      $history_compare->account_id_2=$arr["id2"];
+      $history_compare->account_id_3=$arr["id3"];
+      $history_compare->account_id_4=$arr["id4"];
+    } else {
+      $history_compare->updated_at = new DateTime();
+    }
+    
+    $history_compare->save();
+
+    return $history_compare->id; 
   }
 
   public function check_akun($account,$keywords){
@@ -220,11 +251,17 @@ class CompareController extends Controller
 
     // $accounts = array($acc1,$acc2,$acc3,$acc4);
     $accounts = array();
-    $arr_compare = array(
+    /*$arr_compare = array(
       "id1"=>-1,
       "id2"=>-1,
       "id3"=>-1,
       "id4"=>-1,
+    );*/
+    $arr_compare = array(
+      "id1"=>null,
+      "id2"=>null,
+      "id3"=>null,
+      "id4"=>null,
     );
     if (!is_null($acc1)){
       $arr_compare["id1"] = $acc1->id;
@@ -297,7 +334,7 @@ class CompareController extends Controller
                 ->whereDate("history_compares.created_at","<=",$dt1);
       }
 
-      $compares = $compares->orderBy('history_compares.created_at','desc')
+      $compares = $compares->orderBy('history_compares.updated_at','desc')
                   ->paginate(15);
 
       $arr['view'] = (string) view('user.compare-history.content')

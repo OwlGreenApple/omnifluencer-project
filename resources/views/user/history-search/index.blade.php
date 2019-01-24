@@ -442,7 +442,7 @@
               Posts
             </th>
             <th>Groups</th>
-            <th class="header" action="created_at">
+            <th class="header" action="updated_at">
               Date
             </th>
             <th>Action</th>

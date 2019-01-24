@@ -52,9 +52,9 @@
       ?>
     </td> 
     <td data-label="Date">
-      {{ date("H:i", strtotime($account->created_at))  }}
+      {{ date("H:i", strtotime($account->updated_at))  }}
       <br>
-      {{ date("Y/m/d", strtotime($account->created_at))  }}
+      {{ date("Y/m/d", strtotime($account->updated_at))  }}
     </td> 
     <td data-label="Action">
       

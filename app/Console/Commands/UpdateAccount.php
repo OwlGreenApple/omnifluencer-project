@@ -39,7 +39,7 @@ class UpdateAccount extends Command
      * @return mixed
      */
 
-    public function igcallback($url){
+    public function igcallback($url,$mode='json'){
       $c = curl_init();
 
       curl_setopt($c, CURLOPT_URL, $url);
@@ -49,9 +49,14 @@ class UpdateAccount extends Command
       curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
       $page = curl_exec($c);
       curl_close($c);
-        
-      $arr_res = json_decode($page,true);
-      return $arr_res;
+      
+      if($mode=='json'){
+        $arr_res = json_decode($page,true);
+        return $arr_res;
+      } else {
+        return $page;
+      }
+    
     }
     
     public function handle()
@@ -82,50 +87,77 @@ class UpdateAccount extends Command
 
           var_dump($arr_res["username"]);
 
-          $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"];
-          $arr_res2 = $this->igcallback($url2);
+          $count = 0;
+          $jmllike = 0;
+          $jmlcomment = 0;
+          $end_cursor = null;
+          $private = false;
+          $lastpost = null;
+          //var_dump($arr_res2);
 
-          if($arr_res2!=null){
-            $count = 0;
-            $jmllike = 0;
-            $jmlcomment = 0;
-            //var_dump($arr_res2);
-            foreach ($arr_res2 as $arr) {
-              var_dump($count);
-              if($count>=20){
-                break;
-              } else {
-                $jmllike = $jmllike + $arr["like_count"];
-                var_dump('like = '.$arr["like_count"]);
-                if(array_key_exists('comment_count', $arr)){
-                  $jmlcomment = $jmlcomment + $arr["comment_count"];  
-                  var_dump('comment = '.$arr["comment_count"]);
-                } 
-                $count++;
+          do {
+            $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
+            $arr_res2 = $this->igcallback($url2);    
+
+            $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
+            $arr_res3 = $this->igcallback($url3,'string');
+            var_dump('end_cursor = '.$arr_res3);
+            $end_cursor = $arr_res3;
+
+            if($end_cursor=='InstagramAPI\Response\UserFeedResponse: Not authorized to view user.'){
+              $private = true;
+              break;
+            }
+
+            if(!is_null($arr_res2) and !empty($arr_res2))
+            {
+              if($count==0){
+                $lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
+              }
+
+              foreach ($arr_res2 as $arr) {
+                if($count>=20){
+                  break;
+                } else {
+                  $jmllike = $jmllike + $arr["like_count"];
+                  var_dump('like = '.$arr["like_count"]);
+                  if(array_key_exists('comment_count', $arr)){
+                    $jmlcomment = $jmlcomment + $arr["comment_count"];  
+                    var_dump('comment = '.$arr["comment_count"]);
+                  } 
+                  $count++;
+                }
               }
             }
-            //hitung rata2 like + comment di 6 post terakhir 
+          } while ($count<20);
+            
+          //hitung rata2 like + comment di 20 post terakhir 
+          //check akun private atau nggak
+          var_dump('Last post ='.$lastpost);
+          if($private==false){
             $ratalike = $jmllike/$count;
             $ratacomment = $jmlcomment/$count;
-
-            var_dump("taken = ".$arr_res2[0]["taken_at"]);
-            var_dump(date("d/m/Y",$arr_res2[0]["taken_at"]));
-
-            $account->lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
-            $account->jml_likes = floor($ratalike);
-            $account->jml_comments = floor($ratacomment);
-            //$account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
-
-            if($account->jml_followers>0){
-              $account->eng_rate = ($jmllike + $jmlcomment)/$account->jml_followers;
-              $account->total_influenced = $account->eng_rate*$account->jml_followers;
-            }
-          
-            var_dump('ratalike = '.floor($ratalike));
-            var_dump('ratacomment = '.floor($ratacomment));
-            //var_dump($arr_res2);
-            //var_dump($arr_res2["j"]);
+          } else {
+            $ratalike = 0;
+            $ratacomment = 0;
           }
+
+          $account->lastpost = $lastpost;
+          $account->jml_likes = floor($ratalike);
+          $account->jml_comments = floor($ratacomment);
+          //$account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
+
+          if($account->jml_followers>0){
+            $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers*20);
+            $account->total_influenced = $account->eng_rate*$account->jml_followers;
+          }
+          
+          var_dump('ratalike = '.floor($ratalike));
+          var_dump('ratacomment = '.floor($ratacomment));
+          var_dump('Eng rate = '.round($account->eng_rate*100,2));
+          //var_dump($arr_res2);
+          //var_dump($arr_res2["j"]);
+          
 
           $account->save();
 

@@ -39,7 +39,11 @@
     </div>
     <div class="col-6">
       <p class="number-stat">
-        {{ date("M d Y", strtotime($account->lastpost))  }}
+        @if(is_null($account->lastpost))
+          -
+        @else 
+          {{ date("M d Y", strtotime($account->lastpost))  }}
+        @endif
       </p>
       <p class="desc-stat">Last Posts</p>
     </div>
