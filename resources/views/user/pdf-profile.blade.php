@@ -9,8 +9,6 @@
   if(Auth::user()->logo!=null){
     $logo = Storage::url(Auth::user()->logo);
   }
-
-  dd($logo);
 ?>
 
 <?php if(is_array($account)) { 
