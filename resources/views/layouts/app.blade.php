@@ -84,27 +84,27 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item main-menu">
               <a class="nav-link" href="{{url('faq')}}">
                 FAQ
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item main-menu">
               <a class="nav-link" href="#">Contact</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item main-menu">
               <a class="nav-link" href="#">Blog</a>
             </li>
-            <li class="nav-item" style="border-right: 1px solid black">
+            <li class="nav-item main-menu" style="border-right: 1px solid black">
               <a class="nav-link" href="{{url('pricing')}}">Pricing</a>
             </li>
           
             <!-- Authentication Links -->
             @guest
-              <li class="nav-item">
+              <li class="nav-item main-menu">
                 <a class="nav-link" href="{{url('login')}}">Sign In</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item main-menu">
                 <a class="nav-link d-block d-sm-block d-md-block d-lg-none" href="{{url('register')}}">
                   Sign Up
                 </a>
@@ -113,15 +113,15 @@
                 Sign Up
               </button>
             @else
-              <li class="nav-item">
+              <li class="nav-item main-menu">
                 <a class="nav-link" href="{{asset('dashboard')}}">
-                  <i class="fas fa-tachometer-alt icon-menu"></i>
+                  <i class="fas fa-tachometer-alt" style="margin-right: 5px;"></i>
                   Dashboard
                 </a>
               </li>
 
               <li class="nav-item dropdown" >
-                <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre data-offset="5,10">
+                <a id="navbarDropdown" class="nav-link main-menu" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre data-offset="5,10">
                   <span class="icon-notif" id="icon-notif" data-badge="{{$countnotif}}">
                     <i class="fas fa-bell" style="margin-right: 7px;"></i>
                   </span>
@@ -173,7 +173,7 @@
               ?>
 
               <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+              <a id="navbarDropdown" class="nav-link main-menu" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 <img class="profpic-header" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
               </a>
 

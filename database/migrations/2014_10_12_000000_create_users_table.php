@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->boolean('gender')->default(0)->nullable();
-            $table->integer('point')->nullable();
+            $table->integer('point')->default(0)->nullable();
             $table->boolean('is_admin')->default(0)->nullable();
             $table->boolean('is_confirm')->default(0)->nullable();
             $table->string('confirm_code')->nullable();

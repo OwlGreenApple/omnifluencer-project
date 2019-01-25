@@ -309,9 +309,18 @@
       });
   }
 
-  function check_id(){
+  function check_id(mode='default'){
     if ($(".checkaccid:checked").length > 0){
-      return true;
+      if(mode=='compare'){
+        console.log($(".checkaccid:checked").length);
+        if ($(".checkaccid:checked").length < 2){
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return true;
+      }
     } else {
       return false;
     }
@@ -641,10 +650,10 @@
   $( "body" ).on( "click", "#btn-compare", function() {
     // console.log($('.checkaccid').val());
 
-    if(check_id()){
+    if(check_id('compare')){
       check_compare();
     } else {
-      $('#pesan').html('Pilih akun terlebih dahulu');
+      $('#pesan').html('Pilih setidaknya 2 akun untuk compare');
       $('#pesan').removeClass('alert-success');
       $('#pesan').addClass('alert-warning');
       $('#pesan').show();

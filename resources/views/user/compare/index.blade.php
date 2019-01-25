@@ -16,7 +16,7 @@
     
       window.location.replace(url);
     } else {
-      $('#message').html('Isi form terlebih dahulu');
+      $('#message').html('Pilih setidaknya 2 akun untuk compare');
       $('#modal-pesan').modal('show');
     }
 
@@ -115,7 +115,7 @@
   }
 
   function check_field(){
-    var member = '<?php echo Auth::user()->membership ?>';
+    /*var member = '<?php echo Auth::user()->membership ?>';
 
     if(member=='premium'){
       if($('#keywords1').val()=='' && $('#keywords2').val()=='' && $('#keywords3').val()=='' && $('#keywords4').val()==''){
@@ -129,6 +129,17 @@
       } else {
         return true;
       }
+    }*/
+    var isi = $( "input[name^='keywords']").filter(function() {
+          return $(this).val() != "";
+        });
+
+    if(isi.length<2){
+      console.log(false);
+      return false;
+    } else {
+      console.log(true);
+      return true;
     }
   }
 </script>
@@ -187,7 +198,7 @@
         @csrf
         <div class="form-group row search-bar">
           <div class="col-md-9 col-12">
-            <input id="keywords1" class="form-control " name="search" placeholder="username" value="{{$username1}}">
+            <input id="keywords1" class="form-control " name="keywords[]" placeholder="username" value="{{$username1}}">
           </div>
           <div class="col-md-3 col-12 pl-0 mobile-none">
             <button type="button" class="btn btn-primary btn-search" data-part="1"> Search </button>
@@ -202,7 +213,7 @@
         @csrf
         <div class="form-group row search-bar">
           <div class="col-md-9 col-12 pl-none">
-            <input id="keywords2" class="form-control" name="search" placeholder="username" value="{{$username2}}">
+            <input id="keywords2" class="form-control" name="keywords[]" placeholder="username" value="{{$username2}}">
           </div>
           <div class="col-md-3 col-12 pl-0 mobile-none">
             <button type="button" class="btn btn-primary btn-search" data-part="2"> Search </button>
@@ -218,7 +229,7 @@
           @csrf
           <div class="form-group row search-bar">
             <div class="col-md-9 col-12">
-              <input id="keywords3" class="form-control" name="search" placeholder="username" value="{{$username3}}">
+              <input id="keywords3" class="form-control" name="keywords[]" placeholder="username" value="{{$username3}}">
             </div>
             <div class="col-md-3 col-12 pl-0 mobile-none">
               <button type="button" class="btn btn-primary btn-search" data-part="3"> Search </button>
@@ -233,7 +244,7 @@
           @csrf
           <div class="form-group row search-bar">
             <div class="col-md-9 col-12 pl-none">
-              <input id="keywords4" class="form-control" name="search" placeholder="username" value="{{$username4}}">
+              <input id="keywords4" class="form-control" name="keywords[]" placeholder="username" value="{{$username4}}">
             </div>
             <div class="col-md-3 col-12 pl-0">
               <button type="button" class="btn btn-primary btn-search mobile-none" data-part="4"> Search </button>

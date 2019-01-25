@@ -141,7 +141,7 @@
 
       <div class="row">
         <div class="col-md-2 col-12 mb-20" align="center">
-          <img id="profpic" class="profpic img-img" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')" style="max-width: 100px; border-radius: 50%;">  
+          <img id="profpic" class="profpic img-img" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')" style="width:100px; height:100px; object-fit:cover; border-radius: 50%;">  
         </div>
 
         <div class="col-md-9 col-12 center-mobile mb-20">

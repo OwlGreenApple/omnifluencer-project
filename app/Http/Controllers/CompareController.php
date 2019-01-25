@@ -31,6 +31,10 @@ class CompareController extends Controller
 
     $arr1 = explode("-",$keywords);
 
+    if(count($arr1)<2){
+      return 'Pilih setidaknya 2 akun untuk melakukan compare';
+    }
+
     $arr_compare = array(
       "username1"=>"",
       "username2"=>"",

@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
           $table->string('package')->nullable();
           $table->integer('jmlpoin');
           $table->double('total');
-          $table->double('discount')->nullable();
+          $table->double('discount')->nullable()->default(0);
           $table->smallInteger('status')->default(0);
           $table->text('buktibayar')->nullable();
           $table->text('keterangan')->nullable();

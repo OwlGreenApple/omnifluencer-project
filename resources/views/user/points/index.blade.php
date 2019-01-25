@@ -48,6 +48,8 @@
 <style type="text/css">
   .profpic {
     width: 75px;
+    height: 75px;
+    object-fit: cover;
     border-radius: 50%;
   }
 </style>

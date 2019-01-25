@@ -7,31 +7,36 @@
     </td>
     <td data-label="Instagram">
       <?php 
+        $akun = '';
+
         if(!is_null($compare->account_id_1)){
-      ?>       
-          {{'@'.$compare->acc1username}}
-      <?php  
+          $akun = '@'.$compare->acc1username.' ';       
         }  
 
         if(!is_null($compare->account_id_2)){
-      ?>       
-        <i class="fas fa-arrows-alt-h icon-arrow"></i> 
-        {{'@'.$compare->acc2username}}
-      <?php  
+          if($akun!=''){
+            $akun = $akun.'<i class="fas fa-arrows-alt-h icon-arrow"></i>';
+          }
+          
+          $akun = $akun.'@'.$compare->acc2username.' ';
         }
 
         if(!is_null($compare->account_id_3)){
-      ?>
-          <i class="fas fa-arrows-alt-h icon-arrow"></i> 
-          {{'@'.$compare->acc3username}}          
-      <?php  
+          if($akun!=''){
+            $akun = $akun.'<i class="fas fa-arrows-alt-h icon-arrow"></i>';
+          }
+          $akun = $akun.'@'.$compare->acc3username.' ';
         }
 
         if(!is_null($compare->account_id_4)){
+          if($akun!=''){
+            $akun = $akun.'<i class="fas fa-arrows-alt-h icon-arrow"></i>';
+          }
+          $akun = $akun.'@'.$compare->acc4username.' ';
+        } 
+
+        echo $akun;
       ?>
-          <i class="fas fa-arrows-alt-h icon-arrow"></i> 
-          {{'@'.$compare->acc4username}}          
-      <?php } ?>
     </td>
     <td data-label="Date">
       {{ date("H:i", strtotime($compare->updated_at))  }}

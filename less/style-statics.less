@@ -1,0 +1,235 @@
+/* CSS Document */
+body,
+html {
+  width: 100%;
+  height: 100%;
+  background-image: none;
+}
+
+
+/*SETUP*/
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: SourceSansPro-Regular, sans-serif;
+  font-weight: 700;
+}
+
+/*HR*/
+hr.orn {
+  border-top: 3px solid #fff;
+  width: 10%;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr.wh {
+  border-top: 1px solid #fff;
+  max-width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/*PAGE TITLE*/
+.page-title {
+  background-image: url(../design/new-bg.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: relative;
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin: 0;
+}
+
+.page-title h1 {
+  text-align: center;
+  color: #fff;
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.pg-title {
+  padding-top: 30px;
+  text-align: center;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+
+/*CONTENT*/
+.konten {
+  font-size: 16px;
+  font-weight: 400;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.konten a {
+  font-weight: 600;
+  color: #505050 !important;
+}
+
+.konten a:hover {
+  font-weight: 600;
+  color: #1E6CC6 !important;
+}
+
+.active {
+  background-image: linear-gradient(-135deg, #70C5FF 0%, #49D1EF 52%, #70C5FF 100%);
+  box-shadow: 0 2px 3px 1px rgba(183,183,183,0.50);
+}
+
+.bloks {
+  border-top-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+
+.card {
+  margin-top: 20px;
+  background-color: #FCFCFC;
+  border: 1px solid #DCDCDC;
+}
+
+.card-body h1 {
+  color: #3D3938;
+  margin-bottom: 20px;
+}
+
+.sticky-top {
+  padding-top: 20px;
+}
+
+.list-group-item {
+  border: 0;
+}
+
+
+/*FOOTER*/
+footer {
+  background-color: #fff;
+  border-top: 2px solid #D9D9D9;
+}
+
+footer h6 {
+  position: relative;
+  color: #999999;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.btn-footer {
+  color: grey;
+  text-decoration: none;
+  border: 1px solid;
+  border-radius: 43px;
+  font-size: 13px;
+  padding: 7px 30px;
+  line-height: 47px;
+}
+
+.btn-footer:hover {
+  text-decoration: none;
+}
+
+.social {
+  margin-top: 20px;
+}
+
+.social .fab {
+  color: grey;
+  font-size: 22px;
+  padding: 10px 15px;
+  background: #3c3c3c;
+}
+
+footer ul li {
+  list-style: none;
+  display: block;
+}
+
+footer ul {
+  padding-left: 0;
+}
+
+footer ul li a {
+  color: #999999;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+a:hover {
+  text-decoration: none;
+  color: grey !important;
+
+}
+
+.logo-part {
+  border-right: 1px solid grey;
+  height: 100%;
+}
+
+footer p {
+  padding-top: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #999999;
+}
+
+.form-inline-btm .form-control {
+  width: 170px !important;
+  height: 30px !important;
+}
+
+.form-inline-btm {
+  margin-top: 0;
+}
+
+.btn-primary-btm {
+  width: 80px;
+  height: 30px;
+  padding: 0;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+
+/*MEDIA QUERIES*/
+@media (max-width: 575.98px) {
+  .page-title h1 {
+    font-size: 30px;
+  }
+
+  .pg-title {
+    padding-top: 10px;
+    font-size: 16px;
+  }
+
+  hr.orn {
+    width: 33%;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {}
+
+@media (min-width: 768px) and (max-width: 991.98px) {}
