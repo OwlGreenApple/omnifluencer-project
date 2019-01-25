@@ -3,6 +3,13 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
 
+<?php  
+  $logo = null;
+
+  if(Auth::user()->logo!=null){
+    $logo = Storage::url(Auth::user()->logo);
+  }
+?>
 
 @if(Auth::user()->logo==null)
   <div class="col-xs-12 logo-rotate" align="center">
@@ -10,7 +17,7 @@
   </div>
 @else 
   <div class="col-xs-12 logo-rotate" align="center">
-    <img src="{{asset('design/logodummy.png')}}" style="height:50px;">
+    <img src="<?php echo $logo ?>" style="height:50px;">
   </div>
 @endif
 

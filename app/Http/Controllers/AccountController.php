@@ -98,6 +98,11 @@ class AccountController extends Controller
             $count++;
           }
         }
+      } else {
+        if($count==0){
+          $private = true;
+        }
+        break;
       }
     } while ($count<20);
 

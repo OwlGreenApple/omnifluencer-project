@@ -128,6 +128,11 @@ class UpdateAccount extends Command
                   $count++;
                 }
               }
+            } else {
+              if($count==0){
+                $private = true;
+              }
+              break;
             }
           } while ($count<20);
             

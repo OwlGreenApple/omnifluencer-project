@@ -16,7 +16,7 @@ class CreateHistoryComparesTable extends Migration
         Schema::create('history_compares', function (Blueprint $table) {
             $table->increments('id');
             $table->biginteger('user_id');
-            $table->biginteger('account_id_1');
+            $table->biginteger('account_id_1')->nullable();
             $table->biginteger('account_id_2')->nullable();
             $table->biginteger('account_id_3')->nullable();
             $table->biginteger('account_id_4')->nullable();

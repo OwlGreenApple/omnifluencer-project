@@ -3,6 +3,16 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
 
+<?php  
+  $logo = null;
+
+  if(Auth::user()->logo!=null){
+    $logo = Storage::url(Auth::user()->logo);
+  }
+
+  dd($logo);
+?>
+
 <?php if(is_array($account)) { 
         foreach ($account as $acc) {
 ?>
@@ -17,7 +27,7 @@
       </div>
     @else 
       <div class="col-xs-12 logo" align="center">
-        <img src="{{asset('design/logodummy.png')}}" class="logouser">
+        <img src="<?php echo $logo ?>" class="logouser">
       </div>
     @endif
 
@@ -133,7 +143,7 @@
     </div>
   @else 
     <div class="col-xs-12 logo" align="center">
-      <img src="{{asset('design/logodummy.png')}}" class="logouser">
+      <img src="<?php echo $logo ?>" class="logouser">
     </div>
   @endif
 

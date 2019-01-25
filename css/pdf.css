@@ -101,10 +101,14 @@
 
   /* Compare */
   .info-compare {
-    background-color: #fff; 
+    /*background-color: #fff; */
     padding-top: 30px;
     padding-bottom: 60px;
     margin-top: 50px;
+  }
+
+  .info-label-compare {
+    color: #626262;
   }
 
   .logo-rotate { 
