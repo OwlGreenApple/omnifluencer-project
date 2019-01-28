@@ -8,6 +8,15 @@
     if(logo==null || logo==''){
       $('#logouser').hide();
     }
+
+    if(localStorage.getItem("success"))
+    {
+      $('#pesan').html('Edit profile berhasil');
+      $('#pesan').removeClass('alert-warning');
+      $('#pesan').addClass('alert-success');
+      $('#pesan').show();
+      localStorage.clear();
+    }
   });
 
   $( "body" ).on( "click", "#btn-edit", function() {
@@ -56,10 +65,12 @@
         //var data = jQuery.parseJSON(result);
         
         if(data.status=='success'){
-          $('#pesan').html(data.message);
+          /*$('#pesan').html(data.message);
           $('#pesan').removeClass('alert-warning');
           $('#pesan').addClass('alert-success');
-          $('#pesan').show();
+          $('#pesan').show();*/
+          localStorage.setItem("success",data.message)
+          window.location.reload(); 
         } else {
           $('#pesan').html(data.message);
           $('#pesan').removeClass('alert-success');
@@ -169,7 +180,7 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <!--<div class="form-group">
           <label class="col-sm-4 col-form-label">
             Username
           </label>
@@ -177,7 +188,7 @@
           <div class="col-md-11">
             <input id="username" type="text" class="form-control" name="username" value="{{$user->username}}">
           </div>
-        </div>
+        </div>-->
             
         <div class="form-group">
           <label class="col-sm-4 col-form-label">
