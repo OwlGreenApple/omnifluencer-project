@@ -90,12 +90,14 @@
               </a>
             </li>
             <li class="nav-item main-menu">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="{{url('statics')}}">
+                About Us
+              </a>
             </li>
             <li class="nav-item main-menu">
               <a class="nav-link" href="#">Blog</a>
             </li>
-            <li class="nav-item main-menu" style="border-right: 1px solid black">
+            <li class="nav-item main-menu">
               <a class="nav-link" href="{{url('pricing')}}">Pricing</a>
             </li>
           
@@ -240,7 +242,11 @@
                     <li> 
                       <a href="{{url('/')}}"> Home</a> 
                     </li>
-                    <li> <a href="#"> About Us</a> </li>
+                    <li> 
+                      <a href="{{url('statics')}}"> 
+                        About Us
+                      </a> 
+                    </li>
                     <li> <a href="#"> Blog</a> </li>
                     <li> 
                       <a href="{{url('pricing')}}"> 
