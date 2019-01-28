@@ -34,12 +34,12 @@ class DatabaseSeeder extends Seeder
         'password' => bcrypt('admin888'),
         'gender'=> 1, //male
         'point' => 0,
-        'is_admin' => 1, //admin
+        'is_admin' => 0, //user
         'is_confirm' => 1,
-        'confirm_code' => null,
+        'confirm_code' => 'tes'.uniqid(),
         'last_login' => null,
         'membership' => 'premium', 
-        'referral_link' => null,
+        'referral_link' => uniqid(),
       ]);
 
       DB::table('users')->insert([
@@ -49,12 +49,12 @@ class DatabaseSeeder extends Seeder
         'password' => bcrypt('admin888'),
         'gender'=> 1, //male
         'point' => 0,
-        'is_admin' => 1, //admin
+        'is_admin' => 0, //user
         'is_confirm' => 1,
-        'confirm_code' => null,
+        'confirm_code' => 'tes'.uniqid(),
         'last_login' => null,
         'membership' => 'premium',
-        'referral_link' => null,
+        'referral_link' => uniqid(),
       ]);
 
       DB::table('users')->insert([
