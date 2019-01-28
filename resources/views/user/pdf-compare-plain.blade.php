@@ -47,7 +47,9 @@
             <?php $engrate = $account->eng_rate*100 ?>
             <b>{{round($engrate,2)}}</b>%
           </span><br>
-          <span>Engagement<br>Rate</span>
+          <span class="info-label-compare">
+            Engagement<br>Rate
+          </span>
         </div>
       </div>
         
@@ -57,7 +59,7 @@
             <?php echo Helper::abbreviate_number(round($account->total_influenced),2) ?>  
           </b>
         </span><br>
-        <span>
+        <span class="info-label-compare">
           Total Influenced
         </span>
       </div>
@@ -66,42 +68,46 @@
         <span>
           <b><?php echo Helper::abbreviate_number($account->jml_post,2); ?></b>
         </span><br>
-        <span>Post</span>
+        <span class="info-label-compare">Post</span>
       </div>
         
       <div class="info-box-compare">
         <span>
           <b><?php echo Helper::abbreviate_number($account->jml_followers,2); ?></b>
         </span><br>
-        <span>Followers</span>
+        <span class="info-label-compare">Followers</span>
       </div>
         
       <div class="info-box-compare">
         <span>
           <b><?php echo Helper::abbreviate_number($account->jml_following,2); ?></b>
         </span><br>
-        <span>Following</span>
+        <span class="info-label-compare">Following</span>
       </div>
           
       <div class="info-box-compare">
         <span>
           <b>{{ date("M d Y", strtotime($account->lastpost))  }}</b>
         </span><br>
-        <span>Last Post</span>
+        <span class="info-label-compare">Last Post</span>
       </div>
         
       <div class="info-box-compare">
         <span>
           <b><?php echo Helper::abbreviate_number($account->jml_likes,2); ?></b>
         </span><br>
-        <span>Avg Like Per Post</span>
+        <span class="info-label-compare">
+          Avg Like Per Post
+        </span>
       </div>
         
       <div class="info-box-compare">
         <span>
           <b><?php echo Helper::abbreviate_number($account->jml_comments,2); ?></b>
         </span><br>
-        <span>Avg Comment Per Post</span>
+        <span class="info-label-compare">
+          Avg Comment Per Post
+        </span>
       </div>  
     </div>
   @endforeach
