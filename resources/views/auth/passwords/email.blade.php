@@ -1,7 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="{{ asset('css/style-login.css') }}" rel="stylesheet">
+
 <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-12">
+
+      <div class="signup">
+        <div class="signup-content">
+          <form method="POST" id="signup-form" class="signup-form" action="{{route('password.email')}}">
+            @csrf
+
+            <h2 class="form-title">
+              Reset Password
+            </h2>
+
+            @if (session('status'))
+              <div class="col-md-12 alert alert-success" role="alert">
+                {{ session('status') }}
+              </div>
+            @endif
+      
+            <div class="form-group">
+              <label for="email" class="label-title-test">  Email Address :
+              </label>
+
+              <input id="email" type="email" class="form-input form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Your Email" required autofocus>
+
+              @if ($errors->has('email'))
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $errors->first('email') }}</strong>
+                </span>
+              @endif
+            </div>
+
+            <div class="form-group form-group-mob">
+              <button type="submit" class="btn btn-primary form-submit pointer">
+                Send Password Reset Link
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
 
@@ -44,5 +90,5 @@
         </div>
       </div>
   </div>
-</div>
+</div>-->
 @endsection
