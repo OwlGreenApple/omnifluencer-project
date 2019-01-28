@@ -16,10 +16,12 @@ class ConfirmOrderMail extends Mailable
      *
      * @return void
      */
-    protected $emaildata;
-    public function __construct($emaildata)
+    protected $user;
+    protected $order;
+    public function __construct($user,$order)
     {
-        $this->emaildata = $emaildata;
+        $this->user = $user;
+        $this->order = $order;
     }
 
     /**
@@ -32,6 +34,7 @@ class ConfirmOrderMail extends Mailable
         return $this->from('omnifluencer@gmail.com', 'Omnifluencer')
                   ->subject('[Omnifluencer] Konfirmasi Order')
                   ->view('emails.confirm-order')
-                  ->with($this->emaildata);
+                  ->with('user',$this->user)
+                  ->with('order',$this->order);
     }
 }

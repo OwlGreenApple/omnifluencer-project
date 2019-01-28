@@ -2,7 +2,7 @@ Terima kasih, anda telah melakukan pemesanan Omnifluencer service.<br>
 Info Order anda adalah sebagai berikut <br>
 <br>
 <strong>No Order :</strong> {{$no_order}} <br>
-<strong>Nama :</strong> {{$user->fullname}} <br>
+<strong>Nama :</strong> {{$user->name}} <br>
 <strong>Status Order :</strong> Pending <br>
 Anda telah memesan paket 
 
@@ -19,7 +19,7 @@ Anda telah memesan paket
 	
 	
 	dan setelah selesai membayar<br>
-	silahkan KLIK <a href="{{url('confirm-payment')}}"> --> KONFIRMASI PEMBAYARAN <-- </a> disini. <br>
+	silahkan lakukan konfirmasi pembayaran di menu Orders pada dashboard, atau bisa dengan mengklik <a href="{{url('orders')}}"> --> KONFIRMASI PEMBAYARAN <-- </a> disini. <br>
 
 <br> Salam hangat, 
 <br>
