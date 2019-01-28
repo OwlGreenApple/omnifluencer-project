@@ -964,8 +964,8 @@ footer span {
   }
 
   .form-group .form-control {
-    width: 170px !important;
-    height: 40px !important;
+    width: 170px;
+    height: 40px;
   }
 
   .btn-sbmt {

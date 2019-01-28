@@ -13,6 +13,10 @@
   margin-bottom: 100px;
 }
 
+.form-group .form-control {
+  width: 100%;
+}
+
 .form-title {
   font-size: 30px;
   font-weight: 400;
