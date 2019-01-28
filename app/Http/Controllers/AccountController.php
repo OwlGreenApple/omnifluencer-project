@@ -121,7 +121,7 @@ class AccountController extends Controller
     $account->jml_comments = floor($ratacomment);
 
     if($account->jml_followers>0){
-      $account->eng_rate = ($jmllike + $jmlcomment)/$account->jml_followers;
+      $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers*20);
       $account->total_influenced = $account->eng_rate*$account->jml_followers;
     }
 
