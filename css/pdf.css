@@ -62,7 +62,7 @@
   }
 
   .info-label.influence {
-    font-size: 30px;
+    font-size: 25px;
     color: #626262;  
   }
 
@@ -180,7 +180,7 @@
   .logo-footer{
     position: absolute;
     bottom:20px;
-    left: 50px;
+    left: 100px;
     width: 180px;
   }
 
@@ -191,7 +191,7 @@
   .saved-on-footer { 
     position: absolute;
     bottom:20px;
-    right: 50px; 
+    right: 100px; 
     font-size: 15px;
     color: #626262;
   }
