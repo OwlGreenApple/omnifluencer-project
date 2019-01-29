@@ -837,11 +837,10 @@ footer h6 {
   margin-top: 20px;
 }
 
-.social .fab {
-  color: grey;
-  font-size: 22px;
-  padding: 10px 15px;
-  background: #3c3c3c;
+.icon-social {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #999999;
 }
 
 footer ul li {

@@ -34,3 +34,17 @@ input[type=checkbox]:checked + label {
   display: none;
   margin-bottom: 10px;  
 }
+
+.link-username{
+  background:none!important;
+  color:inherit;
+  border:none; 
+  padding:0!important;
+  font: inherit;
+  /*border is optional*/
+  cursor: pointer;
+}  
+
+.link-username:hover {
+  color: #27ACF3;
+}
