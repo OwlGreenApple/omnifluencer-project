@@ -59,11 +59,9 @@ class ProfileEmail extends Mailable
                     ->view('emails.profile-docs')
                     ->with($this->emaildata);
       } else {
-        $filename = 'profile '.$account->username;
+        $store = '/storage/app/'.Auth::user()->email.'/profile.xlsx';
 
-        $store = '/storage/app/'.Auth::user()->email.'/'.$filename.'.xlsx';
-
-        $Excel_file = Excel::create($filename, function($excel) use ($account) {
+        $Excel_file = Excel::create('profile', function($excel) use ($account) {
           $excel->sheet('list', function($sheet) use ($account) {
             $username = '@'.$account->username;
             $sheet->cell('C2', $username); 
