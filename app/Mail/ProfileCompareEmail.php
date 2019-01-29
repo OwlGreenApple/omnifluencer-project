@@ -52,12 +52,10 @@ class ProfileCompareEmail extends Mailable
                     ->view('emails.profile-docs')
                     ->with($this->emaildata);
       } else {
-        $filename = "profile compare - ".count(array_filter($this->data))." accounts - ".date('d-m-Y');
-
-        $store = '/storage/app/'.Auth::user()->email.'/'.$filename.'.xlsx';
+        $store = '/storage/app/'.Auth::user()->email.'/profile-compare.xlsx';
         $data = $this->data;
 
-        $Excel_file = Excel::create($filename, function($excel) use ($data) {
+        $Excel_file = Excel::create('profile-compare', function($excel) use ($data) {
           $excel->sheet('list', function($sheet) use ($data) {
 
             $sheet->cell('B3', 'Engagement Rate'); 
