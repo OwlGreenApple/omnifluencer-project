@@ -62,11 +62,13 @@ class ProfileBulkEmail extends Mailable
                     ->view('emails.profile-docs')
                     ->with($this->emaildata);
       } else {
-        $store = '/storage/app/'.Auth::user()->email.'/profilebulk.xlsx';
+        $filename = "profile bulk - ".count($data['account'])." accounts - ".date('d-m-Y');
+
+        $store = '/storage/app/'.Auth::user()->email.'/'.$filename.'.xlsx';
 
         $bulkid = $this->bulkid;
 
-        $Excel_file = Excel::create('profilebulk', function($excel) use ($bulkid) {
+        $Excel_file = Excel::create($filename, function($excel) use ($bulkid) {
           $i = 1;
           foreach ($bulkid as $id) {
             $sheetname = 'Sheet'.$i;
