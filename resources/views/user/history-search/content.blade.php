@@ -9,8 +9,16 @@
       <input type="checkbox" class="checkhisid-{{$account->id}}" name="historyid[]" value="{{$account->id}}" style="display: none;">
     </td>
     <td data-label="Instagram">
-      <img src="{{$account->prof_pic}}" style="max-width:50px; border-radius:50%;">
-      <?php echo '@'.$account->username ?>
+      <form action="{{url('search')}}" method="POST">
+        @csrf
+        <input type="hidden" name="keywords" value="{{$account->username}}">
+
+        <img src="{{$account->prof_pic}}" style="max-width:50px; border-radius:50%;">
+        <button class="link-username" type="submit">
+          <?php echo '@'.$account->username ?>
+        </button>
+
+      </form>
     </td>
     <td data-label="Eng. Rate">
       <?php 

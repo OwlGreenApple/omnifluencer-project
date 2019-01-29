@@ -2,6 +2,8 @@
 
 @section('content')
 <script type="text/javascript">
+  var currentHistory;
+
   $(document).ready(function() {
     refresh_page();
   });
@@ -10,10 +12,21 @@
             $('.counter').counterUp();
         });
 
-  $( "body" ).on( "click", ".btn-search", function() {
-    if($('#keywords').val()!=''){
-      refresh_page();
-    }
+  $( "body" ).on( "click", ".btn-search", function(e) {
+    <?php if(!Auth::check()) { ?>
+      if(currentHistory>=3){
+        e.preventDefault();
+        $('#info-kuota').modal('show');
+      } else {
+        if($('#keywords').val()!=''){
+          refresh_page();
+        }
+      }
+    <?php } else { ?>
+      if($('#keywords').val()!=''){
+        refresh_page();
+      }
+    <?php } ?>
   });
 
   $( "body" ).on( "click", ".register-link", function(e) 
@@ -139,7 +152,8 @@
 
         var data = jQuery.parseJSON(result);
         $('#content-history').html(data.view);
-        console.log(data.count);
+        currentHistory = data.count;
+        
         if(data.count>=2){
           $('.boxcompare').show();
           $('.btn-compare').show();
@@ -262,7 +276,7 @@
             <form class="form-inline d-flex justify-content-center" action="/action_page.php">
               @csrf 
               <div class="form-group">
-                <input type="text" class="form-control" id="keywords" placeholder="@username" name="username">
+                <input type="text" class="form-control" id="keywords" placeholder="@username" name="username" value="{{$keywords}}">
               </div>
               <button type="button" class="btn btn-default btn-sbmt grads btn-search">
                 <span>Calculate</span>

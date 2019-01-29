@@ -30,7 +30,13 @@ class AccountController extends Controller
   }
 
   public function index(){
-    return view('user.search.index');
+    return view('user.search.index')
+            ->with('keywords',null);
+  }
+
+  public function index_post(Request $request){
+    return view('user.search.index')
+            ->with('keywords',$request->keywords);
   }
 
   public static function igcallback($url,$mode='json'){
@@ -152,7 +158,11 @@ class AccountController extends Controller
 
     if($request->keywords==''){
       //$account = Account::find(1);
-      $account = Account::where('jml_followers','>=',500000)->inRandomOrder()->first();
+      //$account = Account::where('jml_followers','>=',500000)->inRandomOrder()->first();
+      $account = Account::where('id',1499)
+                  ->orWhere('id',1500)
+                  ->inRandomOrder()
+                  ->first();
     } else {
       $account = Account::where('username',$request->keywords)->first();
 
@@ -375,7 +385,6 @@ class AccountController extends Controller
             ->setOption('margin-left', '0mm');
     }
 
-    //return $pdf->download('omnifluencer.pdf');
     return $pdf->stream();
   }
 
@@ -389,8 +398,8 @@ class AccountController extends Controller
     $user->count_csv = $user->count_csv + 1;
     $user->save();
 
-    $filename = 'omnifluencer';
     $account = Account::find($id);
+    $filename = 'profile '.$account->username;
 
     $Excel_file = Excel::create($filename, function($excel) use ($account) {
         $excel->sheet('list', function($sheet) use ($account) {

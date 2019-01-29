@@ -47,11 +47,18 @@ class ProfileBulkEmail extends Mailable
           'account' => $account,   
         );
 
-        $pdf = PDF::loadView('user.pdf-profile', $data);
+        $pdf = PDF::loadView('user.pdf-profile', $data)
+                ->setPaper('a4')
+                ->setOption('margin-bottom', '0mm')
+                ->setOption('margin-top', '0mm')
+                ->setOption('margin-right', '0mm')
+                ->setOption('margin-left', '0mm');
+
+        $filename = "profile bulk - ".count($data['account'])." accounts - ".date('d-m-Y').".pdf";
 
         return $this->from('omnifluencer@gmail.com', 'Omnifluencer')
                     ->subject('[Omnifluencer] Profile Document')
-                    ->attachData($pdf->output(), "profile.pdf")
+                    ->attachData($pdf->output(), $filename)
                     ->view('emails.profile-docs')
                     ->with($this->emaildata);
       } else {

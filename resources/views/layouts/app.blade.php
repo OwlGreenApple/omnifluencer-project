@@ -300,8 +300,16 @@
                 <button id="button-subscribe" class="btn btn-primary btn-primary-btm">Submit</button>
               </form>
               <div class="social">
-                <a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                <a href="#">
+                  <span class="icon-social">
+                    <i class="fa-facebook-f fab"></i>  
+                  </span>
+                </a>
+                <a href="#">
+                  <span class="icon-social">
+                    <i class="fa-instagram fab"></i>  
+                  </span>
+                </a>
               </div>
             </div>
           </div>
