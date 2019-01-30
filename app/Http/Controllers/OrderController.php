@@ -102,8 +102,13 @@ class OrderController extends Controller
           $path = Storage::disk('s3')->putFileAs($folder, $request->file('buktibayar'),$order->no_order.'.jpg','public');
           
           $order->buktibayar = $path;
+        } else {
+          $arr['status'] = 'error';
+          $arr['message'] = 'Upload file buktibayar terlebih dahulu';
+          return $arr;
         }
 
+        $order->keterangan = $request->keterangan;
         $order->save();
 
         $arr['status'] = 'success';
