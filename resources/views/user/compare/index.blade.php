@@ -156,7 +156,7 @@
       <div class="col-12">
         <h1>Comparison Influencer</h1>
         <hr class="orn">
-        <p class="pg-title">If you are in the market for a computer, there are a number of factors to consider. Will it be used for your home, your office or perhaps even your home office combo? </p>
+        <p class="pg-title">Bandingkan tingkat engagement influencer Anda di sini </p>
       </div>
     </div>
   </div>

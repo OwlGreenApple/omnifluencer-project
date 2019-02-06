@@ -22,9 +22,9 @@
         <div class="col-4 d-none d-sm-none d-md-none d-lg-block" id="spy">
           <ul class="nav nav-pills flex-column sticky-top">
             <li class="nav-item"><a class="nav-link smooth-scroll active" href="#scroll1">Tentang Kami</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll2">Syarat dan Ketentuan</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll3">Earnings and Legal Disclaimer </a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll4">Disclaimer</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll2">Earnings and Legal Disclaimer</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll3">Disclaimer</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll4">Syarat dan Ketentuan</a></li>
           </ul>
         </div>
         <div class="col-lg-8 col-md-12 col-sm-12 scrollspy-example">
@@ -37,6 +37,55 @@
             </div>
           </div>
           <div class="card" id="scroll2">
+            <div class="card-body">
+              <h2>Earnings and Legal Disclaimers</h2>
+              <p>
+                Kami tidak percaya pada cara yang cepat dan instant. Kami percaya pada kerja keras, nilai luhur dan melayani orang lain. Karena itu, kami membuat program untuk membantu Anda. <br>
+
+                Sebagaimana dinyatakan dalam hukum, kami tidak dapat dan tidak menjamin apapun tentang kemampuan Anda sendiri dalam menghasilkan atau mendapatkan uang dari ide, informasi, program, atau strategi kami. <br>
+
+                Kami tidak mengenal Anda. Apapun yang terjadi, itu karena Anda. Sepakat? Namun, kami di sini siap membantu Anda memberikan strategi terhebat sehingga bisnis Anda bisa maju, lebih cepat. <br>
+
+                Bagaimanapun, tidak ada janji atau jaminan masa depan di halaman ini atau situs web atau email kami. <br>
+
+                Setiap angka keuangan yang direferensikan di sini, atau di situs atau email kami, hanyalah perkiraan atau proyeksi atau hasil di masa lalu, dan tidak boleh dianggap tepat, aktual atau sebagai janji potensi penghasilan - semua angka hanya ilustrasi saja. <br>
+
+                Jika Anda memiliki pertanyaan, kirim email ke support@omniflencer.com. Terima kasih sudah berkunjung. Sampai jumpa dan ingatlah: Anda lebih dekat dari yang Anda kira.
+              </p>
+            </div>
+          </div>
+          <div class="card" id="scroll3">
+            <div class="card-body">
+              <h2>Disclaimer</h2>
+              <p>
+                Jika Anda memerlukan informasi lebih lanjut atau memiliki pertanyaan tentang disclaimer website kami, jangan ragu menghubungi kami melalui email di support@omnifluencer.com.
+              </p>
+
+              <p>
+                <b>Disclaimer untuk omnifluencer.com</b>
+                <br>
+                Semua informasi di website ini diterbitkan dengan itikad baik dan dengan tujuan memberikan informasi umum saja. omnifluencer.com tidak membuat jaminan apa pun tentang kelengkapan, keandalan, dan keakuratan informasi ini. <br>
+            
+                Tindakan apa pun yang Anda lakukan terkait informasi yang Anda temukan di website ini (omnifluencer.com), sepenuhnya merupakan risiko Anda sendiri. <br>
+
+                omnifluencer.com tidak akan bertanggung jawab atas kerugian dan/atau kerusakan terkait penggunaan website kami. <br>
+
+                Dari website kami, Anda bisa mengunjungi website lain dengan mengikuti tautan tersebut. Meskipun kami menyediakan tautan berkualitas, kami tidak memiliki kendali atas konten website tersebut. Tautan itu juga tidak direkomendasikan untuk semua konten yang ditemukan di website-website ini. Pemilik website dan konten dapat mengubah isi tanpa pemberitahuan secara tiba-tiba sebelum kami memiliki kesempatan menghapus tautan yang bisa saja memburuk. <br>
+
+                Harap perhatikan, bahwa ketika Anda meninggalkan website kami, website lain mungkin memiliki kebijakan privasi dan ketentuan berbeda di luar kendali kami. Harap pastikan untuk memeriksa Kebijakan Privasi dari website ini serta "Syarat dan Ketentuan" mereka sebelum terlibat dalam bisnis apa pun atau mengunggah informasi apa pun. <br>
+              </p>
+              <p>
+                <b>Persetujuan</b> <br>
+                Dengan menggunakan website kami, Anda memberikan persetujuan atas disclaimer kami dan menyetujui ketentuan-ketentuannya.
+              </p>
+              <p>
+                <b>Memperbarui</b> <br>
+                Disclaimer website ini diperbarui pada: Kamis 31 Januari 2019.
+                Jika ada pembaruan dan pengubahan apapun pada dokumen ini, perubahan tersebut akan diposting secara jelas di sini.
+              </p>
+            </div>
+          </div>
+          <div class="card" id="scroll4">
             <div class="card-body">
               <h2>Syarat dan Ketentuan</h2>
               <p>
@@ -93,56 +142,6 @@
                     Website ini bukan bagian dari Instagram atau Facebook maupun media sosial lain. Selain itu, website ini tidak didukung oleh Facebook dan Instagram dengan cara apapun. FACEBOOK adalah merek dagang dari FACEBOOK, Inc.
                   </li>
                 </ol>
-              
-            </div>
-          </div>
-          <div class="card" id="scroll3">
-            <div class="card-body">
-              <h2>Earnings and Legal Disclaimers</h2>
-              <p>
-                Kami tidak percaya pada cara yang cepat dan instant. Kami percaya pada kerja keras, nilai luhur dan melayani orang lain. Karena itu, kami membuat program untuk membantu Anda. <br>
-
-                Sebagaimana dinyatakan dalam hukum, kami tidak dapat dan tidak menjamin apapun tentang kemampuan Anda sendiri dalam menghasilkan atau mendapatkan uang dari ide, informasi, program, atau strategi kami. <br>
-
-                Kami tidak mengenal Anda. Apapun yang terjadi, itu karena Anda. Sepakat? Namun, kami di sini siap membantu Anda memberikan strategi terhebat sehingga bisnis Anda bisa maju, lebih cepat. <br>
-
-                Bagaimanapun, tidak ada janji atau jaminan masa depan di halaman ini atau situs web atau email kami. <br>
-
-                Setiap angka keuangan yang direferensikan di sini, atau di situs atau email kami, hanyalah perkiraan atau proyeksi atau hasil di masa lalu, dan tidak boleh dianggap tepat, aktual atau sebagai janji potensi penghasilan - semua angka hanya ilustrasi saja. <br>
-
-                Jika Anda memiliki pertanyaan, kirim email ke support@omniflencer.com. Terima kasih sudah berkunjung. Sampai jumpa dan ingatlah: Anda lebih dekat dari yang Anda kira.
-              </p>
-            </div>
-          </div>
-          <div class="card" id="scroll4">
-            <div class="card-body">
-              <h2>Disclaimer</h2>
-              <p>
-                Jika Anda memerlukan informasi lebih lanjut atau memiliki pertanyaan tentang disclaimer website kami, jangan ragu menghubungi kami melalui email di support@omnifluencer.com.
-              </p>
-
-              <p>
-                <b>Disclaimer untuk omnifluencer.com</b>
-                <br>
-                Semua informasi di website ini diterbitkan dengan itikad baik dan dengan tujuan memberikan informasi umum saja. omnifluencer.com tidak membuat jaminan apa pun tentang kelengkapan, keandalan, dan keakuratan informasi ini. <br>
-            
-                Tindakan apa pun yang Anda lakukan terkait informasi yang Anda temukan di website ini (omnifluencer.com), sepenuhnya merupakan risiko Anda sendiri. <br>
-
-                omnifluencer.com tidak akan bertanggung jawab atas kerugian dan/atau kerusakan terkait penggunaan website kami. <br>
-
-                Dari website kami, Anda bisa mengunjungi website lain dengan mengikuti tautan tersebut. Meskipun kami menyediakan tautan berkualitas, kami tidak memiliki kendali atas konten website tersebut. Tautan itu juga tidak direkomendasikan untuk semua konten yang ditemukan di website-website ini. Pemilik website dan konten dapat mengubah isi tanpa pemberitahuan secara tiba-tiba sebelum kami memiliki kesempatan menghapus tautan yang bisa saja memburuk. <br>
-
-                Harap perhatikan, bahwa ketika Anda meninggalkan website kami, website lain mungkin memiliki kebijakan privasi dan ketentuan berbeda di luar kendali kami. Harap pastikan untuk memeriksa Kebijakan Privasi dari website ini serta "Syarat dan Ketentuan" mereka sebelum terlibat dalam bisnis apa pun atau mengunggah informasi apa pun. <br>
-              </p>
-              <p>
-                <b>Persetujuan</b> <br>
-                Dengan menggunakan website kami, Anda memberikan persetujuan atas disclaimer kami dan menyetujui ketentuan-ketentuannya.
-              </p>
-              <p>
-                <b>Memperbarui</b> <br>
-                Disclaimer website ini diperbarui pada: Kamis 31 Januari 2019.
-                Jika ada pembaruan dan pengubahan apapun pada dokumen ini, perubahan tersebut akan diposting secara jelas di sini.
-              </p>
             </div>
           </div>
       </div>

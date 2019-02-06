@@ -9,7 +9,7 @@
         <div class="col-12">
           <h1>Omnifluencer FAQ Page</h1>
           <hr class="orn">
-          <p class="pg-title">If you are in the market for a computer, there are a number of factors to consider. Will it be used for your home, your office or perhaps even your home office combo? </p>
+          <p class="pg-title">Berikut ini serangkaian pertanyaan umum terkait Omnifluencer. Mohon baca di sini sebelum menghubungi customer service dan Anda akan menghemat banyak waktu </p>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
                       <span class="main">
                         <i class="fas fa-check"></i>
                       </span>
-                      <span class="overflow-wrap">How to pay amazon lorem ipsum dolor sit amet puerta omnia</span>
+                      <span class="overflow-wrap">Apa itu Omnifluencer?</span>
                     </button>
                   </h5>
                 </div>
@@ -36,7 +36,8 @@
                 <div id="collapseOne" class="collapse show fade" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div class="card-body">
                     <p>
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>
+                      Omnifluencer adalah tools untuk mengukur engagement rate akun Instagram. Dengan begitu Anda akan membantu memilih influencer yang akan diajak kerjasama.
+                      <!--<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>-->
                     </p>
                   </div>
                 </div>
@@ -48,14 +49,14 @@
                       <span class="main">
                         <i class="fas fa-check"></i>
                       </span>
-                      <span class="overflow-wrap">There are many more.</span>
+                      <span class="overflow-wrap">Siapa Pengguna Omnifluencer?</span>
                     </button>
                   </h5>
                 </div>
                 <div id="collapseTwo" class="collapse fade" aria-labelledby="headingTwo" data-parent="#accordionExample">
                   <div class="card-body">
                     <p>
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>
+                      Omnifluencer cocok untuk siapapun Anda yang menekuni dunia periklanan, endorse, dan Instagram.
                     </p>
                   </div>
                 </div>
@@ -67,33 +68,14 @@
                       <span class="main">
                         <i class="fas fa-check"></i>
                       </span>
-                      <span class="overflow-wrap">How to enable two factor authentication.</span>
+                      <span class="overflow-wrap">Bagaimana Jika Ingin Bekerjasama dengan Omnifluencer? </span>
                     </button>
                   </h5>
                 </div>
                 <div id="collapseThree" class="collapse fade" aria-labelledby="headingThree" data-parent="#accordionExample">
                   <div class="card-body">
                     <p>
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingFour">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                      <span class="main">
-                        <i class="fas fa-check"></i>
-                      </span>
-                      <span class="overflow-wrap">How to contact us.</span>
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseFour" class="collapse fade" aria-labelledby="headingFour" data-parent="#accordionExample">
-                  <div class="card-body">
-                    <p>
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>
+                      Hubungi support@omnifluencer.com untuk informasi lebih lanjut
                     </p>
                   </div>
                 </div>
@@ -109,7 +91,7 @@
                       <span class="main">
                         <i class="fas fa-check"></i>
                       </span>
-                      <span class="overflow-wrap">How to pay amazon.</span>
+                      <span class="overflow-wrap">Bagaimana cara menggunakan Omnifluencer?</span>
                     </button>
                   </h5>
                 </div>
@@ -117,7 +99,9 @@
                 <div id="collapseFive" class="collapse fade" aria-labelledby="headingFive" data-parent="#accordionExample2">
                   <div class="card-body">
                     <p>
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>
+                      - Ketik username influencer, klik kalkulasi <br>
+                      - Anda bisa membandingkan 4 akun username <br>
+                      - Lakukan Sign Up untuk bisa mengeksplor Omnifluencer
                     </p>
                   </div>
                 </div>
@@ -129,52 +113,14 @@
                       <span class="main">
                         <i class="fas fa-check"></i>
                       </span>
-                      <span class="overflow-wrap">There are many more.</span>
+                      <span class="overflow-wrap">Apa saja yang bisa dilakukan di Omnifluencer?</span>
                     </button>
                   </h5>
                 </div>
                 <div id="collapseSix" class="collapse fade" aria-labelledby="headingSix" data-parent="#accordionExample2">
                   <div class="card-body">
                     <p>
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingSeven">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                      <span class="main">
-                        <i class="fas fa-check"></i>
-                      </span>
-                      <span class="overflow-wrap">How to enable two factor authentication.</span>
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseSeven" class="collapse fade" aria-labelledby="headingSeven" data-parent="#accordionExample2">
-                  <div class="card-body">
-                    <p>
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingEight">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                      <span class="main">
-                        <i class="fas fa-check"></i>
-                      </span>
-                      <span class="overflow-wrap">How to contact us.</span>
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseEight" class="collapse fade" aria-labelledby="headingEight" data-parent="#accordionExample2">
-                  <div class="card-body">
-                    <p>
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>
+                      - Anda bisa melakukan analisa influencer seperti memonitor post following follower, dan engagement ratenya. <br>
                     </p>
                   </div>
                 </div>

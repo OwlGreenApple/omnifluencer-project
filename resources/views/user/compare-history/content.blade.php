@@ -44,9 +44,11 @@
       {{ date("Y/m/d", strtotime($compare->updated_at))  }}
     </td> 
     <td data-label="Action">
-      <button type="button" class="btn btn-primary btn-profile" data-id="{{$compare->id}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
-        <i class="fas fa-file-pdf"></i>
-      </button>
+      @if(Auth::user()->membership=='pro' or Auth::user()->membership=='premium')
+        <button type="button" class="btn btn-primary btn-profile" data-id="{{$compare->id}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
+          <i class="fas fa-file-pdf"></i>
+        </button>
+      @endif
 
       @if(Auth::user()->membership=='premium')
         <button type="button" class="btn btn-primary btn-profile" data-id="{{$compare->id}}" data-type="csv" data-toggle="modal" data-target="#send-file">
