@@ -66,11 +66,9 @@
     </td> 
     <td data-label="Action">
       
-      @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')      
-        <button type="button" class="btn btn-primary btn-profile" data-id="{{$account->accountid}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
+      <button type="button" class="btn btn-primary btn-profile" data-id="{{$account->accountid}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
         <i class="fas fa-file-pdf"></i>
-        </button>
-      @endif
+      </button>
 
       @if(Auth::user()->membership=='premium')
         <button type="button" class="btn btn-primary btn-profile" data-id="{{$account->accountid}}" data-type="csv" data-toggle="modal" data-target="#send-file">

@@ -94,7 +94,7 @@ class RegisterController extends Controller
       $pointlog->jml_point = 10;
       $pointlog->poin_before = 0;
       $pointlog->poin_after = 10;
-      $pointlog->keterangan = 'Initial Poin';
+      $pointlog->keterangan = 'You get an extra point from Register';
       $pointlog->save();
 
       if(isset($_COOKIE['referral_link'])) {

@@ -242,6 +242,26 @@ class AccountController extends Controller
     return $arr;
   }
 
+  public function load_search_byid(Request $request){
+    $arr['status'] = 'success';
+    $arr['message'] = '';
+
+    $account = Account::find($request->id);
+
+    /*if(Auth::check()){
+      $history = HistorySearch::where('user_id',Auth::user()->id) 
+                    ->where('account_id',$account->id)
+                    ->first(); 
+
+      $history->updated_at = new Datetime();
+      $history->save();
+    }*/
+    
+    $arr['view'] = (string) view('user.search.content-akun')->with('account',$account);
+
+    return $arr;
+  }
+
   public function load_history(Request $request){
     $accounts = null;
 
@@ -354,9 +374,9 @@ class AccountController extends Controller
 
   public function print_pdf($id,$type){
 
-    if(Auth::user()->membership=='free'){
+    /*if(Auth::user()->membership=='free'){
       return abort(403);
-    }
+    }*/
 
     $user = User::find(Auth::user()->id);
     $user->count_pdf = $user->count_pdf + 1;

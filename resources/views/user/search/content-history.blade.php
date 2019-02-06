@@ -19,11 +19,23 @@
             </label>
           </div>
         </div>
+
+        <?php 
+            $id = null;
+            if(Auth::check()){
+              $id = $account->accountid;
+            } else {
+              $id = $account->id;
+            }
+          ?>
+          
         <div class="col-2">
-          <img class="float-left" src="{{$account->prof_pic}}">
+          <span class="username-history" data-id="{{$id}}" style="cursor: pointer;">
+            <img class="float-left" src="{{$account->prof_pic}}">
+          </span>
         </div>
         <div class="col-7 colmarg">
-          <span>
+          <span class="username-history" data-id="{{$id}}" style="cursor: pointer;">
             <?php echo '@'.$account->username ?>    
           </span>
         </div>

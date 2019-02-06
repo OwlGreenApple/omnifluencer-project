@@ -27,6 +27,7 @@ Route::get('/', 'AccountController@index');
 //Search
 Route::post('/search','AccountController@index_post');
 Route::get('/search/load-search','AccountController@load_search');
+Route::get('/search/load-search-byid','AccountController@load_search_byid');
 Route::get('/search/load-history','AccountController@load_history');  
 Route::get('/search/delete-history','AccountController@delete_history');
 

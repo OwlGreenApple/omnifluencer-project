@@ -29,6 +29,13 @@
     <?php } ?>
   });
 
+  $( "body" ).on( "click", ".username-history", function(e) 
+  {
+    var id = $(this).attr('data-id');
+    search_byid(id);
+    
+  });
+
   $( "body" ).on( "click", ".register-link", function(e) 
   {
     e.preventDefault();
@@ -128,6 +135,39 @@
             $('#message').html(data.message);
             $('#modal-pesan').modal('show');
           }
+        }
+      }
+    });
+  }
+
+  function search_byid(id){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/search/load-search-byid') ?>",
+      data: {
+        id : id,
+      },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status == 'success'){
+          $('.content-akun').html(data.view);
+          $('.counter').counterUp({
+            delay: 10,
+            time: 1000,
+            formatter: function (n) {
+              return Math.round(n * 100) / 100;
+            }
+          });
         }
       }
     });
@@ -276,7 +316,7 @@
             <form class="form-inline d-flex justify-content-center" action="/action_page.php">
               @csrf 
               <div class="form-group">
-                <input type="text" class="form-control" id="keywords" placeholder="@username" name="username" value="{{$keywords}}">
+                <input type="text" class="form-control" id="keywords" placeholder="username" name="username" value="{{$keywords}}">
               </div>
               <button type="button" class="btn btn-default btn-sbmt grads btn-search">
                 <span>Calculate</span>
@@ -363,8 +403,8 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1>Gabung Bersama<br>Komunitas Omnifluencer</h1>
-        <p class="pg-title">If you are in the market for a computer, there are a number of factors to consider.</p>
+        <h1>Join Our Community<br>Right Now!</h1>
+        <p class="pg-title">Gabung bersama komunitas Omnifluencer</p>
       </div>
     </div>
     <div class="row">

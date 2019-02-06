@@ -10,7 +10,7 @@
       <div class="col-12">
         <h1>Omnifluencer Pricing Plans</h1>
         <hr class="orn">
-        <p class="pg-title">If you are in the market for a computer, there are a number of factors to consider. Will it be used for your home, your office or perhaps even your home office combo? </p>
+        <p class="pg-title">Pilih paket aktivasi Omnifluencer bergantung pada kebutuhan media sosial Anda </p>
         <div class="row" align="center">
           <div class="col-12">
             <div class="onoffswitch">

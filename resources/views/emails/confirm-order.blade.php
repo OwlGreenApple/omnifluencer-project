@@ -10,7 +10,7 @@ Anda telah memesan paket
 {{$order->package}} <strong>Rp. {{number_format($order->total - $order->discount,0,'','.')}} </strong><br>
 
 <br>
-Anda dapat langsung menggunakan layanan kami sesuai dengan paket yang Anda pesan<br>
+Aktivasi telah sukses dilakukan. Anda sudah bisa menggunakan layanan Omnifluencer. Segera hubungi kami jika masih ada ditanyakan.<br>
 <br>
 <br>
 Salam hangat,<br>
