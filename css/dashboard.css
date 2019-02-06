@@ -386,3 +386,12 @@ sub {
   text-align: center;
   display: none;
 }
+
+.popup-newWindow {
+  color: #33B1F3;
+}
+
+.popup-newWindow:hover {
+  color: #33B1F3;
+  border-bottom: 1px solid #33B1F3;
+}

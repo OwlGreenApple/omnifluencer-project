@@ -254,21 +254,25 @@
           </div>
 
           <div class="form-group">
-            <label class="col-md-3 col-12">
-              <b>Keterangan</b> 
-            </label>
-
-            <span class="col-md-6 col-12" id="mod-keterangan">
-            </span>
-          </div>
-
-          <div class="form-group">
             <label class="col-md-3 col-12 float-left">
               <b>Bukti Bayar</b> 
             </label>
 
             <div class="col-md-6 col-12 float-left">
               <input type="file" name="buktibayar">
+            </div>
+          </div>
+
+          <div class="clearfix mb-3"></div>
+
+          <div class="form-group">
+            <label class="col-md-3 col-12">
+              <b>Keterangan</b> 
+            </label>
+            <!--<span class="col-md-6 col-12" id="mod-keterangan">
+            </span>-->
+            <div class="col-md-12 col-12">
+              <textarea class="form-control" name="keterangan"></textarea>
             </div>
           </div>
         </form>

@@ -18,7 +18,7 @@
     <td data-label="Date">
       {{$order->created_at}}
     </td>
-    <td data-label="Bukti Bayar">
+    <td data-label="Bukti Bayar" align="center">
       @if($order->buktibayar=='' or $order->buktibayar==null)
         -
       @else
