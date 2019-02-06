@@ -89,6 +89,14 @@ class RegisterController extends Controller
       $user->point = 10;
       $user->save();
       
+      $pointlog = new PointLog;
+      $pointlog->user_id = $user->id;
+      $pointlog->jml_point = 10;
+      $pointlog->poin_before = 0;
+      $pointlog->poin_after = 10;
+      $pointlog->keterangan = 'Initial Poin';
+      $pointlog->save();
+
       if(isset($_COOKIE['referral_link'])) {
         $user_giver = User::where('referral_link',$_COOKIE['referral_link'])->first();
         $referral = new Referral; 
@@ -103,14 +111,6 @@ class RegisterController extends Controller
         $notif->type = 'point';
         $notif->keterangan = 'Congratulations! You get an extra +10 points from registering your account';
         $notif->save();
-
-        $pointlog = new PointLog;
-        $pointlog->user_id = $user->id;
-        $pointlog->jml_point = 10;
-        $pointlog->poin_before = 0;
-        $pointlog->poin_after = 10;
-        $pointlog->keterangan = 'Initial Poin';
-        $pointlog->save();
 
         /* Notif + point log user giver */
         $notif = new Notification;

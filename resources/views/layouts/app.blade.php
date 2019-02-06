@@ -233,7 +233,7 @@
             <div class="col-lg-3 col-md-12 col-sm-12">
               <div class="logo-part">
                 <img src="{{asset('design/logobrand.png')}}" class="w-75">
-                <p>Use this tool as test data for an automated system or find your next pen</p>
+                <p>Omnifluencer adalah tool untuk mengukur engagement rate akun Instagram.</p>
                 <span>Copyright © 2019 Omnifluencer. All rights reserved.</span>
               </div>
             </div>
@@ -291,7 +291,7 @@
             </div>
             <div class="col-3 d-none d-sm-none d-md-none d-lg-block">
               <h6> Newsletter</h6>
-              <p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
+              <p>Dapatkan informasi terkini mengenai tips influencer, media sosial dan perkembangannya. </p>
               <form class="form-inline form-inline-btm" >
                 @csrf
                 <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">

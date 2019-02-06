@@ -128,21 +128,22 @@
             </div>-->
             <div class="card-body" align="center">
               <?php  
-                $member = '';
+                $member = 'Premium';
                 if(Auth::user()->membership=='free'){
                   $member = 'Pro';
-                } else if(Auth::user()->membership == 'pro'){
-                  $member = 'Premium';
                 }
               ?>
               <p>
                 Upgrade to <b>{{$member}} Membership?</b> <br>
                 Click button below
               </p>
-              <button class="btn btn-primary btn-upgrade-poin" data-upgrade="pro">
-                <i class="fas fa-star"></i> 
-                Redeem your point
-              </button>
+
+              <a href="{{url('pricing')}}">
+                <button class="btn btn-primary" data-upgrade="pro">
+                  <i class="fas fa-star"></i> 
+                  Upgrade
+                </button>
+              </a>
                 <!--Importance <br> 
                 Design <br> 
                 Group <br>  

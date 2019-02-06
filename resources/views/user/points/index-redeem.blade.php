@@ -61,7 +61,11 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-body card-point">
-          <img src="https://via.placeholder.com/700x225">
+          @if($idpoint==1)
+            <img src="{{asset('design/upgrade-pro.jpg')}}">
+          @elseif($idpoint==2)
+            <img src="{{asset('design/upgrade-premium.jpg')}}">
+          @endif
           
           <div class="info-point">
             <h4><b>{{$namapaket}}</b></h4> 

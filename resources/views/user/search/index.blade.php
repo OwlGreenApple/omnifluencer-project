@@ -253,7 +253,7 @@
       <div class="col-12">
         <h1>Influencer Engagement Rate</h1>
         <hr class="orn">
-        <p class="pg-title">If you are in the market for a computer, there are a number of factors to consider. Will it be used for your home, your office or perhaps even your home office combo? </p>
+        <p class="pg-title">Dapatkan analisa akun Instagram Anda. Lengkap dengan Kalkulasi engagement, likes & komentar per post. </p>
       </div>
     </div>
   </div>
@@ -306,7 +306,9 @@
     <div class="row">
       <div class="col-lg-5 col-sm-12 percent-title">
         <h1>
-          We analysed 100,000+<br>influencer profiles<br>on Instagram
+          Omnifluencer telah menganalisa 
+          100.000+ Influencer
+          di Instagram
         </h1>
       </div>
       <div class="col-lg-7 col-sm-12 percent">
@@ -349,7 +351,8 @@
         </div>
       </div>
       <div class="col-12">
-        <p class="pg-title-btm">As soon as Computerized Tomography or CT scans became accessible in the 1970s, they reformed the practice of neurology. They did the scans by transmitting x-ray streams all the way through the head at different positions and accumulating the x-ray streams on the other side that was not absorbed by the head.</p>
+        <p class="pg-title-btm">Penilaian di atas hanya berdasarkan perkiraan. Perkiraan ini dikompilasi setelah mengumpulkan data survei verbal, pendapat dari pakar industri dan data patokan dari Tim Omnifluencer. Tim Omnifluencer tidak memiliki preferensi atau pendapat kuat tentang topik khusus ini - melainkan menyediakan alat ukur untuk perbandingan yang adil.
+        </p>
       </div>
     </div>
     <hr class="orn">
@@ -360,7 +363,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1>Join Our Community<br>Right Now!</h1>
+        <h1>Gabung Bersama<br>Komunitas Omnifluencer</h1>
         <p class="pg-title">If you are in the market for a computer, there are a number of factors to consider.</p>
       </div>
     </div>

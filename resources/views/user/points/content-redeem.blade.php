@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body card-point">
         <a href="{{url('points/1')}}">
-          <img src="https://via.placeholder.com/150x100" class="img-point">
+          <img src="{{asset('design/upgrade-pro-sm.jpg')}}" class="img-point">
         </a>  
 
         <div class="info-point">
@@ -22,7 +22,7 @@
     <div class="card">
       <div class="card-body card-point">
         <a href="{{url('points/2')}}">
-          <img src="https://via.placeholder.com/150x100" class="img-point">
+          <img src="{{asset('design/upgrade-premium-sm.jpg')}}" class="img-point">
         </a>
 
         <div class="info-point">
