@@ -205,7 +205,7 @@ class RegisterController extends Controller
           'password' => $request->password,
         ];
         
-        Mail::to($user->email)->queue(new ConfirmEmail($emaildata));
+        Mail::to($user->email)->send(new ConfirmEmail($emaildata));
         return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
       } else {
         return redirect("register")->with("error",$validator->errors()->first());
