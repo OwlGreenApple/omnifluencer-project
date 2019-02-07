@@ -31,6 +31,12 @@ class HomeController extends Controller
     }
 
     public function index_statics(){
-      return view('statics');
+      return view('statics')
+              ->with('syarat',false);
+    }
+
+    public function index_syarat_ketentuan(){
+      return view('statics')
+              ->with('syarat',true); 
     }
 }

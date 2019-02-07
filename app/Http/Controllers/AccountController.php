@@ -187,7 +187,7 @@ class AccountController extends Controller
 
           if($currenthistory->count()>=5){
             $arr['status'] = 'error';
-            $arr['message'] = '<b>Warning!</b> Free user hanya dapat menyimpan history search sebanyak 5';
+            $arr['message'] = '<b>Warning!</b><br> Free user hanya dapat menyimpan history search sebanyak 5 kali';
             return $arr;
           }
         } else if(Auth::user()->membership=='pro'){
@@ -195,7 +195,7 @@ class AccountController extends Controller
 
           if($currenthistory->count()>=25){
             $arr['status'] = 'error';
-            $arr['message'] = '<b>Warning!</b> Pro user hanya dapat menyimpan history search sebanyak 25';
+            $arr['message'] = '<b>Warning!</b><br> Pro user hanya dapat menyimpan history search sebanyak 25 kali';
             return $arr;
           }
         } 

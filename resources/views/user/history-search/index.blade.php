@@ -327,7 +327,7 @@
   }
 </script>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
 
@@ -377,7 +377,6 @@
               ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. 
               <a href="{{url('pricing')}}">
                 <button class="btn btn-primary">
-                  <i class="fas fa-star"></i> 
                   Upgrade To Pro
                 </button>  
               </a>

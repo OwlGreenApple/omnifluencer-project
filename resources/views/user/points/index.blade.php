@@ -53,7 +53,8 @@
     border-radius: 50%;
   }
 </style>
-<div class="container">
+
+<div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
 
@@ -140,7 +141,6 @@
 
               <a href="{{url('pricing')}}">
                 <button class="btn btn-primary" data-upgrade="pro">
-                  <i class="fas fa-star"></i> 
                   Upgrade
                 </button>
               </a>

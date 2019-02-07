@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
       <div class="row">
@@ -42,7 +42,6 @@
           <div class="col-md-4">
             <a href="{{url('pricing')}}">
               <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership=='free') echo 'd-block' ?>">
-                <i class="fas fa-star"></i> 
                 Upgrade To Pro
               </button>
             </a>
@@ -64,7 +63,6 @@
 
             <a href="{{url('pricing')}}">
               <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership!='premium') echo 'd-block' ?>">
-                <i class="fas fa-star"></i> 
                 <?php  
                   if(Auth::user()->membership=='free'){
                     echo 'Upgrade To Pro';

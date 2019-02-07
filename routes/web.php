@@ -40,6 +40,7 @@ Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
 //FAQ
 Route::get('/faq','HomeController@index_faq');
 Route::get('/statics','HomeController@index_statics');
+Route::get('/statics/syarat-ketentuan','HomeController@index_syarat_ketentuan');
 
 //pricing
 Route::get('/pricing','OrderController@pricing');

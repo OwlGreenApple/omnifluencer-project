@@ -162,7 +162,7 @@
     color: #2089F6;
   }
 </style>
-<div class="container">
+<div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
 
@@ -217,7 +217,7 @@
         </div>
 
         <table class="table">
-          <thead align="center">
+          <thead>
             <th>
               <input class="checkAll" type="checkbox" name="checkAll">
             </th>

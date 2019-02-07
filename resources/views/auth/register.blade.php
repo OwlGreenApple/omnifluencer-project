@@ -90,16 +90,19 @@
             </div>
 
             <div class="form-group">
-              <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-              <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in <a href="#" class="term-service">Terms of service</a></label>
+              <label for="agree-term" class="label-agree-term">
+                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term mr-1" />
+                Saya setuju dengan 
+                <a href="{{url('statics/syarat-ketentuan')}}" class="term-service">
+                  Syarat dan Ketentuan
+                </a>
+              </label>
             </div>
 
             <div class="form-group">
-              <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary form-submit pointer">
-                  Sign up
-                </button>
-              </div>
+              <button type="submit" class="btn btn-block btn-primary form-submit pointer">
+                Sign up
+              </button>
             </div>
 
             <p class="loginhere">

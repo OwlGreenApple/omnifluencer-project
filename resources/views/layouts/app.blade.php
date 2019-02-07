@@ -283,7 +283,11 @@
               <div class="row ">
                 <div class="col">
                   <ul>
-                    <li> <a href="#"> support@omnifluencer.com</a> </li>
+                    <li> 
+                      <a href="mailto:support@omnifluencer.com?subject=Mail from Our Site"> 
+                        support@omnifluencer.com
+                      </a> 
+                    </li>
                     <li> <a href="#"> Send Us a Query</a> </li>
                   </ul>
                 </div>
