@@ -51,7 +51,10 @@ class CheckMembership extends Command
         $date = new DateTime($user->valid_until);
         $interval = $date->diff($now)->format('%d');
         var_dump($interval);
+        var_dump($date<$now);
         if($interval==5){
+          Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
+          
           $notif = new Notification;
           $notif->user_id = $user->id;
           $notif->notification = 'Masa aktif membership akan berakhir';
@@ -61,6 +64,8 @@ class CheckMembership extends Command
         }
 
         if($date < $now){
+          Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
+
           $user->membership = 'free';
           $user->valid_until = null;
           $user->save();
@@ -78,8 +83,6 @@ class CheckMembership extends Command
           $notif->keterangan = 'Masa aktif membership Anda telah berakhir. Segera perpanjang melalui order maupun redeem point.';
           $notif->type = 'promo';
           $notif->save();
-
-          Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email));
         }
       }
     }
