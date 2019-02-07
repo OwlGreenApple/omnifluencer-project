@@ -22,7 +22,7 @@ $(document).ready(function () {
     });
 
 
-    $('a.smooth-scroll').click(function(e){
+    $('a.smooth-scroll, .scroll-syarat').click(function(e){
           var snc_active = $(this).attr('href');
           $('html, body').animate({
             scrollTop: $(snc_active).offset().top

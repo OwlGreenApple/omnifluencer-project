@@ -199,9 +199,9 @@
           $('.btn-compare').show();
         }
 
-        if(data.count>5){
+        /*if(data.count>5){
           $('#link-show').show();
-        }
+        }*/
       }
     });
   }
@@ -438,6 +438,16 @@
           <button type="submit" class="btn btn-default btn-sbmt-btm grads" data-toggle="modal" data-target=".bd-example-modal-lg" data-whatever="join"><span>JOIN NOW!</span></button>
         </div>
       </div>
+    @else 
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <a href="{{url('dashboard')}}">
+            <button type="button" class="btn btn-default btn-sbmt-btm grads">
+              <span>TO DASHBOARD</span>
+            </button>
+          </a>
+        </div>
+      </div>
     @endguest
 
   </div>
@@ -523,7 +533,11 @@
                 </div>
 
                 <div class="form-group form-group-mob">
-                  <label for="agree-term" class="label-agree-term"><span><span></span></span>Dengan mendaftar, saya setuju dengan <a href="#" class="term-service">Terms of service</a></label>
+                  <label for="agree-term" class="label-agree-term"><span><span></span></span>Dengan mendaftar, saya setuju dengan 
+                    <a href="{{url('statics/syarat-ketentuan')}}" class="term-service">
+                      Syarat dan Ketentuan
+                    </a>
+                  </label>
                 </div>
                 <div class="form-group form-group-mob">
                   <input type="submit" name="submit" id="submit" class="form-submit pointer" value="Sign up" />

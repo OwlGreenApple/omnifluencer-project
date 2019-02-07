@@ -2,7 +2,7 @@
 
 @foreach($compares as $compare)
   <tr>
-    <td align="center">
+    <td>
       <input type="checkbox" class="checkcompareid" name="compareid[]" value="{{$compare->id}}">
     </td>
     <td data-label="Instagram">
@@ -45,18 +45,18 @@
     </td> 
     <td data-label="Action">
       @if(Auth::user()->membership=='pro' or Auth::user()->membership=='premium')
-        <button type="button" class="btn btn-primary btn-profile" data-id="{{$compare->id}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
+        <button type="button" class="btn btn-sm btn-primary btn-profile" data-id="{{$compare->id}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
           <i class="fas fa-file-pdf"></i>
         </button>
       @endif
 
       @if(Auth::user()->membership=='premium')
-        <button type="button" class="btn btn-primary btn-profile" data-id="{{$compare->id}}" data-type="csv" data-toggle="modal" data-target="#send-file">
+        <button type="button" class="btn btn-sm btn-primary btn-profile" data-id="{{$compare->id}}" data-type="csv" data-toggle="modal" data-target="#send-file">
           <i class="fas fa-file-excel"></i>
         </button>
       @endif
 
-      <button type="button" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$compare->id}}">
+      <button type="button" class="btn btn-sm btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$compare->id}}">
         <i class="far fa-trash-alt"></i>
       </button>
     </td>

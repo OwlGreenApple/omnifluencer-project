@@ -47,20 +47,23 @@
       </div>
     @endforeach     
 
-    <div class="row sub-title-btm">
-      <div class="col">
-        <a id="link-show" href="{{url('history-search')}}" style="display: none">
-          <h4>Show More&nbsp;
-          <i class="fas fa-chevron-down fa-xs"></i></h4>
-        </a>
+    @guest 
+    @else 
+      <div class="row sub-title-btm">
+        <div class="col">
+          <a id="link-show" href="{{url('history-search')}}">
+            <h4>Show More&nbsp;
+            <i class="fas fa-chevron-down fa-xs"></i></h4>
+          </a>
+        </div>
       </div>
-    </div>
+    @endguest
 
     <!--<button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}"> 
       Delete 
     </button>-->
     
 <?php } else { ?>
-  <p>There is no history</p>
+  <p style="padding-top: 20px">There is no history</p>
 <?php } ?>
 </form>

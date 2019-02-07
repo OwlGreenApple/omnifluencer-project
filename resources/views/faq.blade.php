@@ -9,7 +9,7 @@
         <div class="col-12">
           <h1>Omnifluencer FAQ Page</h1>
           <hr class="orn">
-          <p class="pg-title">Berikut ini serangkaian pertanyaan umum terkait Omnifluencer. Mohon baca di sini sebelum menghubungi customer service dan Anda akan menghemat banyak waktu </p>
+          <p class="pg-title">Berikut ini serangkaian pertanyaan umum terkait Omnifluencer. Mohon baca di sini sebelum menghubungi customer service dan Anda akan menghemat banyak waktu. </p>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
                 <div id="collapseOne" class="collapse show fade" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div class="card-body">
                     <p>
-                      Omnifluencer adalah tools untuk mengukur engagement rate akun Instagram. Dengan begitu Anda akan membantu memilih influencer yang akan diajak kerjasama.
+                      Omnifluencer adalah tools untuk mengukur engagement rate akun Instagram. Dengan begitu Anda akan terbantu untuk memilih influencer yang akan diajak kerjasama.
                       <!--<a href="#" class="ml-3" target="_blank"><strong>View More designs <i class="fa fa-angle-double-right"></i></strong></a>-->
                     </p>
                   </div>
@@ -56,7 +56,7 @@
                 <div id="collapseTwo" class="collapse fade" aria-labelledby="headingTwo" data-parent="#accordionExample">
                   <div class="card-body">
                     <p>
-                      Omnifluencer cocok untuk siapapun Anda yang menekuni dunia periklanan, endorse, dan Instagram.
+                      Omnifluencer cocok untuk siapapun bagi Anda yang menekuni dunia periklanan, endorse, dan Instagram.
                     </p>
                   </div>
                 </div>
@@ -68,14 +68,18 @@
                       <span class="main">
                         <i class="fas fa-check"></i>
                       </span>
-                      <span class="overflow-wrap">Bagaimana Jika Ingin Bekerjasama dengan Omnifluencer? </span>
+                      <span class="overflow-wrap">Bagaimana Bekerjasama dengan Omnifluencer? </span>
                     </button>
                   </h5>
                 </div>
                 <div id="collapseThree" class="collapse fade" aria-labelledby="headingThree" data-parent="#accordionExample">
                   <div class="card-body">
                     <p>
-                      Hubungi support@omnifluencer.com untuk informasi lebih lanjut
+                      Hubungi 
+                      <a href="mailto:support@omnifluencer.com?subject=Mail from Our Site"> 
+                        support@omnifluencer.com
+                      </a>  
+                      untuk informasi lebih lanjut
                     </p>
                   </div>
                 </div>
@@ -101,7 +105,7 @@
                     <p>
                       - Ketik username influencer, klik kalkulasi <br>
                       - Anda bisa membandingkan 4 akun username <br>
-                      - Lakukan Sign Up untuk bisa mengeksplor Omnifluencer
+                      - Sign Up untuk bisa mengeksplor fitur-fitur lain Omnifluencer
                     </p>
                   </div>
                 </div>
@@ -120,7 +124,7 @@
                 <div id="collapseSix" class="collapse fade" aria-labelledby="headingSix" data-parent="#accordionExample2">
                   <div class="card-body">
                     <p>
-                      - Anda bisa melakukan analisa influencer seperti memonitor post following follower, dan engagement ratenya. <br>
+                      Anda bisa melakukan analisa influencer seperti memonitor post following follower, dan engagement ratenya. <br>
                     </p>
                   </div>
                 </div>

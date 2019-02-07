@@ -4,6 +4,14 @@
 <link href="{{ asset('css/style-statics.css') }}" rel="stylesheet">
 <script src="{{ asset('js/custom.js') }}"></script>
 
+<script type="text/javascript">
+  $(document).ready(function() {
+    if("{{$syarat}}"){
+      $( ".scroll-syarat" ).trigger( "click" );
+    }
+  });  
+</script>
+
   <section class="page-title">
     <div class="container">
       <div class="row">
@@ -24,7 +32,7 @@
             <li class="nav-item"><a class="nav-link smooth-scroll active" href="#scroll1">Tentang Kami</a></li>
             <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll2">Earnings and Legal Disclaimer</a></li>
             <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll3">Disclaimer</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll4">Syarat dan Ketentuan</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll scroll-syarat" href="#scroll4">Syarat dan Ketentuan</a></li>
           </ul>
         </div>
         <div class="col-lg-8 col-md-12 col-sm-12 scrollspy-example">
