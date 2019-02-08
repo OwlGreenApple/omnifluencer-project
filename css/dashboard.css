@@ -395,3 +395,13 @@ sub {
   color: #33B1F3;
   border-bottom: 1px solid #33B1F3;
 }
+
+.point-card {
+  min-height : 140px;
+  padding-top:30px;
+}
+
+.btn-upgrade-poin {
+  width: 200px;
+  font-size: 16px;
+}

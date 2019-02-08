@@ -312,7 +312,7 @@
         <div class="col-12">
 
           <div class="history justify-content-center">
-            <h3>Enter Instagram username<br>and tap Enter!</h3>
+            <h3>Enter Instagram Username<br>and tap Calcualte!</h3>
             <form class="form-inline d-flex justify-content-center" action="/action_page.php">
               @csrf 
               <div class="form-group">
@@ -443,7 +443,7 @@
         <div class="col-12 d-flex justify-content-center">
           <a href="{{url('dashboard')}}">
             <button type="button" class="btn btn-default btn-sbmt-btm grads">
-              <span>TO DASHBOARD</span>
+              <span>DASHBOARD</span>
             </button>
           </a>
         </div>
@@ -533,9 +533,9 @@
                 </div>
 
                 <div class="form-group form-group-mob">
-                  <label for="agree-term" class="label-agree-term"><span><span></span></span>Dengan mendaftar, saya setuju dengan 
-                    <a href="{{url('statics/syarat-ketentuan')}}" class="term-service">
-                      Syarat dan Ketentuan
+                  <label for="agree-term" class="label-agree-term"><span><span></span></span>With this, I am agree with 
+                    <a href="{{url('statics/terms-conditions')}}" class="term-service">
+                      Terms and Conditions 
                     </a>
                   </label>
                 </div>

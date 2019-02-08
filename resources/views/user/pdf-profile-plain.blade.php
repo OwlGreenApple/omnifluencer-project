@@ -6,7 +6,7 @@
 <?php  
   $logo = null;
 
-  if(Auth::user()->logo!=null){
+  if(Auth::user()->logo!=null and Auth::user()->membership=='premium'){
     $logo = Storage::url(Auth::user()->logo);
   }
 ?>
@@ -15,13 +15,13 @@
         foreach ($account as $acc) {
 ?>
   <div class="page">
-    @if(Auth::user()->logo==null)
+    @if(Auth::user()->logo!=null and Auth::user()->membership=='premium')
       <div class="col-xs-12 logo" align="center">
-        <img src="{{asset('design/logobrand.png')}}" class="logouser">
+        <img src="<?php echo $logo ?>" class="logouser">
       </div>
     @else 
       <div class="col-xs-12 logo" align="center">
-        <img src="<?php echo $logo ?>" class="logouser">
+        <img src="{{asset('design/logobrand.png')}}" class="logouser">
       </div>
     @endif
 
@@ -119,7 +119,7 @@
       </div>
     </div>
 
-    @if(Auth::user()->logo!=null)
+    @if(Auth::user()->logo!=null and Auth::user()->membership=='premium')
       <img src="{{asset('design/logobrand.png')}}" class="logo-footer" style="bottom:-230px">
     @endif  
 
@@ -131,13 +131,13 @@
 <?php } 
     } else { ?>
   
-  @if(Auth::user()->logo==null)
+  @if(Auth::user()->logo!=null and Auth::user()->membership=='premium')
     <div class="col-xs-12 logo" align="center">
-      <img src="{{asset('design/logobrand.png')}}" class="logouser">
+      <img src="<?php echo $logo ?>" class="logouser">
     </div>
   @else 
     <div class="col-xs-12 logo" align="center">
-      <img src="<?php echo $logo ?>" class="logouser">
+      <img src="{{asset('design/logobrand.png')}}" class="logouser">
     </div>
   @endif
 
@@ -235,7 +235,7 @@
     </div>
   </div>
 
-  @if(Auth::user()->logo!=null)
+  @if(Auth::user()->logo!=null and Auth::user()->membership=='premium')
     <img src="{{asset('design/logobrand.png')}}" class="logo-footer">
   @endif  
 

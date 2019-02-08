@@ -9,6 +9,18 @@
     if("{{$syarat}}"){
       $( ".scroll-syarat" ).trigger( "click" );
     }
+
+    if("{{$tentang}}"){
+      $( ".scroll-tentang" ).trigger( "click" );
+    }
+
+    if("{{$earnings}}"){
+      $( ".scroll-earnings" ).trigger( "click" );
+    }
+
+    if("{{$disclaimer}}"){
+      $( ".scroll-disclaimer" ).trigger( "click" );
+    }
   });  
 </script>
 
@@ -29,16 +41,32 @@
       <div class="row">
         <div class="col-4 d-none d-sm-none d-md-none d-lg-block" id="spy">
           <ul class="nav nav-pills flex-column sticky-top">
-            <li class="nav-item"><a class="nav-link smooth-scroll active" href="#scroll1">Tentang Kami</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll2">Earnings and Legal Disclaimer</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll" href="#scroll3">Disclaimer</a></li>
-            <li class="nav-item"><a class="nav-link smooth-scroll scroll-syarat" href="#scroll4">Syarat dan Ketentuan</a></li>
+            <li class="nav-item">
+              <a class="nav-link smooth-scroll scroll-tentang active" href="#scroll1">
+                About Us 
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link smooth-scroll scroll-earnings" href="#scroll2">
+                Earnings and Legal Disclaimer
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link smooth-scroll scroll-disclaimer" href="#scroll3">
+                Disclaimer
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link smooth-scroll scroll-syarat" href="#scroll4">
+                Terms and Condition 
+              </a>
+            </li>
           </ul>
         </div>
         <div class="col-lg-8 col-md-12 col-sm-12 scrollspy-example">
           <div class="card" id="scroll1">
             <div class="card-body">
-              <h2>Tentang Kami</h2>
+              <h2>About Us</h2>
               <p>
                 Dengan Omnifluencer, Anda bisa mengetahui engagement rate akun Instagram. Anda bisa membandingkan hingga 4 akun Instagram untuk bisa melihat perbandingan langsung. Ini akan membantu Anda dalam memilih influencer yang tepat pada proyek yang sedang dijalankan.
               </p>
@@ -95,7 +123,7 @@
           </div>
           <div class="card" id="scroll4">
             <div class="card-body">
-              <h2>Syarat dan Ketentuan</h2>
+              <h2>Terms and Conditions</h2>
               <p>
                 Selamat datang di website kami. Jika Anda terus menelusuri dan menggunakan website ini, Anda setuju untuk mematuhi dan terikat dengan syarat dan ketentuan penggunaan berikut, yang bersama dengan kebijakan privasi kami mengatur hubungan omnifluencer.com dengan Anda dalam kaitannya dengan situs web ini. Jika Anda tidak setuju dengan bagian apa pun dari syarat dan ketentuan ini, mohon jangan gunakan website kami.
               </p>

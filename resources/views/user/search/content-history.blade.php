@@ -6,7 +6,7 @@
         <button type="button" class="btn btn-default btn-compare grads" data-toggle="modal" data-target="#compareModal" data-whatever="compare" style="display: none">
           <span>Compare</span>
         </button>
-        <h3>Here is your search history</h3>
+        <h3>Your History Search Result</h3>
       </div>
     </div>
 
@@ -64,6 +64,8 @@
     </button>-->
     
 <?php } else { ?>
-  <p style="padding-top: 20px">There is no history</p>
+  <p style="padding-top: 20px">
+    There is no history search
+  </p>
 <?php } ?>
 </form>

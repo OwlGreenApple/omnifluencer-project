@@ -99,6 +99,26 @@
     </thead>
     <tbody>
       <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Influencer Report (PDF) 
+          <span class="tooltipstered" title="Influencer Report (PDF)">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Influencer Report (PDF) 
+          <span class="tooltipstered" title="Influencer Report (PDF)">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">1</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
         <td></td>
         <td colspan="3">
           Show History 
@@ -241,26 +261,6 @@
       <tr>
         <td>&nbsp;</td>
         <td colspan="3">
-          Influencer Report (PDF) 
-          <span class="tooltipstered" title="Influencer Report (PDF)">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Influencer Report (PDF) 
-          <span class="tooltipstered" title="Influencer Report (PDF)">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
           Multi Influencers Report (PDF) 
           <span class="tooltipstered" title="Multi Influencer Report (PDF)">
             <i class="fas fa-question-circle fonticon"></i>
@@ -291,6 +291,35 @@
         <td>
           Multi Influencers List (Excel) 
           <span class="tooltipstered" title="Multi Influencer List (Excel)">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="cross">&#10060;</span></td>
+        <td><span class="cross">&#10060;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Agency Logo for Report (PDF)
+          <span class="tooltipstered" data-tooltip-content="#tooltip_content">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+
+        <div class="tooltip_templates" style="display: none;">
+          <span id="tooltip_content">
+            <img src="{{asset('design/agency-logo.PNG')}}" style="width:175px" /><br> 
+            <strong>
+              Agency Logo for Report (PDF)
+            </strong>
+          </span>
+        </div>
+      </tr>
+      <tr>
+        <td>
+          Agency Logo for Report (PDF)
+          <span class="tooltipstered" data-tooltip-content="#tooltip_content">
             <i class="fas fa-question-circle fonticon"></i>
           </span>
         </td>

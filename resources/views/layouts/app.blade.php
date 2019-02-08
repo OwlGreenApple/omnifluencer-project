@@ -88,12 +88,12 @@
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item main-menu">
-              <a class="nav-link" href="{{url('faq')}}">
+              <a class="nav-link <?php if(Request::is('faq')) echo 'nav-active' ?>" href="{{url('faq')}}">
                 FAQ
               </a>
             </li>
             <li class="nav-item main-menu">
-              <a class="nav-link" href="{{url('statics')}}">
+              <a class="nav-link <?php if(Request::is('statics')) echo 'nav-active' ?>" href="{{url('statics')}}">
                 About Us
               </a>
             </li>
@@ -101,13 +101,17 @@
               <a class="nav-link" href="#">Blog</a>
             </li>
             <li class="nav-item main-menu">
-              <a class="nav-link" href="{{url('pricing')}}">Pricing</a>
+              <a class="nav-link <?php if(Request::is('pricing')) echo 'nav-active' ?>" href="{{url('pricing')}}">
+                Pricing 
+              </a>
             </li>
           
             <!-- Authentication Links -->
             @guest
               <li class="nav-item main-menu">
-                <a class="nav-link" href="{{url('login')}}">Sign In</a>
+                <a class="nav-link" href="{{url('login')}}">
+                  Sign In 
+                </a>
               </li>
               <li class="nav-item main-menu">
                 <a class="nav-link d-block d-sm-block d-md-block d-lg-none" href="{{url('register')}}">
@@ -193,7 +197,7 @@
                       <b>{{Auth::user()->name}}</b><br>
                       {{Auth::user()->point}} Points<br>
                       <a class="menu-pass" href="{{url('change-password')}}">
-                        Change Password  
+                        Change Password
                       </a>
                     </div>  
                   </div>   
@@ -204,7 +208,7 @@
                       onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
                     <button class="btn btn-primary">
-                      {{ __('Sign Out') }}
+                      Sign Out
                     </button>
                   </a>
 
@@ -245,15 +249,10 @@
                     <li> 
                       <a href="{{url('/')}}"> Home</a> 
                     </li>
-                    <li> 
-                      <a href="{{url('statics')}}"> 
-                        About Us
-                      </a> 
-                    </li>
                     <li> <a href="#"> Blog</a> </li>
                     <li> 
                       <a href="{{url('pricing')}}"> 
-                        Pricing
+                        Pricing   
                       </a> 
                     </li>
                   </ul>
@@ -261,25 +260,41 @@
               </div>
             </div>
             <div class="col d-none d-sm-none d-md-none d-lg-block">
-              <h6> Helps</h6>
+              <h6> Help </h6>
               <div class="row ">
                 <div class="col">
                   <ul>
                     <li> 
                       <a href="{{url('faq')}}"> 
-                        FAQs
+                        FAQ
                       </a> 
                     </li>
-                    <li> <a href="#"> Terms & Conditions</a> </li>
-                    <li> <a href="#"> Privacy Policy</a> </li>
-                    <li> <a href="#"> Disclaimer</a> </li>
-                    <li> <a href="#"> Learn More</a> </li>
+                    <li> 
+                      <a href="{{url('statics/about-us')}}"> 
+                        About Us 
+                      </a> 
+                    </li>
+                    <li> 
+                      <a href="{{url('statics/earnings-disclaimer')}}">
+                        Earnings and Legal Disclaimer
+                      </a> 
+                    </li>
+                    <li> 
+                      <a href="{{url('statics/disclaimer')}}"> 
+                        Disclaimer
+                      </a> 
+                    </li>
+                    <li> 
+                      <a href="{{url('statics/terms-conditions')}}"> 
+                        Terms and Conditions 
+                      </a> 
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
             <div class="col d-none d-sm-none d-md-none d-lg-block">
-              <h6> Contact</h6>
+              <h6> Contact </h6>
               <div class="row ">
                 <div class="col">
                   <ul>
@@ -288,13 +303,15 @@
                         support@omnifluencer.com
                       </a> 
                     </li>
-                    <li> <a href="#"> Send Us a Query</a> </li>
+                    <li> 
+                      <p>Send Us a Query</p>
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
             <div class="col-3 d-none d-sm-none d-md-none d-lg-block">
-              <h6> Newsletter</h6>
+              <h6> Newsletter </h6>
               <p>Dapatkan informasi terkini mengenai tips influencer, media sosial dan perkembangannya. </p>
               <form class="form-inline form-inline-btm" >
                 @csrf
