@@ -200,27 +200,29 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="col-sm-4 col-form-label">
-            Logo
-          </label>
+        @if(Auth::user()->membership=='premium')
+          <div class="form-group">
+            <label class="col-sm-4 col-form-label">
+              Logo
+            </label>
 
-          <div class="col-md-11">
-            <input type="file" class="form-control" name="filelogo" id="filelogo" accept="image/*">
+            <div class="col-md-11">
+              <input type="file" class="form-control" name="filelogo" id="filelogo" accept="image/*">
+            </div>
+
+            <?php  
+              $logo = null;
+
+              if(Auth::user()->logo!=null){
+                $logo = Storage::url(Auth::user()->logo);
+              }
+            ?>
+
+            <div class="col-md-11 mt-3">
+              <img id="logouser" class="profpic img-img" src="<?php echo $logo ?>" style="max-width: 200px; border: 1px solid #ced4da; padding: 10px;background:#fff;">  
+            </div>
           </div>
-
-          <?php  
-            $logo = null;
-
-            if(Auth::user()->logo!=null){
-              $logo = Storage::url(Auth::user()->logo);
-            }
-          ?>
-
-          <div class="col-md-11 mt-3">
-            <img id="logouser" class="profpic img-img" src="<?php echo $logo ?>" style="max-width: 200px; border: 1px solid #ced4da; padding: 10px;background:#fff;">  
-          </div>
-        </div>
+        @endif
 
         <div class="form-group">
           <div class="col-md-12">

@@ -76,7 +76,7 @@
       <div class="row">
         <div class="col-md-7 h-40">
           <div class="card">  
-            <div class="card-body">
+            <div class="card-body point-card">
               <div class="row"> 
                 <div class="col-md-2 col-12" align="center">  
                   <img class="profpic" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
@@ -103,7 +103,7 @@
                   </p>
                 </div>
               </div>
-              <br>  
+              
               <!--<div class="col-md-12"> 
                 <p style="padding:0;margin:0;" align="right">2500 pts</p>
 
@@ -140,8 +140,8 @@
               </p>
 
               <a href="{{url('pricing')}}">
-                <button class="btn btn-primary" data-upgrade="pro">
-                  Upgrade
+                <button class="btn btn-primary btn-upgrade-poin" data-upgrade="pro">
+                  UPGRADE NOW
                 </button>
               </a>
                 <!--Importance <br> 

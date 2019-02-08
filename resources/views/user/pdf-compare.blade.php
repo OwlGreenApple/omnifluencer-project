@@ -6,7 +6,7 @@
 <?php  
   $logo = null;
 
-  if(Auth::user()->logo!=null){
+  if(Auth::user()->logo!=null and Auth::user()->membership=='premium'){
     $logo = Storage::url(Auth::user()->logo);
   }
 ?>
@@ -15,13 +15,13 @@
   <img src="{{asset('design/bg-pdf-landscape.jpg')}}">
 </div>
 
-@if(Auth::user()->logo==null)
+@if(Auth::user()->logo!=null and Auth::user()->membership=='premium')
   <div class="col-xs-12 logo-rotate" align="center">
-    <img src="{{asset('design/logobrand.png')}}" style="height:50px;">
+    <img src="<?php echo $logo ?>" style="height:50px;">
   </div>
 @else 
   <div class="col-xs-12 logo-rotate" align="center">
-    <img src="<?php echo $logo ?>" style="height:50px;">
+    <img src="{{asset('design/logobrand.png')}}" style="height:50px;">
   </div>
 @endif
 
@@ -112,7 +112,7 @@
     </div>
   @endforeach
   
-  @if(Auth::user()->logo!=null)
+  @if(Auth::user()->logo!=null and Auth::user()->membership=='premium')
     <img src="{{asset('design/logobrand.png')}}" class="logo-footer">
   @endif
   
