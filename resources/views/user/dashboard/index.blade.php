@@ -5,17 +5,27 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
       <div class="row">
-        <div class="col-md-8">
-          <h2><b>Dashboard</b></h2>
+        <div class="col-md-8 col-6">
+          <h2><b>Dashboard</b></h2>    
+        </div>  
+
+        <div class="col-md-4 col-6" align="right">
+          <a href="{{url('/')}}">
+            Search More
+          </a>
+          &raquo;
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-8 col-12">
           <h5>
             Welcome to Omnifluencer!
           </h5>    
         </div>  
 
-        <div class="col-md-4" align="right">
-          <h5>
-            {{ date("l, d F Y")  }}
-          </h5>
+        <div class="col-md-4 col-12 date-dashboard" align="left">
+          {{ date("l, d F Y")  }}
         </div>
       </div>
       

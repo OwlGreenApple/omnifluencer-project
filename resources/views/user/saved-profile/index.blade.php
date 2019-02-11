@@ -283,7 +283,7 @@
           <input class="checkAll" type="checkbox" name="checkAll"> Check All
         </div>
 
-        <table class="table">
+        <table class="table responsive">
           <thead>
             <th>
               <input class="checkAll" type="checkbox" name="checkAll">

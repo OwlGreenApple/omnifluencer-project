@@ -127,7 +127,7 @@
       <br>  
 
       <form>
-        <table class="table">
+        <table class="table responsive">
           <thead align="center">
             <th class="header" action="no_order">
               No Order

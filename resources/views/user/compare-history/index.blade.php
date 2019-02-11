@@ -191,32 +191,30 @@
       <form>
         <div class="form-inline mb-2">
           <label class="center-mobile mr-sm-2" for="from">
-            <b>Dari</b>
+            Dari
           </label>
-          <input id="from" type="text" class="form-control mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
+          <input id="from" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-1 formatted-date" name="from">
 
           <label class="center-mobile mr-sm-2" for="to">
-            <b>hingga</b>
+            hingga
           </label>
-          <input id="to" type="text" class="form-control mb-2 mr-sm-2 formatted-date" name="to">
+          <input id="to" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-1 formatted-date" name="to">
 
-          <div class="d-flex">
-            <label class="sr-only" for="keywords">
-              Search
-            </label>
-            <input id="keywords" type="text" class="form-control mb-2 mr-sm-2" name="keywords" placeholder="username...">
+          <label class="sr-only" for="keywords">
+            Search
+          </label>
+          <input id="keywords" type="text" class="form-control form-control-sm col-md-2 mb-2 mr-sm-2" name="keywords" placeholder="username...">
                 
-            <button type="button" class="btn btn-primary mb-2 btn-search">
-              Search
-            </button>
-          </div>
+          <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
+            Search
+          </button>
         </div>
 
         <div class="check-mobile">
           <input class="checkAll" type="checkbox" name="checkAll"> Check All
         </div>
 
-        <table class="table">
+        <table class="table responsive">
           <thead>
             <th>
               <input class="checkAll" type="checkbox" name="checkAll">

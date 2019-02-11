@@ -340,25 +340,27 @@
           </h5>    
         </div>
 
-        <div class="col-md-7 col-12" align="right">
+        <div class="col-md-7 col-12 menu-mobile" align="right">
           @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
-            <button class="btn btn-primary mb-10" id="btn-compare">
+            <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
               <i class="fas fa-chart-bar"></i>
               Compare
             </button>
 
-            <button class="btn btn-primary mb-10" id="btn-save">
+            <button type="button" class="btn btn-sm btn-primary btn-save mb-10">
               <i class="fas fa-folder-plus"></i> 
               Add to group
             </button>
-            <button class="btn btn-primary mb-10" id="btn-save-global">
+
+            <button type="button" class="btn btn-sm btn-primary btn-save-global mb-10">
               <i class="fas fa-save"></i> 
               Save
             </button>
-            <button class="btn btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
+
+            <button type="button" class="btn btn-sm btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
               <i class="far fa-trash-alt"></i> Delete
             </button>  
-          @endif   
+          @endif     
         </div>
       </div>
       
@@ -407,32 +409,58 @@
       <br>  
 
       <form>
-        <div class="form-inline mb-2">
-          <label class="center-mobile mr-sm-2" for="from">
-            <b>Dari</b>
-          </label>
-          <input id="from" type="text" class="form-control mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
+        <div class="row">
+          <div class="form-inline col-md-7 mb-2">
+            <label class="center-mobile mr-sm-2" for="from">
+              Dari
+            </label>
+            <input id="from" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
 
-          <label class="center-mobile mr-sm-2" for="to">
-            <b>hingga</b>
-          </label>
-          <input id="to" type="text" class="form-control mb-2 mr-sm-2 formatted-date" name="to">
+            <label class="center-mobile mr-sm-2" for="to">
+              hingga
+            </label>
+            <input id="to" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="to">
 
-          <label class="sr-only" for="keywords">
-            Search
-          </label>
-          <input id="keywords" type="text" class="form-control mb-2 mr-sm-2" name="keywords" placeholder="username...">
-              
-          <button type="button" class="btn btn-primary mb-2 btn-search">
-            Search
-          </button>
+            <label class="sr-only" for="keywords">
+              Search
+            </label>
+            <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-3" name="keywords" placeholder="username...">
+                
+            <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
+              Search
+            </button>
+          </div> 
+
+          <div class="col-md-5 menu-nomobile" align="right">
+            @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+              <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
+                <i class="fas fa-chart-bar"></i>
+                Compare
+              </button>
+
+              <button type="button" class="btn btn-sm btn-primary btn-save mb-10">
+                <i class="fas fa-folder-plus"></i> 
+                Add to group
+              </button>
+
+              <button type="button" class="btn btn-sm btn-primary btn-save-global mb-10">
+                <i class="fas fa-save"></i> 
+                Save
+              </button>
+
+              <button type="button" class="btn btn-sm btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
+                <i class="far fa-trash-alt"></i> Delete
+              </button>  
+            @endif     
+          </div>
         </div>
+        
 
         <div class="check-mobile">
           <input class="checkAll" type="checkbox" name="checkAll"> Check All
         </div>
 
-        <table class="table">
+        <table class="table responsive">
           <thead>
             <th>
               <input class="checkAll" type="checkbox" name="checkAll">
@@ -621,7 +649,7 @@
     send_email();
   });
 
-  $( "body" ).on( "click", "#btn-save-global", function()
+  $( "body" ).on( "click", ".btn-save-global", function()
   {
     if(check_id()){
       save_group();
@@ -646,7 +674,7 @@
     refresh_page();
   });
 
-  $( "body" ).on( "click", "#btn-compare", function() {
+  $( "body" ).on( "click", ".btn-compare", function() {
     // console.log($('.checkaccid').val());
 
     if(check_id('compare')){
@@ -686,7 +714,7 @@
     }
   });
 
-  $( "body" ).on( "click", "#btn-save", function() {
+  $( "body" ).on( "click", ".btn-save", function() {
     get_groups();
   });
 
