@@ -125,6 +125,11 @@
   box-shadow: 1px 3px 4px 1px rgba(75, 75, 75, 0.6);
 }
 
+.form-control:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 .pointer {
   cursor: pointer;
 }

@@ -252,21 +252,33 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
 
-      <h2><b>Saved Profile</b></h2>  
+      <div class="row">
+        <div class="col-md-8 col-6">
+          <h2><b>Saved Profile</b></h2>  
+        </div>  
+
+        <div class="col-md-4 col-6" align="right">
+          <a href="{{url('/')}}">
+            <button class="btn btn-sm btn-primary btn-search-more">
+              Search More &raquo;
+            </button>
+          </a>
+        </div>
+      </div>
       
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5 col-12">
           <h5>
             Select bulk action, save or add it to group
           </h5>    
         </div>
 
-        <div class="col-md-7" align="right">
-          <button class="btn btn-primary" id="btn-save">
+        <div <div class="col-12 menu-mobile" align="left">
+          <button class="btn btn-sm btn-primary btn-save">
             <i class="fas fa-folder-plus"></i> 
             Add to group
           </button>
-          <button class="btn btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+          <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>     
         </div>
@@ -281,6 +293,18 @@
       <form>
         <div class="check-mobile">
           <input class="checkAll" type="checkbox" name="checkAll"> Check All
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mb-2 menu-nomobile" align="right">
+            <button class="btn btn-sm btn-primary btn-save">
+              <i class="fas fa-folder-plus"></i> 
+              Add to group
+            </button>
+            <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+              <i class="far fa-trash-alt"></i> Delete
+            </button>  
+          </div>
         </div>
 
         <table class="table responsive">
@@ -501,7 +525,7 @@
     }
   });
 
-  $( "body" ).on( "click", "#btn-save", function() {
+  $( "body" ).on( "click", ".btn-save", function() {
     get_groups();
   });
 

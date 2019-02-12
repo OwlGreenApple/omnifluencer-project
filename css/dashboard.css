@@ -370,6 +370,7 @@ sub {
 /* Dashboard */
 .date-dashboard {
   font-size: 15px;
+  text-align: right;
 }
 
 .save-pdf {
@@ -384,8 +385,10 @@ sub {
 
 .btn-upgrade {
   position: absolute;
+  padding-left: 25px;
+  padding-right: 25px;
   top: 120px;
-  left: 31%;
+  left: 28%;
   z-index: 10;
   margin: 0 auto;
   text-align: center;
@@ -439,6 +442,10 @@ sub {
     position:absolute; 
     right:15px;
   }
+
+  .date-dashboard {
+    text-align: left;
+  }
 }
 
 #pesan {
@@ -452,4 +459,15 @@ sub {
 .menu-toggle{
   position:absolute; 
   left:15px;
+}
+
+.btn-search-more {
+  padding-left: 25px; 
+  padding-right: 25px;
+  border-radius: 25px;
+}
+
+.btn-search-more:hover {
+  background-color: #08db32;
+  border-color: #08db32;
 }

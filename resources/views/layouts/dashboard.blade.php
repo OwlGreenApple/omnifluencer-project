@@ -112,18 +112,18 @@
         </button>    
       </div>
 
-      <div class="col-md-6 col-12 div-header justify-content-end center-mobile">
+      <div class="col-md-6 col-12 div-header justify-content-end">
         <button class="navbar-toggler menu-toggle" type="button" id="sidebarCollapse">
           <i class="fas fa-bars"></i>
         </button>
 
-        <span class="submenu-header menu-mobile" style="padding-right: 20px;">
-          <span class="icon-header-mobile">
+        <span class="submenu-header menu-mobile" style="padding-right: 10px;">
+          <span class="icon-header-mobile" onclick="copylink()">
             <i class="fas fa-file-signature"></i>
           </span>
         </span>
 
-        <span class="submenu-header"  style="padding-right: 20px;">
+        <span class="submenu-header"  style="padding-right: 10px;">
           <a href="{{url('/')}}">
             <span class="icon-header-mobile">
               <i class="fas fa-home" style="margin-right: 7px;"></i>
@@ -134,7 +134,7 @@
           </a>
         </span>
 
-        <span class="submenu-header" style="padding-right: 20px;">
+        <span class="submenu-header" style="padding-right: 10px;">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown" >
               <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre data-offset="5,10">
@@ -192,7 +192,7 @@
           }
         ?>
 
-        <span class="submenu-header profpic-mobile">
+        <span class="submenu-header">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -251,15 +251,6 @@
 
       @if(Auth::user()->is_admin==0)
       <ul class="list-unstyled components">
-        <li class="<?php if(Request::is('home') or Request::is('/')) echo 'active' ?>">
-          <span class="submenu-navbar">
-            <a href="{{url('/')}}">
-              <i class="fas fa-home icon-menu"></i>
-              Home
-            </a>
-          </span>
-        </li>
-
         <li class="<?php if(Request::is('dashboard')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="{{url('dashboard')}}">

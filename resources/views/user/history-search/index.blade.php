@@ -330,8 +330,19 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
+      <div class="row">
+        <div class="col-md-8 col-6">
+          <h2><b>History</b></h2>      
+        </div>
 
-      <h2><b>History</b></h2>  
+        <div class="col-md-4 col-6" align="right">
+          <a href="{{url('/')}}">
+            <button class="btn btn-sm btn-primary btn-search-more">
+              Search More &raquo;
+            </button>
+          </a>
+        </div>
+      </div>
       
       <div class="row">
         <div class="col-md-5 col-12 mb-10">
@@ -340,7 +351,7 @@
           </h5>    
         </div>
 
-        <div class="col-md-7 col-12 menu-mobile" align="right">
+        <div class="col-md-7 col-12 menu-mobile" align="left">
           @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
             <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
               <i class="fas fa-chart-bar"></i>
@@ -411,12 +422,12 @@
       <form>
         <div class="row">
           <div class="form-inline col-md-7 mb-2">
-            <label class="center-mobile mr-sm-2" for="from">
+            <label class="center-mobile mr-sm-2 pb-md-2" for="from">
               Dari
             </label>
             <input id="from" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
 
-            <label class="center-mobile mr-sm-2" for="to">
+            <label class="center-mobile mr-sm-2 pb-md-2 pb-sm-none" for="to">
               hingga
             </label>
             <input id="to" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="to">

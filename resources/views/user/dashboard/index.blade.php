@@ -11,9 +11,10 @@
 
         <div class="col-md-4 col-6" align="right">
           <a href="{{url('/')}}">
-            Search More
+            <button class="btn btn-sm btn-primary btn-search-more">
+              Search More &raquo;
+            </button>
           </a>
-          &raquo;
         </div>
       </div>
       
@@ -24,7 +25,7 @@
           </h5>    
         </div>  
 
-        <div class="col-md-4 col-12 date-dashboard" align="left">
+        <div class="col-md-4 col-12 date-dashboard" align="right">
           {{ date("l, d F Y")  }}
         </div>
       </div>

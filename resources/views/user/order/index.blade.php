@@ -114,8 +114,20 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
 
-      <h2><b>Orders</b></h2>  
-      
+      <div class="row">
+        <div class="col-md-8 col-6">
+          <h2><b>Orders</b></h2>  
+        </div>  
+
+        <div class="col-md-4 col-6" align="right">
+          <a href="{{url('/')}}">
+            <button class="btn btn-sm btn-primary btn-search-more">
+              Search More &raquo;
+            </button>
+          </a>
+        </div>
+      </div>
+
       <h5>
         Show you previous history orders
       </h5>
