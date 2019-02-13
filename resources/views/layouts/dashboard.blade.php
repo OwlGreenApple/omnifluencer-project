@@ -28,10 +28,11 @@
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
   <link href="{{ asset('css/all.css') }}" rel="stylesheet">
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
+
   <link href="{{ asset('DataTables/DataTables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
 
   <script>
@@ -97,11 +98,7 @@
   <!-- Navbar -->
   <nav class="menu-header">
     <div class="row div-header">
-      <div class="col-md-6 col-xs-12 navbar-reflink">
-        <button class="navbar-toggler" type="button" id="sidebarCollapse">
-          <i class="fas fa-bars"></i>
-        </button>
-
+      <div class="col-md-6 col-12 navbar-reflink menu-nomobile">
         <label class="submenu-header label-reflink">
           <b>Referral link</b>
           <span class="tooltipstered" title="Referral link">
@@ -115,22 +112,38 @@
         </button>    
       </div>
 
-      <div class="col-md-6 col-xs-12 div-header justify-content-end">
-        <span class="submenu-header"  style="padding-right: 20px;">
+      <div class="col-md-6 col-12 div-header justify-content-end">
+        <button class="navbar-toggler menu-toggle" type="button" id="sidebarCollapse">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <span class="submenu-header menu-mobile" style="padding-right: 10px;">
+          <span class="icon-header-mobile" onclick="copylink()">
+            <i class="fas fa-file-signature"></i>
+          </span>
+        </span>
+
+        <span class="submenu-header"  style="padding-right: 10px;">
           <a href="{{url('/')}}">
-            <i class="fas fa-home" style="margin-right: 7px;"></i>
-            <b>Home</b>
+            <span class="icon-header-mobile">
+              <i class="fas fa-home" style="margin-right: 7px;"></i>
+            </span>
+            <span class="none-mobile">
+              <b>Home</b>
+            </span>
           </a>
         </span>
 
-        <span class="submenu-header" style="padding-right: 20px;">
+        <span class="submenu-header" style="padding-right: 10px;">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown" >
               <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre data-offset="5,10">
-                <span class="icon-notif" id="icon-notif" data-badge="{{$countnotif}}">
+                <span class="icon-notif icon-header-mobile" id="icon-notif" data-badge="{{$countnotif}}">
                   <i class="fas fa-bell" style="margin-right: 7px;"></i>
                 </span>
-                <b>Notification</b>
+                <span class="none-mobile">
+                  <b>Notification</b>
+                </span>
               </a>
 
               <div class="dropdown-menu dropdown-menu-right profpic-menu" aria-labelledby="navbarDropdown">
@@ -386,11 +399,11 @@
   <footer class="footer">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2 footer-txt">
+        <div class="col-md-2 footer-txt center-mobile">
           <span>Omnifluencer © 2018</span>
         </div>
 
-        <div class="col-md-10 footer-txt" align="right">
+        <div class="col-md-10 footer-txt center-mobile" align="right">
           <span style="padding-right: 15px">
             Privacy Policy
           </span>

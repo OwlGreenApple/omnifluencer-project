@@ -83,22 +83,34 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
-      <h2><b>Group</b></h2>
-
       <div class="row">
-        <div class="col-md-5">
-          <h5>
-            Manage your saved group
-          </h5>    
+        <div class="col-md-8 col-6">
+          <h2><b>Groups</b></h2>    
         </div>
 
-        <div class="col-md-7" align="right">
-          <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete">
+        <div class="col-md-4 col-6" align="right">
+          <a href="{{url('/')}}">
+            <button class="btn btn-sm btn-primary btn-search-more">
+              Search More &raquo;
+            </button>
+          </a>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-5 col-12">
+          <h5>
+            Manage your saved groups
+          </h5>      
+        </div>
+
+        <div class="col-12 menu-mobile" align="left">
+          <button class="btn btn-sm btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>
         </div>
       </div>
-    
+
       <hr>
       
       <div id="pesan" class="alert"></div>
@@ -106,7 +118,16 @@
       <br>
 
       <form>
+        <div class="row">
+          <div class="col-md-12 mb-4 menu-nomobile" align="right">
+            <button class="btn btn-sm btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete">
+              <i class="far fa-trash-alt"></i> Delete
+            </button>  
+          </div>
+        </div>
+        
         <div id="content"></div>
+        
       </form>
 
     </div>
@@ -157,6 +178,7 @@
   });
 
   $( "body" ).on( "dblclick", ".div-group", function() {
+    console.log('check');
     $(this).find('.groupcheck').prop('checked', true);
 
     var idgroup = $(this).attr('data-id');

@@ -57,8 +57,20 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
+      <div class="row">
+        <div class="col-md-8 col-6">
+          <h2><b>Points</b></h2>  
+        </div>  
 
-      <h2><b>Points</b></h2>  
+        <div class="col-md-4 col-6" align="right">
+          <a href="{{url('/')}}">
+            <button class="btn btn-sm btn-primary btn-search-more">
+              Search More &raquo;
+            </button>
+          </a>
+        </div>
+      </div>
+      
       <h5>
         Your point history
       </h5>    

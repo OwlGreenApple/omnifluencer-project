@@ -165,20 +165,32 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
+      <div class="row">
+        <div class="col-md-8 col-6">
+          <h2><b>Compare History</b></h2>      
+        </div>
 
-      <h2><b>Compare History</b></h2>  
+        <div class="col-md-4 col-6" align="right">
+          <a href="{{url('/')}}">
+            <button class="btn btn-sm btn-primary btn-search-more">
+              Search More &raquo;
+            </button>
+          </a>
+        </div>
+      </div>
+      
       
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5 col-12">
           <h5>
             Show you previous history comparison
           </h5>    
         </div>
 
-        <div class="col-md-7" align="right">
-          <button class="btn btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+        <div class="col-12 menu-mobile" align="left">
+          <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
-          </button>     
+          </button>
         </div>
       </div>
       
@@ -189,34 +201,40 @@
       <br>  
 
       <form>
-        <div class="form-inline mb-2">
-          <label class="center-mobile mr-sm-2" for="from">
-            <b>Dari</b>
-          </label>
-          <input id="from" type="text" class="form-control mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
+        <div class="row">
+          <div class="form-inline col-md-7 mb-2">
+            <label class="center-mobile mr-sm-2 pb-md-2" for="from">
+              Dari
+            </label>
+            <input id="from" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
 
-          <label class="center-mobile mr-sm-2" for="to">
-            <b>hingga</b>
-          </label>
-          <input id="to" type="text" class="form-control mb-2 mr-sm-2 formatted-date" name="to">
+            <label class="center-mobile mr-sm-2 pb-md-2" for="to">
+              hingga
+            </label>
+            <input id="to" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="to">
 
-          <div class="d-flex">
             <label class="sr-only" for="keywords">
               Search
             </label>
-            <input id="keywords" type="text" class="form-control mb-2 mr-sm-2" name="keywords" placeholder="username...">
-                
-            <button type="button" class="btn btn-primary mb-2 btn-search">
+            <input id="keywords" type="text" class="form-control form-control-sm col-md-3 mb-2 mr-sm-2" name="keywords" placeholder="username...">
+                  
+            <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
               Search
             </button>
           </div>
-        </div>
 
+          <div class="col-md-5 menu-nomobile" align="right">
+            <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+              <i class="far fa-trash-alt"></i> Delete
+            </button>
+          </div>    
+        </div>
+      
         <div class="check-mobile">
           <input class="checkAll" type="checkbox" name="checkAll"> Check All
         </div>
 
-        <table class="table">
+        <table class="table responsive">
           <thead>
             <th>
               <input class="checkAll" type="checkbox" name="checkAll">

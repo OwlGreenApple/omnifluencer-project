@@ -621,6 +621,10 @@ input[type="text"] {
 .btn-sbmt-btm.grads {
   background-color: #31e80d;
   box-shadow: 0 1px 2px 0 rgba(75, 75, 75, 0.50);
+  width: 340px;
+  font-size: 24px;
+  height: 50px;
+  border-radius: 50px;
 }
 
 .btn-sbmt-btm.grads:hover {
@@ -864,7 +868,7 @@ a:hover {
 }
 
 .logo-part {
-  border-right: 1px solid grey;
+  border-right: 1px solid #d9d9d9;
   height: 100%;
 }
 

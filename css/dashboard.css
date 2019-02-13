@@ -5,6 +5,7 @@ thead {
 }
 
 td{
+  font-size: 15px;
   background-color: #fff; 
 }
 
@@ -23,7 +24,7 @@ table tr {
 
   @media screen and (max-width: 600px) {
     /* untuk ilangin table thead di mobile */ 
-    table thead {
+    table.responsive thead {
       overflow: hidden; /*important*/
       position: absolute;
       width: 1px;
@@ -35,20 +36,20 @@ table tr {
       padding: 0;
     }
     
-    table tr {
+    table.responsive tr {
       border-bottom: 3px solid #ddd;
       display: block;
       margin-bottom: .625em;
     }
     
-    table td {
+    table.responsive td {
       border-bottom: 1px solid #ddd;
       display: block;
       text-align: right;
       width: 100%;
     }
     
-    table td::before {
+    table.responsive td::before {
       /*
       * aria-label has no advantage, it won't be read inside a table
       content: attr(aria-label);
@@ -58,7 +59,7 @@ table tr {
       font-weight: bold;
     }
     
-    table td:last-child {
+    table.responsive td:last-child {
       border-bottom: 0;
     }
 
@@ -367,6 +368,11 @@ sub {
 }
 
 /* Dashboard */
+.date-dashboard {
+  font-size: 15px;
+  text-align: right;
+}
+
 .save-pdf {
   opacity: 0.4;
   position: relative;
@@ -379,8 +385,10 @@ sub {
 
 .btn-upgrade {
   position: absolute;
+  padding-left: 25px;
+  padding-right: 25px;
   top: 120px;
-  left: 31%;
+  left: 28%;
   z-index: 10;
   margin: 0 auto;
   text-align: center;
@@ -404,4 +412,62 @@ sub {
 .btn-upgrade-poin {
   width: 200px;
   font-size: 16px;
+}
+
+/* Miscellaneous */
+.btn-sm {
+  font-size: 12px;
+  padding: .25rem 8px;
+}
+
+.btn-sm-search {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.menu-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 769px) {
+  .menu-nomobile {
+    display: none;
+  }
+
+  .menu-mobile {
+    display: block;
+  }
+
+  .profpic-mobile {
+    position:absolute; 
+    right:15px;
+  }
+
+  .date-dashboard {
+    text-align: left;
+  }
+}
+
+#pesan {
+  display: none;
+}
+
+.icon-header-mobile {
+  font-size: 20px;
+}
+
+.menu-toggle{
+  position:absolute; 
+  left:15px;
+}
+
+.btn-search-more {
+  padding-left: 25px; 
+  padding-right: 25px;
+  border-radius: 25px;
+}
+
+.btn-search-more:hover {
+  background-color: #08db32;
+  border-color: #08db32;
 }

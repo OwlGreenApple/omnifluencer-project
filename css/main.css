@@ -139,6 +139,11 @@ body {
 @media (max-width:769px){
   .center-mobile {
     text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .none-mobile {
+    display: none;
   }
 }
 
@@ -176,7 +181,7 @@ body {
   height:40px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid #12425B;
+  border: 2px solid #505050;
 }
 
 .profpic-header-big {
