@@ -260,34 +260,43 @@
           </span>
         </li>
 
-        <li class="<?php if(Request::is('history-search')) echo 'active' ?>">
+        <li class="<?php if(Request::is('history-search') or Request::is('compare-history') or Request::is('saved-profile')) echo 'active' ?>">
           <span class="submenu-navbar">
-            <a href="{{url('history-search')}}">
-              <i class="fas fa-history icon-menu"></i>
-              History
+            <a href="#infSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+              <i class="fas fa-certificate icon-menu"></i>
+              Influencer
             </a>
           </span>
+          
+          <ul class="collapse list-unstyled <?php if(Request::is('history-search') or Request::is('compare-history') or Request::is('saved-profile')) echo 'show' ?>" id="infSubmenu">
+            <li class="<?php if(Request::is('history-search')) echo 'active' ?>">
+              <a href="{{url('history-search')}}">
+                <i class="fas fa-history icon-menu"></i>
+                History
+              </a>
+            </li>
+
+            <?php if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro') { ?>
+              <li class="<?php if(Request::is('compare-history')) echo 'active' ?>">
+                <a href="{{url('compare-history')}}">
+                  <i class="fas fa-chart-bar icon-menu"></i>
+                  Compare History
+                </a>
+              </li>
+
+              <li class="<?php if(Request::is('saved-profile')) echo 'active' ?>">
+                <span class="submenu-navbar">
+                  <a href="{{url('saved-profile')}}">
+                    <i class="fas fa-save icon-menu"></i>
+                    Saved Profile
+                  </a>
+                </span>
+              </li>
+            <?php } ?>
+          </ul>
         </li>
 
         <?php if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro') { ?>
-          <li class="<?php if(Request::is('compare-history')) echo 'active' ?>">
-            <span class="submenu-navbar">
-              <a href="{{url('compare-history')}}">
-                <i class="fas fa-chart-bar icon-menu"></i>
-                Compare History
-              </a>
-            </span>
-          </li>
-
-          <li class="<?php if(Request::is('saved-profile')) echo 'active' ?>">
-            <span class="submenu-navbar">
-              <a href="{{url('saved-profile')}}">
-                <i class="fas fa-save icon-menu"></i>
-                Saved Profile
-              </a>
-            </span>
-          </li>
-
           <li class="<?php if(Request::is('groups') or Request::is('groups/*')) echo 'active' ?>">
             <span class="submenu-navbar">
               <a href="{{url('groups')}}">
@@ -298,11 +307,11 @@
           </li>
         <?php } ?>
 
-        <li class="<?php if(Request::is('points') or Request::is('points/*')) echo 'active' ?>">
+        <li class="<?php if(Request::is('upgrade-account')) echo 'active' ?>">
           <span class="submenu-navbar">
-            <a href="{{url('points')}}">
-              <i class="fas fa-coins icon-menu"></i>
-              Points
+            <a href="{{url('upgrade-account')}}">
+              <i class="fas fa-rocket icon-menu"></i>
+              Upgrade Account
             </a>
           </span>
         </li>
@@ -310,8 +319,17 @@
         <li class="<?php if(Request::is('orders')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="{{url('orders')}}">
-              <i class="fas fa-shopping-cart icon-menu"></i>
-              Orders
+              <i class="far fa-money-bill-alt icon-menu"></i>
+              Billing
+            </a>
+          </span>
+        </li>
+
+        <li class="<?php if(Request::is('points') or Request::is('points/*')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('points')}}">
+              <i class="far fa-gem icon-menu"></i>
+              Reward Points
             </a>
           </span>
         </li>
@@ -324,14 +342,16 @@
             </a>
           </span>
           
-          <ul class="collapse list-unstyled" id="settingSubmenu">
+          <ul class="collapse list-unstyled <?php if(Request::is('edit-profile') or Request::is('change-password')) echo 'show' ?>" id="settingSubmenu">
             <li class="<?php if(Request::is('edit-profile')) echo 'active' ?>">
               <a href="{{url('edit-profile')}}">
+                <i class="fas fa-pencil-alt icon-menu"></i>
                 Edit Profile
               </a>
             </li>
             <li class="<?php if(Request::is('change-password')) echo 'active' ?>">
               <a href="{{url('change-password')}}">
+                <i class="fas fa-lock icon-menu"></i>
                 Change Password
               </a>
             </li>

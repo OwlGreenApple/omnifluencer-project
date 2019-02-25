@@ -312,7 +312,7 @@
         <div class="col-12">
 
           <div class="history justify-content-center">
-            <h3>Enter Instagram Username<br>and tap Calcualte!</h3>
+            <h3>Enter Instagram Username<br>and tap Calculate!</h3>
             <form class="form-inline d-flex justify-content-center" action="/action_page.php">
               @csrf 
               <div class="form-group">
@@ -640,8 +640,8 @@
     <div class="modal-content bigModal">
       <div class="modal-body bg-kuota" align="left">
         <span class="kuota-txt mr-auto">
-          Kuota telah habis. <br>
-          Silahkan Sign up untuk <br> melanjutkan.
+          Mau menambah kuota? <br>
+          Silahkan melakukan FREE Signup <br> untuk melanjutkan.
         </span>
       </div>
       <div class="modal-footer" id="foot">
