@@ -130,6 +130,11 @@
   box-shadow: none;
 }
 
+.btn-frgt {
+    margin-top: 15px;
+    padding: 0;
+  }
+
 .pointer {
   cursor: pointer;
 }
@@ -221,7 +226,7 @@ input[type=checkbox]:not(old):checked + label > span:before {
 @media (max-width: 575.98px) {
   .signup-content {
     width: auto !important;
-    padding: 20px;
+    padding: 35px;
   }
 
   .form-title {
@@ -237,6 +242,16 @@ input[type=checkbox]:not(old):checked + label > span:before {
   .loginhere {
     font-size: 14px;
     margin-top: 40px;
+  }
+  
+  .form-submit {
+    height: 40px!important;
+    padding-top: 5px!important;
+  }
+  
+  .btn-frgt {
+    margin-top: 15px;
+    padding: 0;
   }
 }
 

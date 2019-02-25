@@ -344,6 +344,11 @@ footer span {
     transition: left 0.3s ease-in;
   }
 
+  .page-title {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  
   .page-title h1 {
     font-size: 30px;
   }
@@ -351,6 +356,7 @@ footer span {
   .pg-title {
     padding-top: 10px;
     font-size: 16px;
+    max-width: 320px;
   }
 
   hr.orn {
@@ -367,15 +373,21 @@ footer span {
     padding-left: 5px;
   }
 
-  /*#accordion-style-1 .card-header .btn .main {
+  #accordion-style-1 .card-header .btn .main {
     padding: 5px;
     width: auto;
     height: auto;
     top: 18px;
-  }*/
+  }
+  
+  .overflow-wrap {
+    margin-top: 2px;
+  }
 
   .card-body p {
     font-size: 13px;
+    padding: 10px 15px;
+    margin-bottom: 0;
   }
 
 
@@ -389,8 +401,9 @@ footer span {
   }
 
   footer p {
-    font-size: 14px;
+    font-size: 15px !important;
     margin-top: 10px;
+    padding-right: 0;
   }
 }
 

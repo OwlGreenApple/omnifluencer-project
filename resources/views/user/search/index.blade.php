@@ -350,8 +350,9 @@
           100.000+ Influencer
           di Instagram
         </h1>
+        <h2>Berikut ini adalah hasil jumlah rata-rata sesuai dengan jumlah follower</h2>
       </div>
-      <div class="col-lg-7 col-sm-12 percent">
+      <div class="col-lg-7 col-sm-12 percent d-none d-md-block">
         <div class="row d-flex flex-wrap justify-content-end">
           <div class="card w-20">
             <h5 class="card-header"><i class="fas fa-less-than fa-xs"></i>&nbsp;1.000 <p>followers</p>
@@ -385,6 +386,57 @@
             <h5 class="card-header">100.000+ <p>followers</p>
             </h5>
             <div class="card-body">
+              <h3 class="card-title">1,1%</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+<!--      Mobile View Card-->
+      <div class="row col-md-12 mobilecard">
+        <div class="col-md-4 col-4 d-block d-sm-none">
+          <div class="card">
+            <h5 class="card-header"><i class="fas fa-less-than fa-xs"></i>&nbsp;1.000 <p>followers</p>
+            </h5>
+            <div class="card-body-meter">
+              <h3 class="card-title">9%</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-4 d-block d-sm-none">
+          <div class="card">
+            <h5 class="card-header"><i class="fas fa-less-than fa-xs"></i>&nbsp;5.000 <p>followers</p>
+            </h5>
+            <div class="card-body-meter">
+              <h3 class="card-title">6,3%</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-4 d-block d-sm-none">
+          <div class="card">
+            <h5 class="card-header"><i class="fas fa-less-than fa-xs"></i>&nbsp;10.000 <p>followers</p>
+            </h5>
+            <div class="card-body-meter">
+              <h3 class="card-title">4,7%</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row col-md-12 mobilecard mbl-btm">
+        <div class="col-md-4 col-4 offset-2 d-block d-sm-none">
+          <div class="card">
+            <h5 class="card-header"><i class="fas fa-less-than fa-xs"></i>&nbsp;100.000 <p>followers</p>
+            </h5>
+            <div class="card-body-meter">
+              <h3 class="card-title">1,6%</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-4 d-block d-sm-none">
+          <div class="card">
+            <h5 class="card-header">100.000+ <p>followers</p>
+            </h5>
+            <div class="card-body-meter">
               <h3 class="card-title">1,1%</h3>
             </div>
           </div>
@@ -425,7 +477,7 @@
           <div class="photos-thumb">
             <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-05.png')}}" />
           </div>
-          <div class="photos-thumb">
+          <div class="photos-thumb-last">
             <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-06.png')}}" />
           </div>
         </div>
