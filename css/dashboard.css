@@ -441,6 +441,18 @@ sub {
   color: #fff;  
 }
 
+.btn-upgrade-big {
+  background-color: #FEBE54;
+  color: #505050;
+  font-size: 22px;
+  font-weight: 900;
+  border-radius: 25px;
+  padding-left: 95px;
+  padding-right: 95px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 /* Miscellaneous */
 .label-calculate {
   font-size: 16px;

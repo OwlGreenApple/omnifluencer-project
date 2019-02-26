@@ -55,8 +55,239 @@
           </label>
         </div>
         Yearly
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                Upgrade to Pro
+                <button class="btn">
+                  UPGRADE
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>  
+                  <div class="col-md-6 text-md-left">
+                    Influencer Report (PDF)
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    25
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Show History
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    25
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Save Profile
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    Yes - 2
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Compare
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    Yes - 2
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Compare From History
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Grouping
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Multi Group
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Multi Delete 
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="cross">&#10060;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Multi Influencers Report (PDF)
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="cross">&#10060;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Multi Influencers List (Excel)
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="cross">&#10060;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Agency Logo for Report (PDF)
+                  </div>
+                </div>
+
+                <button class="btn btn-upgrade-big">
+                  UPGRADE
+                </button>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                Upgrade to Premium
+                <button class="btn">
+                  UPGRADE
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>  
+                  <div class="col-md-6 text-md-left">
+                    Influencer Report (PDF)
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    Unlimited
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Show History
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    Unlimited
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Save Profile
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    Yes - 4
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Compare
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    Yes - 4
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Compare From History
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Grouping
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Multi Group
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Multi Delete 
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Multi Influencers Report (PDF)
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Multi Influencers List (Excel)
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="offset-md-1 col-md-3">
+                    <span class="tickblue">&check;</span>
+                  </div>
+                  <div class="col-md-6 text-md-left">
+                    Agency Logo for Report (PDF)
+                  </div>
+                </div>
+
+                <button class="btn btn-upgrade-big">
+                  UPGRADE
+                </button>
+              </div>
+            </div>      
+          </div>
+        </div>
+
       </div>
-      
     </div>
   </div>
 </div>

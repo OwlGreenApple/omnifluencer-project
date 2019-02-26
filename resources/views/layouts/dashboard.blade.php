@@ -100,7 +100,7 @@
     <div class="row div-header">
       <div class="col-md-6 col-12 navbar-reflink menu-nomobile">
         <label class="submenu-header label-reflink">
-          <b>Referral link</b>
+          <b>Invitation Link</b>
           <span class="tooltipstered" title="Referral link">
             <i class="fas fa-question-circle icon-reflink"></i>
           </span>
