@@ -285,12 +285,10 @@
               </li>
 
               <li class="<?php if(Request::is('saved-profile')) echo 'active' ?>">
-                <span class="submenu-navbar">
-                  <a href="{{url('saved-profile')}}">
-                    <i class="fas fa-save icon-menu"></i>
+                <a href="{{url('saved-profile')}}">
+                  <i class="fas fa-save icon-menu"></i>
                     Saved Profile
-                  </a>
-                </span>
+                </a>
               </li>
             <?php } ?>
           </ul>

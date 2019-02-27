@@ -431,12 +431,23 @@ sub {
 
 /* Upgrade Account */
 .btn-pricing {
+  border:none;
   border-radius: 25px;
   background-color: #fff;
   color: #44698A;
+  box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);
 }
 
-.btn-pricing .active {
+.btn-secondary:focus {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, 
+.btn-secondary:not(:disabled):not(.disabled):active, 
+.show>.btn-secondary.dropdown-toggle {
   background-color: #0F9814;
   color: #fff;  
 }
@@ -454,15 +465,19 @@ sub {
 }
 
 .upgrade-pro {
-  background-color: #41B7F1;
+  background-image: linear-gradient(-136deg, #0E76EF 0%, #2E8DF6 52%, #137BF5 100%);
   border-bottom: 10px solid #106BC8;
   color: #fff;
 }
 
 .upgrade-premium {
-  background-color: #7B31DE;
+  background-image: linear-gradient(-135deg, #762CD8 0%, rgba(161,89,255,0.99) 49%, rgba(116,43,212,0.99) 100%);
   border-bottom: 10px solid #6010C7;
   color: #fff;
+}
+
+.blue {
+  color: #248BF6;
 }
 
 .harga {
@@ -470,16 +485,40 @@ sub {
   font-size: 45px;
 }
 
+.header-1 {
+  font-size: 19px;
+}
+
+.header-2 {
+  font-size: 16px;
+}
+
+.view-more-pro, .view-more-premium {
+  color: #3490dc;
+}
+
 @media screen and (max-width: 769px) {
   .harga {
-    font-family: SourceSansPro-Bold;
-    font-size: 30px;
+    /*font-family: SourceSansPro-Bold;
+    font-size: 30px;*/
+    font-size: 14px;
   }  
 
   .btn-upgrade-big {
-    font-size: 18px;
+    /*font-size: 18px;
     padding-left: 70px;
-    padding-right: 70px;
+    padding-right: 70px;*/
+    font-size: 13px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .card-header.upgrade-pro, .card-header.upgrade-premium {
+    padding: 10px;
+  }
+
+  .header-1 {
+    font-size: 17px;
   }
 }
 
