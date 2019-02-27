@@ -38,7 +38,8 @@ h6 {
   color: #1A1A1A !important;
 }
 
-.nav-link:hover, .nav-link.nav-active {
+.nav-link:hover,
+.nav-link.nav-active {
   color: #1E6CC6 !important;
 }
 
@@ -303,7 +304,7 @@ input[type="text"] {
 
 .modal-body {
   padding-bottom: 30px;
-  text-align:center;
+  text-align: center;
 }
 
 .modal-body p {
@@ -500,12 +501,20 @@ input[type="text"] {
 }
 
 .meter h1 {
+  font-size: 30px;
   color: #fff;
   font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.meter h2 {
+  font-size: 24px;
+  color: #fff;
+  font-weight: 400;
 }
 
 .percent {
-  padding-bottom: 100px;
+  padding-bottom: 10px;
 }
 
 .card {
@@ -543,10 +552,10 @@ input[type="text"] {
 }
 
 .pg-title-btm {
-  padding-top: 30px;
+  padding-top: 20px;
   padding-bottom: 50px;
   text-align: center;
-  max-width: 600px;
+  max-width: 700px;
   display: block;
   margin: 0 auto;
   color: #fff;
@@ -559,7 +568,7 @@ input[type="text"] {
 /*JOIN*/
 .join {
   margin-top: 50px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 .join h1 {
@@ -573,7 +582,18 @@ input[type="text"] {
   margin-right: 10px;
 }
 
+.photos-thumb-last {
+  width: 80px;
+  margin-right: 0;
+}
+
 .photos-thumb img {
+  border-radius: 50%;
+  border: 2px solid #fff;
+  width: 100%;
+}
+
+.photos-thumb-last img {
   border-radius: 50%;
   border: 2px solid #fff;
   width: 100%;
@@ -590,7 +610,6 @@ input[type="text"] {
   font-weight: 600;
   color: #505050;
   cursor: pointer;
-  margin-left: 5px;
   height: 45px;
   text-align: center;
   border: none;
@@ -644,7 +663,7 @@ input[type="text"] {
 
 .modal-body-form {
   background-color: #fff;
-  text-align:left;
+  text-align: left;
 }
 
 .signup-content {
@@ -943,12 +962,13 @@ footer span {
   }
 
   .page-title h1 {
-    font-size: 30px;
+    font-size: 40px;
   }
 
   .pg-title {
     padding-top: 10px;
-    font-size: 16px;
+    font-size: 18px;
+    max-width: 320px;
   }
 
   hr.orn {
@@ -956,8 +976,8 @@ footer span {
   }
 
   .content {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .form-group {
@@ -1016,7 +1036,7 @@ footer span {
   }
 
   .number-stat {
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
   }
 
@@ -1043,6 +1063,10 @@ footer span {
   }
 
   .card-body {
+    padding: 20px 25px;
+  }
+  
+  .card-body-meter {
     padding: 10px;
   }
 
@@ -1055,8 +1079,13 @@ footer span {
   }
 
   .percent-title h1 {
-    font-size: 22px !important;
+    font-size: 24px !important;
     font-weight: 600;
+    text-align: center;
+    padding-bottom: 25px;
+  }
+
+  .meter h2 {
     text-align: center;
     padding-bottom: 25px;
   }
@@ -1079,7 +1108,9 @@ footer span {
   }
 
   .pg-title-btm {
-    font-size: 16px;
+    font-size: 18px;
+    max-width: 320px;
+    padding-bottom: 20px;
   }
 
   .join h1 {
@@ -1101,27 +1132,51 @@ footer span {
   }
 
   footer p {
-    font-size: 14px;
+    font-size: 15px !important;
     margin-top: 10px;
+    padding-right: 0;
   }
-  
+
+  .py-5 {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+
   .modal-body {
     text-align: center;
   }
-  
+
   .modal-body-form {
     text-align: left;
   }
-  
+
   .form-group-mob {
     margin-bottom: 20px;
   }
-  
+
   .loginhere {
     font-size: 14px;
   }
 }
 
+
+
+/*MOBILE VIEW*/
+.mobilecard {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.mobilecard .card-header {
+  padding-top: 15px;
+  font-size: 16px;
+}
+
+.mbl-btm {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   .navbar-collapse {
@@ -1162,6 +1217,11 @@ footer span {
     padding-bottom: 25px;
   }
 
+  .meter h2 {
+    text-align: center;
+    padding-bottom: 25px;
+  }
+
   .card-header {
     padding: 5px;
   }
@@ -1197,34 +1257,34 @@ footer span {
     font-weight: 400;
     margin-bottom: 0;
   }
-  
+
   .history {
     margin-top: 30px;
   }
-  
+
   .page-title {
     margin-top: 50px;
     margin-bottom: 50px;
   }
-  
+
   .page-title h1 {
     font-size: 40px;
   }
-  
+
   .content {
     margin-top: 50px;
     margin-bottom: 50px;
   }
-  
+
   .meter {
     margin-top: 50px;
     margin-bottom: 50px;
   }
-  
+
   .percent {
     padding-bottom: 50px;
   }
-  
+
   .logo-part {
     border: none;
     text-align: center;
@@ -1237,16 +1297,17 @@ footer span {
   footer p {
     font-size: 14px;
     margin-top: 10px;
+    padding-right: 0;
   }
-  
+
   .modal-body-form {
     text-align: left;
   }
-  
+
   .form-group-mob {
     margin-bottom: 20px;
   }
-  
+
   .loginhere {
     font-size: 14px;
   }
@@ -1283,6 +1344,20 @@ footer span {
     -moz-transition: left 0.3s ease-in;
     transition: left 0.3s ease-in;
   }
+  
+  .page-title {
+    margin-top: 75px;
+    margin-bottom: 75px;
+  }
+  
+  .content {
+    margin-top: 75px;
+    margin-bottom: 75px;
+  }
+  
+  .meter {
+    margin-top: 75px;
+  }
 
   .percent-title h1 {
     font-size: 34px;
@@ -1291,11 +1366,18 @@ footer span {
     padding-bottom: 25px;
   }
 
+  .meter h2 {
+    text-align: center;
+    padding-bottom: 45px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
   .justify-content-end {
     margin: 0 auto;
     justify-content: center !important;
   }
-  
+
   .form-group {
     margin-bottom: 0;
   }
@@ -1334,15 +1416,21 @@ footer span {
     border: 2px solid #fff;
     width: 100px !important;
   }
-  
+
   .percent {
-    padding-bottom: 50px;
+    padding-bottom: 0;
   }
-  
+
   .pg-title-btm {
+    padding-top: 0;
     padding-bottom: 30px;
   }
-  
+
+  .mbl-btm {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
   .logo-part {
     border: none;
     text-align: center;
@@ -1355,20 +1443,21 @@ footer span {
   footer p {
     font-size: 14px;
     margin-top: 10px;
+    padding-right: 0;
   }
-  
+
   .modal-body {
     text-align: center;
   }
-  
+
   .modal-body-form {
     text-align: left;
   }
-  
+
   .form-group-mob {
     margin-bottom: 20px;
   }
-  
+
   .loginhere {
     font-size: 14px;
   }
@@ -1376,10 +1465,10 @@ footer span {
 
 /* Modal Kuota */
 .bg-kuota {
-  background: linear-gradient(to right,#000000 0%, rgba(0, 0, 0, 0.1) 70%), url(../design/bg-kuota.jpeg);
+  background: linear-gradient(to right, #000000 0%, rgba(0, 0, 0, 0.1) 70%), url(../design/bg-kuota.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
-}  
+}
 
 .kuota-txt {
   color: #fff;
@@ -1391,104 +1480,117 @@ footer span {
 }
 
 /* Counter */
-.progress{
-    width: 150px;
-    height: 150px;
-    line-height: 150px;
-    background: none;
-    margin: 0 auto;
-    box-shadow: none;
-    position: relative;
+.progress {
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  background: none;
+  margin: 0 auto;
+  box-shadow: none;
+  position: relative;
 }
-.progress:after{
-    content: "";
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 12px solid #fff;
-    position: absolute;
-    top: 0;
-    left: 0;
+
+.progress:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 12px solid #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-.progress > span{
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    z-index: 1;
+
+.progress > span {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  z-index: 1;
 }
-.progress .progress-left{
-    left: 0;
+
+.progress .progress-left {
+  left: 0;
 }
-.progress .progress-bar{
-    width: 100%;
-    height: 100%;
-    background: none;
-    border-width: 12px;
-    border-style: solid;
-    position: absolute;
-    top: 0;
+
+.progress .progress-bar {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border-width: 12px;
+  border-style: solid;
+  position: absolute;
+  top: 0;
 }
-.progress .progress-left .progress-bar{
-    left: 100%;
-    border-top-right-radius: 80px;
-    border-bottom-right-radius: 80px;
-    border-left: 0;
-    -webkit-transform-origin: center left;
-    transform-origin: center left;
+
+.progress .progress-left .progress-bar {
+  left: 100%;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  border-left: 0;
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
 }
-.progress .progress-right{
-    right: 0;
+
+.progress .progress-right {
+  right: 0;
 }
-.progress .progress-right .progress-bar{
-    left: -100%;
-    border-top-left-radius: 80px;
-    border-bottom-left-radius: 80px;
-    border-right: 0;
-    -webkit-transform-origin: center right;
-    transform-origin: center right;
-    /*animation: loading-1 0.5s linear forwards;*/
+
+.progress .progress-right .progress-bar {
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  -webkit-transform-origin: center right;
+  transform-origin: center right;
+  /*animation: loading-1 0.5s linear forwards;*/
 }
-.progress .progress-value{
-    width: 90%;
-    height: 90%;
-    border-radius: 50%;
-    /* background-color: rgba(255, 255, 255, 0.1); 
+
+.progress .progress-value {
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  /* background-color: rgba(255, 255, 255, 0.1); 
     background-color: rgb(255, 255, 255);
     */
-    font-size: 24px;
-    color: #fff;
-    line-height: 135px;
-    text-align: center;
-    position: absolute;
-    top: 5%;
-    left: 5%;
+  font-size: 24px;
+  color: #fff;
+  line-height: 135px;
+  text-align: center;
+  position: absolute;
+  top: 5%;
+  left: 5%;
 }
-.progress.blue .progress-bar{
-    border-color: #F9B91E;
+
+.progress.blue .progress-bar {
+  border-color: #F9B91E;
 }
+
 /*.progress.blue .progress-left .progress-bar{
     animation: loading-1 0.6s linear forwards 0.6s;
 }*/
 
-@keyframes loading-1{
-  0%{
+@keyframes loading-1 {
+  0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
-  100%{
+
+  100% {
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
   }
 }
 
-@media only screen and (max-width: 990px){
-  .progress{ margin-bottom: 20px; }
+@media only screen and (max-width: 990px) {
+  .progress {
+    margin-bottom: 20px;
+  }
 }
 
-@media (min-width: 991.98px){
+@media (min-width: 991.98px) {
   .main-menu {
     line-height: 40px;
-  }  
+  }
 }

@@ -58,17 +58,27 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
       <div class="row">
+        <form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
+          @csrf
+          
+          <label class="mr-sm-2 pb-md-2 label-calculate" for="calculate">
+            Calculate More
+          </label>
+
+          <input id="calculate" type="text" class="form-control form-control-sm mb-2 mr-sm-2 mr-2 col-md-3 col-9" name="keywords" placeholder="Enter Instagram Username">
+
+          <button type="submit" class="btn btn-sm btn-primary mb-2">
+            Calculate
+          </button>
+        </form>
+      </div>
+
+      <hr>
+
+      <div class="row">
         <div class="col-md-8 col-6">
           <h2><b>Points</b></h2>  
         </div>  
-
-        <div class="col-md-4 col-6" align="right">
-          <a href="{{url('/')}}">
-            <button class="btn btn-sm btn-primary btn-search-more">
-              Search More &raquo;
-            </button>
-          </a>
-        </div>
       </div>
       
       <h5>

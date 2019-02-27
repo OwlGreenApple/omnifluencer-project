@@ -90,6 +90,8 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/points/{id}','PointController@index_redeem');
   Route::get('/redeem-point','PointController@redeem_point');
 
+  //Upgrade Account 
+  Route::get('/upgrade-account','OrderController@index_upgrade');  
 
   //Compare History
   Route::get('/compare-history','CompareController@index_history');

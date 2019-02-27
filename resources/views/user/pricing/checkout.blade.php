@@ -35,8 +35,8 @@
                 <select class="form-control form-control-lg" name="select-auto-manage" id="select-auto-manage" style="width: 100%">
                     <option data-price="197000" data-paket="Pro Monthly" value="{{$id}}" <?php if ($id==1) echo "selected"; ?>>Pro Monthly - IDR 197.000,-/mo</option>
                     <option data-price="297000" data-paket="Premium Monthly" value="{{$id}}" <?php if ($id==3) echo "selected"; ?>>Premium Monthly - IDR 297.000,-/mo</option>
-                    <option data-price="250000" data-paket="Pro Yearly" value="{{$id}}" <?php if ($id==2) echo "selected"; ?>>Pro Yearly - IDR 250.000,-/year</option>
-                    <option data-price="450000" data-paket="Premium Yearly" value="{{$id}}" <?php if ($id==4) echo "selected"; ?>>Premium Yearly - IDR 450.000,-/year</option>
+                    <option data-price="699000" data-paket="Pro Yearly" value="{{$id}}" <?php if ($id==2) echo "selected"; ?>>Pro Yearly - IDR 699.000,-/year</option>
+                    <option data-price="999000" data-paket="Premium Yearly" value="{{$id}}" <?php if ($id==4) echo "selected"; ?>>Premium Yearly - IDR 999.000,-/year</option>
                 </select>
               </div>
               <div class="form-group">

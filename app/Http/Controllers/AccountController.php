@@ -59,6 +59,7 @@ class AccountController extends Controller
   }
 
   public static function create_account($arr_res){
+    set_time_limit(0);
     $account = new Account;
     $account->ig_id = $arr_res["pk"];
     $account->username = strtolower($arr_res["username"]);

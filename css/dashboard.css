@@ -285,7 +285,7 @@ ul ul a {
   }
 
   #page-content {
-    margin-top:115px;
+    margin-top:85px;
   }
 }
 
@@ -296,11 +296,30 @@ ul ul a {
 }
 
 .card.dashboard {
-  height: 220px;
+  height: 225px;
+}
+
+@media screen and (max-width: 769px) {
+  .card.dashboard {
+    height: 240px;
+  }
 }
 
 .card-body.dashboard {
-  padding-top: 35px;
+  padding-top: 30px;
+}
+
+.card-body > a {
+  color: #3490dc;
+}
+
+.card-body > a:hover {
+  text-decoration: underline;
+}
+
+.card-body > p {
+  padding-top: 4px; 
+  padding-bottom: 17px;
 }
 
 .card-header > h5 {
@@ -315,22 +334,23 @@ ul ul a {
 }
 
 .calc{
-  background-image: linear-gradient(-135deg, #8688EA 0%, #686BE1 100%);
-  color: #fff;
+  border-top: 10px solid #787BE6;
 }
 
 .pdf {
-  background-image: linear-gradient(-135deg, #EF6363 0%, #F72D37 100%);
-  color: #fff;
+  border-top: 10px solid #F3484E; 
 }
 
 .csv {
-  background-image: linear-gradient(-140deg, #25B7B2 0%, #3B9893 100%);
-  color: #fff;
+  border-top: 10px solid #2DAAA4; 
+}
+
+.group {
+  border-top: 10px solid #56ACE5; 
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 45px;
   font-weight: 700;
 }
 
@@ -373,24 +393,19 @@ sub {
   text-align: right;
 }
 
-.save-pdf {
-  opacity: 0.4;
-  position: relative;
-}
-
-.save-csv {
+.forbid {
   opacity: 0.4;
   position: relative;
 }
 
 .btn-upgrade {
   position: absolute;
-  padding-left: 25px;
-  padding-right: 25px;
-  top: 120px;
-  left: 28%;
+  padding-left: 10px;
+  padding-right: 10px;
+  top: 52px;
+  left: 50%;
+  margin-left: -57px;
   z-index: 10;
-  margin: 0 auto;
   text-align: center;
   display: none;
 }
@@ -414,7 +429,65 @@ sub {
   font-size: 16px;
 }
 
+/* Upgrade Account */
+.btn-pricing {
+  border-radius: 25px;
+  background-color: #fff;
+  color: #44698A;
+}
+
+.btn-pricing .active {
+  background-color: #0F9814;
+  color: #fff;  
+}
+
+.btn-upgrade-big {
+  background-color: #FEBE54;
+  color: #505050;
+  font-size: 22px;
+  font-weight: 900;
+  border-radius: 25px;
+  padding-left: 95px;
+  padding-right: 95px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.upgrade-pro {
+  background-color: #41B7F1;
+  border-bottom: 10px solid #106BC8;
+  color: #fff;
+}
+
+.upgrade-premium {
+  background-color: #7B31DE;
+  border-bottom: 10px solid #6010C7;
+  color: #fff;
+}
+
+.harga {
+  font-family: SourceSansPro-Bold;
+  font-size: 45px;
+}
+
+@media screen and (max-width: 769px) {
+  .harga {
+    font-family: SourceSansPro-Bold;
+    font-size: 30px;
+  }  
+
+  .btn-upgrade-big {
+    font-size: 18px;
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+}
+
 /* Miscellaneous */
+.label-calculate {
+  font-size: 16px;
+}
+
 .btn-sm {
   font-size: 12px;
   padding: .25rem 8px;
@@ -423,6 +496,13 @@ sub {
 .btn-sm-search {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.btn-upgrade-sm {
+  background-color: #fff;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .menu-mobile {
@@ -470,4 +550,8 @@ sub {
 .btn-search-more:hover {
   background-color: #08db32;
   border-color: #08db32;
+}
+
+@media screen and (min-width: 600px)  {
+  .mobile-break { display: none; }
 }

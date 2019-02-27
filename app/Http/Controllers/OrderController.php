@@ -222,4 +222,8 @@ class OrderController extends Controller
 
     return $arr;
   }
+
+  public function index_upgrade(){
+    return view('user.upgrade-account.index');
+  }
 }
