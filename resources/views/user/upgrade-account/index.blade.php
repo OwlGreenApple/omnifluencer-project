@@ -56,14 +56,30 @@
         </div>
         Yearly
 
-        <div class="row">
+        <div class="row mt-4">
           <div class="col-md-6">
             <div class="card">
-              <div class="card-header">
-                Upgrade to Pro
-                <button class="btn">
-                  UPGRADE
-                </button>
+              <div class="card-header upgrade-pro">
+                <div class="row">
+                  <div class="col-md-6" align="left">
+                    <span>
+                      UPGRADE TO PRO
+                    </span> <br>
+                    <b>Monthly</b>
+                  </div>  
+
+                  <div class="col-md-6" align="right">
+                    <button class="btn btn-sm btn-upgrade-sm">
+                      UPGRADE
+                    </button>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <span class="harga">
+                    IDR 197.000,-
+                  </span>
+                </div>
               </div>
               <div class="card-body">
                 <div class="row mb-2">
@@ -173,11 +189,25 @@
           </div>
           <div class="col-md-6">
             <div class="card">
-              <div class="card-header">
-                Upgrade to Premium
-                <button class="btn">
-                  UPGRADE
-                </button>
+              <div class="card-header upgrade-premium">
+                <div class="row">
+                  <div class="col-md-6" align="left">
+                    UPGRADE TO PREMIUM <br>
+                    <b>Monthly</b>
+                  </div>  
+
+                  <div class="col-md-6" align="right">
+                    <button class="btn btn-sm btn-upgrade-sm">
+                      UPGRADE
+                    </button>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <span class="harga">
+                    IDR 297.000,-
+                  </span>
+                </div>
               </div>
               <div class="card-body">
                 <div class="row mb-2">

@@ -453,6 +453,36 @@ sub {
   margin-bottom: 20px;
 }
 
+.upgrade-pro {
+  background-color: #41B7F1;
+  border-bottom: 10px solid #106BC8;
+  color: #fff;
+}
+
+.upgrade-premium {
+  background-color: #7B31DE;
+  border-bottom: 10px solid #6010C7;
+  color: #fff;
+}
+
+.harga {
+  font-family: SourceSansPro-Bold;
+  font-size: 45px;
+}
+
+@media screen and (max-width: 769px) {
+  .harga {
+    font-family: SourceSansPro-Bold;
+    font-size: 30px;
+  }  
+
+  .btn-upgrade-big {
+    font-size: 18px;
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+}
+
 /* Miscellaneous */
 .label-calculate {
   font-size: 16px;
@@ -466,6 +496,13 @@ sub {
 .btn-sm-search {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.btn-upgrade-sm {
+  background-color: #fff;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .menu-mobile {
