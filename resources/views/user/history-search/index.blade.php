@@ -101,7 +101,7 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        $('#pager').html(data.pager);
+        $('.pager').html(data.pager);
 
         $('.tooltipstered').tooltipster({
           contentAsHTML: true,
@@ -350,7 +350,7 @@
 
       <div class="row">
         <div class="col-md-8 col-6">
-          <h2><b>History</b></h2>      
+          <h2><b>History Influencer</b></h2>      
         </div>
       </div>
       
@@ -431,7 +431,7 @@
 
       <form>
         <div class="row">
-          <div class="form-inline col-md-7 mb-2">
+          <div class="form-inline col-md-6 mb-2">
             <label class="center-mobile mr-sm-2 pb-md-2" for="from">
               Dari
             </label>
@@ -442,17 +442,26 @@
             </label>
             <input id="to" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="to">
 
-            <label class="sr-only" for="keywords">
-              Search
-            </label>
-            <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-3" name="keywords" placeholder="username...">
-                
             <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
-              Search
+              Filter
             </button>
           </div> 
 
-          <div class="col-md-5 menu-nomobile" align="right">
+          <div class="col-md-6 mb-2 row" align="right" style="padding:0"> 
+            <div class="col-md-10" style="padding:0">
+              <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-5" name="keywords" placeholder="username...">  
+            </div>
+
+            <div class="col-md-auto" style="padding:0">
+              <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row"> 
+          <div class="col-md-6 menu-nomobile">
             @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
               <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
                 <i class="fas fa-chart-bar"></i>
@@ -474,6 +483,10 @@
               </button>  
             @endif     
           </div>
+
+          <div class="col-md-6" align="right">
+            <div class="pager" style="float:right"></div>
+          </div> 
         </div>
         
 
@@ -506,9 +519,37 @@
           </thead>
           <tbody id="content"></tbody>
         </table>
-
-        <div id="pager"></div>    
       </form>
+
+      <div class="row"> 
+        <div class="col-md-6 menu-nomobile">
+          @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+            <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
+              <i class="fas fa-chart-bar"></i>
+              Compare
+            </button>
+
+            <button type="button" class="btn btn-sm btn-primary btn-save mb-10">
+              <i class="fas fa-folder-plus"></i> 
+              Add to group
+            </button>
+
+            <button type="button" class="btn btn-sm btn-primary btn-save-global mb-10">
+              <i class="fas fa-save"></i> 
+              Save
+            </button>
+
+            <button type="button" class="btn btn-sm btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
+              <i class="far fa-trash-alt"></i> Delete
+            </button>  
+          @endif     
+        </div>
+
+        <div class="col-md-6" align="right">
+          <div class="pager" style="float:right"></div>
+        </div>    
+
+      </div>
     </div>
   </div>
 </div>

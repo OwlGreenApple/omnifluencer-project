@@ -548,6 +548,10 @@ sub {
   display: none;
 }
 
+.page-link {
+  padding: 2px 10px;
+}
+
 @media screen and (max-width: 769px) {
   .menu-nomobile {
     display: none;

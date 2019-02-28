@@ -14,6 +14,10 @@
       $('#input-group').val('');
       $('#input-group').hide();
     });
+
+    $('.formatted-date').datepicker({
+      dateFormat: 'yy/mm/dd',
+    });
   });
 
   function get_groups(){
@@ -61,7 +65,7 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        $('#pager').html(data.pager);
+        $('.pager').html(data.pager);
 
         $('.tooltipstered').tooltipster({
           contentAsHTML: true,
@@ -271,7 +275,7 @@
 
       <div class="row">
         <div class="col-md-8 col-6">
-          <h2><b>Saved Profile</b></h2>  
+          <h2><b>Saved Influencer</b></h2>  
         </div>  
       </div>
       
@@ -282,7 +286,7 @@
           </h5>    
         </div>
 
-        <div <div class="col-12 menu-mobile" align="left">
+        <div class="col-12 menu-mobile" align="left">
           <button class="btn btn-sm btn-primary btn-save">
             <i class="fas fa-folder-plus"></i> 
             Add to group
@@ -300,20 +304,54 @@
       <br>  
 
       <form>
-        <div class="check-mobile">
-          <input class="checkAll" type="checkbox" name="checkAll"> Check All
+        <div class="row">
+          <div class="form-inline col-md-6 mb-2">
+            <label class="center-mobile mr-sm-2 pb-md-2" for="from">
+              Dari
+            </label>
+            <input id="from" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
+
+            <label class="center-mobile mr-sm-2 pb-md-2 pb-sm-none" for="to">
+              hingga
+            </label>
+            <input id="to" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="to">
+
+            <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
+              Filter
+            </button>
+          </div> 
+
+          <div class="col-md-6 mb-2 row" align="right" style="padding:0"> 
+            <div class="col-md-10" style="padding:0">
+              <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-5" name="keywords" placeholder="username...">  
+            </div>
+
+            <div class="col-md-auto" style="padding:0">
+              <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
+                Search
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-12 mb-2 menu-nomobile" align="right">
+        <div class="row"> 
+          <div class="col-md-6 menu-nomobile">
             <button class="btn btn-sm btn-primary btn-save">
               <i class="fas fa-folder-plus"></i> 
               Add to group
             </button>
             <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
               <i class="far fa-trash-alt"></i> Delete
-            </button>  
+            </button>     
           </div>
+
+          <div class="col-md-6" align="right">
+            <div class="pager" style="float:right"></div>
+          </div> 
+        </div>
+
+        <div class="check-mobile">
+          <input class="checkAll" type="checkbox" name="checkAll"> Check All
         </div>
 
         <table class="table responsive">
@@ -331,10 +369,25 @@
             <th>Action</th>
           </thead>
           <tbody id="content"></tbody>
-        </table>
-
-        <div id="pager"></div>    
+        </table>   
       </form>
+
+      <div class="row"> 
+        <div class="col-md-6 menu-nomobile">
+          <button class="btn btn-sm btn-primary btn-save">
+            <i class="fas fa-folder-plus"></i> 
+            Add to group
+          </button>
+          <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+            <i class="far fa-trash-alt"></i> Delete
+          </button>     
+        </div>
+
+        <div class="col-md-6" align="right">
+          <div class="pager" style="float:right"></div>
+        </div> 
+      </div>
+
     </div>
   </div>
 </div>
