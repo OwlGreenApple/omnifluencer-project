@@ -1,7 +1,6 @@
 /* Table */
 thead {
   background-color: #E5E5E5; 
-  border-bottom: 2px solid #333;
 }
 
 td{
@@ -24,12 +23,12 @@ table tr {
 
   @media screen and (max-width: 600px) {
     /* untuk ilangin table thead di mobile */ 
-    table.responsive thead {
-      overflow: hidden; /*important*/
+    /*table.responsive thead {
+      overflow: hidden; 
       position: absolute;
       width: 1px;
 
-      border: none; /*optional*/
+      border: none; 
       clip: rect(0 0 0 0);
       height: 1px;
       margin: -1px;
@@ -50,10 +49,6 @@ table tr {
     }
     
     table.responsive td::before {
-      /*
-      * aria-label has no advantage, it won't be read inside a table
-      content: attr(aria-label);
-      */
       content: attr(data-label);
       float: left;
       font-weight: bold;
@@ -65,7 +60,7 @@ table tr {
 
     .check-mobile{
       display: block;
-    }
+    }*/
   }
   
 /* Sidebar */
@@ -360,6 +355,16 @@ sub {
   font-weight: 300;
 }
 
+/* History Search*/
+.menu-savepdf {
+  color: #63ADF8;
+}
+
+.menu-delete {
+  color: #FF6D6E;
+}
+
+
 /* Poin history */
 .poinplus {
   color: #409AF7;
@@ -552,6 +557,10 @@ sub {
   padding: 2px 10px;
 }
 
+.pagination {
+  justify-content: flex-end;
+}
+
 @media screen and (max-width: 769px) {
   .menu-nomobile {
     display: none;
@@ -569,6 +578,10 @@ sub {
   .date-dashboard {
     text-align: left;
   }
+
+  .pagination {
+    justify-content: center;
+  }  
 }
 
 #pesan {

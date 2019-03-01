@@ -346,7 +346,7 @@
           </div>
 
           <div class="col-md-6" align="right">
-            <div class="pager" style="float:right"></div>
+            <div class="pager"></div>
           </div> 
         </div>
 
@@ -384,7 +384,7 @@
         </div>
 
         <div class="col-md-6" align="right">
-          <div class="pager" style="float:right"></div>
+          <div class="pager"></div>
         </div> 
       </div>
 

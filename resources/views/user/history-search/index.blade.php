@@ -349,7 +349,7 @@
       <hr>
 
       <div class="row">
-        <div class="col-md-8 col-6">
+        <div class="col-md-8 col-12">
           <h2><b>History Influencer</b></h2>      
         </div>
       </div>
@@ -359,29 +359,6 @@
           <h5>
             Select bulk action, save or add it to group
           </h5>    
-        </div>
-
-        <div class="col-md-7 col-12 menu-mobile" align="left">
-          @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
-            <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
-              <i class="fas fa-chart-bar"></i>
-              Compare
-            </button>
-
-            <button type="button" class="btn btn-sm btn-primary btn-save mb-10">
-              <i class="fas fa-folder-plus"></i> 
-              Add to group
-            </button>
-
-            <button type="button" class="btn btn-sm btn-primary btn-save-global mb-10">
-              <i class="fas fa-save"></i> 
-              Save
-            </button>
-
-            <button type="button" class="btn btn-sm btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
-              <i class="far fa-trash-alt"></i> Delete
-            </button>  
-          @endif     
         </div>
       </div>
       
@@ -431,23 +408,32 @@
 
       <form>
         <div class="row">
-          <div class="form-inline col-md-6 mb-2">
-            <label class="center-mobile mr-sm-2 pb-md-2" for="from">
+          <div class="row col-md-6 mb-2 order-md-0 order-1">
+            <label class="col-sm-1 pb-md-3 text-left col-5 order-0 order-md-0" for="from">
               Dari
             </label>
-            <input id="from" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
 
-            <label class="center-mobile mr-sm-2 pb-md-2 pb-sm-none" for="to">
+            <div class="mb-2 col-md-3 col-5 order-2 order-md-1">
+              <input id="from" type="text" class="form-control form-control-sm formatted-date" name="from">
+            </div>
+            
+            <label class="col-7 col-sm-1 pb-md-3 pb-sm-none order-1 order-md-2 text-left pl-md-0 pr-md-0" for="to">
               hingga
             </label>
-            <input id="to" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="to">
 
-            <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
-              Filter
-            </button>
+            <div class="mb-2 col-5 col-md-3 order-3 order-md-3">
+              <input id="to" type="text" class="form-control form-control-sm formatted-date" name="to">  
+            </div>
+            
+            <div class="col-2 order-4 order-md-4" style="padding-left:0px;">
+              <button type="button" class="btn btn-sm btn-sm-search btn-primary btn-search">
+                Filter
+              </button>  
+            </div>
+            
           </div> 
 
-          <div class="col-md-6 mb-2 row" align="right" style="padding:0"> 
+          <div class="col-md-6 mb-2 row order-md-1 order-0" align="right" style="padding:0"> 
             <div class="col-md-10" style="padding:0">
               <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-5" name="keywords" placeholder="username...">  
             </div>
@@ -485,13 +471,19 @@
           </div>
 
           <div class="col-md-6" align="right">
-            <div class="pager" style="float:right"></div>
+            <div class="pager"></div>
           </div> 
         </div>
         
-
-        <div class="check-mobile">
-          <input class="checkAll" type="checkbox" name="checkAll"> Check All
+        <div class="row mb-3 mt-3 menu-mobile">
+          <div class="col-6">
+            <select class="form-control">
+              <option>Compare</option>
+              <option>Add to group</option>
+              <option>Save</option>
+              <option>Delete</option>
+            </select>
+          </div>
         </div>
 
         <table class="table responsive">
@@ -499,20 +491,25 @@
             <th>
               <input class="checkAll" type="checkbox" name="checkAll">
             </th>
-            <th class="header" action="username">
+            <th class="menu-mobile">
+              Select / De-select All
+            </th>
+            <th class="menu-nomobile">
               Instagram
             </th>
-            <th class="header" action="eng_rate">
+            <th class="menu-nomobile">
               Eng. Rate
             </th>
-            <th class="header" action="jml_followers">
+            <th class="menu-nomobile">
               Followers
             </th>
-            <th class="header" action="jml_post">
+            <th class="menu-nomobile">
               Posts
             </th>
-            <th>Groups</th>
-            <th class="header" action="updated_at">
+            <th class="menu-nomobile">
+              Groups
+            </th>
+            <th class="menu-nomobile">
               Date
             </th>
             <th>Action</th>
@@ -545,8 +542,17 @@
           @endif     
         </div>
 
+        <div class="col-6 mb-3 menu-mobile">
+          <select class="form-control">
+            <option>Compare</option>
+            <option>Add to group</option>
+            <option>Save</option>
+            <option>Delete</option>
+          </select>
+        </div>
+
         <div class="col-md-6" align="right">
-          <div class="pager" style="float:right"></div>
+          <div class="pager"></div>
         </div>    
 
       </div>
@@ -689,6 +695,12 @@
 </div>
 
 <script type="text/javascript">
+  $( "body" ).on( "click", ".view-details", function() {
+    var id = $(this).attr('data-id');
+
+    $('.details-'+id).toggleClass('d-none');
+  });
+
   $( "body" ).on( "click", ".btn-profile", function() {
     var id = $(this).attr('data-id');
     var type = $(this).attr('data-type');
