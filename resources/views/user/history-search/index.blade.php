@@ -407,41 +407,44 @@
       <br>  
 
       <form>
-        <div class="row">
-          <div class="row col-md-6 mb-2 order-md-0 order-1">
-            <label class="col-sm-1 pb-md-3 text-left col-5 order-0 order-md-0" for="from">
-              Dari
-            </label>
+        <div class="row mb-lg-0 mb-3">
+          <div class="col-lg-6 col-md-12 mb-2 order-lg-0 order-1">
+            <div class="row">
+              <label class="col-lg-1 pb-lg-3 text-left col-5 order-0 order-lg-0" for="from">
+                Dari
+              </label>
 
-            <div class="mb-2 col-md-3 col-5 order-2 order-md-1">
-              <input id="from" type="text" class="form-control form-control-sm formatted-date" name="from">
-            </div>
-            
-            <label class="col-7 col-sm-1 pb-md-3 pb-sm-none order-1 order-md-2 text-left pl-md-0 pr-md-0" for="to">
-              hingga
-            </label>
+              <div class="mb-2 col-lg-3 col-md-5 col-5 order-2 order-lg-1">
+                <input id="from" type="text" class="form-control form-control-sm formatted-date" name="from">
+              </div>
+              
+              <label class="col-7 col-lg-1 pb-lg-3 pb-sm-none order-1 order-lg-2 text-left pl-lg-0 pr-lg-0" for="to">
+                hingga
+              </label>
 
-            <div class="mb-2 col-5 col-md-3 order-3 order-md-3">
-              <input id="to" type="text" class="form-control form-control-sm formatted-date" name="to">  
+              <div class="mb-2 col-5 col-md-5 col-lg-3 order-3 order-lg-3">
+                <input id="to" type="text" class="form-control form-control-sm formatted-date" name="to">  
+              </div>
+              
+              <div class="col-2 order-4 order-md-4" style="padding-left:0px;">
+                <button type="button" class="btn btn-sm btn-sm-search btn-success btn-search">
+                  Filter
+                </button>  
+              </div>
             </div>
-            
-            <div class="col-2 order-4 order-md-4" style="padding-left:0px;">
-              <button type="button" class="btn btn-sm btn-sm-search btn-primary btn-search">
-                Filter
-              </button>  
-            </div>
-            
           </div> 
 
-          <div class="col-md-6 mb-2 row order-md-1 order-0" align="right" style="padding:0"> 
-            <div class="col-md-10" style="padding:0">
-              <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-5" name="keywords" placeholder="username...">  
-            </div>
+          <div class="col-lg-6 col-md-12 mb-2 order-lg-1 order-0"> 
+            <div class="row">
+              <div class="col-lg-10 col-md-10 col-10 pr-lg-0">
+                <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-lg-5 float-lg-right" name="keywords" placeholder="username...">  
+              </div>
 
-            <div class="col-md-auto" style="padding:0">
-              <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
-                Search
-              </button>
+              <div class="col-lg-2 col-md-2 col-2 pl-0">
+                <button type="button" class="btn btn-sm btn-sm-search btn-success mb-2 btn-search">
+                  Search
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -470,19 +473,27 @@
             @endif     
           </div>
 
-          <div class="col-md-6" align="right">
+          <div class="col-lg-6 col-md-12 col-12" align="right">
             <div class="pager"></div>
           </div> 
         </div>
         
-        <div class="row mb-3 mt-3 menu-mobile">
-          <div class="col-6">
-            <select class="form-control">
-              <option>Compare</option>
-              <option>Add to group</option>
-              <option>Save</option>
-              <option>Delete</option>
-            </select>
+        <div class="mb-3 mt-3 menu-mobile">
+          <div class="row">
+            <div class="col-6">
+              <select class="form-control form-control-sm opsi-action1">
+                <option>Compare</option>
+                <option>Add to group</option>
+                <option>Save</option>
+                <option>Delete</option>
+              </select>
+            </div>
+
+            <div class="col-2 pl-0">
+              <button type="button" class="btn btn-primary btn-sm btn-apply">
+                Apply
+              </button>
+            </div>
           </div>
         </div>
 
@@ -542,16 +553,26 @@
           @endif     
         </div>
 
-        <div class="col-6 mb-3 menu-mobile">
-          <select class="form-control">
-            <option>Compare</option>
-            <option>Add to group</option>
-            <option>Save</option>
-            <option>Delete</option>
-          </select>
+        <div class="col-12 mb-4 menu-mobile">
+          <div class="row">
+            <div class="col-6">
+              <select class="form-control form-control-sm opsi-action2">
+                <option>Compare</option>
+                <option>Add to group</option>
+                <option>Save</option>
+                <option>Delete</option>
+              </select>
+            </div>
+
+            <div class="col-2 pl-0">
+              <button type="button" class="btn btn-primary btn-sm btn-apply">
+                Apply
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div class="col-md-6" align="right">
+        <div class="col-lg-6 col-md-12 col-12" align="right">
           <div class="pager"></div>
         </div>    
 
@@ -695,6 +716,51 @@
 </div>
 
 <script type="text/javascript">
+  $( "body" ).on( "click", ".btn-apply", function() {
+    var action = $('.opsi-action1').val();
+    switch(action){
+      case 'Compare' :
+        if(check_id('compare')){
+          check_compare();
+        } else {
+          $('#pesan').html('Pilih setidaknya 2 akun untuk compare');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      break;
+      case 'Add to group' :
+        get_groups();
+      break;
+      case 'Save' :
+        if(check_id()){
+          save_group();
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show(); 
+        }
+      break;
+      case 'Delete' :
+        if(check_id()){
+          $('#delete_type').val('bulk');
+          $('#confirm-delete').modal('show');
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      break;
+    }
+  });
+
+  $( "body" ).on( "change", ".opsi-action1,.opsi-action2", function() {
+    $('.opsi-action1').val($(this).val());
+    $('.opsi-action2').val($(this).val());
+  });
+
   $( "body" ).on( "click", ".view-details", function() {
     var id = $(this).attr('data-id');
 

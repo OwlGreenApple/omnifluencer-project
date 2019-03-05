@@ -253,6 +253,10 @@ ul ul a {
   margin: 0px 5px;
 }
 
+.btn-copy {
+  background-color: #09950E;
+}
+
 @media (max-width:769px){
   #reflink-box {
     margin-left: 2px;
@@ -562,6 +566,11 @@ sub {
 }
 
 @media screen and (max-width: 769px) {
+  .btn-sm-search  {
+    padding: .25rem 8px;
+    width: 53px;
+  }
+
   .menu-nomobile {
     display: none;
   }

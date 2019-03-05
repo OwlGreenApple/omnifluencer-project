@@ -107,6 +107,8 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/groups/delete-member','GroupController@delete_member_group');
   Route::get('/groups/delete-member-bulk','GroupController@delete_member_group_bulk');
   Route::get('/groups/delete-group','GroupController@delete_group');
+  Route::get('/groups/delete-single-group','GroupController@delete_single_group');
+  Route::get('/groups/edit-group','GroupController@edit_group');
 
   //Saved Profile
   Route::get('/saved-profile','GroupController@index_saved');

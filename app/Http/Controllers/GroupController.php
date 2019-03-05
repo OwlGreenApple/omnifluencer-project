@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Group;
 use App\Save;
 
-use Auth;
+use Auth, Carbon;
 
 class GroupController extends Controller
 {
@@ -17,9 +17,20 @@ class GroupController extends Controller
       return view('user.groups.index');
     }
 
-    public function load_groups(){
+    public function load_groups(Request $request){
       $groups = Group::where('user_id',Auth::user()->id)
-                ->paginate(15);
+                ->where('group_name','like','%'.$request->keywords.'%');
+
+      if($request->from!=null and $request->to!=null){
+        $dt = Carbon::createFromFormat("Y/m/d h:i:s", $request->from.' 00:00:00'); 
+
+        $dt1 = Carbon::createFromFormat("Y/m/d h:i:s", $request->to.' 00:00:00');
+
+        $groups = $groups->whereDate("created_at",">=",$dt)
+              ->whereDate("created_at","<=",$dt1);
+      }
+
+      $groups = $groups->paginate(15);
 
       $arr['view'] = (string) view('user.groups.content')
                         ->with('groups',$groups);
@@ -148,5 +159,31 @@ class GroupController extends Controller
       $arr['message'] = 'Delete group berhasil';
 
       return $arr;
+    }
+
+    public function delete_single_group(Request $request){
+        $group = Group::find($request->id);
+
+        $member = Save::where('group_id',$group->id)
+                    ->where('user_id',Auth::user()->id)
+                    ->delete();
+
+        $group = $group->delete();  
+
+        $arr['status'] = 'success';
+        $arr['message'] = 'Delete group berhasil';
+
+        return $arr;
+    }
+
+    public function edit_group(Request $request){
+      $group = Group::find($request->id);
+      $group->group_name = $request->name;
+      $group->save();
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Edit group berhasil';
+
+      return $arr; 
     }
 }
