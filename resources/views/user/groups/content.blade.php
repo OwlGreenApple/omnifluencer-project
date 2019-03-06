@@ -23,11 +23,11 @@
       
       <div class="menu-mobile">
         <div class="view-details" data-id="{{$group->id}}">
-          <i class="fas fa-folder"></i>
-          <b>{{$group->group_name}}</b>  
           <span class="menu-mobile" style="float:right;">
             <i class="fas fa-sort-down"></i>
           </span>
+          <i class="fas fa-folder"></i>
+          <b>{{$group->group_name}}</b>  
         </div>
       </div>
     </td>

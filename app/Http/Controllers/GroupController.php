@@ -48,9 +48,20 @@ class GroupController extends Controller
     public function load_list_group(Request $request){
       $accounts = Save::join('accounts','saves.account_id','accounts.id')
                 ->select('saves.*','accounts.id as accountid','accounts.username','accounts.prof_pic')
+                ->where('accounts.username','like','%'.$request->keywords.'%')
                 ->where('saves.user_id',Auth::user()->id)
-                ->where('group_id',$request->id)
-                ->paginate(15);
+                ->where('group_id',$request->id);
+
+      if($request->from!=null and $request->to!=null){
+        $dt = Carbon::createFromFormat("Y/m/d h:i:s", $request->from.' 00:00:00'); 
+
+        $dt1 = Carbon::createFromFormat("Y/m/d h:i:s", $request->to.' 00:00:00');
+
+        $accounts = $accounts->whereDate("saves.created_at",">=",$dt)
+                ->whereDate("saves.created_at","<=",$dt1);
+      }
+
+      $accounts = $accounts->paginate(15);
 
       $arr['view'] = (string) view('user.list-group.content')
                         ->with('accounts',$accounts);
@@ -71,9 +82,20 @@ class GroupController extends Controller
     public function load_saved_accounts(Request $request){
       $accounts = Save::join('accounts','saves.account_id','accounts.id')
                 ->select('saves.*','accounts.id as accountid','accounts.username','accounts.prof_pic')
+                ->where('accounts.username','like','%'.$request->keywords.'%')
                 ->where('saves.user_id',Auth::user()->id)
-                ->where('group_id',0)
-                ->paginate(15);
+                ->where('group_id',0);
+
+      if($request->from!=null and $request->to!=null){
+        $dt = Carbon::createFromFormat("Y/m/d h:i:s", $request->from.' 00:00:00'); 
+
+        $dt1 = Carbon::createFromFormat("Y/m/d h:i:s", $request->to.' 00:00:00');
+
+        $accounts = $accounts->whereDate("saves.created_at",">=",$dt)
+                ->whereDate("saves.created_at","<=",$dt1);
+      }
+
+      $accounts = $accounts->paginate(15);
 
       $arr['view'] = (string) view('user.saved-profile.content')
                         ->with('accounts',$accounts);

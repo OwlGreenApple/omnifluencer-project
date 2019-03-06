@@ -183,7 +183,7 @@
       <hr>
 
       <div class="row">
-        <div class="col-md-8 col-6">
+        <div class="col-md-8 col-12">
           <h2><b>Influencer Group</b></h2>    
         </div>
       </div>
@@ -210,7 +210,7 @@
             </label>
 
             <div class="mb-2 col-lg-3 col-md-5 col-5 order-2 order-lg-1">
-              <input id="from" type="text" class="form-control form-control-sm formatted-date" name="from">
+              <input id="from" type="text" class="form-control form-control-sm formatted-date" name="from" autocomplete="off">
             </div>
               
             <label class="col-7 col-lg-1 pb-lg-3 pb-sm-none order-1 order-lg-2 text-left pl-lg-0 pr-lg-0" for="to">
@@ -218,7 +218,7 @@
             </label>
 
             <div class="mb-2 col-5 col-md-5 col-lg-3 order-3 order-lg-3">
-              <input id="to" type="text" class="form-control form-control-sm formatted-date" name="to">  
+              <input id="to" type="text" class="form-control form-control-sm formatted-date" name="to" autocomplete="off">  
             </div>
               
             <div class="col-2 order-4 order-md-4" style="padding-left:0px;">

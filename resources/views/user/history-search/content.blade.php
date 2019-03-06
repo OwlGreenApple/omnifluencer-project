@@ -23,10 +23,10 @@
 
       <div class="menu-mobile">
         <div class="view-details" data-id="{{$account->id}}">
-          <?php echo '@'.$account->username ?>
           <span class="menu-mobile" style="display: inline-block; float: right;">
             <i class="fas fa-sort-down"></i>
           </span>  
+          <?php echo '@'.$account->username ?>
         </div>
       </div>
     </td>
