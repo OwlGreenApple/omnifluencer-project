@@ -287,7 +287,7 @@
         </div>
 
         <div class="row"> 
-          <div class="col-md-6 menu-nomobile">
+          <div class="col-md-6 menu-nomobile mb-2">
             @if(Auth::user()->membership=='premium')
               <button class="btn btn-sm btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
                 <i class="fas fa-file-pdf"></i> PDF
@@ -499,10 +499,38 @@
     var action = $('.opsi-action1').val();
     switch(action){
       case 'PDF' :
-        
+        if(check_id()){
+          $('#email-type').val('pdf');
+          $('#send-type').val('bulk');
+
+          $("#link-pdf").prop("href", "<?php echo url('print-pdf-bulk')?>"+'?'+$('form').serialize());
+          $('.send-pdf').show();
+          $('.send-csv').hide();
+
+          $('#send-file').modal('show');
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show(); 
+        }
       break;
       case 'Excel' :
-        
+        if(check_id()){
+          $('#email-type').val('csv');
+          $('#send-type').val('bulk');
+
+          $("#link-csv").prop("href", "<?php echo url('print-csv-bulk')?>"+'?'+$('form').serialize());
+          $('.send-csv').show();
+          $('.send-pdf').hide();
+
+          $('#send-file').modal('show');
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show(); 
+        }  
       break;
       case 'Delete' :
         if(check_id()){

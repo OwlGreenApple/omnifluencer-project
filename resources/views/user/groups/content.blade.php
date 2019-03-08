@@ -8,7 +8,7 @@
     <td>
       <div class="menu-nomobile">
         <i class="fas fa-folder"></i>
-        <a href="{{(url('/groups/'.$group->id.'/'.$group->group_name))}}">
+        <a class="link-listgrup" href="{{(url('/groups/'.$group->id.'/'.$group->group_name))}}">
           <b>{{$group->group_name}}</b>
       
           <?php  

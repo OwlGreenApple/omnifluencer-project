@@ -413,10 +413,12 @@ sub {
   padding-right: 10px;
   top: 52px;
   left: 50%;
-  margin-left: -57px;
-  z-index: 10;
+  margin-left: -74px;
+  /*z-index: 10;*/
+  z-index: 1;
   text-align: center;
   display: none;
+  min-width: 150px;
 }
 
 .popup-newWindow {
@@ -429,8 +431,11 @@ sub {
 }
 
 .point-card {
-  min-height : 140px;
-  padding-top:30px;
+  /*min-height : 140px;
+  padding-top:30px;*/
+
+  min-height: 162px;
+  padding-top: 40px;
 }
 
 .btn-upgrade-poin {
@@ -451,7 +456,14 @@ sub {
   background-image: none;
   outline: 0;
   -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
+}
+
+[class*="btn-"]:focus {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
 }
 
 .btn-secondary:not(:disabled):not(.disabled).active, 
@@ -530,6 +542,13 @@ sub {
     font-size: 17px;
   }
 }
+
+/* Group */
+.link-listgrup:hover {
+  color: #1BA8F4;
+  text-decoration: underline;
+}
+
 
 /* Miscellaneous */
 .label-calculate {

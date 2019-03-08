@@ -92,13 +92,13 @@
       </div>
       
       <div class="menu-mobile">
-        <span class="menu-savepdf" data-id="{{$account->accountid}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
+        <span class="menu-savepdf btn-profile" data-id="{{$account->accountid}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
           Save PDF 
         </span>
 
         |
 
-        <span class="menu-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">
+        <span class="menu-delete btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$account->id}}">
           Delete
         </span>        
       </div>

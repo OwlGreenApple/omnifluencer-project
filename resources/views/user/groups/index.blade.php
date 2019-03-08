@@ -245,7 +245,7 @@
       </div>
 
       <div class="row"> 
-        <div class="col-md-6 menu-nomobile">
+        <div class="col-md-6 menu-nomobile mb-2">
           <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>      

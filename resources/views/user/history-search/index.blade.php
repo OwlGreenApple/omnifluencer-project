@@ -376,7 +376,7 @@
               <br>  
               ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. 
               <a href="{{url('pricing')}}">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary btn-sm">
                   Upgrade To Pro
                 </button>  
               </a>
@@ -390,8 +390,7 @@
               <br>  
               ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. 
               <a href="{{url('pricing')}}">
-                <button class="btn btn-primary">
-                  <i class="fas fa-star"></i> 
+                <button class="btn btn-primary btn-sm">
                   Upgrade To Premium
                 </button>  
               </a>
@@ -450,7 +449,7 @@
         </div>
 
         <div class="row"> 
-          <div class="col-md-6 menu-nomobile">
+          <div class="col-md-6 menu-nomobile mb-2">
             @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
               <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
                 <i class="fas fa-chart-bar"></i>

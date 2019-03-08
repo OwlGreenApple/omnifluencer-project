@@ -380,7 +380,7 @@
         </div>
 
         <div class="row"> 
-          <div class="col-md-6 menu-nomobile">
+          <div class="col-md-6 menu-nomobile mb-2">
             @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
               <button type="button" class="btn btn-sm btn-primary btn-compare">
                 <i class="fas fa-chart-bar"></i>
