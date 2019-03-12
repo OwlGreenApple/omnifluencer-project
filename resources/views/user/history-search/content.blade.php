@@ -14,7 +14,7 @@
           @csrf
           <input type="hidden" name="keywords" value="{{$account->username}}">
 
-          <img class="menu-nomobile" src="{{$account->prof_pic}}" style="max-width:50px; border-radius:50%;">
+          <img class="menu-nomobile" src="{{$account->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')" style="max-width:50px; border-radius:50%;">
           <button class="link-username" type="submit">
             <?php echo '@'.$account->username ?>
           </button>

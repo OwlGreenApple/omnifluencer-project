@@ -1,7 +1,7 @@
 <?php use App\Helpers\Helper; ?>
 
 <div class="photos">
-  <img class="mx-auto d-block" src="{{$account->prof_pic}}" />
+  <img class="mx-auto d-block" src="{{$account->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
 </div>
 <div class="names">
   <h3><?php echo '@'.$account->username ?></h3>
