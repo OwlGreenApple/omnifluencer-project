@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
+<?php use App\Group;  ?>
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
@@ -60,7 +61,7 @@
 
                 <hr>
 
-                <a href="">
+                <a href="{{url('history-search')}}">
                   View Details &raquo;
                 </a>
               </div>
@@ -77,7 +78,10 @@
             <div class="card dashboard <?php if(Auth::user()->membership=='free') echo 'forbid' ?> group">
               <div class="card-body dashboard" align="center">
                 <h1>
-                  {{Auth::user()->count_calc}} 
+                  <?php  
+                    $groups = Group::where('user_id',Auth::user()->id)->count();
+                    echo $groups;
+                  ?>
                 </h1> 
 
                 <p>
@@ -89,7 +93,7 @@
 
                 <hr>
 
-                <a href="">
+                <a href="{{url('groups')}}">
                   View Details &raquo;
                 </a>
               </div>
@@ -112,7 +116,7 @@
 
                 <hr>
 
-                <a href="">
+                <a href="{{url('history-search')}}">
                   View Details &raquo;
                 </a>
 
@@ -149,7 +153,7 @@
 
                 <hr>
 
-                <a href="">
+                <a href="{{url('history-search')}}">
                   View Details &raquo;
                 </a>
 

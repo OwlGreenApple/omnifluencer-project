@@ -9,6 +9,10 @@
   $(document).ready(function() {
     //function saat klik pagination
     refresh_page();
+
+    $('.formatted-date').datepicker({
+      dateFormat: 'yy/mm/dd',
+    });
   });
 
   function refresh_page(){
@@ -20,7 +24,10 @@
       type : 'GET',
       url : currentPage,
       data : {
-        id:{{$id_group}},
+        id : {{$id_group}},
+        keywords : $('#keywords').val(),
+        from : $('#from').val(),
+        to : $('#to').val(),
       },
       dataType: 'text',
       beforeSend: function()
@@ -34,7 +41,7 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        $('#pager').html(data.pager);
+        $('.pager').html(data.pager);
       }
     });
   }
@@ -198,18 +205,27 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
+      <div class="row">
+        <form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
+          @csrf
+          
+          <label class="mr-sm-2 pb-md-2 label-calculate" for="calculate">
+            Calculate More
+          </label>
+
+          <input id="calculate" type="text" class="form-control form-control-sm mb-2 mr-sm-2 mr-2 col-md-3 col-9" name="keywords" placeholder="Enter Instagram Username">
+
+          <button type="submit" class="btn btn-sm btn-primary mb-2">
+            Calculate
+          </button>
+        </form>
+      </div>
+
+      <hr>
 
       <div class="row">
-        <div class="col-md-8 col-6">
+        <div class="col-md-8 col-12">
           <h2><b>Group - {{$group_name}}</b></h2>  
-        </div>
-
-        <div class="col-md-4 col-6" align="right">
-          <a href="{{url('/')}}">
-            <button class="btn btn-sm btn-primary btn-search-more">
-              Search More &raquo;
-            </button>
-          </a>
         </div>
       </div>
       
@@ -218,21 +234,6 @@
           <h5>
             Manage your saved group
           </h5>    
-        </div>
-
-        <div class="col-12 menu-mobile" align="left">
-          @if(Auth::user()->membership=='premium')
-            <button class="btn btn-sm btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
-              <i class="fas fa-file-pdf"></i> PDF
-            </button>
-            <button class="btn btn-sm btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
-              <i class="fas fa-file-excel"></i> Excel
-            </button>
-          @endif
-          
-          <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
-            <i class="far fa-trash-alt"></i> Delete
-          </button>     
         </div>
       </div>
       
@@ -243,12 +244,50 @@
       <br>  
 
       <form>
-        <div class="check-mobile">
-          <input class="checkAll" type="checkbox" name="checkAll"> Check All
+        <div class="row mb-lg-0 mb-3">
+          <div class="col-lg-6 col-md-12 mb-2 order-lg-0 order-1">
+            <div class="row">
+              <label class="col-lg-1 pb-lg-3 text-left col-5 order-0 order-lg-0" for="from">
+                Dari
+              </label>
+
+              <div class="mb-2 col-lg-3 col-md-5 col-5 order-2 order-lg-1">
+                <input id="from" type="text" class="form-control form-control-sm formatted-date" name="from" autocomplete="off">
+              </div>
+              
+              <label class="col-7 col-lg-1 pb-lg-3 pb-sm-none order-1 order-lg-2 text-left pl-lg-0 pr-lg-0" for="to">
+                hingga
+              </label>
+
+              <div class="mb-2 col-5 col-md-5 col-lg-3 order-3 order-lg-3">
+                <input id="to" type="text" class="form-control form-control-sm formatted-date" name="to" autocomplete="off">  
+              </div>
+              
+              <div class="col-2 order-4 order-md-4" style="padding-left:0px;">
+                <button type="button" class="btn btn-sm btn-sm-search btn-success btn-search">
+                  Filter
+                </button>  
+              </div>
+            </div>
+          </div> 
+
+          <div class="col-lg-6 col-md-12 mb-2 order-lg-1 order-0"> 
+            <div class="row">
+              <div class="col-lg-10 col-md-10 col-10 pr-lg-0">
+                <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-lg-5 float-lg-right" name="keywords" placeholder="username...">  
+              </div>
+
+              <div class="col-lg-2 col-md-2 col-2 pl-0">
+                <button type="button" class="btn btn-sm btn-sm-search btn-success mb-2 btn-search">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-12 mb-4 menu-nomobile" align="right">
+        <div class="row"> 
+          <div class="col-md-6 menu-nomobile mb-2">
             @if(Auth::user()->membership=='premium')
               <button class="btn btn-sm btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
                 <i class="fas fa-file-pdf"></i> PDF
@@ -260,7 +299,31 @@
             
             <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
               <i class="far fa-trash-alt"></i> Delete
-            </button>   
+            </button>      
+          </div>
+
+          <div class="col-lg-6 col-md-12 col-12" align="right">
+            <div class="pager"></div>
+          </div> 
+        </div>
+
+        <div class="mb-3 mt-3 menu-mobile">
+          <div class="row">
+            <div class="col-6">
+              <select class="form-control form-control-sm opsi-action1">
+                @if(Auth::user()->membership=='premium')
+                  <option>PDF</option>
+                  <option>Excel</option>
+                @endif
+                <option>Delete</option>
+              </select>
+            </div>
+
+            <div class="col-2 pl-0">
+              <button type="button" class="btn btn-primary btn-sm btn-apply">
+                Apply
+              </button>
+            </div>
           </div>
         </div>
 
@@ -269,19 +332,63 @@
             <th>
               <input type="checkbox" name="checkAll" class="checkAll"\>
             </th>
-            <th class="header" action="username">
+            <th class="menu-mobile">
+              Select / De-select All
+            </th>
+            <th class="menu-nomobile">
               Instagram
             </th>
-            <th class="header" action="created_at">
+            <th class="menu-nomobile">
               Date
             </th>
             <th>Action</th>
           </thead>
           <tbody id="content"></tbody>
         </table>
-
-        <div id="pager"></div>    
       </form>
+
+      <div class="row"> 
+        <div class="col-md-6 menu-nomobile">
+          @if(Auth::user()->membership=='premium')
+            <button class="btn btn-sm btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
+              <i class="fas fa-file-pdf"></i> PDF
+            </button>
+            <button class="btn btn-sm btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
+              <i class="fas fa-file-excel"></i> Excel
+            </button>
+          @endif
+            
+          <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+            <i class="far fa-trash-alt"></i> Delete
+          </button>     
+        </div>
+
+        <div class="col-12 mb-4 menu-mobile">
+          <div class="row">
+            <div class="col-6">
+              <select class="form-control form-control-sm opsi-action1">
+                @if(Auth::user()->membership=='premium')
+                  <option>PDF</option>
+                  <option>Excel</option>
+                @endif
+                <option>Delete</option>
+              </select>
+            </div>
+
+            <div class="col-2 pl-0">
+              <button type="button" class="btn btn-primary btn-sm btn-apply">
+                Apply
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-12" align="right">
+          <div class="pager"></div>
+        </div>    
+
+      </div>
     </div>
   </div>
 </div>
@@ -388,6 +495,72 @@
 </div>
 
 <script type="text/javascript">
+  $( "body" ).on( "click", ".btn-apply", function() {
+    var action = $('.opsi-action1').val();
+    switch(action){
+      case 'PDF' :
+        if(check_id()){
+          $('#email-type').val('pdf');
+          $('#send-type').val('bulk');
+
+          $("#link-pdf").prop("href", "<?php echo url('print-pdf-bulk')?>"+'?'+$('form').serialize());
+          $('.send-pdf').show();
+          $('.send-csv').hide();
+
+          $('#send-file').modal('show');
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show(); 
+        }
+      break;
+      case 'Excel' :
+        if(check_id()){
+          $('#email-type').val('csv');
+          $('#send-type').val('bulk');
+
+          $("#link-csv").prop("href", "<?php echo url('print-csv-bulk')?>"+'?'+$('form').serialize());
+          $('.send-csv').show();
+          $('.send-pdf').hide();
+
+          $('#send-file').modal('show');
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show(); 
+        }  
+      break;
+      case 'Delete' :
+        if(check_id()){
+          $('#delete_type').val('bulk');
+          $('#confirm-delete').modal('show');
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();   
+        }
+      break;
+    }
+  });
+
+  $( "body" ).on( "click", ".btn-search", function() {
+    refresh_page();
+  });
+
+  $( "body" ).on( "change", ".opsi-action1,.opsi-action2", function() {
+    $('.opsi-action1').val($(this).val());
+    $('.opsi-action2').val($(this).val());
+  });
+
+  $( "body" ).on( "click", ".view-details", function() {
+    var id = $(this).attr('data-id');
+
+    $('.details-'+id).toggleClass('d-none');
+  });
+
   $( "body" ).on( "click", ".btn-profile", function() {
     var id = $(this).attr('data-id');
     var type = $(this).attr('data-type');

@@ -98,7 +98,7 @@
   <!-- Navbar -->
   <nav class="menu-header">
     <div class="row div-header">
-      <div class="col-md-6 col-12 navbar-reflink menu-nomobile">
+      <div class="col-lg-6 col-md-12 col-12 navbar-reflink menu-nomobile">
         <label class="submenu-header label-reflink">
           <b>Invitation Link</b>
           <span class="tooltipstered" title="Referral link">
@@ -107,21 +107,21 @@
         </label>
           
         <input type="text" name="reflink" class="col-md-6 col-4" id="reflink-box" value="<?php echo url('/').'/ref/'.Auth::user()->referral_link ?>" readonly="readonly">
-        <button class="btn btn-default btn-sm btn-copy" onclick="copylink()">
+        <button class="btn btn-success btn-sm btn-copy" onclick="copylink()">
           Copy
         </button>    
       </div>
 
-      <div class="col-md-6 col-12 div-header justify-content-end">
+      <div class="col-lg-6 col-md-12 col-12 div-header justify-content-end">
         <button class="navbar-toggler menu-toggle" type="button" id="sidebarCollapse">
           <i class="fas fa-bars"></i>
         </button>
 
-        <span class="submenu-header menu-mobile" style="padding-right: 10px;">
+        <!--<span class="submenu-header menu-mobile" style="padding-right: 10px;">
           <span class="icon-header-mobile" onclick="copylink()">
             <i class="fas fa-file-signature"></i>
           </span>
-        </span>
+        </span>-->
 
         <span class="submenu-header"  style="padding-right: 10px;">
           <a href="{{url('/')}}">
@@ -199,7 +199,7 @@
                 <img class="profpic-header" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
               </a>
 
-              <div class="dropdown-menu dropdown-menu-right profpic-menu prof" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu dropdown-menu-right profpic-menu prof shadow-lg" aria-labelledby="navbarDropdown">
                 <div class="container" style="padding-bottom: 10px;">
                   <div class="row">
                     <div class="col-md-4" align="center">
@@ -208,6 +208,19 @@
 
                     <div class="col-md-8" align="left">
                       <b>{{Auth::user()->name}}</b><br>
+
+                      <div class="menu-mobile">
+                        <hr>
+
+                        <b>Invitation Link</b> <br>
+                        <input type="text" name="reflink" class="col-md-6 col-9" id="reflink-box" value="<?php echo url('/').'/ref/'.Auth::user()->referral_link ?>" readonly="readonly">
+                        <button class="btn btn-success btn-sm btn-copy" onclick="copylink()">
+                          Copy
+                        </button> 
+
+                        <hr>
+                      </div>
+
                       {{Auth::user()->point}} Points<br>
                       <a class="menu-pass" href="{{url('change-password')}}">
                         Change Password  
@@ -285,12 +298,10 @@
               </li>
 
               <li class="<?php if(Request::is('saved-profile')) echo 'active' ?>">
-                <span class="submenu-navbar">
-                  <a href="{{url('saved-profile')}}">
-                    <i class="fas fa-save icon-menu"></i>
+                <a href="{{url('saved-profile')}}">
+                  <i class="fas fa-save icon-menu"></i>
                     Saved Profile
-                  </a>
-                </span>
+                </a>
               </li>
             <?php } ?>
           </ul>

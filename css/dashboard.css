@@ -1,7 +1,6 @@
 /* Table */
 thead {
   background-color: #E5E5E5; 
-  border-bottom: 2px solid #333;
 }
 
 td{
@@ -24,12 +23,12 @@ table tr {
 
   @media screen and (max-width: 600px) {
     /* untuk ilangin table thead di mobile */ 
-    table.responsive thead {
-      overflow: hidden; /*important*/
+    /*table.responsive thead {
+      overflow: hidden; 
       position: absolute;
       width: 1px;
 
-      border: none; /*optional*/
+      border: none; 
       clip: rect(0 0 0 0);
       height: 1px;
       margin: -1px;
@@ -50,10 +49,6 @@ table tr {
     }
     
     table.responsive td::before {
-      /*
-      * aria-label has no advantage, it won't be read inside a table
-      content: attr(aria-label);
-      */
       content: attr(data-label);
       float: left;
       font-weight: bold;
@@ -65,7 +60,7 @@ table tr {
 
     .check-mobile{
       display: block;
-    }
+    }*/
   }
   
 /* Sidebar */
@@ -258,6 +253,10 @@ ul ul a {
   margin: 0px 5px;
 }
 
+.btn-copy {
+  background-color: #09950E;
+}
+
 @media (max-width:769px){
   #reflink-box {
     margin-left: 2px;
@@ -360,6 +359,16 @@ sub {
   font-weight: 300;
 }
 
+/* History Search*/
+.menu-savepdf {
+  color: #63ADF8;
+}
+
+.menu-delete {
+  color: #FF6D6E;
+}
+
+
 /* Poin history */
 .poinplus {
   color: #409AF7;
@@ -404,10 +413,12 @@ sub {
   padding-right: 10px;
   top: 52px;
   left: 50%;
-  margin-left: -57px;
-  z-index: 10;
+  margin-left: -74px;
+  /*z-index: 10;*/
+  z-index: 1;
   text-align: center;
   display: none;
+  min-width: 150px;
 }
 
 .popup-newWindow {
@@ -420,8 +431,11 @@ sub {
 }
 
 .point-card {
-  min-height : 140px;
-  padding-top:30px;
+  /*min-height : 140px;
+  padding-top:30px;*/
+
+  min-height: 162px;
+  padding-top: 40px;
 }
 
 .btn-upgrade-poin {
@@ -431,12 +445,30 @@ sub {
 
 /* Upgrade Account */
 .btn-pricing {
+  border:none;
   border-radius: 25px;
   background-color: #fff;
   color: #44698A;
+  box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);
 }
 
-.btn-pricing .active {
+.btn-secondary:focus {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+[class*="btn-"]:focus {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, 
+.btn-secondary:not(:disabled):not(.disabled):active, 
+.show>.btn-secondary.dropdown-toggle {
   background-color: #0F9814;
   color: #fff;  
 }
@@ -454,15 +486,19 @@ sub {
 }
 
 .upgrade-pro {
-  background-color: #41B7F1;
+  background-image: linear-gradient(-136deg, #0E76EF 0%, #2E8DF6 52%, #137BF5 100%);
   border-bottom: 10px solid #106BC8;
   color: #fff;
 }
 
 .upgrade-premium {
-  background-color: #7B31DE;
+  background-image: linear-gradient(-135deg, #762CD8 0%, rgba(161,89,255,0.99) 49%, rgba(116,43,212,0.99) 100%);
   border-bottom: 10px solid #6010C7;
   color: #fff;
+}
+
+.blue {
+  color: #248BF6;
 }
 
 .harga {
@@ -470,18 +506,49 @@ sub {
   font-size: 45px;
 }
 
+.header-1 {
+  font-size: 19px;
+}
+
+.header-2 {
+  font-size: 16px;
+}
+
+.view-more-pro, .view-more-premium {
+  color: #3490dc;
+}
+
 @media screen and (max-width: 769px) {
   .harga {
-    font-family: SourceSansPro-Bold;
-    font-size: 30px;
+    /*font-family: SourceSansPro-Bold;
+    font-size: 30px;*/
+    font-size: 14px;
   }  
 
   .btn-upgrade-big {
-    font-size: 18px;
+    /*font-size: 18px;
     padding-left: 70px;
-    padding-right: 70px;
+    padding-right: 70px;*/
+    font-size: 13px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .card-header.upgrade-pro, .card-header.upgrade-premium {
+    padding: 10px;
+  }
+
+  .header-1 {
+    font-size: 17px;
   }
 }
+
+/* Group */
+.link-listgrup:hover {
+  color: #1BA8F4;
+  text-decoration: underline;
+}
+
 
 /* Miscellaneous */
 .label-calculate {
@@ -509,7 +576,20 @@ sub {
   display: none;
 }
 
+.page-link {
+  padding: 2px 10px;
+}
+
+.pagination {
+  justify-content: flex-end;
+}
+
 @media screen and (max-width: 769px) {
+  .btn-sm-search  {
+    padding: .25rem 8px;
+    width: 53px;
+  }
+
   .menu-nomobile {
     display: none;
   }
@@ -526,6 +606,10 @@ sub {
   .date-dashboard {
     text-align: left;
   }
+
+  .pagination {
+    justify-content: center;
+  }  
 }
 
 #pesan {

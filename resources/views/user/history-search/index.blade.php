@@ -101,7 +101,7 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        $('#pager').html(data.pager);
+        $('.pager').html(data.pager);
 
         $('.tooltipstered').tooltipster({
           contentAsHTML: true,
@@ -349,8 +349,8 @@
       <hr>
 
       <div class="row">
-        <div class="col-md-8 col-6">
-          <h2><b>History</b></h2>      
+        <div class="col-md-8 col-12">
+          <h2><b>History Influencer</b></h2>      
         </div>
       </div>
       
@@ -359,29 +359,6 @@
           <h5>
             Select bulk action, save or add it to group
           </h5>    
-        </div>
-
-        <div class="col-md-7 col-12 menu-mobile" align="left">
-          @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
-            <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
-              <i class="fas fa-chart-bar"></i>
-              Compare
-            </button>
-
-            <button type="button" class="btn btn-sm btn-primary btn-save mb-10">
-              <i class="fas fa-folder-plus"></i> 
-              Add to group
-            </button>
-
-            <button type="button" class="btn btn-sm btn-primary btn-save-global mb-10">
-              <i class="fas fa-save"></i> 
-              Save
-            </button>
-
-            <button type="button" class="btn btn-sm btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
-              <i class="far fa-trash-alt"></i> Delete
-            </button>  
-          @endif     
         </div>
       </div>
       
@@ -399,7 +376,7 @@
               <br>  
               ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. 
               <a href="{{url('pricing')}}">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary btn-sm">
                   Upgrade To Pro
                 </button>  
               </a>
@@ -413,8 +390,7 @@
               <br>  
               ** <b>UPGRADE</b> akun Anda untuk mendapatkan banyak kelebihan. Info lebih lanjut, silahkan klik tombol berikut. 
               <a href="{{url('pricing')}}">
-                <button class="btn btn-primary">
-                  <i class="fas fa-star"></i> 
+                <button class="btn btn-primary btn-sm">
                   Upgrade To Premium
                 </button>  
               </a>
@@ -430,29 +406,50 @@
       <br>  
 
       <form>
-        <div class="row">
-          <div class="form-inline col-md-7 mb-2">
-            <label class="center-mobile mr-sm-2 pb-md-2" for="from">
-              Dari
-            </label>
-            <input id="from" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="from">
+        <div class="row mb-lg-0 mb-3">
+          <div class="col-lg-6 col-md-12 mb-2 order-lg-0 order-1">
+            <div class="row">
+              <label class="col-lg-1 pb-lg-3 text-left col-5 order-0 order-lg-0" for="from">
+                Dari
+              </label>
 
-            <label class="center-mobile mr-sm-2 pb-md-2 pb-sm-none" for="to">
-              hingga
-            </label>
-            <input id="to" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-2 formatted-date" name="to">
+              <div class="mb-2 col-lg-3 col-md-5 col-5 order-2 order-lg-1">
+                <input id="from" type="text" class="form-control form-control-sm formatted-date" name="from" autocomplete="off">
+              </div>
+              
+              <label class="col-7 col-lg-1 pb-lg-3 pb-sm-none order-1 order-lg-2 text-left pl-lg-0 pr-lg-0" for="to">
+                hingga
+              </label>
 
-            <label class="sr-only" for="keywords">
-              Search
-            </label>
-            <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-md-3" name="keywords" placeholder="username...">
-                
-            <button type="button" class="btn btn-sm btn-sm-search btn-primary mb-2 btn-search">
-              Search
-            </button>
+              <div class="mb-2 col-5 col-md-5 col-lg-3 order-3 order-lg-3">
+                <input id="to" type="text" class="form-control form-control-sm formatted-date" name="to" autocomplete="off">  
+              </div>
+              
+              <div class="col-2 order-4 order-md-4" style="padding-left:0px;">
+                <button type="button" class="btn btn-sm btn-sm-search btn-success btn-search">
+                  Filter
+                </button>  
+              </div>
+            </div>
           </div> 
 
-          <div class="col-md-5 menu-nomobile" align="right">
+          <div class="col-lg-6 col-md-12 mb-2 order-lg-1 order-0"> 
+            <div class="row">
+              <div class="col-lg-10 col-md-10 col-10 pr-lg-0">
+                <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-lg-5 float-lg-right" name="keywords" placeholder="username...">  
+              </div>
+
+              <div class="col-lg-2 col-md-2 col-2 pl-0">
+                <button type="button" class="btn btn-sm btn-sm-search btn-success mb-2 btn-search">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row"> 
+          <div class="col-md-6 menu-nomobile mb-2">
             @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
               <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
                 <i class="fas fa-chart-bar"></i>
@@ -474,11 +471,31 @@
               </button>  
             @endif     
           </div>
+
+          <div class="col-lg-6 col-md-12 col-12" align="right">
+            <div class="pager"></div>
+          </div> 
         </div>
         
+        <div class="mb-3 mt-3 menu-mobile">
+          <div class="row">
+            @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+              <div class="col-6">
+                <select class="form-control form-control-sm opsi-action1">
+                  <option>Compare</option>
+                  <option>Add to group</option>
+                  <option>Save</option>
+                  <option>Delete</option>
+                </select>
+              </div>
 
-        <div class="check-mobile">
-          <input class="checkAll" type="checkbox" name="checkAll"> Check All
+              <div class="col-2 pl-0">
+                <button type="button" class="btn btn-primary btn-sm btn-apply">
+                  Apply
+                </button>
+              </div>
+            @endif
+          </div>
         </div>
 
         <table class="table responsive">
@@ -486,29 +503,83 @@
             <th>
               <input class="checkAll" type="checkbox" name="checkAll">
             </th>
-            <th class="header" action="username">
+            <th class="menu-mobile">
+              Select / De-select All
+            </th>
+            <th class="menu-nomobile">
               Instagram
             </th>
-            <th class="header" action="eng_rate">
+            <th class="menu-nomobile">
               Eng. Rate
             </th>
-            <th class="header" action="jml_followers">
+            <th class="menu-nomobile">
               Followers
             </th>
-            <th class="header" action="jml_post">
+            <th class="menu-nomobile">
               Posts
             </th>
-            <th>Groups</th>
-            <th class="header" action="updated_at">
+            <th class="menu-nomobile">
+              Groups
+            </th>
+            <th class="menu-nomobile">
               Date
             </th>
             <th>Action</th>
           </thead>
           <tbody id="content"></tbody>
         </table>
-
-        <div id="pager"></div>    
       </form>
+
+      <div class="row"> 
+        <div class="col-md-6 menu-nomobile">
+          @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+            <button type="button" class="btn btn-sm btn-primary btn-compare mb-10">
+              <i class="fas fa-chart-bar"></i>
+              Compare
+            </button>
+
+            <button type="button" class="btn btn-sm btn-primary btn-save mb-10">
+              <i class="fas fa-folder-plus"></i> 
+              Add to group
+            </button>
+
+            <button type="button" class="btn btn-sm btn-primary btn-save-global mb-10">
+              <i class="fas fa-save"></i> 
+              Save
+            </button>
+
+            <button type="button" class="btn btn-sm btn-danger btn-delete-bulk mb-10" data-toggle="modal" data-target="#confirm-delete">
+              <i class="far fa-trash-alt"></i> Delete
+            </button>  
+          @endif     
+        </div>
+
+        <div class="col-12 mb-4 menu-mobile">
+          <div class="row">
+            @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+              <div class="col-6">
+                <select class="form-control form-control-sm opsi-action2">
+                  <option>Compare</option>
+                  <option>Add to group</option>
+                  <option>Save</option>
+                  <option>Delete</option>
+                </select>
+              </div>
+
+              <div class="col-2 pl-0">
+                <button type="button" class="btn btn-primary btn-sm btn-apply">
+                  Apply
+                </button>
+              </div>
+            @endif
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-12" align="right">
+          <div class="pager"></div>
+        </div>    
+
+      </div>
     </div>
   </div>
 </div>
@@ -648,6 +719,57 @@
 </div>
 
 <script type="text/javascript">
+  $( "body" ).on( "click", ".btn-apply", function() {
+    var action = $('.opsi-action1').val();
+    switch(action){
+      case 'Compare' :
+        if(check_id('compare')){
+          check_compare();
+        } else {
+          $('#pesan').html('Pilih setidaknya 2 akun untuk compare');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      break;
+      case 'Add to group' :
+        get_groups();
+      break;
+      case 'Save' :
+        if(check_id()){
+          save_group();
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show(); 
+        }
+      break;
+      case 'Delete' :
+        if(check_id()){
+          $('#delete_type').val('bulk');
+          $('#confirm-delete').modal('show');
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      break;
+    }
+  });
+
+  $( "body" ).on( "change", ".opsi-action1,.opsi-action2", function() {
+    $('.opsi-action1').val($(this).val());
+    $('.opsi-action2').val($(this).val());
+  });
+
+  $( "body" ).on( "click", ".view-details", function() {
+    var id = $(this).attr('data-id');
+
+    $('.details-'+id).toggleClass('d-none');
+  });
+
   $( "body" ).on( "click", ".btn-profile", function() {
     var id = $(this).attr('data-id');
     var type = $(this).attr('data-type');

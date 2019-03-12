@@ -14,6 +14,10 @@
       $('#input-group').val('');
       $('#input-group').hide();
     });
+
+    $('.formatted-date').datepicker({
+      dateFormat: 'yy/mm/dd',
+    });
   });
 
   function get_groups(){
@@ -49,6 +53,11 @@
     $.ajax({
       type : 'GET',
       url : currentPage,
+      data:{
+        keywords : $('#keywords').val(),
+        from : $('#from').val(),
+        to : $('#to').val(),
+      },
       dataType: 'text',
       beforeSend: function()
       {
@@ -61,7 +70,7 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        $('#pager').html(data.pager);
+        $('.pager').html(data.pager);
 
         $('.tooltipstered').tooltipster({
           contentAsHTML: true,
@@ -239,12 +248,50 @@
     }  
   }
 
-  function check_id(){
+  function check_id(mode='default'){
     if ($(".checkaccid:checked").length > 0){
-      return true;
+      if(mode=='compare'){
+        if ($(".checkaccid:checked").length < 2){
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return true;
+      }
     } else {
       return false;
     }
+  }
+
+  function check_compare(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/compare/check') ?>",
+      data: $('form').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if(data.status=='success'){
+          // refresh_page();
+          window.location.href = "<?php echo url('compare'); ?>/"+data.message;
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
   }
 </script>
 
@@ -270,8 +317,8 @@
       <hr>
 
       <div class="row">
-        <div class="col-md-8 col-6">
-          <h2><b>Saved Profile</b></h2>  
+        <div class="col-md-8 col-12">
+          <h2><b>Saved Influencer</b></h2>  
         </div>  
       </div>
       
@@ -280,16 +327,6 @@
           <h5>
             Select bulk action, save or add it to group
           </h5>    
-        </div>
-
-        <div <div class="col-12 menu-mobile" align="left">
-          <button class="btn btn-sm btn-primary btn-save">
-            <i class="fas fa-folder-plus"></i> 
-            Add to group
-          </button>
-          <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
-            <i class="far fa-trash-alt"></i> Delete
-          </button>     
         </div>
       </div>
     
@@ -300,19 +337,87 @@
       <br>  
 
       <form>
-        <div class="check-mobile">
-          <input class="checkAll" type="checkbox" name="checkAll"> Check All
+        <div class="row mb-lg-0 mb-3">
+          <div class="col-lg-6 col-md-12 mb-2 order-lg-0 order-1">
+            <div class="row">
+              <label class="col-lg-1 pb-lg-3 text-left col-5 order-0 order-lg-0" for="from">
+                Dari
+              </label>
+
+              <div class="mb-2 col-lg-3 col-md-5 col-5 order-2 order-lg-1">
+                <input id="from" type="text" class="form-control form-control-sm formatted-date" name="from" autocomplete="off">
+              </div>
+              
+              <label class="col-7 col-lg-1 pb-lg-3 pb-sm-none order-1 order-lg-2 text-left pl-lg-0 pr-lg-0" for="to">
+                hingga
+              </label>
+
+              <div class="mb-2 col-5 col-md-5 col-lg-3 order-3 order-lg-3">
+                <input id="to" type="text" class="form-control form-control-sm formatted-date" name="to" autocomplete="off">  
+              </div>
+              
+              <div class="col-2 order-4 order-md-4" style="padding-left:0px;">
+                <button type="button" class="btn btn-sm btn-sm-search btn-success btn-search">
+                  Filter
+                </button>  
+              </div>
+            </div>
+          </div> 
+
+          <div class="col-lg-6 col-md-12 mb-2 order-lg-1 order-0"> 
+            <div class="row">
+              <div class="col-lg-10 col-md-10 col-10 pr-lg-0">
+                <input id="keywords" type="text" class="form-control form-control-sm mb-2 mr-sm-2 col-lg-5 float-lg-right" name="keywords" placeholder="username...">  
+              </div>
+
+              <div class="col-lg-2 col-md-2 col-2 pl-0">
+                <button type="button" class="btn btn-sm btn-sm-search btn-success mb-2 btn-search">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-12 mb-2 menu-nomobile" align="right">
-            <button class="btn btn-sm btn-primary btn-save">
-              <i class="fas fa-folder-plus"></i> 
-              Add to group
-            </button>
-            <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
-              <i class="far fa-trash-alt"></i> Delete
-            </button>  
+        <div class="row"> 
+          <div class="col-md-6 menu-nomobile mb-2">
+            @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+              <button type="button" class="btn btn-sm btn-primary btn-compare">
+                <i class="fas fa-chart-bar"></i>
+                Compare
+              </button>
+              <button class="btn btn-sm btn-primary btn-save">
+                <i class="fas fa-folder-plus"></i> 
+                Add to group
+              </button>
+              <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+                <i class="far fa-trash-alt"></i> Delete
+              </button>
+            @endif     
+          </div>
+
+          <div class="col-lg-6 col-md-12 col-12" align="right">
+            <div class="pager"></div>
+          </div> 
+        </div>
+
+        <div class="mb-3 mt-3 menu-mobile">
+          <div class="row">
+            @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+              <div class="col-6">
+                <select class="form-control form-control-sm opsi-action1">
+                  <option>Compare</option>
+                  <option>Add to group</option>
+                  <option>Delete</option>
+                </select>
+              </div>
+
+              <div class="col-2 pl-0">
+                <button type="button" class="btn btn-primary btn-sm btn-apply">
+                  Apply
+                </button>
+              </div>
+            @endif
           </div>
         </div>
 
@@ -321,20 +426,67 @@
             <th>
               <input class="checkAll" type="checkbox" name="checkAll">
             </th>
-            <th class="header" action="username">
+            <th class="menu-mobile">
+              Select / De-select All
+            </th>
+            <th class="menu-nomobile">
               Instagram
             </th>
-            <th class="header" action="created_at">
+            <th class="menu-nomobile">
               Saved Date
             </th>
-            <th>Groups</th>
+            <th class="menu-nomobile">
+              Groups
+            </th>
             <th>Action</th>
           </thead>
           <tbody id="content"></tbody>
-        </table>
-
-        <div id="pager"></div>    
+        </table>   
       </form>
+
+      <div class="row"> 
+        <div class="col-md-6 menu-nomobile">
+          @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+            <button type="button" class="btn btn-sm btn-primary btn-compare">
+              <i class="fas fa-chart-bar"></i>
+              Compare
+            </button>
+            <button class="btn btn-sm btn-primary btn-save">
+              <i class="fas fa-folder-plus"></i> 
+              Add to group
+            </button>
+            <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+              <i class="far fa-trash-alt"></i> Delete
+            </button>
+          @endif    
+        </div>
+
+        <div class="col-12 mb-4 menu-mobile">
+          <div class="row">
+            @if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro')
+              <div class="col-6">
+                <select class="form-control form-control-sm opsi-action2">
+                  <option>Compare</option>
+                  <option>Add to group</option>
+                  <option>Delete</option>
+                </select>
+              </div>
+
+              <div class="col-2 pl-0">
+                <button type="button" class="btn btn-primary btn-sm btn-apply">
+                  Apply
+                </button>
+              </div>
+            @endif
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-12" align="right">
+          <div class="pager"></div>
+        </div>    
+
+      </div>
+
     </div>
   </div>
 </div>
@@ -474,6 +626,51 @@
 </div>
 
 <script type="text/javascript">
+  $( "body" ).on( "click", ".btn-apply", function() {
+    var action = $('.opsi-action1').val();
+    switch(action){
+      case 'Compare' :
+        if(check_id('compare')){
+          check_compare();
+        } else {
+          $('#pesan').html('Pilih setidaknya 2 akun untuk compare');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      break;
+      case 'Add to group' :
+        get_groups();
+      break;
+      case 'Delete' :
+        if(check_id()){
+          $('#delete_type').val('bulk');
+          $('#confirm-delete').modal('show');
+        } else {
+          $('#pesan').html('Pilih akun terlebih dahulu');
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      break;
+    }
+  });
+
+  $( "body" ).on( "click", ".btn-search", function() {
+    refresh_page();
+  });
+
+  $( "body" ).on( "change", ".opsi-action1,.opsi-action2", function() {
+    $('.opsi-action1').val($(this).val());
+    $('.opsi-action2').val($(this).val());
+  });
+
+  $( "body" ).on( "click", ".view-details", function() {
+    var id = $(this).attr('data-id');
+
+    $('.details-'+id).toggleClass('d-none');
+  });
+
   $( "body" ).on( "keypress", "#input-group", function(e)
   {
       if(e.which == 13)
