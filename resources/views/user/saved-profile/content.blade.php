@@ -20,8 +20,8 @@
           <span class="menu-mobile" style="display: inline-block; float: right;">
             <i class="fas fa-sort-down"></i>
           </span>
-          <?php echo '@'.$account->username ?>  
         </div>
+        <?php echo '@'.$account->username ?>  
       </div>
       
     </td>

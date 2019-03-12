@@ -26,8 +26,16 @@
           <span class="menu-mobile" style="display: inline-block; float: right;">
             <i class="fas fa-sort-down"></i>
           </span>  
-          <?php echo '@'.$account->username ?>
         </div>
+        
+        <form action="{{url('search')}}" method="POST">
+          @csrf
+          <input type="hidden" name="keywords" value="{{$account->username}}">
+
+          <button class="link-username" type="submit">
+            <?php echo '@'.$account->username ?>
+          </button>
+        </form>
       </div>
     </td>
     <td class="menu-nomobile" data-label="Eng. Rate">
