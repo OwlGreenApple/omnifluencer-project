@@ -31,10 +31,10 @@
           
         <div class="col-2">
           <span class="username-history" data-id="{{$id}}" style="cursor: pointer;">
-            <img class="float-left" src="{{$account->prof_pic}}">
+            <img src="{{$account->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
           </span>
         </div>
-        <div class="col-7 colmarg">
+        <div class="col-7 colmarg pl-4">
           <span class="username-history" data-id="{{$id}}" style="cursor: pointer;">
             <?php echo '@'.$account->username ?>    
           </span>

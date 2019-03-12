@@ -37,17 +37,17 @@
       </div>
 
       <div class="col-md-12" align="center">
-        <h4 style="padding-top: 20px;padding-bottom: 20px;">
+        <h4 class="pt-3 pb-3">
           <b>Our Pricing Plans</b>
         </h4>
 
-        <div style="padding-bottom: 20px">
+        <div class="pb-3">
           Monthly
-          <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-left: 20px;padding-right: 20px;">
-            <label class="btn btn-secondary btn-pricing month active">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary btn-pricing month active" style="outline: none; box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
               <input type="radio" name="options" id="option1" autocomplete="off" checked> Monthly
             </label>
-            <label class="btn btn-secondary btn-pricing year">
+            <label class="btn btn-secondary btn-pricing year" style="outline: none;box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
               <input type="radio" name="options" id="option2" autocomplete="off"> Yearly
             </label>
           </div>

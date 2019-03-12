@@ -16,7 +16,7 @@ $col = 1;
     <div class="col-md-3 col-6 div-progress" align="center">
       &nbsp
       <div class="akun-{{$col}}">
-        <img src="{{$account->prof_pic}}">
+        <img src="{{$account->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
 
         <div class="btn-delete" data-col="{{$col}}">
           <i class="icon ion-md-close"></i>  

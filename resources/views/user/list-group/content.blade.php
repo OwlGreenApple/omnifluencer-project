@@ -10,7 +10,8 @@
     </td>
     <td data-label="Instagram">
       <div class="menu-nomobile">
-        <img src="{{$account->prof_pic}}" style="max-width:50px; border-radius:50%;">
+        <img src="{{$account->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')"
+        style="max-width:50px; border-radius:50%;">
         <?php echo '@'.$account->username ?>
       </div>
 

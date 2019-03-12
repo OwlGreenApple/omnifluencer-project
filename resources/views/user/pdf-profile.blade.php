@@ -30,7 +30,11 @@
     @endif
 
     <div class="col-xs-12" align="center">
-      <img class="profpic" src="{{$acc->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
+      <?php if(getimagesize($acc->prof_pic)=='Array') { ?>
+        <img class="profpic" src="{{$acc->prof_pic}}">
+      <?php } else { ?>
+        <img class="profpic" src="{{asset('/design/profpic-user.png')}}">
+      <?php } ?>
       <br>
     </div>
 
