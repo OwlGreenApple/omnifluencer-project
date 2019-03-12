@@ -12,8 +12,9 @@
             <i class="fas fa-sort-down"></i>
           </span>    
         </div>
+      </div>
 
-        <?php 
+      <?php 
           $akun = '';
 
           if(!is_null($compare->account_id_1)){
@@ -43,8 +44,7 @@
           } 
 
           echo $akun;
-        ?>
-      </div>
+      ?>
     </td>
     <td class="menu-nomobile" data-label="Date">
       {{ date("H:i", strtotime($compare->updated_at))  }}

@@ -7,8 +7,8 @@
     </td>
     <td>
       <div class="menu-nomobile">
-        <i class="fas fa-folder"></i>
         <a class="link-listgrup" href="{{(url('/groups/'.$group->id.'/'.$group->group_name))}}">
+          <i class="fas fa-folder"></i>
           <b>{{$group->group_name}}</b>
       
           <?php  
@@ -26,9 +26,13 @@
           <span class="menu-mobile" style="float:right;">
             <i class="fas fa-sort-down"></i>
           </span>
+        </div>
+
+        <a class="link-listgrup" href="{{(url('/groups/'.$group->id.'/'.$group->group_name))}}">
           <i class="fas fa-folder"></i>
           <b>{{$group->group_name}}</b>  
-        </div>
+        </a>
+        
       </div>
     </td>
     <td class="menu-nomobile">

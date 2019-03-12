@@ -30,7 +30,7 @@
     @endif
 
     <div class="col-xs-12" align="center">
-      <img class="profpic" src="{{$acc->prof_pic}}">
+      <img class="profpic" src="{{$acc->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
       <br>
     </div>
 
@@ -146,7 +146,7 @@
   @endif
 
   <div class="col-xs-12" align="center">
-    <img class="profpic" src="{{$account->prof_pic}}">
+    <img class="profpic" src="{{$account->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
     <br>
   </div>
 
