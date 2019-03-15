@@ -18,6 +18,14 @@
       $('#input-group').val('');
       $('#input-group').hide();
     });
+
+    /*$('.ui-datepicker').live('mouseleave', function() {
+      $('.ui-datepicker').fadeOut(function() {
+          $('.formattedStartDate').attr('class', 'formattedStartDate');
+          $(this).remove();
+      });
+    });*/
+
   });
 
   function check_compare(){
