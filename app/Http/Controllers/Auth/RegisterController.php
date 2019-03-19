@@ -200,7 +200,7 @@ class RegisterController extends Controller
         ];
       
         $emaildata = [
-          // 'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
+          'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
           'user' => $user,
           'password' => $request->password,
         ];
