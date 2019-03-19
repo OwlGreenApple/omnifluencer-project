@@ -57,7 +57,7 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
-      <div class="row">
+      <!--<div class="row">
         <form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
           @csrf
           
@@ -73,7 +73,7 @@
         </form>
       </div>
 
-      <hr>
+      <hr>-->
 
       <div class="row">
         <div class="col-md-8 col-6">
@@ -161,7 +161,7 @@
                 Click button below
               </p>
 
-              <a href="{{url('pricing')}}">
+              <a href="{{url('upgrade-account')}}">
                 <button class="btn btn-primary btn-upgrade-poin" data-upgrade="pro">
                   UPGRADE NOW
                 </button>
@@ -282,14 +282,14 @@
     $("#input-group").focus();
   });
 
-  $( "body" ).on( "click", ".btn-upgrade-poin", function(e){
+  /*$( "body" ).on( "click", ".btn-upgrade-poin", function(e){
     $('.nav-tabs a[href="#nav-redeem"]').tab('show');
 
     var targetSec = $(this).attr('data-upgrade');
     $('html, body').animate({
       scrollTop: $('#' + targetSec).offset().top
     }, 1000);
-  });
+  });*/
 
   $(document).on('click', '#checkAll', function (e) {
     $('input:checkbox').not(this).prop('checked', this.checked);

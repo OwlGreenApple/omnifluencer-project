@@ -303,9 +303,9 @@
                         support@omnifluencer.com
                       </a> 
                     </li>
-                    <li> 
+                    <!--<li> 
                       <p>Send Us a Query</p>
-                    </li>
+                    </li>-->
                   </ul>
                 </div>
               </div>

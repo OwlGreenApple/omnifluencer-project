@@ -58,6 +58,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/compare/load-search','CompareController@load_search');
   Route::get('/compare/load-compare','CompareController@load_compare');
   Route::get('/compare/{keywords}','CompareController@index');
+  Route::get('/click-compare','CompareController@click_compare');
 
   //Referral
   Route::get('/referral','ReferralController@index');
@@ -109,6 +110,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/groups/delete-group','GroupController@delete_group');
   Route::get('/groups/delete-single-group','GroupController@delete_single_group');
   Route::get('/groups/edit-group','GroupController@edit_group');
+  Route::get('/groups/create-group','GroupController@create_group');
 
   //Saved Profile
   Route::get('/saved-profile','GroupController@index_saved');

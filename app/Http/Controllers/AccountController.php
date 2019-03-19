@@ -621,7 +621,8 @@ class AccountController extends Controller
     }
 
     $user = User::find(Auth::user()->id);
-    $user->count_pdf = $user->count_pdf + count($request->accountid);
+    //$user->count_pdf = $user->count_pdf + count($request->accountid);
+    $user->count_pdf = $user->count_pdf + 1;
     $user->save();
 
     $account = [];
@@ -667,7 +668,8 @@ class AccountController extends Controller
     }
 
     $user = User::find(Auth::user()->id);
-    $user->count_csv = $user->count_csv + count($request->accountid);
+    //$user->count_csv = $user->count_csv + count($request->accountid);
+    $user->count_csv = $user->count_csv + 1;
     $user->save();
 
     $filename = 'omnifluencer';

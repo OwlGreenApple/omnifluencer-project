@@ -26,6 +26,7 @@
   <script src="{{ asset('js/datetime-moment.js') }}"></script>
 
   <!-- Styles -->
+  <link href="{{ asset('css/pointer.css') }}" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">

@@ -6,7 +6,7 @@
     <div class="col-md-11">
       <div class="col-md-12">
 
-        <div class="row">
+        <!--<div class="row">
           <form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
             @csrf
             
@@ -22,7 +22,7 @@
           </form>
         </div>
 
-        <hr>
+        <hr>-->
 
         <div class="row">
           <div class="col-md-8 col-12">
@@ -37,21 +37,21 @@
       </div>
 
       <div class="col-md-12" align="center">
-        <h4 class="pt-3 pb-3">
+        <h4 class="pt-5 pb-3">
           <b>Our Pricing Plans</b>
         </h4>
 
-        <div class="pb-3">
-          Monthly
+        <div class="pb-5">
+          <span class="upgrade-radio">Monthly</span>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary btn-pricing month active" style="outline: none; box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
+            <label class="btn btn-secondary btn-pricing month upgrade-radio active" style="outline: none; box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
               <input type="radio" name="options" id="option1" autocomplete="off" checked> Monthly
             </label>
-            <label class="btn btn-secondary btn-pricing year" style="outline: none;box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
+            <label class="btn btn-secondary btn-pricing year upgrade-radio" style="outline: none;box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
               <input type="radio" name="options" id="option2" autocomplete="off"> Yearly
             </label>
           </div>
-          Yearly
+          <span class="upgrade-radio">Yearly</span>
         </div>
 
         <div class="row mt-4">
@@ -83,7 +83,7 @@
                   </span>
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body upgrade-details">
                 <div class="d-none d-md-block view-pro">
                   <div class="row mb-2">
                     <div class="offset-md-1 col-md-3 blue">
@@ -223,7 +223,7 @@
                   </span>
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body upgrade-details">
 
                 <div class="d-none d-md-block view-premium">
                   <div class="row mb-2">

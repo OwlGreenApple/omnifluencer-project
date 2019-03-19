@@ -113,7 +113,7 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
-      <div class="row">
+      <!--<div class="row">
         <form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
           @csrf
           
@@ -129,7 +129,7 @@
         </form>
       </div>
 
-      <hr>
+      <hr>-->
 
       <div class="row">
         <div class="col-md-8 col-6">
@@ -149,29 +149,32 @@
 
       <form>
         <table class="table responsive">
-          <thead align="center">
-            <th class="header" action="no_order">
+          <thead>
+            <th class="menu-mobile">
+              Details
+            </th>
+            <th class="menu-nomobile" action="no_order">
               No Order
             </th>
-            <th class="header" action="package">
+            <th class="menu-nomobile" action="package">
               Package
             </th>
-            <th class="header" action="total">
+            <th class="menu-nomobile" action="total">
               Total
             </th>
-            <th class="header" action="discount">
+            <th class="menu-nomobile" action="discount">
               Discount
             </th>
-            <th class="header" action="created_at">
+            <th class="menu-nomobile" action="created_at">
               Date
             </th>
-            <th class="header">
+            <th class="menu-nomobile">
               Bukti Bayar
             </th>
-            <th class="header" action="keterangan">
+            <th class="menu-nomobile" action="keterangan">
               Keterangan
             </th>
-            <th class="header" action="status">
+            <th action="status">
               Status
             </th>
           </thead>
@@ -313,6 +316,12 @@
 
 
 <script type="text/javascript">
+  $( "body" ).on( "click", ".view-details", function() {
+    var id = $(this).attr('data-id');
+
+    $('.details-'+id).toggleClass('d-none');
+  });
+
   $( "body" ).on( "click", ".btn-search", function() {
     currentPage = '';
     refresh_page();

@@ -453,6 +453,14 @@ sub {
 }
 
 /* Upgrade Account */
+.upgrade-details{
+  font-size: 17px;
+}
+
+.upgrade-radio {
+  font-size: 18px;
+}
+
 .btn-pricing {
   border:none;
   border-radius: 25px;

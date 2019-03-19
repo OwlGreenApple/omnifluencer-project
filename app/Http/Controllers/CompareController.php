@@ -517,4 +517,50 @@ class CompareController extends Controller
 
     return $arr;
   }
+
+  public function click_compare(){
+    $compare = HistoryCompare::where('user_id',Auth::user()->id)
+                ->orderBy('updated_at','desc')
+                ->first();
+
+    $akun = '';
+
+    if(!is_null($compare->account_id_1)){
+      $acc1 = Account::find($compare->account_id_1);
+
+      $akun = $acc1->username;       
+    }  
+
+    if(!is_null($compare->account_id_2)){
+      $acc2 = Account::find($compare->account_id_2);
+
+      if($akun!=''){
+        $akun = $akun.'-'.$acc2->username;
+      } else {
+        $akun = $acc2->username;
+      }
+    }
+
+    if(!is_null($compare->account_id_3)){
+      $acc3 = Account::find($compare->account_id_3);
+
+      if($akun!=''){
+        $akun = $akun.'-'.$acc3->username;
+      } else {
+        $akun = $acc3->username;
+      }
+    }
+
+    if(!is_null($compare->account_id_4)){
+      $acc4 = Account::find($compare->account_id_4);
+
+      if($akun!=''){
+        $akun = $akun.'-'.$acc4->username;
+      } else {
+        $akun = $acc4->username;
+      }
+    }
+    
+    return redirect( url('compare').'/'.$akun );
+  }
 }

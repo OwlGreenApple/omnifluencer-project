@@ -129,7 +129,7 @@
     <div class="col-md-11">
       <div class="col-md-12">
 
-        <div class="row">
+        <!--<div class="row">
           <form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
             @csrf
             
@@ -145,7 +145,7 @@
           </form>
         </div>
 
-        <hr>
+        <hr>-->
 
         <div class="row">
           <div class="col-md-8 col-6">
@@ -229,6 +229,18 @@
           <div class="form-group">
             <label class="col-sm-4 col-form-label">
               Logo
+              <span class="tooltipstered ml-1" data-tooltip-content="#tooltip_content">
+                <i class="fas fa-question-circle fonticon"></i>
+              </span>
+
+              <div class="tooltip_templates" style="display: none;">
+                <span id="tooltip_content">
+                  <img src="{{asset('design/agency-logo.PNG')}}" style="width:175px" /><br> 
+                  <strong>
+                    Agency Logo for Report (PDF)
+                  </strong>
+                </span>
+              </div>
             </label>
 
             <div class="col-md-11">
