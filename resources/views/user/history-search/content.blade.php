@@ -23,7 +23,7 @@
 
       <div class="menu-mobile">
         <div class="view-details" data-id="{{$account->id}}">
-          <span class="menu-mobile" style="display: inline-block; float: right;">
+          <span class="menu-mobile icon-dropdown">
             <i class="fas fa-sort-down"></i>
           </span>  
         </div>

@@ -8,7 +8,7 @@
     <td data-label="Instagram">
       <div class="view-details" data-id="{{$compare->id}}">
         <div class="menu-mobile">
-          <span style="display: inline-block; float: right;">
+          <span class="icon-dropdown">
             <i class="fas fa-sort-down"></i>
           </span>    
         </div>

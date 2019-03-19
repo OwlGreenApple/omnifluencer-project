@@ -362,12 +362,21 @@ sub {
 /* History Search*/
 .menu-savepdf {
   color: #63ADF8;
+  cursor: pointer;
 }
 
 .menu-delete {
   color: #FF6D6E;
+  cursor: pointer;
 }
 
+.icon-dropdown {
+  display: inline-block; 
+  float: right;
+  margin-top: -12px;
+  font-size: 25px;
+  cursor: pointer;
+}
 
 /* Poin history */
 .poinplus {
