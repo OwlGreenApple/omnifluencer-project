@@ -218,6 +218,9 @@ class AccountController extends Controller
         $user = User::find(Auth::user()->id);
         $user->count_calc = $user->count_calc + 1;
         $user->save();
+
+        $account->total_calc = $account->total_calc + 1;
+        $account->save();
       } else {
         //$request->session()->put('account_search', $account->username);
         if(!isset($_COOKIE[$this->cookie_search])) {

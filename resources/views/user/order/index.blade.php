@@ -174,7 +174,7 @@
             <th class="menu-nomobile" action="keterangan">
               Keterangan
             </th>
-            <th action="status">
+            <th class="colstatus" action="status">
               Status
             </th>
           </thead>

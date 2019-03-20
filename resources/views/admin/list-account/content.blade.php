@@ -41,6 +41,12 @@
     <td data-label="Avg Comments">
       {{ $account->jml_comments }}
     </td>
+    <td data-label="Total Search">
+      {{ $account->total_calc }}
+    </td>
+    <td data-label="Total Compare">
+      {{ $account->total_compare }}
+    </td>
     <td data-label="Created_at">
       {{ $account->created_at }}
     </td>

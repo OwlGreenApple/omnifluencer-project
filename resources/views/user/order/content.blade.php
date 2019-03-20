@@ -23,7 +23,7 @@
     <td class="menu-nomobile" data-label="Date">
       {{$order->created_at}}
     </td>
-    <td class="menu-nomobile" data-label="Bukti Bayar" align="center">
+    <td class="menu-nomobile" data-label="Bukti Bayar">
       @if($order->buktibayar=='' or $order->buktibayar==null)
         -
       @else

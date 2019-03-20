@@ -107,6 +107,18 @@
           // console.log(data.view);
           // load_history();
         } else {
+          $('#content-akun').html(data.view);
+          $("#link-download").prop("href", "<?php echo url('print-pdf-compare')?>"+'/'+data.id+'/colorful');
+
+          $('.counter').counterUp({
+            delay: 10,
+            time: 1000,
+            formatter: function (n) {
+              return Math.round(n * 100) / 100;
+            }
+          });
+
+
           $('#message').html(data.message);
           $('#modal-pesan').modal('show');
         }

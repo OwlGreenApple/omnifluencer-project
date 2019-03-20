@@ -41,7 +41,7 @@
           <b>Our Pricing Plans</b>
         </h4>
 
-        <div class="pb-5">
+        <div class="pb-md-5 pb-3">
           <span class="upgrade-radio">Monthly</span>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary btn-pricing month upgrade-radio active" style="outline: none; box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
@@ -61,7 +61,7 @@
                 <div class="row">
                   <div class="col-md-6 text-md-left text-sm-center">
                     <span class="header-1">
-                      UPGRADE TO PRO
+                      UPGRADE TO <br class="menu-mobile"> PRO
                     </span> <br>
                     <span class="header-2">
                       <b>Monthly</b>
@@ -201,7 +201,7 @@
                 <div class="row">
                   <div class="col-md-6 text-md-left text-sm-center">
                     <span class="header-1">
-                      UPGRADE TO PREMIUM
+                      UPGRADE TO <br class="menu-mobile"> PREMIUM
                     </span> <br>
                     <span class="header-2">
                       <b>Monthly</b>
