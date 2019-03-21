@@ -11,9 +11,16 @@
     </td>
     <td data-label="Instagram">
       <div class="menu-nomobile">
-        <img src="{{$account->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')"
-        style="max-width:50px; border-radius:50%;">
-        <?php echo '@'.$account->username ?>
+        <form action="{{url('search')}}" method="GET">
+          @csrf
+          <input type="hidden" name="keywords" value="{{$account->username}}">
+
+          <img src="{{$account->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')"
+          style="max-width:50px; border-radius:50%;">
+          <button class="link-username" type="submit">
+            <?php echo $account->username ?>
+          </button>
+        </form>
       </div>
       
       <div class="menu-mobile">
@@ -22,7 +29,7 @@
             <i class="fas fa-sort-down"></i>
           </span>
         </div>
-        <?php echo '@'.$account->username ?>  
+        <?php echo $account->username ?>  
       </div>
       
     </td>

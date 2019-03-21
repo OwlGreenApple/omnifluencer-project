@@ -13,7 +13,10 @@ class AddTotalCalcTableAccountLogs extends Migration
      */
     public function up()
     {
-        //
+      Schema::table('account_logs', function (Blueprint $table) {
+        $table->bigInteger('total_calc')->default(0)->after('total_influenced');
+        $table->bigInteger('total_compare')->default(0)->after('total_calc');
+      });
     }
 
     /**

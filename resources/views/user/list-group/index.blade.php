@@ -289,15 +289,15 @@
         <div class="row"> 
           <div class="col-md-6 menu-nomobile mb-2">
             @if(Auth::user()->membership=='premium')
-              <button class="btn btn-sm btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
+              <button type="button" class="btn btn-sm btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
                 <i class="fas fa-file-pdf"></i> PDF
               </button>
-              <button class="btn btn-sm btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
+              <button type="button" class="btn btn-sm btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
                 <i class="fas fa-file-excel"></i> Excel
               </button>
             @endif
             
-            <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+            <button type="button" class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
               <i class="far fa-trash-alt"></i> Delete
             </button>      
           </div>
@@ -350,15 +350,15 @@
       <div class="row"> 
         <div class="col-md-6 menu-nomobile">
           @if(Auth::user()->membership=='premium')
-            <button class="btn btn-sm btn-primary btn-pdf" data-toggle="modal" data-target="#send-file">
+            <button class="btn btn-sm btn-primary btn-pdf" type="button" data-toggle="modal" data-target="#send-file">
               <i class="fas fa-file-pdf"></i> PDF
             </button>
-            <button class="btn btn-sm btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
+            <button type="button" class="btn btn-sm btn-primary btn-csv" data-toggle="modal" data-target="#send-file">
               <i class="fas fa-file-excel"></i> Excel
             </button>
           @endif
             
-          <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+          <button type="button" class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
             <i class="far fa-trash-alt"></i> Delete
           </button>     
         </div>

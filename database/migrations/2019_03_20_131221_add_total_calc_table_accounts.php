@@ -14,6 +14,7 @@ class AddTotalCalcTableAccounts extends Migration
     public function up()
     {
       Schema::table('accounts', function (Blueprint $table) {
+        $table->string('fullname')->nullable()->after('username');
         $table->bigInteger('total_calc')->default(0)->after('total_influenced');
         $table->bigInteger('total_compare')->default(0)->after('total_calc');
       });

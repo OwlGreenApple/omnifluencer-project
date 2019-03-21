@@ -5,7 +5,7 @@
 </div>
 <div class="names">
   <h3><?php echo '@'.$account->username ?></h3>
-  <p>{{$account->username}}</p>
+  <p>{{$account->fullname}}</p>
 </div>
 
 <div class="names">

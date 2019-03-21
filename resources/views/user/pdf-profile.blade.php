@@ -30,11 +30,7 @@
     @endif
 
     <div class="col-xs-12" align="center">
-      <?php if(getimagesize($acc->prof_pic)=='Array') { ?>
-        <img class="profpic" src="{{$acc->prof_pic}}">
-      <?php } else { ?>
-        <img class="profpic" src="{{asset('/design/profpic-user.png')}}">
-      <?php } ?>
+      <img class="profpic" src="{{$acc->prof_pic}}" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
       <br>
     </div>
 
@@ -46,7 +42,7 @@
         <?php echo '@'.$acc->username ?>
       </span> <br>
       <span class="name">
-        {{$acc->username}}
+        {{$acc->fullname}}
       </span> <br>
       
       <div style="margin-top:50px; margin-bottom: 50px;">
@@ -162,7 +158,7 @@
       <?php echo '@'.$account->username ?>
     </span> <br>
     <span class="name">
-      {{$account->username}}
+      {{$account->fullname}}
     </span> <br>
     
     <div style="margin-top:50px; margin-bottom: 50px;">

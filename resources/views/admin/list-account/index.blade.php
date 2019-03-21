@@ -135,6 +135,12 @@
             <th class="header all" action="total_compare">
               Total Compare
             </th>
+            <th class="header all">
+              Total Saved
+            </th>
+            <th class="header all">
+              Total Group
+            </th>
             <th class="header none" action="created_at">
               Created_at
             </th>

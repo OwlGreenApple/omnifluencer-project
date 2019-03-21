@@ -180,25 +180,29 @@
 
   .logo-footer{
     position: absolute;
-    bottom:20px;
+    top:930px;
+    /*bottom:0px;*/
     left: 100px;
     width: 180px;
   }
 
   .logo-footer.profile {
-    bottom:125px;
+    top: 1250px;
+    /*bottom:125px;*/
   }
 
   .saved-on-footer { 
     position: absolute;
-    bottom:20px;
+    top:930px;
+    /*bottom:0px;*/
     right: 100px; 
     font-size: 14px;
     color: #626262;
   }
 
   .saved-on-footer.profile {
-    bottom:125px;
+    top: 1250px;
+    /*bottom:125px;*/
   }
 
   .info-value-plain { 

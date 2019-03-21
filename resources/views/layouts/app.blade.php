@@ -22,6 +22,7 @@
   <script type="text/javascript" src="{{asset('tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
   <script defer src="{{asset('js/all.js')}}"></script>
   <script src="{{ asset('js/numscroller-1.0.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">

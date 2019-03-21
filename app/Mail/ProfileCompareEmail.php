@@ -58,14 +58,14 @@ class ProfileCompareEmail extends Mailable
         $Excel_file = Excel::create('profile-compare', function($excel) use ($data) {
           $excel->sheet('list', function($sheet) use ($data) {
 
-            $sheet->cell('B3', 'Engagement Rate'); 
-            $sheet->cell('B4', 'Total Influenced'); 
-            $sheet->cell('B5', 'Post'); 
-            $sheet->cell('B6', 'Followers'); 
-            $sheet->cell('B7', 'Following'); 
-            $sheet->cell('B8', 'Last Post'); 
-            $sheet->cell('B9', 'Avg Like Per Post'); 
-            $sheet->cell('B10', 'Avg Comment Per Post'); 
+            $sheet->cell('B4', 'Engagement Rate'); 
+            $sheet->cell('B5', 'Total Influenced'); 
+            $sheet->cell('B6', 'Post'); 
+            $sheet->cell('B7', 'Followers'); 
+            $sheet->cell('B8', 'Following'); 
+            $sheet->cell('B9', 'Last Post'); 
+            $sheet->cell('B10', 'Avg Like Per Post');
+            $sheet->cell('B11', 'Avg Comment Per Post'); 
 
             $cell = 'C';
 
@@ -76,18 +76,20 @@ class ProfileCompareEmail extends Mailable
 
               $username = '@'.$account->username;
               $sheet->cell($cell.'2', $username); 
-              $sheet->cell($cell.'3', $account->eng_rate*100); 
+              $sheet->cell($cell.'3', $account->fullname); 
+
+              $sheet->cell($cell.'4', $account->eng_rate*100); 
 
               $influence = round($account->total_influenced);
-              $sheet->cell($cell.'4', $influence); 
+              $sheet->cell($cell.'5', $influence); 
 
-              $sheet->cell($cell.'5', $account->jml_post);
-              $sheet->cell($cell.'6', $account->jml_followers); 
-              $sheet->cell($cell.'7', $account->jml_following); 
+              $sheet->cell($cell.'6', $account->jml_post);
+              $sheet->cell($cell.'7', $account->jml_followers); 
+              $sheet->cell($cell.'8', $account->jml_following); 
               
-              $sheet->cell($cell.'8', date("M d Y", strtotime($account->lastpost))); 
-              $sheet->cell($cell.'9', $account->jml_likes);
-              $sheet->cell($cell.'10', $account->jml_comments); 
+              $sheet->cell($cell.'9', date("M d Y", strtotime($account->lastpost))); 
+              $sheet->cell($cell.'10', $account->jml_likes);
+              $sheet->cell($cell.'11', $account->jml_comments); 
 
               $cell++;
             }

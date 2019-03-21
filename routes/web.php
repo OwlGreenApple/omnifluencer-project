@@ -25,7 +25,7 @@ Route::get('/home', 'AccountController@index')
 Route::get('/', 'AccountController@index');
 
 //Search
-Route::post('/search','AccountController@index_post');
+Route::get('/search','AccountController@index_post');
 Route::get('/search/load-search','AccountController@load_search');
 Route::get('/search/load-search-byid','AccountController@load_search_byid');
 Route::get('/search/load-history','AccountController@load_history');  
@@ -44,6 +44,7 @@ Route::get('/statics/{page}','HomeController@index_statics_page');
 
 //pricing
 Route::get('/pricing','OrderController@pricing');
+Route::get('/thankyou','OrderController@thankyou');
 Route::get('/checkout/{id}','OrderController@checkout');
 Route::post('/confirm-payment','OrderController@confirm_payment');
 Route::get('/register-payment','OrderController@register_payment');

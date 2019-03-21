@@ -25,6 +25,10 @@ class OrderController extends Controller
     return view('user.pricing.pricing');
   }
 
+  public function thankyou(){
+    return view('user.pricing.thankyou');
+  }
+
   public function checkout($id){
     return view('user.pricing.checkout')->with(array(
 			'id'=>$id,		
