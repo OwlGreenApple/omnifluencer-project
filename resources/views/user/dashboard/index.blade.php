@@ -1,11 +1,13 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<?php use App\Group;  ?>
+<?php use App\Group;  
+      use App\HistorySearch;  
+?>
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
-      <div class="row">
+      <!--<div class="row">
         <form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
           @csrf
           
@@ -21,7 +23,7 @@
         </form>
       </div>
 
-      <hr>
+      <hr>-->
 
       <div class="row">
         <div class="col-md-8 order-1 order-md-1 col-6">
@@ -49,7 +51,11 @@
             <div class="card dashboard calc">
               <div class="card-body dashboard" align="center">
                 <h1>
-                  {{Auth::user()->count_calc}} 
+                  <!--{{Auth::user()->count_calc}}-->
+                  <?php  
+                    $history = HistorySearch::where('user_id',Auth::user()->id)->count();
+                    echo $history;
+                  ?>
                 </h1> 
 
                 <p>

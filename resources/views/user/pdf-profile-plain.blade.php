@@ -3,6 +3,15 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
 
+<style type="text/css">
+  footer {
+    position: fixed; 
+    bottom: 0cm; 
+    left: 0cm; 
+    right: 0cm;
+    height: 2cm;
+  }
+</style>
 <?php  
   $logo = null;
 
@@ -38,7 +47,7 @@
           <?php echo '@'.$acc->username ?>
         </span> <br>
         <span class="name">
-          {{$acc->username}}
+          {{$acc->fullname}}
         </span> <br>
       </div>
 
@@ -119,14 +128,14 @@
       </div>
     </div>
 
-    @if(Auth::user()->logo!=null and Auth::user()->membership=='premium')
-      <img src="{{asset('design/logobrand.png')}}" class="logo-footer" style="bottom:-230px">
-    @endif  
+      @if(Auth::user()->logo!=null and Auth::user()->membership=='premium')
+        <img src="{{asset('design/logobrand.png')}}" class="logo-footer">
+      @endif  
 
-    <span class="saved-on-footer" style="bottom:-230px">
-      <!--{{url('/')}} | calculated on {{ date("d F Y") }}-->
-      www.omnifluencer.com | calculated on {{ date("d F Y") }}
-    </span>
+      <span class="saved-on-footer">
+        <!--{{url('/')}} | calculated on {{ date("d F Y") }}-->
+        www.omnifluencer.com | calculated on {{ date("d F Y") }}
+      </span>
   </div>
 <?php } 
     } else { ?>
@@ -154,7 +163,7 @@
         <?php echo '@'.$account->username ?>
       </span> <br>
       <span class="name">
-        {{$account->username}}
+        {{$account->fullname}}
       </span> <br>
     </div>
 

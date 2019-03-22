@@ -166,7 +166,7 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
       <div class="row">
-        <form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
+        <!--<form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
           @csrf
           
           <label class="mr-sm-2 pb-md-2 label-calculate" for="calculate">
@@ -178,6 +178,13 @@
           <button type="submit" class="btn btn-sm btn-primary mb-2">
             Calculate
           </button>
+        </form>-->
+
+        <form class="form-inline col-md-12 mb-2" action="{{url('click-compare')}}" method="GET">
+          @csrf
+          <button type="submit" class="btn btn-primary">
+            Click to compare
+          </button>  
         </form>
       </div>
 

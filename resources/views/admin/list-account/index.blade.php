@@ -7,6 +7,7 @@
 
   $(document).ready(function() {
     table = $('#myTable').DataTable({
+      responsive : true,
       destroy: true,
       "order": [],
     });
@@ -44,6 +45,7 @@
         $('#content').html(data.view);
         
         table = $('#myTable').DataTable({
+                responsive : true,
                 destroy: true,
                 "order": [],
             });
@@ -100,37 +102,49 @@
       <form>
         <table class="table" id="myTable">
           <thead align="center">
-            <th class="header" action="username">
+            <th data-priority="1" class="header all" action="username">
               Instagram
             </th>
-            <th class="header" action="eng_rate">
+            <th class="header all" action="eng_rate">
               Eng. Rate
             </th>
-            <th class="header" action="total_influenced">
+            <th class="header all" action="total_influenced">
               Total Influenced
             </th>
-            <th class="header" action="jml_followers">
+            <th class="header all" action="jml_followers">
               Followers
             </th>
-            <th class="header" action="jml_following">
+            <th class="header none" action="jml_following">
               Following
             </th>
-            <th class="header" action="jml_post">
+            <th class="header none" action="jml_post">
               Post
             </th>
-            <th class="header" action="lastpost">
+            <th class="header none" action="lastpost">
               Last Post
             </th>
-            <th class="header" action="jml_likes">
+            <th class="header none" action="jml_likes">
               Avg Likes
             </th>
-            <th class="header" action="jml_comments">
+            <th class="header none" action="jml_comments">
               Avg Comments
             </th>
-            <th class="header" action="created_at">
+            <th class="header all" action="total_calc">
+              Total Search
+            </th>
+            <th class="header all" action="total_compare">
+              Total Compare
+            </th>
+            <th class="header all">
+              Total Saved
+            </th>
+            <th class="header all">
+              Total Group
+            </th>
+            <th class="header none" action="created_at">
               Created_at
             </th>
-            <th>
+            <th class="all" data-priority="2">
               Action
             </th>
           </thead>

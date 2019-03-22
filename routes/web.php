@@ -25,7 +25,7 @@ Route::get('/home', 'AccountController@index')
 Route::get('/', 'AccountController@index');
 
 //Search
-Route::post('/search','AccountController@index_post');
+Route::get('/search','AccountController@index_post');
 Route::get('/search/load-search','AccountController@load_search');
 Route::get('/search/load-search-byid','AccountController@load_search_byid');
 Route::get('/search/load-history','AccountController@load_history');  
@@ -44,6 +44,7 @@ Route::get('/statics/{page}','HomeController@index_statics_page');
 
 //pricing
 Route::get('/pricing','OrderController@pricing');
+Route::get('/thankyou','OrderController@thankyou');
 Route::get('/checkout/{id}','OrderController@checkout');
 Route::post('/confirm-payment','OrderController@confirm_payment');
 Route::get('/register-payment','OrderController@register_payment');
@@ -58,6 +59,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/compare/load-search','CompareController@load_search');
   Route::get('/compare/load-compare','CompareController@load_compare');
   Route::get('/compare/{keywords}','CompareController@index');
+  Route::get('/click-compare','CompareController@click_compare');
 
   //Referral
   Route::get('/referral','ReferralController@index');
@@ -109,6 +111,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/groups/delete-group','GroupController@delete_group');
   Route::get('/groups/delete-single-group','GroupController@delete_single_group');
   Route::get('/groups/edit-group','GroupController@edit_group');
+  Route::get('/groups/create-group','GroupController@create_group');
 
   //Saved Profile
   Route::get('/saved-profile','GroupController@index_saved');

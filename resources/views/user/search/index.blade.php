@@ -16,6 +16,7 @@
     <?php if(!Auth::check()) { ?>
       if(currentHistory>=3){
         e.preventDefault();
+        $('.kuota-txt').html('Mau menambah kuota? <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
         $('#info-kuota').modal('show');
       } else {
         if($('#keywords').val()!=''){
@@ -61,6 +62,7 @@
   $( "body" ).on( "click", ".btn-compare", function(e) {
     <?php if(!Auth::check()) { ?>
       e.preventDefault();
+      $('.kuota-txt').html('Mau menambah kuota? <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
       $('#info-kuota').modal('show');
     <?php } else { ?>
       if(check_id()){
@@ -130,6 +132,7 @@
           load_history();
         } else {
           if(data.message=='kuota habis'){
+            $('.kuota-txt').html('Mau menambah kuota? <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
             $('#info-kuota').modal('show');
           } else {
             $('#message').html(data.message);
@@ -233,6 +236,7 @@
           refresh_page();
         } else {
           if(data.message=='kuota habis'){
+            $('.kuota-txt').html('Delete hanya bisa 1 kali <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
             $('#info-kuota').modal('show');
           }
         }
@@ -698,10 +702,7 @@
     <!-- Modal content-->
     <div class="modal-content bigModal">
       <div class="modal-body bg-kuota" align="left">
-        <span class="kuota-txt mr-auto">
-          Mau menambah kuota? <br>
-          Silahkan melakukan FREE Signup <br> untuk melanjutkan.
-        </span>
+        <span class="kuota-txt mr-auto"></span>
       </div>
       <div class="modal-footer" id="foot">
         <a class="mr-auto" href="{{url('login')}}">

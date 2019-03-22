@@ -36,7 +36,7 @@
         </div>
         <div class="col-7 colmarg pl-4">
           <span class="username-history" data-id="{{$id}}" style="cursor: pointer;">
-            <?php echo '@'.$account->username ?>    
+            <?php echo $account->username ?>    
           </span>
         </div>
         <div class="col-2 colmargbtn">

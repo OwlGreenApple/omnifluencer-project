@@ -22,10 +22,12 @@
   <script defer src="{{asset('js/all.js')}}"></script>
   <script src="{{ asset('js/datepicker.js') }}"></script>
   <script src="{{ asset('DataTables/DataTables/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('DataTables/Responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('js/moment.js') }}"></script>
   <script src="{{ asset('js/datetime-moment.js') }}"></script>
 
   <!-- Styles -->
+  <link href="{{ asset('css/pointer.css') }}" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
@@ -34,6 +36,7 @@
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 
   <link href="{{ asset('DataTables/DataTables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
+  <link href="{{ asset('DataTables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>
 
   <script>
     $(document).ready(function() {

@@ -208,4 +208,16 @@ class GroupController extends Controller
 
       return $arr; 
     }
+
+    public function create_group(Request $request){
+      $group = new Group;
+      $group->user_id = Auth::user()->id;
+      $group->group_name = $request->name;
+      $group->save();
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Create group berhasil';
+
+      return $arr; 
+    }
 }

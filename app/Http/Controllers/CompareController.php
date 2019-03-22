@@ -247,11 +247,11 @@ class CompareController extends Controller
     $acc3 = $this->check_akun($acc3,$request->id3);
     $acc4 = $this->check_akun($acc4,$request->id4);
 
-    if($acc1===false || $acc2===false || $acc3===false || $acc4===false){
+    /*if($acc1===false || $acc2===false || $acc3===false || $acc4===false){
       $arr['status'] = 'error';
       $arr['message'] = 'Username tidak ditemukan';
       return $arr;
-    }
+    }*/
 
     // $accounts = array($acc1,$acc2,$acc3,$acc4);
     $accounts = array();
@@ -267,40 +267,64 @@ class CompareController extends Controller
       "id3"=>null,
       "id4"=>null,
     );
-    if (!is_null($acc1)){
+    if (!is_null($acc1) and $acc1){
       $arr_compare["id1"] = $acc1->id;
       $accounts[] = $acc1;
+
+      $acc1->total_compare = $acc1->total_compare + 1;
+      $acc1->save();
     } else {
       $accounts[] = null;
     }
 
-    if (!is_null($acc2)){
+    if (!is_null($acc2) and $acc2){
       $arr_compare["id2"] = $acc2->id;
       $accounts[] = $acc2;
+
+      $acc2->total_compare = $acc2->total_compare + 1;
+      $acc2->save();
     } else {
       $accounts[] = null;
     }
 
-    if (!is_null($acc3)){
+    if (!is_null($acc3) and $acc3){
       $arr_compare["id3"] = $acc3->id;
       $accounts[] = $acc3;
+
+      $acc3->total_compare = $acc3->total_compare + 1;
+      $acc3->save();
     } else {
       $accounts[] = null;
     }
 
-    if (!is_null($acc4)){
+    if (!is_null($acc4) and $acc4){
       $arr_compare["id4"] = $acc4->id;
       $accounts[] = $acc4;
+
+      $acc4->total_compare = $acc4->total_compare + 1;
+      $acc4->save();
     } else {
       $accounts[] = null;
     }
     
-    $id_history = $this->do_compare($arr_compare);
+    if((!is_null($acc1) and !$acc1) or (!is_null($acc2) and !$acc2) or (!is_null($acc3) and !$acc3) or (!is_null($acc4) and !$acc4)){
+      $id_history = HistoryCompare::where('user_id',Auth::user()->id)
+                      ->orderBy('updated_at','desc')
+                      ->first()->id;
 
-    $arr['status'] = "success";
-    $arr['view'] = (string) view('user.compare.content-akun')
-                      ->with('accounts',$accounts);
-    $arr['id'] = $id_history;
+      $arr['status'] = 'error';
+      $arr['message'] = '<b>Warning!</b> Username tidak ditemukan!';
+      $arr['view'] = (string) view('user.compare.content-akun')
+                        ->with('accounts',$accounts);
+      $arr['id'] = $id_history;
+    } else {
+      $id_history = $this->do_compare($arr_compare);
+
+      $arr['status'] = "success";
+      $arr['view'] = (string) view('user.compare.content-akun')
+                        ->with('accounts',$accounts);
+      $arr['id'] = $id_history;
+    }
 
     return $arr;
     // return "asd";
@@ -417,14 +441,14 @@ class CompareController extends Controller
     $Excel_file = Excel::create($filename, function($excel) use ($data) {
         $excel->sheet('list', function($sheet) use ($data) {
         
-          $sheet->cell('B3', 'Engagement Rate'); 
-          $sheet->cell('B4', 'Total Influenced'); 
-          $sheet->cell('B5', 'Post'); 
-          $sheet->cell('B6', 'Followers'); 
-          $sheet->cell('B7', 'Following'); 
-          $sheet->cell('B8', 'Last Post'); 
-          $sheet->cell('B9', 'Avg Like Per Post'); 
-          $sheet->cell('B10', 'Avg Comment Per Post'); 
+          $sheet->cell('B4', 'Engagement Rate'); 
+          $sheet->cell('B5', 'Total Influenced'); 
+          $sheet->cell('B6', 'Post'); 
+          $sheet->cell('B7', 'Followers'); 
+          $sheet->cell('B8', 'Following'); 
+          $sheet->cell('B9', 'Last Post'); 
+          $sheet->cell('B10', 'Avg Like Per Post'); 
+          $sheet->cell('B11', 'Avg Comment Per Post'); 
 
           $cell = 'C';
 
@@ -435,18 +459,19 @@ class CompareController extends Controller
 
             $username = '@'.$account->username;
             $sheet->cell($cell.'2', $username); 
-            $sheet->cell($cell.'3', $account->eng_rate*100); 
+            $sheet->cell($cell.'3', $account->fullname); 
+            $sheet->cell($cell.'4', $account->eng_rate*100); 
 
             $influence = round($account->total_influenced);
-            $sheet->cell($cell.'4', $influence); 
+            $sheet->cell($cell.'5', $influence); 
 
-            $sheet->cell($cell.'5', $account->jml_post);
-            $sheet->cell($cell.'6', $account->jml_followers); 
-            $sheet->cell($cell.'7', $account->jml_following); 
+            $sheet->cell($cell.'6', $account->jml_post);
+            $sheet->cell($cell.'7', $account->jml_followers); 
+            $sheet->cell($cell.'8', $account->jml_following); 
             
-            $sheet->cell($cell.'8', date("M d Y", strtotime($account->lastpost))); 
-            $sheet->cell($cell.'9', $account->jml_likes);
-            $sheet->cell($cell.'10', $account->jml_comments); 
+            $sheet->cell($cell.'9', date("M d Y", strtotime($account->lastpost))); 
+            $sheet->cell($cell.'10', $account->jml_likes);
+            $sheet->cell($cell.'11', $account->jml_comments); 
 
             $cell++;
           }
@@ -516,5 +541,51 @@ class CompareController extends Controller
     $arr['message'] = 'Delete berhasil';
 
     return $arr;
+  }
+
+  public function click_compare(){
+    $compare = HistoryCompare::where('user_id',Auth::user()->id)
+                ->orderBy('updated_at','desc')
+                ->first();
+
+    $akun = '';
+
+    if(!is_null($compare->account_id_1)){
+      $acc1 = Account::find($compare->account_id_1);
+
+      $akun = $acc1->username;       
+    }  
+
+    if(!is_null($compare->account_id_2)){
+      $acc2 = Account::find($compare->account_id_2);
+
+      if($akun!=''){
+        $akun = $akun.'-'.$acc2->username;
+      } else {
+        $akun = $acc2->username;
+      }
+    }
+
+    if(!is_null($compare->account_id_3)){
+      $acc3 = Account::find($compare->account_id_3);
+
+      if($akun!=''){
+        $akun = $akun.'-'.$acc3->username;
+      } else {
+        $akun = $acc3->username;
+      }
+    }
+
+    if(!is_null($compare->account_id_4)){
+      $acc4 = Account::find($compare->account_id_4);
+
+      if($akun!=''){
+        $akun = $akun.'-'.$acc4->username;
+      } else {
+        $akun = $acc4->username;
+      }
+    }
+    
+    return redirect( url('compare').'/'.$akun );
   }
 }

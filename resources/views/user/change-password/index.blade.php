@@ -48,7 +48,7 @@
   <div class="row justify-content-center">
     <div class="col-md-11">
       <div class="col-md-12">
-        <div class="row">
+        <!--<div class="row">
           <form class="form-inline col-md-12 mb-2" action="{{url('search')}}" method="POST">
             @csrf
             
@@ -64,7 +64,7 @@
           </form>
         </div>
 
-        <hr>
+        <hr>-->
 
         <div class="row">
           <div class="col-md-8 col-6">

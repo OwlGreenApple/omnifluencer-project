@@ -40,7 +40,7 @@
         <img class="profpic-compare" src="{{$account->prof_pic}}"><br>
         <?php echo '@'.$account->username ?> <br>
         <span class="username-compare">
-          <b>{{$account->username}}</b>
+          <b>{{$account->fullname}}</b>
         </span>
       </div>
 

@@ -18,7 +18,7 @@
           $akun = '';
 
           if(!is_null($compare->account_id_1)){
-            $akun = '@'.$compare->acc1username.' ';       
+            $akun = $compare->acc1username.' ';       
           }  
 
           if(!is_null($compare->account_id_2)){
@@ -26,21 +26,21 @@
               $akun = $akun.'<br class="menu-mobile"><i class="fas fa-arrows-alt-h icon-arrow"></i>';
             }
             
-            $akun = $akun.'@'.$compare->acc2username.' ';
+            $akun = $akun.$compare->acc2username.' ';
           }
 
           if(!is_null($compare->account_id_3)){
             if($akun!=''){
               $akun = $akun.'<br class="menu-mobile"><i class="fas fa-arrows-alt-h icon-arrow"></i>';
             }
-            $akun = $akun.'@'.$compare->acc3username.' ';
+            $akun = $akun.$compare->acc3username.' ';
           }
 
           if(!is_null($compare->account_id_4)){
             if($akun!=''){
               $akun = $akun.'<br class="menu-mobile"><i class="fas fa-arrows-alt-h icon-arrow"></i>';
             }
-            $akun = $akun.'@'.$compare->acc4username.' ';
+            $akun = $akun.$compare->acc4username.' ';
           } 
 
           echo $akun;

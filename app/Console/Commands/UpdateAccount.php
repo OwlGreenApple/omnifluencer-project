@@ -80,6 +80,7 @@ class UpdateAccount extends Command
             $account->username = $arr_res["username"];
           }
 
+          $account->fullname = $arr_res["full_name"];
           $account->prof_pic = $arr_res["hd_profile_pic_url_info"]["url"];
           $account->jml_following = $arr_res["following_count"];
           $account->jml_followers = $arr_res["follower_count"];
@@ -174,7 +175,8 @@ class UpdateAccount extends Command
           $accountlog->lastpost = $account->lastpost;
           $accountlog->jml_likes = $account->jml_likes;
           $accountlog->jml_comments = $account->jml_comments;
-
+          $accountlog->total_calc = $account->total_calc;
+          $accountlog->total_compare = $account->total_compare;
           if($account->jml_followers>0){
             $accountlog->eng_rate = $account->eng_rate;
             $accountlog->total_influenced = $account->total_influenced;  

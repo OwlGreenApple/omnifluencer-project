@@ -1,4 +1,7 @@
-<?php use App\Helpers\Helper; ?>
+<?php 
+    use App\Helpers\Helper; 
+    use App\Save;
+?>
 
 @foreach($accounts as $account)
   <tr>
@@ -40,6 +43,30 @@
     </td>
     <td data-label="Avg Comments">
       {{ $account->jml_comments }}
+    </td>
+    <td data-label="Total Search">
+      {{ $account->total_calc }}
+    </td>
+    <td data-label="Total Compare">
+      {{ $account->total_compare }}
+    </td>
+    <td data-label="Total Saved">
+      <?php  
+        $countsave = Save::where('account_id',$account->id)
+                        ->where('group_id',0)
+                        ->count();
+
+        echo $countsave;
+      ?>
+    </td>
+    <td data-label="Total Group">
+      <?php  
+        $countgroup = Save::where('account_id',$account->id)
+                        ->where('group_id','!=',0)
+                        ->count();
+
+        echo $countgroup;
+      ?>
     </td>
     <td data-label="Created_at">
       {{ $account->created_at }}
