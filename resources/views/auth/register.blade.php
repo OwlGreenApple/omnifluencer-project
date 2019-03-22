@@ -104,11 +104,29 @@
                 Sign up
               </button>
             </div>
-
-            <p class="loginhere">
-              Have already an account ? <a href="{{url('login')}}" class="loginhere-link">Sign In Here</a>
-            </p>
           </form>
+
+          <div align="center">
+            <span class="loginhere">
+              Have already an account ? 
+            </span>
+            <?php if(isset($price)) { ?>
+              <form method="POST" class="d-inline-block" action="{{ url('login-payment') }}">
+                @csrf
+                <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
+                <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
+
+                <a href="#" class="loginhere-link" onclick="$(this).closest('form').submit()">
+                  Sign In Here
+                </a>
+              </form>
+            <?php } else { ?>
+              <a href="{{url('login')}}" class="loginhere-link">
+                Sign In Here
+              </a>
+            <?php } ?>
+          </div>
+         
         </div>
       </div>
     </div>

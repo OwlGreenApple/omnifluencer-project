@@ -11,6 +11,8 @@
         <div class="signup-content">
           <form method="POST" id="signup-form" class="signup-form" action="{{ route('login') }}">
             @csrf
+            <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
+            <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
 
             <h2 class="form-title">Please input your<br>Email & Password</h2>
 

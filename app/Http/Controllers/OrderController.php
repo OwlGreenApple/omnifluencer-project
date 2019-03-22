@@ -42,6 +42,13 @@ class OrderController extends Controller
 		));
   }
   
+  public function login_payment(Request $request){
+    return view('auth.login')->with(array(
+      "price"=>$request->price,
+      "namapaket"=>$request->namapaket,
+    ));  
+  }
+
   public function confirm_payment(Request $request){
     $user = Auth::user();
     

@@ -20,10 +20,16 @@
         echo Helper::abbreviate_number(round($account->total_influenced),2)
       ?>
     </td>
+    <td>
+      {{$account->total_influenced}}
+    </td>
     <td data-label="Followers">
       <?php 
         echo Helper::abbreviate_number($account->jml_followers,2)
       ?>
+    </td>
+    <td>
+      {{$account->jml_followers}}
     </td>
     <td data-label="Following">
       <?php 

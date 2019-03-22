@@ -22,7 +22,7 @@
               <!-- ditaruh di session -->
               <form method="POST" action="{{url('confirm-payment')}}" id="signup-form" class="signup-form">
             <?php } else {?>
-              <form method="GET" action="{{url('register-payment')}}" id="signup-form" class="signup-form">
+              <form method="POST" action="{{url('register-payment')}}" id="signup-form" class="signup-form">
             <?php }?>
               {{ csrf_field() }}
               <input type="hidden" id="price" name="price">
