@@ -10,10 +10,10 @@
       responsive : true,
       destroy: true,
       "order": [],
-      /*"aoColumnDefs": [
+      "aoColumnDefs": [
         { "iDataSort": 3, "aTargets": [ 2 ] },
         { "iDataSort": 5, "aTargets": [ 4 ] },
-      ],*/
+      ],
     });
     $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
 
@@ -52,10 +52,10 @@
                 responsive : true,
                 destroy: true,
                 "order": [],
-                /*"aoColumnDefs": [
+                "aoColumnDefs": [
                   { "iDataSort": 3, "aTargets": [ 2 ] },
                   { "iDataSort": 5, "aTargets": [ 4 ] }
-                ],*/
+                ],
             });
 
       }
