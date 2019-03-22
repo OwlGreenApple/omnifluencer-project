@@ -10,6 +10,10 @@
       responsive : true,
       destroy: true,
       "order": [],
+      "aoColumnDefs": [
+        { "iDataSort": 3, "aTargets": [ 2 ] },
+        { "iDataSort": 5, "aTargets": [ 4 ] },
+      ],
     });
     $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
 
@@ -48,6 +52,10 @@
                 responsive : true,
                 destroy: true,
                 "order": [],
+                "aoColumnDefs": [
+                  { "iDataSort": 3, "aTargets": [ 2 ] },
+                  { "iDataSort": 5, "aTargets": [ 4 ] }
+                ],
             });
 
       }
@@ -111,8 +119,14 @@
             <th class="header all" action="total_influenced">
               Total Influenced
             </th>
+            <th class="never">
+              Total Inf
+            </th>
             <th class="header all" action="jml_followers">
               Followers
+            </th>
+            <th class="never">
+              Follower
             </th>
             <th class="header none" action="jml_following">
               Following

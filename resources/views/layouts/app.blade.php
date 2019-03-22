@@ -110,7 +110,7 @@
             <!-- Authentication Links -->
             @guest
               <li class="nav-item main-menu">
-                <a class="nav-link" href="{{url('login')}}">
+                <a class="nav-link <?php if(Request::is('login')) echo 'nav-active' ?>" href="{{url('login')}}">
                   Sign In 
                 </a>
               </li>
