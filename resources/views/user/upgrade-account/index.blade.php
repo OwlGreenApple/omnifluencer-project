@@ -58,7 +58,20 @@
           <div class="col-md-6 col-6">
             <div class="card">
               <div class="card-header upgrade-pro">
-                <div class="row">
+
+                <div class="row header-top">
+                  <div class="col-md-12" align="center">
+                    <b class="sbold">
+                      PAKET <br class="menu-mobile"> PRO
+                    </b> 
+                    <br class="menu-mobile">
+                    <span class="header-2">
+                      BULANAN
+                    </span>
+                  </div>
+                </div>
+
+                <!--<div class="row">
                   <div class="col-md-6 text-md-left text-sm-center">
                     <span class="header-1">
                       UPGRADE TO <br class="menu-mobile"> PRO
@@ -75,11 +88,17 @@
                       </button>
                     </a>
                   </div>
-                </div>
+                </div>-->
 
-                <div class="col-md-12">
+                <div class="col-md-12 pt-3 pb-3">
+                  <p class="hemat">
+                    LEBIH HEMAT <b>70%</b>
+                  </p>
                   <span class="harga pro">
                     IDR 197.000,-
+                  </span><br>
+                  <span class="harga-real pro">
+                    LEBIH HEMAT DENGAN PAKET TAHUNAN
                   </span>
                 </div>
               </div>
@@ -198,7 +217,19 @@
           <div class="col-md-6 col-6">
             <div class="card">
               <div class="card-header upgrade-premium">
-                <div class="row">
+                <div class="row header-top">
+                  <div class="col-md-12" align="center">
+                    <b class="sbold">
+                      PAKET <br class="menu-mobile"> PREMIUM
+                    </b> 
+                    <br class="menu-mobile">
+                    <span class="header-2">
+                      BULANAN
+                    </span>
+                  </div>
+                </div>
+
+                <!--<div class="row">
                   <div class="col-md-6 text-md-left text-sm-center">
                     <span class="header-1">
                       UPGRADE TO <br class="menu-mobile"> PREMIUM
@@ -215,11 +246,17 @@
                       </button>
                     </a>
                   </div>
-                </div>
+                </div>-->
 
-                <div class="col-md-12">
+                <div class="col-md-12 pt-3 pb-3">
+                  <p class="hemat">
+                    LEBIH HEMAT <b>72%</b>
+                  </p>
                   <span class="harga premium">
                     IDR 297.000,-
+                  </span><br>
+                  <span class="harga-real premium">
+                    HEMAT <b>72%</b> DENGAN PAKET TAHUNAN
                   </span>
                 </div>
               </div>
@@ -372,20 +409,36 @@
 </div>
 
 <script type="text/javascript">
+  $(document).ready(function() {
+    $('.hemat').hide(); 
+  });
+
   $( "body" ).on( "click", ".btn-pricing.month", function(e) 
   {
-    $('.header-2').html('<b>Monthly</b>');
+    $('.header-2').html('BULANAN');
+    $('.hemat').hide();
+
     $('.harga.pro').html('IDR 197.000,-');
+    $('.harga-real.pro').html('LEBIH HEMAT DENGAN PAKET TAHUNAN');
+
     $('.harga.premium').html('IDR 297.000,-');
+    $('.harga-real.premium').html('HEMAT <b>72%</b> DENGAN PAKET TAHUNAN');
+
     $('.link-pro').attr('href',"{{url('checkout/1')}}");
     $('.link-premium').attr('href',"{{url('checkout/3')}}");
   });
 
   $( "body" ).on( "click", ".btn-pricing.year", function(e) 
   {
-    $('.header-2').html('<b>Yearly</b>');
+    $('.header-2').html('TAHUNAN');
+    $('.hemat').show();
+
     $('.harga.pro').html('IDR 699.000,-');
+    $('.harga-real.pro').html('<del>IDR 2.364.000</del>');
+
     $('.harga.premium').html('IDR 999.000,-');
+    $('.harga-real.premium').html('<del>IDR 3.564.000</del>');
+
     $('.link-pro').attr('href',"{{url('checkout/2')}}");
     $('.link-premium').attr('href',"{{url('checkout/4')}}");
   });

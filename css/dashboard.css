@@ -360,6 +360,12 @@ sub {
 }
 
 /* History Search*/
+.profpic-tb {
+  max-width:50px; 
+  border-radius:50%;
+  margin-right: 10px;
+}
+
 .menu-savepdf {
   color: #63ADF8;
   cursor: pointer;
@@ -379,6 +385,13 @@ sub {
 }
 
 /* Poin history */
+#profpic-point{
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .poinplus {
   color: #409AF7;
 }
@@ -453,12 +466,50 @@ sub {
 }
 
 /* Upgrade Account */
+.header-top {
+  background-color: #fff;
+  color: #505050;  
+  margin-top: -12px;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.sbold {
+  font-family: SourceSansPro-Bold;
+}
+
+.hemat {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.harga-real {
+  font-size: 22px;
+}
+
 .upgrade-details{
   font-size: 17px;
 }
 
 .upgrade-radio {
   font-size: 18px;
+}
+
+@media screen and (max-width: 769px) {
+  .header-top {
+    margin-left: -11px;
+    margin-right: -11px;
+    font-size: 14px;
+  }
+  .harga-real {
+    font-size: 14px;
+  }
+  .hemat {
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -525,10 +576,6 @@ sub {
   font-size: 19px;
 }
 
-.header-2 {
-  font-size: 16px;
-}
-
 .view-more-pro, .view-more-premium {
   color: #3490dc;
 }
@@ -562,6 +609,14 @@ sub {
 .link-listgrup:hover {
   color: #1BA8F4;
   text-decoration: underline;
+}
+
+/* Edit Profile */
+.profpic-edit {
+  width:100px; 
+  height:100px; 
+  object-fit:cover; 
+  border-radius: 50%;
 }
 
 /* Order */
