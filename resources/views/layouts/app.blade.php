@@ -322,12 +322,12 @@
                 <button id="button-subscribe" class="btn btn-primary btn-primary-btm">Submit</button>
               </form>
               <div class="social">
-                <a href="https://www.facebook.com/pg/Omnifluencer-2369637796655735/about/?ref=page_internal">
+                <a href="https://www.facebook.com/pg/Omnifluencer-2369637796655735/about/?ref=page_internal" target="_blank">
                   <span class="icon-social">
                     <i class="fa-facebook-f fab"></i>
                   </span>
                 </a>
-                <a href="https://www.instagram.com/omnifluencer/">
+                <a href="https://www.instagram.com/omnifluencer/" target="_blank">
                   <span class="icon-social">
                     <i class="fa-instagram fab"></i> 
                   </span>
