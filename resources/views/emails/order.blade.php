@@ -13,10 +13,10 @@ Anda telah memesan paket
 	<strong>TRANSFER Melalui :</strong><br>
 	<br>
 	<strong>Bank BCA</strong><br>
-  	4800-227-122<br>
-  	Sugiarto Lasjim<br>
+  	8290981477<br>
+  	Rizky Redjosoewignjo<br>
 	<br>
-	
+	 
 	
 	dan setelah selesai membayar<br>
 	silahkan lakukan konfirmasi pembayaran di menu Orders pada dashboard, atau bisa dengan mengklik <a href="{{url('orders')}}"> --> KONFIRMASI PEMBAYARAN <-- </a> disini. <br>

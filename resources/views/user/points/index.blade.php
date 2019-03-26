@@ -101,7 +101,7 @@
             <div class="card-body point-card">
               <div class="row"> 
                 <div class="col-md-2 col-12" align="center">  
-                  <img class="profpic" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
+                  <img class="profpic" id="profpic-point" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
                 </div>
 
                 <div class="col-md-6 col-12 center-mobile"> 
