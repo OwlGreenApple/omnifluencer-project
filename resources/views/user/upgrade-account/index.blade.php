@@ -55,7 +55,7 @@
         </div>
 
         <div class="row mt-4">
-          <div class="col-md-6 col-6">
+          <div class="col-md-6 col-12">
             <div class="card">
               <div class="card-header upgrade-pro">
 
@@ -214,7 +214,7 @@
               </div>
             </div>      
           </div>
-          <div class="col-md-6 col-6">
+          <div class="col-md-6 col-12">
             <div class="card">
               <div class="card-header upgrade-premium">
                 <div class="row header-top">
