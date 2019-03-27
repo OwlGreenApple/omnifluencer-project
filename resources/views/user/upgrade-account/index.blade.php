@@ -62,9 +62,8 @@
                 <div class="row header-top">
                   <div class="col-md-12" align="center">
                     <b class="sbold">
-                      PAKET <br class="menu-mobile"> PRO
+                      PAKET PRO
                     </b>
-                    <br class="menu-mobile">
                     <span class="header-2">
                       BULANAN
                     </span>
@@ -96,7 +95,7 @@
                   </p>
 
                   <span class="harga pro">
-                    IDR 197.000,-
+                    Rp 197.000
                   </span><br>
                   <span class="harga-real pro">
                     DENGAN PAKET TAHUNAN
@@ -107,141 +106,103 @@
                 <div class="d-none d-md-block view-pro">
                   
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>  
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Influencer Report (PDF)
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       25
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Show History
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       25
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Save Profile
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       Yes - 2
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Compare
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       Yes - 2
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Compare From History
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Grouping
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Multi Group
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Multi Delete 
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4">
                       <span class="cross">&#10060;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Multi Influencers Report (PDF)
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4">
                       <span class="cross">&#10060;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Multi Influencers List (Excel)
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4">
                       <span class="cross">&#10060;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Agency Logo for Report (PDF)
                     </div>
                   </div>
-
-<!--
-                  <div class="row text-md-center">
-                    <div class="col-md-12">
-                      <span class="blue">✓</span> Influencer Report (PDF)
-                    </div>
-                    <div class="col-md-12">
-                      <span class="blue">25</span> Show History
-                    </div>
-                    <div class="col-md-12">
-                      <span class="blue">25</span> Save Profile
-                    </div>
-                    <div class="col-md-12">
-                      <span class="blue">Yes - 2</span> Compare
-                    </div>
-                    <div class="col-md-12">
-                      <span class="blue">Yes - 2</span> Compare From History
-                    </div>
-                    <div class="col-md-12">
-                      <span class="blue">✓</span> Grouping
-                    </div>
-                    <div class="col-md-12">
-                      <span class="blue">✓</span> Multi Group
-                    </div>
-                    <div class="col-md-12">
-                      <span class="blue">✓</span> Multi Delete
-                    </div>
-                    <div class="col-md-12">
-                      <span class="cross">&#10060;</span> Multi Influencers Report (PDF)
-                    </div>
-                    <div class="col-md-12">
-                      <span class="cross">&#10060;</span> Multi Influencers List (Excel)
-                    </div>
-                    <div class="col-md-12">
-                      <span class="cross">&#10060;</span> Agency Logo for Report (PDF)
-                    </div>
-                  </div>
--->
                 </div>
 
                 <div class="d-block d-md-none view-more-pro">View details</div>
@@ -260,9 +221,8 @@
                 <div class="row header-top">
                   <div class="col-md-12" align="center">
                     <b class="sbold">
-                      PAKET <br class="menu-mobile"> PREMIUM
+                      PAKET PREMIUM
                     </b>
-                    <br class="menu-mobile">
                     <span class="header-2">
                       BULANAN
                     </span>
@@ -293,111 +253,111 @@
                     LEBIH HEMAT
                   </p>
                   <span class="harga premium">
-                    IDR 297.000,-
+                    Rp 297.000
                   </span><br>
                   <span class="harga-real premium">
                     DENGAN PAKET TAHUNAN
                   </span>
                 </div>
               </div>
-              <div class="card-body upgrade-details">
 
+              <div class="card-body upgrade-details">
                 <div class="d-none d-md-block view-premium">
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Influencer Report (PDF)
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       Unlimited
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Show History
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       Unlimited
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Save Profile
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       Yes - 4
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Compare
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       Yes - 4
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Compare From History
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Grouping
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Multi Group
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Multi Delete
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Multi Influencers Report (PDF)
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Multi Influencers List (Excel)
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 col-md-3 blue">
+                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
                       <span class="tickblue">&check;</span>
                     </div>
-                    <div class="col-md-6 text-md-left">
+                    <div class="col-md-6 col-6 text-left">
                       Agency Logo for Report (PDF)
                     </div>
                   </div>
@@ -407,7 +367,7 @@
                 <a class="link-premium" href="{{url('checkout/3')}}">
                   <button class="btn btn-upgrade-big">
                     BELI PAKET
-                  </button>
+                  </button>  
                 </a>
               </div>
             </div>
@@ -457,10 +417,10 @@
     //$('.hemat').hide();
     $('.hemat').html('LEBIH HEMAT');
 
-    $('.harga.pro').html('IDR 197.000,-');
+    $('.harga.pro').html('Rp 197.000,-');
     $('.harga-real.pro').html('DENGAN PAKET TAHUNAN');
 
-    $('.harga.premium').html('IDR 297.000,-');
+    $('.harga.premium').html('Rp 297.000,-');
     $('.harga-real.premium').html('DENGAN PAKET TAHUNAN');
 
     $('.link-pro').attr('href', "{{url('checkout/1')}}");
@@ -472,11 +432,11 @@
     //$('.hemat').show();
     $('.hemat').html('HEMAT 70%');
 
-    $('.harga.pro').html('IDR 699.000,-');
-    $('.harga-real.pro').html('dari <del>IDR 2.364.000</del>');
+    $('.harga.pro').html('Rp 699.000,-');
+    $('.harga-real.pro').html('dari <del>Rp 2.364.000</del>');
 
-    $('.harga.premium').html('IDR 999.000,-');
-    $('.harga-real.premium').html('dari <del>IDR 3.564.000</del>');
+    $('.harga.premium').html('Rp 999.000,-');
+    $('.harga-real.premium').html('dari <del>Rp 3.564.000</del>');
 
     $('.link-pro').attr('href', "{{url('checkout/2')}}");
     $('.link-premium').attr('href', "{{url('checkout/4')}}");
