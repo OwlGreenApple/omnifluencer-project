@@ -27,22 +27,22 @@
         <div class="row">
           <div class="col-md-8 col-12">
             <h2><b>Upgrade Account</b></h2>
-          </div>  
+          </div>
         </div>
-          
+
         <h5>
           Upgrade your account!
         </h5>
-        <hr>  
+        <hr>
       </div>
 
       <div class="col-md-12" align="center">
         <h4 class="pt-5 pb-3">
-          <b>Our Pricing Plans</b>
+          <b>Pilih Paket Anda</b>
         </h4>
 
         <div class="pb-md-5 pb-3">
-          <span class="upgrade-radio">Monthly</span>
+          <span class="upgrade-radio">&nbsp;</span>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary btn-pricing month upgrade-radio active" style="outline: none; box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
               <input type="radio" name="options" id="option1" autocomplete="off" checked> Monthly
@@ -51,7 +51,7 @@
               <input type="radio" name="options" id="option2" autocomplete="off"> Yearly
             </label>
           </div>
-          <span class="upgrade-radio">Yearly</span>
+          <span class="upgrade-radio">&nbsp;</span>
         </div>
 
         <div class="row mt-4">
@@ -63,7 +63,7 @@
                   <div class="col-md-12" align="center">
                     <b class="sbold">
                       PAKET <br class="menu-mobile"> PRO
-                    </b> 
+                    </b>
                     <br class="menu-mobile">
                     <span class="header-2">
                       BULANAN
@@ -92,18 +92,20 @@
 
                 <div class="col-md-12 pt-3 pb-3">
                   <p class="hemat">
-                    LEBIH HEMAT <b>70%</b>
+                    LEBIH HEMAT
                   </p>
+
                   <span class="harga pro">
                     IDR 197.000,-
                   </span><br>
                   <span class="harga-real pro">
-                    LEBIH HEMAT DENGAN PAKET TAHUNAN
+                    DENGAN PAKET TAHUNAN
                   </span>
                 </div>
               </div>
               <div class="card-body upgrade-details">
                 <div class="d-none d-md-block view-pro">
+                  
                   <div class="row mb-2">
                     <div class="offset-md-1 col-md-3 blue">
                       <span class="tickblue">&check;</span>
@@ -202,17 +204,55 @@
                       Agency Logo for Report (PDF)
                     </div>
                   </div>
+
+<!--
+                  <div class="row text-md-center">
+                    <div class="col-md-12">
+                      <span class="blue">✓</span> Influencer Report (PDF)
+                    </div>
+                    <div class="col-md-12">
+                      <span class="blue">25</span> Show History
+                    </div>
+                    <div class="col-md-12">
+                      <span class="blue">25</span> Save Profile
+                    </div>
+                    <div class="col-md-12">
+                      <span class="blue">Yes - 2</span> Compare
+                    </div>
+                    <div class="col-md-12">
+                      <span class="blue">Yes - 2</span> Compare From History
+                    </div>
+                    <div class="col-md-12">
+                      <span class="blue">✓</span> Grouping
+                    </div>
+                    <div class="col-md-12">
+                      <span class="blue">✓</span> Multi Group
+                    </div>
+                    <div class="col-md-12">
+                      <span class="blue">✓</span> Multi Delete
+                    </div>
+                    <div class="col-md-12">
+                      <span class="cross">&#10060;</span> Multi Influencers Report (PDF)
+                    </div>
+                    <div class="col-md-12">
+                      <span class="cross">&#10060;</span> Multi Influencers List (Excel)
+                    </div>
+                    <div class="col-md-12">
+                      <span class="cross">&#10060;</span> Agency Logo for Report (PDF)
+                    </div>
+                  </div>
+-->
                 </div>
 
                 <div class="d-block d-md-none view-more-pro">View details</div>
 
                 <a class="link-pro" href="{{url('checkout/1')}}">
                   <button class="btn btn-upgrade-big">
-                    UPGRADE
+                    BELI PAKET
                   </button>
                 </a>
               </div>
-            </div>      
+            </div>
           </div>
           <div class="col-md-6 col-12">
             <div class="card">
@@ -221,7 +261,7 @@
                   <div class="col-md-12" align="center">
                     <b class="sbold">
                       PAKET <br class="menu-mobile"> PREMIUM
-                    </b> 
+                    </b>
                     <br class="menu-mobile">
                     <span class="header-2">
                       BULANAN
@@ -250,13 +290,13 @@
 
                 <div class="col-md-12 pt-3 pb-3">
                   <p class="hemat">
-                    LEBIH HEMAT <b>72%</b>
+                    LEBIH HEMAT
                   </p>
                   <span class="harga premium">
                     IDR 297.000,-
                   </span><br>
                   <span class="harga-real premium">
-                    HEMAT <b>72%</b> DENGAN PAKET TAHUNAN
+                    DENGAN PAKET TAHUNAN
                   </span>
                 </div>
               </div>
@@ -266,7 +306,7 @@
                   <div class="row mb-2">
                     <div class="offset-md-1 col-md-3 blue">
                       <span class="tickblue">&check;</span>
-                    </div>  
+                    </div>
                     <div class="col-md-6 text-md-left">
                       Influencer Report (PDF)
                     </div>
@@ -331,7 +371,7 @@
                       <span class="tickblue">&check;</span>
                     </div>
                     <div class="col-md-6 text-md-left">
-                      Multi Delete 
+                      Multi Delete
                     </div>
                   </div>
 
@@ -360,18 +400,17 @@
                     <div class="col-md-6 text-md-left">
                       Agency Logo for Report (PDF)
                     </div>
-                  </div>  
+                  </div>
                 </div>
-                
-                <div class="d-block d-md-none view-more-premium">View details</div>
 
+                <div class="d-block d-md-none view-more-premium">View details</div>
                 <a class="link-premium" href="{{url('checkout/3')}}">
                   <button class="btn btn-upgrade-big">
-                    UPGRADE
-                  </button>  
+                    BELI PAKET
+                  </button>
                 </a>
               </div>
-            </div>      
+            </div>
           </div>
         </div>
 
@@ -383,7 +422,7 @@
 <!-- Modal Confirm Delete -->
 <div class="modal fade" id="confirm-delete" role="dialog">
   <div class="modal-dialog">
-    
+
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -404,53 +443,51 @@
         </button>
       </div>
     </div>
-      
+
   </div>
 </div>
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.hemat').hide(); 
+    //$('.hemat').hide();
   });
 
-  $( "body" ).on( "click", ".btn-pricing.month", function(e) 
-  {
+  $("body").on("click", ".btn-pricing.month", function(e) {
     $('.header-2').html('BULANAN');
-    $('.hemat').hide();
+    //$('.hemat').hide();
+    $('.hemat').html('LEBIH HEMAT');
 
     $('.harga.pro').html('IDR 197.000,-');
-    $('.harga-real.pro').html('LEBIH HEMAT DENGAN PAKET TAHUNAN');
+    $('.harga-real.pro').html('DENGAN PAKET TAHUNAN');
 
     $('.harga.premium').html('IDR 297.000,-');
-    $('.harga-real.premium').html('HEMAT <b>72%</b> DENGAN PAKET TAHUNAN');
+    $('.harga-real.premium').html('DENGAN PAKET TAHUNAN');
 
-    $('.link-pro').attr('href',"{{url('checkout/1')}}");
-    $('.link-premium').attr('href',"{{url('checkout/3')}}");
+    $('.link-pro').attr('href', "{{url('checkout/1')}}");
+    $('.link-premium').attr('href', "{{url('checkout/3')}}");
   });
 
-  $( "body" ).on( "click", ".btn-pricing.year", function(e) 
-  {
+  $("body").on("click", ".btn-pricing.year", function(e) {
     $('.header-2').html('TAHUNAN');
-    $('.hemat').show();
+    //$('.hemat').show();
+    $('.hemat').html('HEMAT 70%');
 
     $('.harga.pro').html('IDR 699.000,-');
-    $('.harga-real.pro').html('<del>IDR 2.364.000</del>');
+    $('.harga-real.pro').html('dari <del>IDR 2.364.000</del>');
 
     $('.harga.premium').html('IDR 999.000,-');
-    $('.harga-real.premium').html('<del>IDR 3.564.000</del>');
+    $('.harga-real.premium').html('dari <del>IDR 3.564.000</del>');
 
-    $('.link-pro').attr('href',"{{url('checkout/2')}}");
-    $('.link-premium').attr('href',"{{url('checkout/4')}}");
+    $('.link-pro').attr('href', "{{url('checkout/2')}}");
+    $('.link-premium').attr('href', "{{url('checkout/4')}}");
   });
 
-  $( "body" ).on( "click", ".view-more-pro", function(e) 
-  {
+  $("body").on("click", ".view-more-pro", function(e) {
     $('.view-pro').toggleClass('d-none');
     $(this).html($(this).html() == 'View details' ? 'View less' : 'View details');
   });
 
-  $( "body" ).on( "click", ".view-more-premium", function(e) 
-  {
+  $("body").on("click", ".view-more-premium", function(e) {
     $('.view-premium').toggleClass('d-none');
     $(this).html($(this).html() == 'View details' ? 'View less' : 'View details');
   });
