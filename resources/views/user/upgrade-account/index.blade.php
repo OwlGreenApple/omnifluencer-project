@@ -1,9 +1,53 @@
 @extends('layouts.dashboard')
 
 @section('content')
+<link href="{{ asset('css/style-pricing.css') }}" rel="stylesheet">
+
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="col-md-11">
+    <div class="col-md-11 col-12">
+      <!-- Header -->
+        <div class="row header-pricing d-lg-none d-md-none d-none text-center">
+          <div class="col-md-6 col-6 pr-0 pl-0">
+            <div class="card">
+              <div class="card-body pricing">
+                <h4 class="mb-0 green-color">
+                  <b class="sbold">
+                    PRO
+                  </b>  
+                </h4>
+                <span class="harga harga-med pro">
+                  <sup>Rp</sup> 59.000<sub> /bln</sub>
+                </span><br>
+                <a class="link-pro" href="{{url('checkout/2')}}">
+                  <button class="btn btn-block btn-upgrade-big med pro">
+                    BELI PAKET
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-6 pr-0 pl-0">
+            <div class="card">
+              <div class="card-body pricing">
+                <h4 class="mb-0 orange-color">
+                  <b class="sbold">
+                    PREMIUM
+                  </b>    
+                </h4>
+                <span class="harga harga-med premium">
+                  <sup>Rp</sup> 89.000<sub> /bln</sub>
+                </span><br>
+                <a class="link-premium" href="{{url('checkout/4')}}">
+                  <button class="btn btn-block btn-upgrade-big med premium">
+                    BELI PAKET
+                  </button>  
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
       <div class="col-md-12">
 
         <!--<div class="row">
@@ -25,15 +69,29 @@
         <hr>-->
 
         <div class="row">
-          <div class="col-md-8 col-12">
+          <div class="col-md-6 col-12 order-md-1 order-1">
             <h2><b>Upgrade Account</b></h2>
+          </div>
+          <div class="col-md-6 col-12 order-md-2 order-3 text-md-right text-left" style="position: relative;">
+            <h5 class="info-member">
+              My membership : <b>{{ucfirst(Auth::user()->membership)}}</b>
+            </h5>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-3 order-2">
+            <h5>
+              Upgrade your account!
+            </h5>
+          </div>
+          <div class="col-md-6 col-12 text-md-right text-left order-md-4 order-4">
+            <h5>
+              Expired by: {{date("d-m-Y",strtotime(Auth::user()->valid_until))}}  
+            </h5>
           </div>
         </div>
 
-        <h5>
-          Upgrade your account!
-        </h5>
         <hr>
+
       </div>
 
       <div class="col-md-12" align="center">
@@ -42,333 +100,337 @@
         </h4>
 
         <div class="pb-md-5 pb-3">
-          <span class="upgrade-radio">&nbsp;</span>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary btn-pricing month upgrade-radio active" style="outline: none; box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
-              <input type="radio" name="options" id="option1" autocomplete="off" checked> Monthly
+            <label class="btn btn-secondary btn-pricing year upgrade-radio active" style="outline: none;box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
+              <input type="radio" name="options" id="option2" autocomplete="off"> 
+              TAHUNAN
             </label>
-            <label class="btn btn-secondary btn-pricing year upgrade-radio" style="outline: none;box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
-              <input type="radio" name="options" id="option2" autocomplete="off"> Yearly
+            <label class="btn btn-secondary btn-pricing month upgrade-radio" style="outline: none; box-shadow: 0 1px 5px 0 rgba(183,183,183,0.50);">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked> 
+              BULANAN
             </label>
           </div>
-          <span class="upgrade-radio">&nbsp;</span>
+          
+          <br>
+
+          <h5 class="mt-3">
+            Hemat <b>Hingga 70%</b> Dengan Paket Tahunan
+          </h5>
         </div>
 
-        <div class="row mt-4">
-          <div class="col-md-6 col-12">
-            <div class="card">
-              <div class="card-header upgrade-pro">
+        <div class="row mt-4 pricing-box">
+          <div class="offset-lg-1 col-lg-5 col-md-12 col-12 pr-lg-0">
+            <div class="card card-ribbon">
 
-                <div class="row header-top">
-                  <div class="col-md-12" align="center">
-                    <b class="sbold">
-                      PAKET PRO
-                    </b>
-                    <span class="header-2">
-                      BULANAN
+              <div class="corner-ribbon top-right green">
+                FAVORITE
+              </div>
+
+              <div class="card-body upgrade-details">
+                <div class="col-md-12" align="center green-color">
+                  <span class="green-color">
+                    <span class="icon-upgrade">
+                      <i class="fas fa-trophy"></i>
                     </span>
-                  </div>
-                </div>
-
-                <!--<div class="row">
-                  <div class="col-md-6 text-md-left text-sm-center">
-                    <span class="header-1">
-                      UPGRADE TO <br class="menu-mobile"> PRO
-                    </span> <br>
-                    <span class="header-2">
-                      <b>Monthly</b>
-                    </span>
-                  </div>  
-
-                  <div class="col-md-6 d-none d-md-block" align="right">
-                    <a class="link-pro" href="{{url('checkout/1')}}">
-                      <button class="btn btn-sm btn-upgrade-sm">
-                        UPGRADE
-                      </button>
-                    </a>
-                  </div>
-                </div>-->
-
-                <div class="col-md-12 pt-3 pb-3">
-                  <p class="hemat">
-                    LEBIH HEMAT
-                  </p>
-
-                  <span class="harga pro">
-                    Rp 197.000
-                  </span><br>
-                  <span class="harga-real pro">
-                    DENGAN PAKET TAHUNAN
+                    <h3 class="pt-3">
+                      <b class="sbold">
+                        PRO
+                      </b>  
+                    </h3>
                   </span>
                 </div>
-              </div>
-              <div class="card-body upgrade-details">
-                <div class="d-none d-md-block view-pro">
-                  
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
-                    </div>  
-                    <div class="col-md-6 col-6 text-left">
-                      Influencer Report (PDF)
-                    </div>
-                  </div>
 
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      25
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Show History
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      25
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Save Profile
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      Yes - 2
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Compare
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      Yes - 2
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Compare From History
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Grouping
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Multi Group
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Multi Delete 
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4">
-                      <span class="cross">&#10060;</span>
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Multi Influencers Report (PDF)
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4">
-                      <span class="cross">&#10060;</span>
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Multi Influencers List (Excel)
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4">
-                      <span class="cross">&#10060;</span>
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Agency Logo for Report (PDF)
-                    </div>
-                  </div>
+                <div class="col-md-12 pb-3">
+                  <span class="harga pro">
+                    <sup>Rp</sup> 59.000<sub> /bln</sub>
+                  </span><br>
+                  <span class="harga-real pro">
+                    Biaya Per Tahun @ Rp 708.000
+                  </span><br>
+                  <p class="hemat monthly mt-4">
+                    <i class="fas fa-redo-alt"></i>
+                    &nbsp;Harga Bulanan
+                  </p>
                 </div>
 
-                <div class="d-block d-md-none view-more-pro">View details</div>
-
-                <a class="link-pro" href="{{url('checkout/1')}}">
-                  <button class="btn btn-upgrade-big">
+                <a class="link-pro" href="{{url('checkout/2')}}">
+                  <button class="btn btn-block btn-upgrade-big pro">
                     BELI PAKET
                   </button>
                 </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-12">
-            <div class="card">
-              <div class="card-header upgrade-premium">
-                <div class="row header-top">
-                  <div class="col-md-12" align="center">
-                    <b class="sbold">
-                      PAKET PREMIUM
-                    </b>
-                    <span class="header-2">
-                      BULANAN
-                    </span>
-                  </div>
-                </div>
 
-                <!--<div class="row">
-                  <div class="col-md-6 text-md-left text-sm-center">
-                    <span class="header-1">
-                      UPGRADE TO <br class="menu-mobile"> PREMIUM
-                    </span> <br>
-                    <span class="header-2">
-                      <b>Monthly</b>
-                    </span>
-                  </div>  
-
-                  <div class="col-md-6 d-none d-md-block" align="right">
-                    <a class="link-premium" href="{{url('checkout/3')}}">
-                      <button class="btn btn-sm btn-upgrade-sm">
-                        UPGRADE
-                      </button>
-                    </a>
-                  </div>
-                </div>-->
-
-                <div class="col-md-12 pt-3 pb-3">
-                  <p class="hemat">
-                    LEBIH HEMAT
-                  </p>
-                  <span class="harga premium">
-                    Rp 297.000
-                  </span><br>
-                  <span class="harga-real premium">
-                    DENGAN PAKET TAHUNAN
-                  </span>
-                </div>
-              </div>
-
-              <div class="card-body upgrade-details">
-                <div class="d-none d-md-block view-premium">
+                <div class="upgrade-details2">
                   <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
+                    </div>  
+                    <div class="col-md-9 col-9 text-left">
                       Influencer Report (PDF)
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      Unlimited
+                    <div class="offset-md-1 offset-1 col-md-2 col-2 pl-0 pr-0 green-color">
+                      <b>25</b>
                     </div>
-                    <div class="col-md-6 col-6 text-left">
+                    <div class="col-md-9 col-9 text-left">
                       Show History
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      Unlimited
+                    <div class="offset-md-1 offset-1 col-md-2 col-2 pl-0 pr-0 green-color">
+                      <b>25</b>
                     </div>
-                    <div class="col-md-6 col-6 text-left">
+                    <div class="col-md-9 col-9 text-left">
                       Save Profile
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      Yes - 4
+                    <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                      <b>2</b>
                     </div>
-                    <div class="col-md-6 col-6 text-left">
+                    <div class="col-md-9 col-9 text-left">
                       Compare
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      Yes - 4
+                    <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                      <b>2</b>
                     </div>
-                    <div class="col-md-6 col-6 text-left">
+                    <div class="col-md-9 col-9 text-left">
                       Compare From History
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
                     </div>
-                    <div class="col-md-6 col-6 text-left">
+                    <div class="col-md-9 col-9 text-left">
                       Grouping
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
                     </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Multi Group
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Multi Delete
+                    <div class="col-md-9 col-9 text-left">
+                      Bulk Group
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
                     </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Multi Influencers Report (PDF)
-                    </div>
-                  </div>
-
-                  <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
-                    </div>
-                    <div class="col-md-6 col-6 text-left">
-                      Multi Influencers List (Excel)
+                    <div class="col-md-9 col-9 text-left">
+                      Bulk Delete 
                     </div>
                   </div>
 
                   <div class="row mb-2">
-                    <div class="offset-md-1 offset-1 col-md-3 col-4 blue">
-                      <span class="tickblue">&check;</span>
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="red-color">
+                        <i class="fas fa-times-circle"></i>
+                      </span>
                     </div>
-                    <div class="col-md-6 col-6 text-left">
+                    <div class="col-md-9 col-9 text-left">
+                      Bulk Save .PDF
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="red-color">
+                        <i class="fas fa-times-circle"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Bulk Save .XLS
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="red-color">
+                        <i class="fas fa-times-circle"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
                       Agency Logo for Report (PDF)
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                <div class="d-block d-md-none view-more-premium">View details</div>
-                <a class="link-premium" href="{{url('checkout/3')}}">
-                  <button class="btn btn-upgrade-big">
+          <div class="col-lg-5 col-md-12 col-12 pl-lg-0">
+            <div class="card card-ribbon">
+              <div class="corner-ribbon top-right orange">
+                LEBIH HEMAT
+              </div>
+
+              <div class="card-body upgrade-details">
+                <div class="col-md-12" align="center">
+                  <span class="orange-color">
+                    <span class="icon-upgrade">
+                      <i class="fas fa-crown"></i>  
+                    </span>
+                    <br>
+                    <h3 class="pt-3">
+                      <b class="sbold">
+                        PREMIUM
+                      </b>    
+                    </h3>
+                  </span>
+                </div>
+                
+                <div class="col-md-12 pb-3">
+                  <span class="harga premium">
+                    <sup>Rp</sup> 89.000<sub> /bln</sub>
+                  </span><br>
+                  <span class="harga-real premium">
+                    Biaya Per Tahun @ Rp 1.068.000
+                  </span><br>
+                  <p class="hemat monthly mt-4">
+                    <i class="fas fa-redo-alt"></i>
+                    &nbsp;Harga Bulanan
+                  </p>
+                </div>
+
+                <a class="link-premium" href="{{url('checkout/4')}}">
+                  <button class="btn btn-block btn-upgrade-big premium">
                     BELI PAKET
                   </button>  
                 </a>
+
+                <div class="upgrade-details2">
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Influencer Report (PDF)
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                      <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Show History
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                      <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Save Profile
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                      <b>4</b>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Compare
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                      <b>4</b>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Compare From History
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Grouping
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Bulk Group
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Bulk Delete
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Bulk Save .PDF
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Bulk Save .XLS
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="offset-md-1 offset-1 col-md-2 col-2">
+                      <span class="green-color">
+                        <i class="fas fa-check-circle"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-9 col-9 text-left">
+                      Agency Logo for Report (PDF)
+                    </div>
+                  </div>                    
+                </div>
               </div>
             </div>
           </div>
@@ -408,35 +470,59 @@
 </div>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    //$('.hemat').hide();
+  // get initial position of the element
+  var elm = $('.pricing-box');
+  if (elm.length) {
+    var fixmeTop = elm.offset().top;
+  }
+
+  $(window).scroll(function() {                  
+    // get current position
+    var currentScroll = $(window).scrollTop(); 
+
+    // apply position: fixed if you
+    if (currentScroll >= fixmeTop) {           
+      $('.header-pricing').addClass('d-md-flex d-flex');
+      $('.header-pricing').removeClass('d-md-none d-none');
+    } else {
+      $('.header-pricing').addClass('d-md-none d-none');
+      $('.header-pricing').removeClass('d-md-flex d-flex');
+    }
   });
 
-  $("body").on("click", ".btn-pricing.month", function(e) {
-    $('.header-2').html('BULANAN');
-    //$('.hemat').hide();
-    $('.hemat').html('LEBIH HEMAT');
+  $("body").on("click", ".btn-pricing.month,.hemat.monthly", function(e) {
+    $('.hemat').toggleClass('monthly');
+    $('.hemat').toggleClass('yearly');
 
-    $('.harga.pro').html('Rp 197.000,-');
-    $('.harga-real.pro').html('DENGAN PAKET TAHUNAN');
+    $('.btn-pricing.month').addClass('active');
+    $('.btn-pricing.year').removeClass('active');
 
-    $('.harga.premium').html('Rp 297.000,-');
-    $('.harga-real.premium').html('DENGAN PAKET TAHUNAN');
+    $('.harga.pro').html('<sup>Rp</sup> 197.000 <sub>/bln</sub>');
+    $('.harga-real.pro').html('<b>Dibayar Per Bulan</b>');
+
+    $('.harga.premium').html('<sup>Rp</sup> 297.000 <sub>/bln</sub>');
+    $('.harga-real.premium').html('<b>Dibayar Per Bulan</b>');
+
+    $('.hemat').html('<i class="fas fa-redo-alt"></i>&nbsp;Harga Tahunan');
 
     $('.link-pro').attr('href', "{{url('checkout/1')}}");
     $('.link-premium').attr('href', "{{url('checkout/3')}}");
   });
 
-  $("body").on("click", ".btn-pricing.year", function(e) {
-    $('.header-2').html('TAHUNAN');
-    //$('.hemat').show();
-    $('.hemat').html('HEMAT 70%');
+  $("body").on("click", ".btn-pricing.year,.hemat.yearly", function(e) {
+    $('.hemat').toggleClass('monthly');
+    $('.hemat').toggleClass('yearly');
 
-    $('.harga.pro').html('Rp 699.000,-');
-    $('.harga-real.pro').html('dari <del>Rp 2.364.000</del>');
+    $('.btn-pricing.month').removeClass('active');
+    $('.btn-pricing.year').addClass('active');
 
-    $('.harga.premium').html('Rp 999.000,-');
-    $('.harga-real.premium').html('dari <del>Rp 3.564.000</del>');
+    $('.harga.pro').html('<sup>Rp</sup> 59.000 <sub>/bln</sub>');
+    $('.harga-real.pro').html('<b>Biaya Per Tahun @ Rp 708.000</b>');
+
+    $('.harga.premium').html('<sup>Rp</sup> 89.000 <sub>/bln</sub>');
+    $('.harga-real.premium').html('<b>Biaya Per Tahun @ Rp 1.068.000</b>');
+
+    $('.hemat').html('<i class="fas fa-redo-alt"></i>&nbsp;Harga Bulanan');
 
     $('.link-pro').attr('href', "{{url('checkout/2')}}");
     $('.link-premium').attr('href', "{{url('checkout/4')}}");
