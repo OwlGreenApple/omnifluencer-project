@@ -14,7 +14,7 @@
             <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
             <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
 
-            <h2 class="form-title">Please input your<br>Email & Password</h2>
+            <h2 class="form-title">Masukkan<br>Email & Password</h2>
 
             @if (session('error') )
               <div class="col-md-12 alert alert-danger">
@@ -30,7 +30,7 @@
             <div class="form-group">
               <label for="email" class="label-title-test">  Masukkan Email:
               </label>
-              <input id="email" type="email" class="form-input form-control{{ $errors->has('email') ? ' is-invalid' : '' }} " name="email" value="{{ old('email') }}" placeholder="Your Email" required autofocus>
+              <input id="email" type="email" class="form-input form-control{{ $errors->has('email') ? ' is-invalid' : '' }} " name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
 
               @if ($errors->has('email'))
                 <span class="invalid-feedback" role="alert">

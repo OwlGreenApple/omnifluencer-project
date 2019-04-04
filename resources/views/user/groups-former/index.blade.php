@@ -157,7 +157,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete?
+        Anda yakin ingin menghapus?
       </div>
       <div class="modal-footer" id="foot">
         <button class="btn btn-primary" id="btn-delete-ok" data-dismiss="modal">

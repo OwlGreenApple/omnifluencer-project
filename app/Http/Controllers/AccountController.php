@@ -189,30 +189,30 @@ class AccountController extends Controller
       }
 
       if(Auth::check()){
-        /* pengecekan membership */
-        if(Auth::user()->membership=='free'){
-          $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
-
-          if($currenthistory->count()>=5){
-            $arr['status'] = 'error';
-            $arr['message'] = '<b>Warning!</b><br> Free user hanya dapat menyimpan history search sebanyak 5 kali';
-            return $arr;
-          }
-        } else if(Auth::user()->membership=='pro'){
-          $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
-
-          if($currenthistory->count()>=25){
-            $arr['status'] = 'error';
-            $arr['message'] = '<b>Warning!</b><br> Pro user hanya dapat menyimpan history search sebanyak 25 kali';
-            return $arr;
-          }
-        } 
-
         $history = HistorySearch::where('user_id',Auth::user()->id) 
                     ->where('account_id',$account->id)
                     ->first();
 
         if(is_null($history)){
+          /* pengecekan membership */
+          if(Auth::user()->membership=='free'){
+            $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
+
+            if($currenthistory->count()>=5){
+              $arr['status'] = 'error';
+              $arr['message'] = '<b>Warning!</b><br> Free user hanya dapat menyimpan history search sebanyak 5 kali';
+              return $arr;
+            }
+          } else if(Auth::user()->membership=='pro'){
+            $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
+
+            if($currenthistory->count()>=25){
+              $arr['status'] = 'error';
+              $arr['message'] = '<b>Warning!</b><br> Pro user hanya dapat menyimpan history search sebanyak 25 kali';
+              return $arr;
+            }
+          } 
+        
           $history = new HistorySearch;
           $history->account_id = $account->id;
           $history->user_id = Auth::user()->id;

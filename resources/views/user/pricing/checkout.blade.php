@@ -61,7 +61,7 @@
                   <span>
                     <span></span>
                   </span>
-                  I agree all statements in <a href="#" class="term-service">Terms of service</a>
+                  Menyetujui <a href="{{url('statics/terms-conditions')}}" class="term-service">Syarat dan Ketentuan</a>
                 </label>
               </div>
               <div class="form-group">

@@ -16,7 +16,7 @@
     <?php if(!Auth::check()) { ?>
       if(currentHistory>=3){
         e.preventDefault();
-        $('.kuota-txt').html('Mau menambah kuota? <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
+        $('.kuota-txt').html('Untuk melanjutkan, <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
         $('#info-kuota').modal('show');
       } else {
         if($('#keywords').val()!=''){
@@ -62,7 +62,7 @@
   $( "body" ).on( "click", ".btn-compare", function(e) {
     <?php if(!Auth::check()) { ?>
       e.preventDefault();
-      $('.kuota-txt').html('Mau menambah kuota? <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
+      $('.kuota-txt').html('Untuk melanjutkan, <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
       $('#info-kuota').modal('show');
     <?php } else { ?>
       if(check_id()){
@@ -132,7 +132,7 @@
           load_history();
         } else {
           if(data.message=='kuota habis'){
-            $('.kuota-txt').html('Mau menambah kuota? <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
+            $('.kuota-txt').html('Untuk melanjutkan, <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
             $('#info-kuota').modal('show');
           } else {
             $('#message').html(data.message);
@@ -233,6 +233,7 @@
         var data = jQuery.parseJSON(result);
 
         if(data.status=='success'){
+          $('#keywords').val('');
           refresh_page();
         } else {
           if(data.message=='kuota habis'){
@@ -679,7 +680,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete?
+        Anda yakin ingin menghapus?
         <input type="hidden" name="id_delete" id="id_delete">
       </div>
       <div class="modal-footer" id="foot">
@@ -712,8 +713,8 @@
         </a>
   
         <a href="{{url('register')}}">
-          <button class="btn btn-primary">
-            SIGN UP
+          <button class="btn btn-success">
+            FREE SIGN UP
           </button>
         </a>
       </div>

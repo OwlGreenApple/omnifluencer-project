@@ -200,7 +200,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete?
+        Anda yakin ingin menghapus?
 
         <input type="hidden" name="id_delete" id="id_delete">
       </div>
