@@ -30,7 +30,7 @@ h6 {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
-  z-index: 99999999;
+  z-index: 10;
   background-color: #fff;
   padding-top: 20px;
   padding-bottom: 20px;
