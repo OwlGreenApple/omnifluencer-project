@@ -59,13 +59,13 @@
 
                 @if (Route::has('password.request'))
                   <a class="btn btn-link btn-frgt" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
+                    Lupa Password?
                   </a>
                 @endif
             </div>
 
             <p class="loginhere">
-              Don't have an account ? <a href="{{url('register')}}" class="loginhere-link">Sign Up here</a>
+              Belum punya akun? klik <a href="{{url('register')}}" class="loginhere-link">Register disini</a>
             </p>
 
           </form>

@@ -108,7 +108,7 @@
 
           <div align="center">
             <span class="loginhere">
-              Have already an account ? 
+              Sudah punya akun? klik
             </span>
             <?php if(isset($price)) { ?>
               <form method="POST" class="d-inline-block" action="{{ url('login-payment') }}">
@@ -117,12 +117,12 @@
                 <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
 
                 <a href="#" class="loginhere-link" onclick="$(this).closest('form').submit()">
-                  Sign In Here
+                  Login disini
                 </a>
               </form>
             <?php } else { ?>
               <a href="{{url('login')}}" class="loginhere-link">
-                Sign In Here
+                Login disini
               </a>
             <?php } ?>
           </div>
