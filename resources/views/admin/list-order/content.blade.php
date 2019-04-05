@@ -31,7 +31,7 @@
       @if($order->keterangan=='' or $order->keterangan==null)
         -
       @else
-        $order->keterangan
+        {{$order->keterangan}}
       @endif
     </td>
     <td data-label="Status">

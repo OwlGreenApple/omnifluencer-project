@@ -25,7 +25,7 @@ $(document).ready(function () {
     $('a.smooth-scroll, .scroll-syarat, .scroll-tentang, .scroll-disclaimer, .scroll-earnings').click(function(e){
           var snc_active = $(this).attr('href');
           $('html, body').animate({
-            scrollTop: $(snc_active).offset().top
+            scrollTop: $(snc_active).offset().top - 100
           }, 1000);
           $('a.smooth-scroll').removeClass('active');
           $(this).addClass('active');

@@ -391,7 +391,7 @@
       <div class="modal-body">
         <input type="hidden" name="id_delete" id="id_delete">
         <input type="hidden" name="type" id="type">
-        Are you sure you want to delete?
+        Anda yakin ingin menghapus?
       </div>
       <div class="modal-footer" id="foot">
         <button class="btn btn-primary" id="btn-delete-ok" data-dismiss="modal">

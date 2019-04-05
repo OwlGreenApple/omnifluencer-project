@@ -149,7 +149,7 @@
                 </span>
               </a>
 
-              <div class="dropdown-menu dropdown-menu-right profpic-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu dropdown-menu-right shadow-lg profpic-menu" aria-labelledby="navbarDropdown">
                 @foreach($notification as $notif)
                   <span class="dropdown-item">
                     @if($notif->type=='point')

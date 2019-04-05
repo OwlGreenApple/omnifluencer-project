@@ -111,16 +111,16 @@
             @guest
               <li class="nav-item main-menu">
                 <a class="nav-link <?php if(Request::is('login')) echo 'nav-active' ?>" href="{{url('login')}}">
-                  Sign In 
+                  Login
                 </a>
               </li>
               <li class="nav-item main-menu">
                 <a class="nav-link d-block d-sm-block d-md-block d-lg-none" href="{{url('register')}}">
-                  Sign Up
+                  Register
                 </a>
               </li>
               <button class="btn btn-primary navbar-btn d-none d-sm-none d-md-none d-lg-block btn-signup">
-                Sign Up
+                Register
               </button>
             @else
               <li class="nav-item main-menu">

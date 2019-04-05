@@ -14,7 +14,7 @@
             <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
             <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
 
-            <h2 class="form-title">Create an Omnifluencer<br>account within a minutes</h2>
+            <h2 class="form-title">Buat Akun Baru Omnifluencer</h2>
 
             @if (session('error') )
               <div class="col-md-12 alert alert-danger">
@@ -30,7 +30,7 @@
             <div class="form-group">
               <label class="label-title-test" for="name">Masukkan Nama Lengkap:</label>
 
-              <input id="name" type="text" class="form-input form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Your Full Name"  required autofocus>
+              <input id="name" type="text" class="form-input form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap"  required autofocus>
 
               @if ($errors->has('name'))
                 <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                 Masukkan Email:
               </label>
 
-              <input id="email" type="email" class="form-input form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Your Email" required>
+              <input id="email" type="email" class="form-input form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
 
               @if ($errors->has('email'))
                 <span class="invalid-feedback" role="alert">
@@ -72,7 +72,7 @@
                 Konfirmasi Password:
               </label>
 
-              <input id="password-confirm" type="password" class="form-input form-control" name="password_confirmation" placeholder="Confirm your password" required>
+              <input id="password-confirm" type="password" class="form-input form-control" name="password_confirmation" placeholder="Ketik ulang password Anda" required>
             </div>
 
             <div class="form-group">
@@ -81,34 +81,34 @@
               </label>
 
               <label class="radio-inline col-md-3">
-                <input type="radio" name="gender" value="1" checked> Male
+                <input type="radio" name="gender" value="1" checked> Pria
               </label>
 
               <label class="radio-inline col-md-4">
-                <input type="radio" name="gender" value="0"> Female
+                <input type="radio" name="gender" value="0"> Wanita
               </label>
             </div>
 
             <div class="form-group">
               <label for="agree-term" class="label-agree-term">
                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term mr-1" />
-                I agree with 
+                Menyetujui
                 <a href="{{url('statics/terms-conditions')}}" class="term-service">
-                  Terms and Conditions
+                  Syarat dan Ketentuan 
                 </a>
               </label>
             </div>
 
             <div class="form-group">
               <button type="submit" class="btn btn-block btn-primary form-submit pointer">
-                Sign up
+                REGISTER
               </button>
             </div>
           </form>
 
           <div align="center">
             <span class="loginhere">
-              Have already an account ? 
+              Sudah punya akun? klik
             </span>
             <?php if(isset($price)) { ?>
               <form method="POST" class="d-inline-block" action="{{ url('login-payment') }}">
@@ -117,12 +117,12 @@
                 <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
 
                 <a href="#" class="loginhere-link" onclick="$(this).closest('form').submit()">
-                  Sign In Here
+                  Login disini
                 </a>
               </form>
             <?php } else { ?>
               <a href="{{url('login')}}" class="loginhere-link">
-                Sign In Here
+                Login disini
               </a>
             <?php } ?>
           </div>
