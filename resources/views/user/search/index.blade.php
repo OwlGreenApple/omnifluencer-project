@@ -8,11 +8,11 @@
     refresh_page();
   });
 
-   jQuery(document).ready(function($) {
-            $('.counter').counterUp();
-        });
+  jQuery(document).ready(function($) {
+    $('.counter').counterUp();
+  });
 
-  $( "body" ).on( "click", ".btn-search", function(e) {
+  $("body").on("click", ".btn-search", function(e) {
     <?php if(!Auth::check()) { ?>
       if(currentHistory>=3){
         e.preventDefault();
@@ -27,71 +27,72 @@
       if($('#keywords').val()!=''){
         refresh_page();
       }
+    }
+    <?php } else { ?>
+    if ($('#keywords').val() != '') {
+      refresh_page();
+    }
     <?php } ?>
   });
 
-  $( "body" ).on( "click", ".username-history", function(e) 
-  {
+  $("body").on("click", ".username-history", function(e) {
     var id = $(this).attr('data-id');
     search_byid(id);
-    
+
   });
 
-  $( "body" ).on( "click", ".register-link", function(e) 
-  {
+  $("body").on("click", ".register-link", function(e) {
     e.preventDefault();
     $('.signup-content').show();
     $('.login-content').hide();
   });
 
-  $( "body" ).on( "click", ".loginhere-link", function(e)
-  {
+  $("body").on("click", ".loginhere-link", function(e) {
     e.preventDefault();
     $('.signup-content').hide();
     $('.login-content').show();
   });
 
-  $( "body" ).on( "click", ".btn-delete", function() {
+  $("body").on("click", ".btn-delete", function() {
     $('#id_delete').val($(this).attr('data-id'));
   });
 
-  $( "body" ).on( "click", "#btn-delete-ok", function() {
+  $("body").on("click", "#btn-delete-ok", function() {
     delete_history();
   });
 
-  $( "body" ).on( "click", ".btn-compare", function(e) {
+  $("body").on("click", ".btn-compare", function(e) {
     <?php if(!Auth::check()) { ?>
       e.preventDefault();
       $('.kuota-txt').html('Untuk melanjutkan, <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
       $('#info-kuota').modal('show');
     <?php } else { ?>
-      if(check_id()){
-        check_compare();
-      } else {
-        $('#message').html('Pilih akun terlebih dahulu');
-        $('#modal-pesan').modal('show');
-      }
+    if (check_id()) {
+      check_compare();
+    } else {
+      $('#message').html('Pilih akun terlebih dahulu');
+      $('#modal-pesan').modal('show');
+    }
     <?php } ?>
   });
 
-  function check_id(){
-    if ($(".boxcompare:checked").length > 0){
+  function check_id() {
+    if ($(".boxcompare:checked").length > 0) {
       return true;
     } else {
       return false;
     }
   }
 
-  function load_search(){
+  function load_search() {
     $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/search/load-search') ?>",
+      type: 'GET',
+      url: "<?php echo url('/search/load-search') ?>",
       data: {
-        keywords : $('#keywords').val(),
+        keywords: $('#keywords').val(),
       },
       dataType: 'text',
-      beforeSend: function()
-      {
+      beforeSend: function() {
         $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
@@ -101,12 +102,12 @@
 
         var data = jQuery.parseJSON(result);
 
-        if(data.status == 'success'){
+        if (data.status == 'success') {
           $('.content-akun').html(data.view);
           $('.counter').counterUp({
             delay: 10,
             time: 1000,
-            formatter: function (n) {
+            formatter: function(n) {
               return Math.round(n * 100) / 100;
             }
           });
@@ -119,7 +120,7 @@
             console.log("asd");
             }, { offset: '100%' }
           );*/
-          
+
           /*$('.progress .progress-right .progress-bar').waypoint(function() {
             // $('.progress .progress-right .progress-bar').css({
               // animation: "loading-1 0.5s linear forwards",
@@ -143,16 +144,15 @@
     });
   }
 
-  function search_byid(id){
+  function search_byid(id) {
     $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/search/load-search-byid') ?>",
+      type: 'GET',
+      url: "<?php echo url('/search/load-search-byid') ?>",
       data: {
-        id : id,
+        id: id,
       },
       dataType: 'text',
-      beforeSend: function()
-      {
+      beforeSend: function() {
         $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
@@ -162,12 +162,12 @@
 
         var data = jQuery.parseJSON(result);
 
-        if(data.status == 'success'){
+        if (data.status == 'success') {
           $('.content-akun').html(data.view);
           $('.counter').counterUp({
             delay: 10,
             time: 1000,
-            formatter: function (n) {
+            formatter: function(n) {
               return Math.round(n * 100) / 100;
             }
           });
@@ -176,16 +176,15 @@
     });
   }
 
-  function load_history(){
+  function load_history() {
     $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/search/load-history') ?>",
+      type: 'GET',
+      url: "<?php echo url('/search/load-history') ?>",
       data: {
-        keywords : $('#keywords').val(),
+        keywords: $('#keywords').val(),
       },
       dataType: 'text',
-      beforeSend: function()
-      {
+      beforeSend: function() {
         $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
@@ -196,8 +195,8 @@
         var data = jQuery.parseJSON(result);
         $('#content-history').html(data.view);
         currentHistory = data.count;
-        
-        if(data.count>=2){
+
+        if (data.count >= 2) {
           $('.boxcompare').show();
           $('.btn-compare').show();
         }
@@ -209,20 +208,19 @@
     });
   }
 
-  function refresh_page(){
+  function refresh_page() {
     load_search();
   }
 
-  function delete_history(){
+  function delete_history() {
     $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/search/delete-history') ?>",
+      type: 'GET',
+      url: "<?php echo url('/search/delete-history') ?>",
       data: {
-        id : $('#id_delete').val(),
+        id: $('#id_delete').val(),
       },
       dataType: 'text',
-      beforeSend: function()
-      {
+      beforeSend: function() {
         $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
@@ -236,7 +234,7 @@
           $('#keywords').val('');
           refresh_page();
         } else {
-          if(data.message=='kuota habis'){
+          if (data.message == 'kuota habis') {
             $('.kuota-txt').html('Delete hanya bisa 1 kali <br> Silahkan melakukan FREE Signup <br> untuk melanjutkan.');
             $('#info-kuota').modal('show');
           }
@@ -245,14 +243,13 @@
     });
   }
 
-  function check_compare(){
+  function check_compare() {
     $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/compare/check') ?>",
+      type: 'GET',
+      url: "<?php echo url('/compare/check') ?>",
       data: $('.form-compare').serialize(),
       dataType: 'text',
-      beforeSend: function()
-      {
+      beforeSend: function() {
         $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
@@ -262,9 +259,9 @@
 
         var data = jQuery.parseJSON(result);
 
-        if(data.status=='success'){
+        if (data.status == 'success') {
           // refresh_page();
-          window.location.href = "<?php echo url('compare'); ?>/"+data.message;
+          window.location.href = "<?php echo url('compare'); ?>/" + data.message;
         } else {
           $('#message').html(data.message);
           $('#modal-pesan').modal('show');
@@ -273,30 +270,29 @@
     });
   }
 
-  $( "body" ).on( "keypress", '#keywords', function(e)
-  {
-      if(e.which == 13) {
-        e.preventDefault();
-        refresh_page();
-      }
-  });  
+  $("body").on("keypress", '#keywords', function(e) {
+    if (e.which == 13) {
+      e.preventDefault();
+      refresh_page();
+    }
+  });
 </script>
 
 <style type="text/css">
-  .bigModal{
+  .bigModal {
     height: 430px;
   }
 </style>
 
 @if (session('error') )
-  <div class="col-md-12 alert alert-danger">
-    <strong>Warning!</strong> {{session('error')}}
-  </div>
+<div class="col-md-12 alert alert-danger">
+  <strong>Warning!</strong> {{session('error')}}
+</div>
 @endif
 @if (session('success') )
-  <div class="col-md-12 alert alert-success">
-    <strong>Success!</strong> {{session('success')}}
-  </div>
+<div class="col-md-12 alert alert-success">
+  <strong>Success!</strong> {{session('success')}}
+</div>
 @endif
 
 <section class="page-title">
@@ -315,7 +311,7 @@
 
 <section class="content">
   <div class="container">
-    
+
     <!--<div id="pesan" class="alert"></div>-->
 
     <div class="row">
@@ -326,7 +322,7 @@
           <div class="history justify-content-center">
             <h3>Enter Instagram Username<br>and tap Calculate!</h3>
             <form class="form-inline d-flex justify-content-center" action="/action_page.php">
-              @csrf 
+              @csrf
               <div class="form-group">
                 <input type="text" class="form-control" id="keywords" placeholder="username" name="username" value="{{$keywords}}">
               </div>
@@ -336,7 +332,7 @@
             </form>
           </div>
         </div>
-          
+
         <div class="col-12" id="div-progress">
           <div class="history justify-content-center">
 
@@ -344,6 +340,7 @@
 
             <div id="content-history"></div>
             
+
           </div>
         </div>
       </div>
@@ -358,7 +355,7 @@
     <div class="row">
       <div class="col-lg-5 col-sm-12 percent-title">
         <h1>
-          Omnifluencer telah menganalisa 
+          Omnifluencer telah menganalisa
           100.000+ Influencer
           di Instagram
         </h1>
@@ -403,8 +400,8 @@
           </div>
         </div>
       </div>
-      
-<!--      Mobile View Card-->
+
+      <!--      Mobile View Card-->
       <div class="row col-md-12 mobilecard">
         <div class="col-md-4 col-4 d-block d-sm-none">
           <div class="card">
@@ -485,7 +482,7 @@
           </div>
           <div class="photos-thumb">
             <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-04.png')}}" />
-            </div>
+          </div>
           <div class="photos-thumb">
             <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-05.png')}}" />
           </div>
@@ -495,23 +492,23 @@
         </div>
       </div>
     </div>
-    
+
     @guest
-      <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-          <button type="submit" class="btn btn-default btn-sbmt-btm grads" data-toggle="modal" data-target=".bd-example-modal-lg" data-whatever="join"><span>JOIN NOW!</span></button>
-        </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <button type="submit" class="btn btn-default btn-sbmt-btm grads" data-toggle="modal" data-target=".bd-example-modal-lg" data-whatever="join"><span>JOIN NOW!</span></button>
       </div>
-    @else 
-      <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-          <a href="{{url('dashboard')}}">
-            <button type="button" class="btn btn-default btn-sbmt-btm grads">
-              <span>DASHBOARD</span>
-            </button>
-          </a>
-        </div>
+    </div>
+    @else
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <a href="{{url('dashboard')}}">
+          <button type="button" class="btn btn-default btn-sbmt-btm grads">
+            <span>DASHBOARD</span>
+          </button>
+        </a>
       </div>
+    </div>
     @endguest
 
   </div>
@@ -541,9 +538,9 @@
                   <input type="text" class="form-input{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" name="name" id="name" placeholder="Your Full Name" required autofocus />
 
                   @if ($errors->has('name'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('name') }}</strong>
-                    </span>
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('name') }}</strong>
+                  </span>
                   @endif
                 </div>
 
@@ -551,12 +548,12 @@
                   <label class="label-title-test" for="email">
                     Masukkan Email:
                   </label>
-                  <input type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" name="email" placeholder="Your Email" required/>
+                  <input type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" name="email" placeholder="Your Email" required />
 
                   @if ($errors->has('email'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('email') }}</strong>
-                    </span>
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('email') }}</strong>
+                  </span>
                   @endif
                 </div>
 
@@ -569,9 +566,9 @@
                   <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
 
                   @if ($errors->has('password'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('password') }}</strong>
-                    </span>
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('password') }}</strong>
+                  </span>
                   @endif
                 </div>
 
@@ -579,7 +576,7 @@
                   <label class="label-title-test" for="password-confirm">
                     Konfirmasi Password:
                   </label>
-                  <input type="password" class="form-input" name="password_confirmation" id="password-confirm" placeholder="Confirm your password" required/>
+                  <input type="password" class="form-input" name="password_confirmation" id="password-confirm" placeholder="Confirm your password" required />
                 </div>
 
                 <div class="form-group">
@@ -597,9 +594,9 @@
                 </div>
 
                 <div class="form-group form-group-mob">
-                  <label for="agree-term" class="label-agree-term"><span><span></span></span>With this, I am agree with 
+                  <label for="agree-term" class="label-agree-term"><span><span></span></span>With this, I am agree with
                     <a href="{{url('statics/terms-conditions')}}" class="term-service">
-                      Terms and Conditions 
+                      Terms and Conditions
                     </a>
                   </label>
                 </div>
@@ -619,14 +616,14 @@
                 <h2 class="form-title">Please input your<br>Email & Password</h2>
 
                 <div class="form-group">
-                  <label for="email" class="label-title-test">  Masukkan Email:
+                  <label for="email" class="label-title-test"> Masukkan Email:
                   </label>
                   <input type="email" class="form-input{{ $errors->has('email') ? ' is-invalid' : '' }} " name="email" value="{{ old('email') }}" placeholder="Your Email" required autofocus>
 
                   @if ($errors->has('email'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('email') }}</strong>
-                    </span>
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('email') }}</strong>
+                  </span>
                   @endif
                 </div>
 
@@ -637,22 +634,22 @@
                   <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
 
                   @if ($errors->has('password'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('password') }}</strong>
-                    </span>
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('password') }}</strong>
+                  </span>
                   @endif
                 </div>
 
                 <div class="form-group form-group-mob">
-                    <button type="submit" class="btn btn-primary form-submit pointer">
-                      Sign In
-                    </button>
+                  <button type="submit" class="btn btn-primary form-submit pointer">
+                    Sign In
+                  </button>
 
-                    @if (Route::has('password.request'))
-                      <a class="btn btn-link" href="{{ route('password.request') }}">
-                        {{ __('Forgot Your Password?') }}
-                      </a>
-                    @endif
+                  @if (Route::has('password.request'))
+                  <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                  </a>
+                  @endif
                 </div>
 
                 <p class="loginhere">
@@ -670,7 +667,7 @@
 <!-- Modal Confirm Delete -->
 <div class="modal fade" id="confirm-delete" role="dialog">
   <div class="modal-dialog">
-    
+
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -692,14 +689,14 @@
         </button>
       </div>
     </div>
-      
+
   </div>
 </div>
 
 <!-- Modal Info Kuota -->
-<div class="modal fade" id="info-kuota" role="dialog" >
+<div class="modal fade" id="info-kuota" role="dialog">
   <div class="modal-dialog modal-lg">
-    
+
     <!-- Modal content-->
     <div class="modal-content bigModal">
       <div class="modal-body bg-kuota" align="left">
@@ -711,7 +708,7 @@
             LOG IN
           </button>
         </a>
-  
+
         <a href="{{url('register')}}">
           <button class="btn btn-success">
             FREE SIGN UP
@@ -719,7 +716,7 @@
         </a>
       </div>
     </div>
-      
+
   </div>
 </div>
 @endsection
