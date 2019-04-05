@@ -96,32 +96,41 @@
         }
       ?>
       <div class="row">
-        <div class="col-md-7 h-40">
+        <div class="col-md-7">
           <div class="card">  
             <div class="card-body point-card">
               <div class="row"> 
-                <div class="col-md-2 col-12" align="center">  
+                <div class="col-lg-3 col-md-3 col-12" align="center">  
                   <img class="profpic" id="profpic-point" src="<?php echo $profpic ?>" altSrc="{{asset('/design/profpic-user.png')}}" onerror="this.src = $(this).attr('altSrc')">
                 </div>
 
-                <div class="col-md-6 col-12 center-mobile"> 
-                  <h4><b>{{Auth::user()->name}}</b></h4>
-                  <i>{{ucfirst(Auth::user()->membership)}} Membership</i> <br>
-                  <i>
-                    @if(Auth::user()->membership=='free')
-                      No Expired
-                    @else 
-                      Expire on : 
-                      {{date('d-m-Y',strtotime(Auth::user()->valid_until))}}
-                    @endif
-                  </i>
+                <div class="col-lg-5 col-md-5 col-12 center-mobile">
+                  <h4 class="point-name">
+                    <b>{{Auth::user()->name}}</b>
+                  </h4>
+                  <span class="point-member">
+                    <i>
+                      {{ucfirst(Auth::user()->membership)}} Membership
+                    </i><br>
+                    <i>
+                      @if(Auth::user()->membership=='free')
+                        No Expired
+                      @else 
+                        Expire on : 
+                        {{date('d-m-Y',strtotime(Auth::user()->valid_until))}}
+                      @endif
+                    </i>  
+                  </span>
+                  
                 </div>
 
-                <div class="col-md-4 col-12 center-mobile" align="right">
+                <div class="col-lg-4 col-md-4 col-12 center-mobile" align="right">
                   <span><b>Total points :</b></span> <br>
                   <p>
                     <i class="fas fa-coins"></i>
-                    <span style="font-size: 28px;margin-left: 5px;">{{Auth::user()->point}}</span>
+                    <span class="point-total">
+                      {{Auth::user()->point}}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -144,7 +153,7 @@
           </div>
         </div>  
 
-        <div class="col-md-5 h-60">
+        <div class="col-md-5">
           <div class="card">  
             <!--<div class="card-header membership" align="center">
               <h3>PRO MEMBER</h3>
