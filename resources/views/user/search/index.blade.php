@@ -27,11 +27,6 @@
       if($('#keywords').val()!=''){
         refresh_page();
       }
-    }
-    <?php } else { ?>
-    if ($('#keywords').val() != '') {
-      refresh_page();
-    }
     <?php } ?>
   });
 

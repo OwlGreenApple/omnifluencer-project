@@ -57,8 +57,18 @@
   <div class="row sub-title-btm">
     <div class="col">
       <div class="rowcom">
-        <button type="button" class="btn btn-light btn-md" style="background-color:#dbdbdb;border-color:transparent;"><i class="fas fa-sync-alt"></i>&nbsp;COMPARE</button>
-        <button type="button" class="btn btn-light btn-md" style="background-color:#f7f7f7;border-color:transparent;"><i class="fas fa-tachometer-alt"></i>&nbsp;DASHBOARD</button>
+
+        <button type="button" class="btn btn-light btn-md btn-compare" style="background-color:#dbdbdb;border-color:transparent;">
+          <i class="fas fa-sync-alt"></i>&nbsp;COMPARE
+        </button>
+
+        <a href="{{url('dashboard')}}">
+          <button type="button" class="btn btn-light btn-md" style="background-color:#f7f7f7;border-color:transparent;">
+            <i class="fas fa-tachometer-alt"></i>
+            &nbsp;DASHBOARD
+          </button>  
+        </a>
+        
 
         <!--
       <button type="button" class="btn btn-default btn-compare grads" data-toggle="modal" data-target="#compareModal" data-whatever="compare" style="display: none">
