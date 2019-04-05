@@ -54,25 +54,47 @@
             </div>
 
             <div class="form-group">
-              <label class="label-title-test" for="password">
+              <label class="label-title-test">
                 Masukkan Password:
               </label>
 
-              <input id="password" type="password" class="form-input form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
+              <div class="input-group" id="show_password">
+                <input id="password" type="password" class="form-input form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required style="width: auto !important">
 
-              @if ($errors->has('password'))
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $errors->first('password') }}</strong>
-                </span>
-              @endif
+                <div class="input-group-append" for="password">
+                  <label class="input-group-text">
+                    <span class="icon-pass">
+                      <i class="fas fa-eye-slash" aria-hidden="true"></i>
+                    </span>
+                  </label>
+                </div>
+
+                @if ($errors->has('password'))
+                  <span class="invalid-feedback" role="alert">
+                    <strong>
+                      {{ $errors->first('password') }}
+                    </strong>
+                  </span>
+                @endif
+              </div>
             </div>
 
             <div class="form-group">
-              <label class="label-title-test" for="password-confirm">
+              <label class="label-title-test">
                 Konfirmasi Password:
               </label>
 
-              <input id="password-confirm" type="password" class="form-input form-control" name="password_confirmation" placeholder="Ketik ulang password Anda" required>
+              <div class="input-group" id="show_password_confirm">
+                <input id="password-confirm" type="password" class="form-input form-control" name="password_confirmation" placeholder="Ketik ulang password Anda" required style="width: auto !important">
+
+                <div class="input-group-append" for="password-confirm">
+                  <label class="input-group-text">
+                    <span class="icon-pass-confirm">
+                      <i class="fas fa-eye-slash" aria-hidden="true"></i>
+                    </span>    
+                  </label>
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
@@ -132,4 +154,28 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#show_password .icon-pass").on('click', function(e) {
+      if($('#show_password input').attr("type") == "text"){
+        $('#show_password input').attr('type', 'password');
+        $('#show_password .icon-pass').html('<i class="fas fa-eye-slash" aria-hidden="true"></i>');
+      } else if($('#show_password input').attr("type") == "password"){
+        $('#show_password input').attr('type', 'text');
+        $('#show_password .icon-pass').html('<i class="fas fa-eye" aria-hidden="true"></i>');
+      }
+    });
+
+    $("#show_password_confirm .icon-pass-confirm").on('click', function(e) {
+      if($('#show_password_confirm input').attr("type") == "text"){
+        $('#show_password_confirm input').attr('type', 'password');
+        $('#show_password_confirm .icon-pass-confirm').html('<i class="fas fa-eye-slash" aria-hidden="true"></i>');
+      } else if($('#show_password_confirm input').attr("type") == "password"){
+        $('#show_password_confirm input').attr('type', 'text');
+        $('#show_password_confirm .icon-pass-confirm').html('<i class="fas fa-eye" aria-hidden="true"></i>');
+      }
+    });
+  });  
+</script>
 @endsection

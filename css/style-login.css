@@ -1,4 +1,8 @@
 /*FORM*/
+.icon-pass, .icon-pass-confirm {
+  cursor: pointer;
+}
+
 .signup-content {
   background: #fff;
   border-radius: 10px;

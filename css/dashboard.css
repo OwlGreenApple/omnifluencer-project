@@ -386,6 +386,11 @@ sub {
 }
 
 /* Poin history */
+.point-total {
+  font-size: 28px;
+  margin-left: 5px;
+}
+
 #profpic-point{
   width: 75px;
   height: 75px;
@@ -417,6 +422,18 @@ sub {
 .desc-point {
   font-size: 14px;
   font-weight: 600;
+}
+
+@media screen and (max-width: 769px) {
+  .point-name {
+    font-size: 20px;
+  }
+  .point-member {
+    font-size: 13px;
+  }
+  .point-total {
+    font-size: 23px;
+  }
 }
 
 /* Dashboard */
