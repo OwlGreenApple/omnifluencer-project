@@ -495,7 +495,7 @@
       </div>
     </div>
     @else
-    <div class="row">
+    <!--<div class="row">
       <div class="col-12 d-flex justify-content-center">
         <a href="{{url('dashboard')}}">
           <button type="button" class="btn btn-default btn-sbmt-btm grads">
@@ -503,7 +503,7 @@
           </button>
         </a>
       </div>
-    </div>
+    </div>-->
     @endguest
 
   </div>
