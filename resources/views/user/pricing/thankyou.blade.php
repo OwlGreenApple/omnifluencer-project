@@ -31,7 +31,7 @@
           <div class="card-body">
             <span style="font-size: 48px; color: Dodgerblue;"><i class="fas fa-search"></i></span>
             <h5 class="card-title">Find Our Email</h5>
-            <p class="card-text">Temukan email yang dikirim oleh Activfans mengenai konfirmasi pembayaran.</p>
+            <p class="card-text">Temukan email yang dikirim oleh Omnifluencer mengenai konfirmasi pembayaran.</p>
           </div>
         </div>
       </div>
