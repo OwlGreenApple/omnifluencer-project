@@ -2,7 +2,7 @@
   <div class="col-md-3 col-6" id="pro">
     <div class="card">
       <div class="card-body card-point">
-        <a href="{{url('points/1')}}">
+        <a href="{{url('reward-points/1')}}">
           <img src="{{asset('design/upgrade-pro-sm.jpg')}}" class="img-point">
         </a>  
 
@@ -21,7 +21,7 @@
   <div class="col-md-3 col-6">
     <div class="card">
       <div class="card-body card-point">
-        <a href="{{url('points/2')}}">
+        <a href="{{url('reward-points/2')}}">
           <img src="{{asset('design/upgrade-premium-sm.jpg')}}" class="img-point">
         </a>
 
@@ -40,7 +40,7 @@
   <!--<div class="col-md-3 col-6">
     <div class="card">
       <div class="card-body card-point">
-        <a href="{{url('points/3')}}">
+        <a href="{{url('reward-points/3')}}">
           <img src="https://via.placeholder.com/150x100" class="img-point">
         </a>
 
@@ -59,7 +59,7 @@
   <!--<div class="col-md-3 col-6">
     <div class="card">
       <div class="card-body card-point">
-        <a href="{{url('points/4')}}">
+        <a href="{{url('reward-points/4')}}">
           <img src="https://via.placeholder.com/150x100" class="img-point">
         </a>
 

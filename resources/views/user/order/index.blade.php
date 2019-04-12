@@ -133,7 +133,7 @@
 
       <div class="row">
         <div class="col-md-8 col-6">
-          <h2><b>Orders</b></h2>  
+          <h2><b>Billing</b></h2>  
         </div>  
       </div>
 

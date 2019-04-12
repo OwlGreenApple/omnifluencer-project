@@ -9,13 +9,41 @@
         <div class="col-12">
           <h1>Thank You For Your Purchasing</h1>
           <hr class="orn">
-          <p class="pg-title">Setelah Anda menyelesaikan langkah-langkah konfirmasi berikut, segera lakukan pembayaran untuk mendapatkan akses langsung ke akun Omnifluencer Anda!</p>
+          <p class="pg-title">
+          Setelah Anda menyelesaikan langkah-langkah konfirmasi ini, segera lakukan pembayaran untuk mendapatkan akses langsung ke akun Omnifluencer Anda!
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="container konten">
+  <div class="container konten text-center">
+    <div class="offset-sm-2 col-sm-8">
+      <div class="card h-80 card-payment">
+        <div class="card-body">
+          <p class="card-text">
+            Silahkan melakukan Transfer Bank ke
+          </p> 
+          <h2>8290981477</h2>
+          <p class="card-text">
+            BCA <b>Rizky Redjosoewignjo</b>
+          </p>
+          <p class="card-text">
+            Setelah Transfer, silahkan Klik tombol konfirmasi di bawah ini <br> atau Email bukti Transfer anda ke <b>omnifluencer@gmail.com</b> <br>
+            Admin kami akan membantu anda max 1x24 jam
+          </p>
+
+          <a href="{{url('billing')}}">
+            <button class="btn btn-success" style="font-size: 19px;padding: 10px 30px;">
+              KONFIRMASI TRANSFER BANK
+            </button>
+          </a>
+        </div>
+      </div>  
+    </div>
+  
+    <br>
+
     <div class="row">
       <div class="col-sm-4">
         <div class="card h-80">

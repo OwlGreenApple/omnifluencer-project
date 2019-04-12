@@ -276,7 +276,7 @@
           </span>
         </li>
 
-        <li class="<?php if(Request::is('history-search') or Request::is('compare-history') or Request::is('saved-profile')) echo 'active' ?>">
+        <li class="<?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="#infSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
               <i class="fas fa-certificate icon-menu"></i>
@@ -284,11 +284,11 @@
             </a>
           </span>
           
-          <ul class="collapse list-unstyled <?php if(Request::is('history-search') or Request::is('compare-history') or Request::is('saved-profile')) echo 'show' ?>" id="infSubmenu">
-            <li class="<?php if(Request::is('history-search')) echo 'active' ?>">
-              <a href="{{url('history-search')}}">
+          <ul class="collapse list-unstyled <?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile')) echo 'show' ?>" id="infSubmenu">
+            <li class="<?php if(Request::is('history-influencer')) echo 'active' ?>">
+              <a href="{{url('history-influencer')}}">
                 <i class="fas fa-history icon-menu"></i>
-                History
+                History Influencer
               </a>
             </li>
 
@@ -330,18 +330,18 @@
           </span>
         </li>
 
-        <li class="<?php if(Request::is('orders')) echo 'active' ?>">
+        <li class="<?php if(Request::is('billing')) echo 'active' ?>">
           <span class="submenu-navbar">
-            <a href="{{url('orders')}}">
+            <a href="{{url('billing')}}">
               <i class="far fa-money-bill-alt icon-menu"></i>
               Billing
             </a>
           </span>
         </li>
 
-        <li class="<?php if(Request::is('points') or Request::is('points/*')) echo 'active' ?>">
+        <li class="<?php if(Request::is('reward-points') or Request::is('reward-points/*')) echo 'active' ?>">
           <span class="submenu-navbar">
-            <a href="{{url('points')}}">
+            <a href="{{url('reward-points')}}">
               <i class="far fa-gem icon-menu"></i>
               Reward Points
             </a>

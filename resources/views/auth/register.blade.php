@@ -113,7 +113,7 @@
 
             <div class="form-group">
               <label for="agree-term" class="label-agree-term">
-                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term mr-1" />
+                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term mr-1" required/>
                 Menyetujui
                 <a href="{{url('statics/terms-conditions')}}" class="term-service">
                   Syarat dan Ketentuan 
@@ -122,7 +122,7 @@
             </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-block btn-primary form-submit pointer">
+              <button type="submit" class="btn btn-block btn-primary form-submit pointer btn-register">
                 REGISTER
               </button>
             </div>
@@ -156,6 +156,14 @@
 </div>
 
 <script type="text/javascript">
+  /*$(document).on( "submit", "#signup-form", function() {
+    if($('#agree-term').prop("checked") == false){
+      $('#message').html('Silakan centang syarat dan ketentuan terlebih dahulu.');
+      $('#modal-pesan').modal('show');
+      return false;
+    } 
+  });*/
+
   $(document).ready(function() {
     $("#show_password .icon-pass").on('click', function(e) {
       if($('#show_password input').attr("type") == "text"){

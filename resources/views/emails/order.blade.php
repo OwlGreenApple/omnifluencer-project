@@ -19,7 +19,7 @@ Anda telah memesan paket
 	 
 	
 	dan setelah selesai membayar<br>
-	silahkan lakukan konfirmasi pembayaran di menu Orders pada dashboard, atau bisa dengan mengklik <a href="{{url('orders')}}"> --> KONFIRMASI PEMBAYARAN <-- </a> disini. <br>
+	silahkan lakukan konfirmasi pembayaran di menu Orders pada dashboard, atau bisa dengan mengklik <a href="{{url('billing')}}"> --> KONFIRMASI PEMBAYARAN <-- </a> disini. <br>
 
 <br> Salam hangat, 
 <br>

@@ -39,8 +39,8 @@ Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
 
 //FAQ
 Route::get('/faq','HomeController@index_faq');
-Route::get('/statics','HomeController@index_statics');
-Route::get('/statics/{page}','HomeController@index_statics_page');
+Route::get('/about-us','HomeController@index_statics');
+Route::get('/about-us/{page}','HomeController@index_statics_page');
 
 //pricing
 Route::get('/pricing','OrderController@pricing');
@@ -67,7 +67,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/referral/load-referral','ReferralController@load_referral');
 
   //History Search
-  Route::get('/history-search','AccountController@index_history');
+  Route::get('/history-influencer','AccountController@index_history');
   Route::get('/history-search/load-history-search','AccountController@load_history_search');
   Route::get('/history-search/get-groups','AccountController@get_groups');
   Route::get('/history-search/add-groups','AccountController@add_groups');
@@ -88,9 +88,9 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/dashboard','ProfileController@index_dashboard');
 
   //Points 
-  Route::get('/points','PointController@index');  
+  Route::get('/reward-points','PointController@index');  
   Route::get('/points/load-points','PointController@load_points'); 
-  Route::get('/points/{id}','PointController@index_redeem');
+  Route::get('/reward-points/{id}','PointController@index_redeem');
   Route::get('/redeem-point','PointController@redeem_point');
 
   //Upgrade Account 
@@ -135,7 +135,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/send-email-bulk','AccountController@send_email_bulk');
 
   //Order
-  Route::get('/orders','OrderController@index_order');
+  Route::get('/billing','OrderController@index_order');
   Route::get('/orders/load-order','OrderController@load_order');
   Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
 });

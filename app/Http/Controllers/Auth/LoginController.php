@@ -11,7 +11,7 @@ use App\Helpers\Helper;
 use App\User;
 use App\Order;
 
-use Crypt, Carbon, Mail;
+use Crypt, Carbon, Mail, Auth;
 
 class LoginController extends Controller
 {
@@ -96,7 +96,9 @@ class LoginController extends Controller
                 $user->is_confirm = 1;
                 $user->save();
                 
-                return redirect('/login')->with("success","Welcome to Omnifluencer! Thank you for confirming your e-mail address.");  
+                //return redirect('/login')->with("success","Welcome to Omnifluencer! Thank you for confirming your e-mail address.");  
+                Auth::loginUsingId($user->id);
+                return redirect('/dashboard')->with("success", "Thank you for confirming your email.");
             }
             else{
               return redirect(404);

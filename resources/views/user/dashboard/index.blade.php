@@ -45,6 +45,20 @@
       
       <br>
 
+      @if (session('success') )
+        <div class="col-md-12 alert alert-success">
+          <strong>Success!</strong> {{session('success')}}
+        </div>
+        <br>
+      @endif
+
+      @if(Auth::user()->is_confirm==0)
+        <div class="col-md-12 alert alert-warning">
+          Please check your inbox to verify your email address.    
+        </div>
+        <br>
+      @endif
+
       @if(Auth::user()->is_admin==0)
         <div class="row">
           <div class="col-md-3 col-6">
@@ -75,7 +89,7 @@
           </div>
           
           <div class="col-md-3 col-6">
-            <a href="{{url('pricing')}}">
+            <a href="{{url('upgrade-account')}}">
               <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership=='free') echo 'd-block' ?>">
                 Upgrade To Pro
               </button>
@@ -132,7 +146,7 @@
 
           <div class="col-md-3 col-6">
 
-            <a href="{{url('pricing')}}">
+            <a href="{{url('upgrade-account')}}">
               <button class="btn btn-primary btn-upgrade <?php if(Auth::user()->membership!='premium') echo 'd-block' ?>">
                 <?php  
                   if(Auth::user()->membership=='free'){

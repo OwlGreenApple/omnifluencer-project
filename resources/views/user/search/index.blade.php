@@ -451,63 +451,67 @@
         </p>
       </div>
     </div>
-    <hr class="orn">
   </div>
 </section>
 
-<section class="join">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1>Join Our Community<br>Right Now!</h1>
-        <p class="pg-title">Gabung bersama komunitas Omnifluencer</p>
+
+@guest
+  <hr class="orn">
+  
+  <section class="join">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>Join Our Community<br>Right Now!</h1>
+          <p class="pg-title">Gabung bersama komunitas Omnifluencer</p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="col d-flex justify-content-center imgthmb">
-          <div class="photos-thumb">
-            <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-01.png')}}" />
-          </div>
-          <div class="photos-thumb">
-            <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-02.png')}}" />
-          </div>
-          <div class="photos-thumb">
-            <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-03.png')}}" />
-          </div>
-          <div class="photos-thumb">
-            <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-04.png')}}" />
-          </div>
-          <div class="photos-thumb">
-            <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-05.png')}}" />
-          </div>
-          <div class="photos-thumb-last">
-            <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-06.png')}}" />
+      <div class="row">
+        <div class="col-12">
+          <div class="col d-flex justify-content-center imgthmb">
+            <div class="photos-thumb">
+              <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-01.png')}}" />
+            </div>
+            <div class="photos-thumb">
+              <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-02.png')}}" />
+            </div>
+            <div class="photos-thumb">
+              <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-03.png')}}" />
+            </div>
+            <div class="photos-thumb">
+              <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-04.png')}}" />
+            </div>
+            <div class="photos-thumb">
+              <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-05.png')}}" />
+            </div>
+            <div class="photos-thumb-last">
+              <img class="mx-auto d-block" src="{{asset('design/thumb-sm-btm-06.png')}}" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    @guest
-    <div class="row">
-      <div class="col-12 d-flex justify-content-center">
-        <button type="submit" class="btn btn-default btn-sbmt-btm grads" data-toggle="modal" data-target=".bd-example-modal-lg" data-whatever="join"><span>JOIN NOW!</span></button>
-      </div>
-    </div>
-    @else
-    <!--<div class="row">
-      <div class="col-12 d-flex justify-content-center">
-        <a href="{{url('dashboard')}}">
-          <button type="button" class="btn btn-default btn-sbmt-btm grads">
-            <span>DASHBOARD</span>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <button type="submit" class="btn btn-default btn-sbmt-btm grads" data-toggle="modal" data-target=".bd-example-modal-lg" data-whatever="join">
+            <span>JOIN NOW!</span>
           </button>
-        </a>
+        </div>
       </div>
-    </div>-->
-    @endguest
+    </div>  
+  </section>    
+@else
+  <!--<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+      <a href="{{url('dashboard')}}">
+        <button type="button" class="btn btn-default btn-sbmt-btm grads">
+          <span>DASHBOARD</span>
+        </button>
+      </a>
+    </div>
+  </div>-->
+@endguest
 
-  </div>
-</section>
 
 <!-- Modal Join -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
