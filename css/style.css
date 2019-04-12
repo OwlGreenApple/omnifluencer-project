@@ -334,7 +334,19 @@ input[type="text"] {
   width: 140px;
 }
 
+.btn-dashboard {
+  background-color:#f7f7f7;
+  border-color:transparent;
+}
+
+.btn-dashboard:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
 .btn-compare {
+  background-color:#dbdbdb;
+  border-color:transparent;
   /*width: 125px;
   font-size: 16px;
   font-weight: 600;
@@ -354,15 +366,18 @@ input[type="text"] {
 */
 }
 
-/*
+
 .btn-compare:hover {
-  background-position: 100% 0;
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+  /*background-position: 100% 0;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
-  transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;*/
 }
-*/
+
 
 .btn-compare:focus {
   outline: none;

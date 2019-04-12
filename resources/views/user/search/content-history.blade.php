@@ -58,12 +58,12 @@
     <div class="col">
       <div class="rowcom">
 
-        <button type="button" class="btn btn-light btn-md btn-compare" style="background-color:#dbdbdb;border-color:transparent;">
+        <button type="button" class="btn btn-light btn-md btn-compare">
           <i class="fas fa-sync-alt"></i>&nbsp;COMPARE
         </button>
 
         <a href="{{url('dashboard')}}">
-          <button type="button" class="btn btn-light btn-md" style="background-color:#f7f7f7;border-color:transparent;">
+          <button type="button" class="btn btn-light btn-md btn-dashboard">
             <i class="fas fa-tachometer-alt"></i>
             &nbsp;DASHBOARD
           </button>  
