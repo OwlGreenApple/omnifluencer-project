@@ -661,7 +661,9 @@ input[type="text"] {
 }
 
 .btn-sbmt-btm.grads {
-  background-color: #31e80d;
+  /*background-color: #31e80d;*/
+  background-color: #51d633;
+  border-color: #28a745;
   box-shadow: 0 1px 2px 0 rgba(75, 75, 75, 0.50);
   width: 340px;
   font-size: 24px;
@@ -670,9 +672,10 @@ input[type="text"] {
 }
 
 .btn-sbmt-btm.grads:hover {
+  background-color: #49c92c;
+  box-shadow: 1px 3px 4px 1px rgba(75, 75, 75, 0.6);
   /*  background-image: linear-gradient(to right, #FF7B00, #F9B91E, #ef9d43, #FF7B00);*/
   /*  background-image: linear-gradient(to right, #0EB810, #15D518, #15D518, #21B623);*/
-  box-shadow: 1px 3px 4px 1px rgba(75, 75, 75, 0.6);
 }
 
 
