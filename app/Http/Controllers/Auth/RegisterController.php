@@ -19,7 +19,7 @@ use App\Mail\ConfirmEmail;
 
 use App\Helpers\Helper;
 
-use Carbon, Crypt, Mail;
+use Carbon, Crypt, Mail,Auth;
 
 class RegisterController extends Controller
 {
@@ -211,6 +211,8 @@ class RegisterController extends Controller
           return redirect('thankyou');
         } else {
           return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
+          /*Auth::loginUsingId($user->id);
+          return redirect('/dashboard')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");*/
         }
       } else {
         return redirect("register")->with("error",$validator->errors()->first());

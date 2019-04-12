@@ -56,7 +56,7 @@
                 <input type="text" class="form-input" name="text" id="text" placeholder="Masukkan Kode Kupon Disini" />
               </div>
               <div class="form-group">
-                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
                 <label for="agree-term" class="label-agree-term">
                   <span>
                     <span></span>
@@ -65,7 +65,7 @@
                 </label>
               </div>
               <div class="form-group">
-                <input type="submit" name="submit" id="submit" class="form-submit pointer" value="Confirm Your Payment" />
+                <input type="submit" name="submit" id="submit" class="btn btn-primary form-submit pointer" value="Confirm Your Payment" />
               </div>
             </form>
           </div>

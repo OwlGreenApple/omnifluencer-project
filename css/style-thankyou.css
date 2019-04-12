@@ -71,6 +71,11 @@ h6 {
   border: 1px solid rgba(0,0,0,.125);
 }
 
+.card-payment {
+  background-color: #fcf9f2;
+  border-color: #fcf1d1;
+}
+
 .card-title {
   font-size: 24px;
   font-weight: 600;

@@ -94,7 +94,7 @@
               </a>
             </li>
             <li class="nav-item main-menu">
-              <a class="nav-link <?php if(Request::is('statics')) echo 'nav-active' ?>" href="{{url('statics')}}">
+              <a class="nav-link <?php if(Request::is('about-us')) echo 'nav-active' ?>" href="{{url('about-us')}}">
                 About Us
               </a>
             </li>
@@ -271,22 +271,22 @@
                       </a> 
                     </li>
                     <li> 
-                      <a href="{{url('statics/about-us')}}"> 
+                      <a href="{{url('about-us/about-us')}}"> 
                         About Us 
                       </a> 
                     </li>
                     <li> 
-                      <a href="{{url('statics/earnings-disclaimer')}}">
+                      <a href="{{url('about-us/earnings-disclaimer')}}">
                         Earnings and Legal Disclaimer
                       </a> 
                     </li>
                     <li> 
-                      <a href="{{url('statics/disclaimer')}}"> 
+                      <a href="{{url('about-us/disclaimer')}}"> 
                         Disclaimer
                       </a> 
                     </li>
                     <li> 
-                      <a href="{{url('statics/terms-conditions')}}"> 
+                      <a href="{{url('about-us/terms-conditions')}}"> 
                         Terms and Conditions 
                       </a> 
                     </li>

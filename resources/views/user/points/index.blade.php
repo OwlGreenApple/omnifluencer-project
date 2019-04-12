@@ -77,7 +77,7 @@
 
       <div class="row">
         <div class="col-md-8 col-6">
-          <h2><b>Points</b></h2>  
+          <h2><b>Reward Points</b></h2>  
         </div>  
       </div>
       
