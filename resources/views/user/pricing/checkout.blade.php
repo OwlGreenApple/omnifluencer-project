@@ -18,6 +18,12 @@
       <div class="col-12">
         <div class="signup">
           <div class="signup-content">
+             @if (session('error') )
+              <div class="col-md-12 alert alert-danger">
+                <strong>Warning!</strong> {{session('error')}}
+              </div>
+            @endif
+            
             <?php if (Auth::check()) {?>
               <!-- ditaruh di session -->
               <form method="POST" action="{{url('confirm-payment')}}" id="signup-form" class="signup-form">
@@ -58,9 +64,6 @@
               <div class="form-group">
                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
                 <label for="agree-term" class="label-agree-term">
-                  <span>
-                    <span></span>
-                  </span>
                   Menyetujui <a href="{{url('statics/terms-conditions')}}" class="term-service">Syarat dan Ketentuan</a>
                 </label>
               </div>

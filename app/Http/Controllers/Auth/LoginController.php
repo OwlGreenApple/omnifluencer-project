@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use App\Helpers\Helper;
+use App\Http\Controllers\OrderController;
 
 use App\User;
 use App\Order;
@@ -48,6 +49,11 @@ class LoginController extends Controller
     protected function authenticated(Request $request,$user)
     {
       if ($request->price<>"") {
+        $ordercont = new OrderController;
+        $stat = $ordercont->cekharga($request->namapaket,$request->price);
+        if($stat==false){
+          return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+        }
         //create order 
         $dt = Carbon::now();
         $order = new Order;
@@ -74,6 +80,7 @@ class LoginController extends Controller
         Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
           $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
           $message->to($user->email);
+          $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
           $message->subject('[Omnifluencer] Order Nomor '.$order_number);
         });
 

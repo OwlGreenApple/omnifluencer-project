@@ -29,6 +29,25 @@ class OrderController extends Controller
     return view('user.pricing.thankyou');
   }
 
+  public function cekharga($namapaket, $price){
+    $paket = array(
+      'Pro Monthly' => 197000,
+      'Premium Monthly' => 297000,
+      'Pro Yearly' => 708000,
+      'Premium Yearly' => 1068000
+    );
+
+    if(isset($paket[$namapaket])){
+      if($price!=$paket[$namapaket]){
+        return false; 
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
   public function checkout($id){
     return view('user.pricing.checkout')->with(array(
 			'id'=>$id,		
@@ -36,6 +55,12 @@ class OrderController extends Controller
   }
   
   public function register_payment(Request $request){
+    $stat = $this->cekharga($request->namapaket,$request->price);
+
+    if($stat==false){
+      return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+    }
+
     return view('auth.register')->with(array(
 			"price"=>$request->price,
 			"namapaket"=>$request->namapaket,
@@ -43,6 +68,12 @@ class OrderController extends Controller
   }
   
   public function login_payment(Request $request){
+    $stat = $this->cekharga($request->namapaket,$request->price);
+
+    if($stat==false){
+      return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+    }
+
     return view('auth.login')->with(array(
       "price"=>$request->price,
       "namapaket"=>$request->namapaket,
@@ -50,6 +81,12 @@ class OrderController extends Controller
   }
 
   public function confirm_payment(Request $request){
+    $stat = $this->cekharga($request->namapaket,$request->price);
+
+    if($stat==false){
+      return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+    }
+
     $user = Auth::user();
     
     //create order 
@@ -78,6 +115,7 @@ class OrderController extends Controller
     Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
       $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
       $message->to($user->email);
+      $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
       $message->subject('[Omnifluencer] Order Nomor '.$order_number);
     });
 

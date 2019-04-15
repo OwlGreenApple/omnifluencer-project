@@ -18,6 +18,7 @@ use App\PointLog;
 use App\Mail\ConfirmEmail;
 
 use App\Helpers\Helper;
+use App\Http\Controllers\OrderController;
 
 use Carbon, Crypt, Mail,Auth;
 
@@ -66,6 +67,13 @@ class RegisterController extends Controller
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'min:6', 'confirmed'],
+      ]);
+    }
+
+    protected function cek_emailvalid(array $data)
+    {
+      return Validator::make($data, [
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
       ]);
     }
 
@@ -160,6 +168,7 @@ class RegisterController extends Controller
         Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
           $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
           $message->to($user->email);
+          $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
           $message->subject('[Omnifluencer] Order Nomor '.$order_number);
         });
       }
@@ -180,8 +189,30 @@ class RegisterController extends Controller
       }
     }
 
+    public function cek_email(Request $request){
+      $validator = $this->cek_emailvalid($request->all());
+
+      if($validator->fails()){
+        $arr['status'] = 'error';
+        $arr['message'] = $validator->errors()->first();
+      } else {
+        $arr['status'] = 'success';
+        $arr['message'] = $validator->errors()->first();
+      }
+
+      return $arr;
+    }
+
     public function register(Request $request){
       $validator = $this->validator($request->all());
+
+      if($request->price<>""){
+        $ordercont = new OrderController;
+        $stat = $ordercont->cekharga($request->namapaket,$request->price);
+        if($stat==false){
+          return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+        }
+      }
 
       if(!$validator->fails()) {
         $user = $this->create($request->all());
@@ -219,7 +250,7 @@ class RegisterController extends Controller
       }
     }
 
-    public function post_register(Request $request){
+    /*public function post_register(Request $request){
       $validator = $this->validator($request->all());
 
       if(!$validator->fails()) {
@@ -249,5 +280,5 @@ class RegisterController extends Controller
       } else {
         return redirect("register")->with("error",$validator->errors()->first());
       }
-    }
+    }*/
 }

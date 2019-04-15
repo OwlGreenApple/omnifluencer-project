@@ -3,6 +3,69 @@
 @section('content')
 <link href="{{ asset('css/style-login.css') }}" rel="stylesheet">
 
+<script type="text/javascript">
+  var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+      clearTimeout (timer);
+      timer = setTimeout(callback, ms);
+    };
+  })();
+
+  function cekemail(){
+    $.ajax({
+      type: 'POST',
+      url: "<?php echo url('/register/cek-email') ?>",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: { 
+        email:$('#email').val()
+      },
+      dataType: 'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        if (data.status == 'success') {
+          $('#email').addClass('is-valid');
+          $('#email').removeClass('is-invalid');
+        } else {
+          $('.email-msg').html(data.message);
+          $('#email').removeClass('is-valid');
+          $('#email').addClass('is-invalid');
+        }
+      }
+    });
+  }
+</script>
+
+<style type="text/css">
+  .form-control.is-valid, .was-validated .form-control:valid {
+    border-color: #28a745;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("design/green-check.png");
+    background-repeat: no-repeat;
+    background-position: center right calc(.375em + .1875rem);
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+  }
+
+  .form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("design/red-cross.png");
+    background-repeat: no-repeat;
+    background-position: center right calc(.375em + .1875rem);
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+  }
+</style>
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8 col-12">
@@ -50,7 +113,14 @@
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $errors->first('email') }}</strong>
                 </span>
+              @else 
+                <span class="invalid-feedback" role="alert">
+                  <strong class="email-msg"></strong>
+                </span>
               @endif
+
+              <div class="valid-feedback"></div>
+
             </div>
 
             <div class="form-group">
@@ -165,6 +235,12 @@
   });*/
 
   $(document).ready(function() {
+    $('#email').keyup(function() {
+      delay(function(){
+        cekemail();
+      }, 1000 );
+    });
+
     $("#show_password .icon-pass").on('click', function(e) {
       if($('#show_password input').attr("type") == "text"){
         $('#show_password input').attr('type', 'password');

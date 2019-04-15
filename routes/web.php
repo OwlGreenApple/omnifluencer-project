@@ -18,6 +18,7 @@ Route::get('/tes-igcallback', 'TesController@tes_igcallback');
 
 //Auth
 Route::post('post-register', 'Auth\RegisterController@post_register');
+Route::post('register/cek-email', 'Auth\RegisterController@cek_email');
 
 //Home
 Route::get('/home', 'AccountController@index')
