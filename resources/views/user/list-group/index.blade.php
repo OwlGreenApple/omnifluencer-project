@@ -28,6 +28,8 @@
         keywords : $('#keywords').val(),
         from : $('#from').val(),
         to : $('#to').val(),
+        act : act,
+        status :status,
       },
       dataType: 'text',
       beforeSend: function()
@@ -335,10 +337,10 @@
             <th class="menu-mobile">
               Select / De-select All
             </th>
-            <th class="menu-nomobile">
+            <th class="menu-nomobile header" action="username">
               Instagram
             </th>
-            <th class="menu-nomobile">
+            <th class="menu-nomobile header" action="created_at">
               Date
             </th>
             <th>Action</th>

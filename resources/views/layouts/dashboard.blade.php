@@ -64,6 +64,37 @@
   ?>
 
   <script type="text/javascript">
+    var status = 'not-sort';
+    var act = '';
+
+    //function saat klik header table (sort asc)
+    $(document).on('click', 'th.header', function (e) {
+      if(!$(this).hasClass("asc")){
+        status = 'asc';
+        act = $(this).attr('action');
+        
+        refresh_page();
+
+        $("th").removeClass("asc");
+        $("th").removeClass("desc");
+        $(this).addClass("asc");
+      }
+    });
+
+    //function saat klik header table (sort desc)
+    $(document).on('click', 'th.asc', function (e) {
+      if(!$(this).hasClass("desc")) {
+        status = 'desc';
+        act = $(this).attr('action');
+
+        refresh_page();
+
+        $("th").removeClass("asc");
+        $("th").removeClass("desc");
+        $(this).addClass("desc");
+      }
+    });
+    
     $(document).ready(function() {
       var countnotif = '{{$countnotif}}';
 
