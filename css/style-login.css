@@ -113,6 +113,37 @@
   color: #222;
 }
 
+.loading-form {
+  background-image: url("../design/loading-form.gif") !important;
+  background-repeat: no-repeat;
+  background-position: center right calc(.375em + .1875rem);
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.form-control.is-valid, .was-validated .form-control:valid {
+  border-image-source: none;
+  box-shadow: none !important;
+  border-color: #28a745;
+  /*padding-right: calc(1.5em + .75rem);*/
+  background-image: url("../design/green-check.png");
+  background-repeat: no-repeat;
+  /*background-position: center right calc(.375em + .1875rem);*/
+  background-position: center right 12px;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  border-image-source: none;
+  box-shadow: none !important;
+  border-color: #dc3545;
+  /*padding-right: calc(1.5em + .75rem);*/
+  background-image: url("../design/red-cross.png");
+  background-repeat: no-repeat;
+  /*background-position: center right calc(.375em + .1875rem);*/
+  background-position: center right 12px;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
 .form-submit {
   width: 100%;
   padding: 15px 10px;

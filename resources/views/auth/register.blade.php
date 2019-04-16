@@ -24,12 +24,10 @@
       },
       dataType: 'text',
       beforeSend: function() {
-        $('#loader').show();
-        $('.div-loading').addClass('background-load');
+        $('#email').addClass('loading-form');
       },
       success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
+        $('#email').removeClass('loading-form');
 
         var data = jQuery.parseJSON(result);
 
@@ -45,26 +43,6 @@
     });
   }
 </script>
-
-<style type="text/css">
-  .form-control.is-valid, .was-validated .form-control:valid {
-    border-color: #28a745;
-    padding-right: calc(1.5em + .75rem);
-    background-image: url("design/green-check.png");
-    background-repeat: no-repeat;
-    background-position: center right calc(.375em + .1875rem);
-    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-  }
-
-  .form-control.is-invalid, .was-validated .form-control:invalid {
-    border-color: #dc3545;
-    padding-right: calc(1.5em + .75rem);
-    background-image: url("design/red-cross.png");
-    background-repeat: no-repeat;
-    background-position: center right calc(.375em + .1875rem);
-    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-  }
-</style>
 
 <div class="container">
   <div class="row justify-content-center">
@@ -107,7 +85,7 @@
                 Masukkan Email:
               </label>
 
-              <input id="email" type="email" class="form-input form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
+              <input id="email" type="email" class="form-input form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required autocomplete="off">
 
               @if ($errors->has('email'))
                 <span class="invalid-feedback" role="alert">

@@ -316,7 +316,7 @@
               <p>Dapatkan informasi terkini mengenai tips influencer, media sosial dan perkembangannya. </p>
               <form class="form-inline form-inline-btm" >
                 @csrf
-                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                <input type="email" class="form-control" id="email-sub" placeholder="Enter email" name="email">
                 <div class="form-check">
                 </div>
                 <button id="button-subscribe" class="btn btn-primary btn-primary-btm">Submit</button>
@@ -385,7 +385,7 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },      
       data: {
-        email: $("#email").val(),
+        email: $("#email-sub").val(),
       },
       dataType: 'text',
       beforeSend: function()
