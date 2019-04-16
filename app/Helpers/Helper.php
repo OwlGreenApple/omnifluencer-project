@@ -9,6 +9,16 @@ use DB, Crypt, App;
 
 class Helper
 {
+  public static function sorting($model,$sort,$action){
+    if($sort=='asc'){
+      $model = $model->orderBy($action,'asc');
+    } else if($sort=='desc'){
+      $model = $model->orderBy($action,'desc');
+    }
+
+    return $model;
+  }
+  
   public static function abbreviate_number($n,$precision){
     if ($n < 999) {
       // 0 - 900
