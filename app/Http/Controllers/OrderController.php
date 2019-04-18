@@ -278,7 +278,6 @@ class OrderController extends Controller
     Mail::send('emails.confirm-order', $emaildata, function ($message) use ($user,$order) {
       $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
       $message->to($user->email);
-      $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
       $message->subject('[Omnifluencer] Konfirmasi Order '.$order->no_order);
     });
 
