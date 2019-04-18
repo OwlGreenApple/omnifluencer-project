@@ -8,6 +8,8 @@ use App\PointLog;
 use App\User;
 use App\UserLog;
 
+use App\Helpers\Helper;
+
 use App\Http\Controllers\OrderController;
 
 use Auth, DateTime;
@@ -18,8 +20,12 @@ class PointController extends Controller
       return view('user.points.index');
     }
 
-    public function load_points(){
-      $points = PointLog::where('user_id',Auth::user()->id)->paginate(15);
+    public function load_points(Request $request){
+      $points = PointLog::where('user_id',Auth::user()->id);
+
+      $points = Helper::sorting($points,$request->status,$request->act);
+
+      $points = $points->paginate(15);
 
       $arr['view'] = (string) view('user.points.content')
                         ->with('points',$points);

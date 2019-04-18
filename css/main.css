@@ -38,6 +38,25 @@ body {
   display: none;
 }*/
 
+/* Sorter */
+th.header {   
+  background-image: url("../design/sorter.png");
+  cursor: pointer; 
+  background-repeat: no-repeat; 
+  background-position: center right;
+  background-size: 10px 15px; 
+}
+
+th.desc { 
+  background-image: url("../design/sorterdesc.png"); 
+  background-size: 10px 9px; 
+}  
+
+th.asc { 
+  background-image: url("../design/sorterasc.png"); 
+  background-size: 10px 9px; 
+}
+
 /* loader */
 .background-load {
   background-color: #a39f9f;

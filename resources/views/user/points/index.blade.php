@@ -24,7 +24,8 @@
       type : 'GET',
       url : currentPage,
       data: {
-        keywords : $('#keywords').val(),
+        act : act,
+        status :status,
       },
       dataType: 'text',
       beforeSend: function()
@@ -235,13 +236,13 @@
         
           <table class="table">
             <thead align="center">
-              <th class="header" action="created_at">
+              <th>
                 Date
               </th>
-              <th class="header" action="keterangan">
+              <th>
                 Description
               </th>
-              <th class="header" action="jml_point">
+              <th>
                 Points
               </th>
             </thead>

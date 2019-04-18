@@ -27,6 +27,8 @@
         keywords : $('#keywords').val(),
         from : $('#from').val(),
         to : $('#to').val(),
+        act : act,
+        status : status,
       },
       dataType: 'text',
       beforeSend: function()
@@ -293,7 +295,7 @@
             <th class="menu-nomobile">
               Instagram
             </th>
-            <th class="menu-nomobile">
+            <th class="menu-nomobile header" action="updated_at">
               Date
             </th>
             <th>
