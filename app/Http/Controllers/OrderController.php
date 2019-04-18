@@ -270,7 +270,17 @@ class OrderController extends Controller
     $notif->keterangan = 'Order '.$order->no_order.' telah dikonfirmasi oleh admin. Terimakasih dan selamat menikmati layanan kami.';
     $notif->save();
 
-    Mail::to($user->email)->queue(new ConfirmOrderMail($user,$order));
+    // Mail::to($user->email)->queue(new ConfirmOrderMail($user,$order));
+    $emaildata = [
+        'order' => $order,
+        'user' => $user,
+    ];
+    Mail::send('emails.confirm-order', $emaildata, function ($message) use ($user,$order) {
+      $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+      $message->to($user->email);
+      $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
+      $message->subject('[Omnifluencer] Konfirmasi Order '.$order->no_order);
+    });
 
     $arr['status'] = 'success';
     $arr['message'] = 'Order berhasil dikonfirmasi';
