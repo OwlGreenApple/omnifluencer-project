@@ -127,9 +127,15 @@ class OrderController extends Controller
   }
 
   public function load_order(Request $request){
-    $orders = Order::where('user_id',Auth::user()->id)
-                ->orderBy('created_at','descend')
-                ->paginate(15);
+    $orders = Order::where('user_id',Auth::user()->id);
+
+    if($request->status=='not-sort'){
+      $orders = $orders->orderBy('created_at','descend');
+    } else {
+      $orders = Helper::sorting($orders,$request->status,$request->act);
+    }
+                
+    $orders = $orders->paginate(15);
 
     $arr['view'] = (string) view('user.order.content')
                       ->with('orders',$orders);

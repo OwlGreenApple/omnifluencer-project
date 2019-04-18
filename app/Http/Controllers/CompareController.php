@@ -7,6 +7,8 @@ use App\HistoryCompare;
 use App\User;
 use App\Account;
 
+use App\Helpers\Helper;
+
 use App\Mail\ProfileCompareEmail;
 
 use App\Http\Controllers\AccountController;
@@ -362,8 +364,13 @@ class CompareController extends Controller
                 ->whereDate("history_compares.created_at","<=",$dt1);
       }
 
-      $compares = $compares->orderBy('history_compares.updated_at','desc')
-                  ->paginate(15);
+      if($request->status=='not-sort'){
+        $compares = $compares->orderBy('history_compares.updated_at','desc');
+      } else {
+        $compares = Helper::sorting($compares,$request->status,$request->act);
+      }
+      
+        $compares = $compares->paginate(15);
 
       $arr['view'] = (string) view('user.compare-history.content')
                         ->with('compares',$compares);

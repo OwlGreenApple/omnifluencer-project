@@ -11,6 +11,8 @@ use App\Group;
 use App\Save;
 use App\Subscribe;
 
+use App\Helpers\Helper;
+
 use App\Mail\ProfileEmail;
 use App\Mail\ProfileBulkEmail;
 
@@ -372,8 +374,13 @@ class AccountController extends Controller
               ->whereDate("history_searchs.created_at","<=",$dt1);
     }
 
-    $accounts = $accounts->orderBy('history_searchs.updated_at','desc')
-          ->paginate(15);
+    if($request->status=='not-sort'){
+      $accounts = $accounts->orderBy('history_searchs.updated_at','desc');
+    } else {
+      $accounts = Helper::sorting($accounts,$request->status,$request->act);
+    }
+    
+    $accounts = $accounts->paginate(15);
 
     $arr['view'] = (string) view('user.history-search.content')
                       ->with('accounts',$accounts);

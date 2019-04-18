@@ -21,6 +21,10 @@
     $.ajax({
       type : 'GET',
       url : currentPage,
+      data : {
+        act : act,
+        status : status,
+      },
       dataType: 'text',
       beforeSend: function()
       {
@@ -153,19 +157,19 @@
             <th class="menu-mobile">
               Details
             </th>
-            <th class="menu-nomobile" action="no_order">
+            <th class="menu-nomobile header" action="no_order">
               No Order
             </th>
-            <th class="menu-nomobile" action="package">
+            <th class="menu-nomobile header" action="package">
               Package
             </th>
-            <th class="menu-nomobile" action="total">
+            <th class="menu-nomobile header" action="total">
               Total
             </th>
-            <th class="menu-nomobile" action="discount">
+            <th class="menu-nomobile header" action="discount">
               Discount
             </th>
-            <th class="menu-nomobile" action="created_at">
+            <th class="menu-nomobile header" action="created_at">
               Date
             </th>
             <th class="menu-nomobile">

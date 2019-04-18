@@ -34,10 +34,12 @@
         if (data.status == 'success') {
           $('#email').addClass('is-valid');
           $('#email').removeClass('is-invalid');
+          $(".btn-register").attr("disabled", false);
         } else {
           $('.email-msg').html(data.message);
           $('#email').removeClass('is-valid');
           $('#email').addClass('is-invalid');
+          $(".btn-register").attr("disabled", true);
         }
       }
     });

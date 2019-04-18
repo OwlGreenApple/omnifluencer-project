@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Group;
 use App\Save;
 
+use App\Helpers\Helper;
+
 use Auth, Carbon;
 
 class GroupController extends Controller
@@ -29,6 +31,8 @@ class GroupController extends Controller
         $groups = $groups->whereDate("created_at",">=",$dt)
               ->whereDate("created_at","<=",$dt1);
       }
+
+      $groups = Helper::sorting($groups,$request->status,$request->act);
 
       $groups = $groups->paginate(15);
 
@@ -60,6 +64,8 @@ class GroupController extends Controller
         $accounts = $accounts->whereDate("saves.created_at",">=",$dt)
                 ->whereDate("saves.created_at","<=",$dt1);
       }
+
+      $accounts = Helper::sorting($accounts,$request->status,$request->act);
 
       $accounts = $accounts->paginate(15);
 
@@ -94,6 +100,8 @@ class GroupController extends Controller
         $accounts = $accounts->whereDate("saves.created_at",">=",$dt)
                 ->whereDate("saves.created_at","<=",$dt1);
       }
+
+      $accounts = Helper::sorting($accounts,$request->status,$request->act);
 
       $accounts = $accounts->paginate(15);
 

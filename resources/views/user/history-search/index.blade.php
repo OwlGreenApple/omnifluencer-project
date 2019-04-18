@@ -96,6 +96,8 @@
         keywords : $('#keywords').val(),
         from : $('#from').val(),
         to : $('#to').val(),
+        act:act,
+        status:status,
       },
       dataType: 'text',
       beforeSend: function()
@@ -514,22 +516,22 @@
             <th class="menu-mobile">
               Select / De-select All
             </th>
-            <th class="menu-nomobile">
+            <th class="header menu-nomobile" action="username">
               Instagram
             </th>
-            <th class="menu-nomobile">
+            <th class="header menu-nomobile" action="eng_rate">
               Eng. Rate
             </th>
-            <th class="menu-nomobile">
+            <th class="header menu-nomobile" action="jml_followers">
               Followers
             </th>
-            <th class="menu-nomobile">
+            <th class="header menu-nomobile" action="jml_post">
               Posts
             </th>
             <th class="menu-nomobile">
               Groups
             </th>
-            <th class="menu-nomobile">
+            <th class="header menu-nomobile" action="updated_at">
               Date
             </th>
             <th>Action</th>
