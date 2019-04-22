@@ -21,13 +21,11 @@ class TesController extends Controller
       $end_cursor = null;
       $private = false;
       $lastpost = null;
-      dd($arr_res);
-      // echo $arr_res->username;
-      exit;
+      // dd($arr_res);
       do {
         // $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
         // $arr_res2 = AccountController::igcallback($url2);    
-        $arr_res2 = InstagramHelper::get_user_feed($arr_res["username"],$end_cursor);
+        $arr_res2 = json_decode(InstagramHelper::get_user_feed($arr_res["username"],$end_cursor),true);
 
         // $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
         // $arr_res3 = AccountController::igcallback($url3,'string');
