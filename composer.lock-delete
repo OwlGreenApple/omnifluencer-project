@@ -4,11 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a1224eb4c3612249807f9ffceb18fef",
+    "content-hash": "3e37986b8a0266c5380be9d322c95665",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
+<<<<<<< HEAD
+<<<<<<< HEAD
+            "version": "3.86.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php.git",
+                "reference": "0f38d6b5625c4e6ea8891abd6a75e3d35e3ef465"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0f38d6b5625c4e6ea8891abd6a75e3d35e3ef465",
+                "reference": "0f38d6b5625c4e6ea8891abd6a75e3d35e3ef465",
+=======
+            "version": "3.90.8",
+=======
             "version": "3.92.1",
+>>>>>>> 11321cc400816d2e4e720db78cd393248a69e60a
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
@@ -16,8 +32,14 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bccb5b3509ed7517e50a75bba6b19ac4506aae70",
+                "reference": "bccb5b3509ed7517e50a75bba6b19ac4506aae70",
+>>>>>>> 908fad0dbdce78b5a8a56b1f632007cd5f886a0d
+=======
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/94ecf9ad388d9fd04e8dfe492fd9484f94efb69e",
                 "reference": "94ecf9ad388d9fd04e8dfe492fd9484f94efb69e",
+>>>>>>> 11321cc400816d2e4e720db78cd393248a69e60a
                 "shasum": ""
             },
             "require": {
@@ -86,7 +108,15 @@
                 "s3",
                 "sdk"
             ],
+<<<<<<< HEAD
+<<<<<<< HEAD
+            "time": "2019-01-21T22:52:28+00:00"
+=======
+            "time": "2019-03-22T19:48:31+00:00"
+>>>>>>> 908fad0dbdce78b5a8a56b1f632007cd5f886a0d
+=======
             "time": "2019-04-19T18:08:54+00:00"
+>>>>>>> 11321cc400816d2e4e720db78cd393248a69e60a
         },
         {
             "name": "barryvdh/laravel-snappy",
@@ -1442,6 +1472,18 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
+            "version": "v5.7.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "64a7749bd9e8df68addce1d01a54bcf606141f29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/64a7749bd9e8df68addce1d01a54bcf606141f29",
+                "reference": "64a7749bd9e8df68addce1d01a54bcf606141f29",
+=======
             "version": "v5.7.28",
             "source": {
                 "type": "git",
@@ -1452,6 +1494,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/8e69728f1c80a024588adbd24c65c4fcf9aa9192",
                 "reference": "8e69728f1c80a024588adbd24c65c4fcf9aa9192",
+>>>>>>> 908fad0dbdce78b5a8a56b1f632007cd5f886a0d
                 "shasum": ""
             },
             "require": {
@@ -1584,7 +1627,11 @@
                 "framework",
                 "laravel"
             ],
+<<<<<<< HEAD
+            "time": "2019-01-22T15:08:35+00:00"
+=======
             "time": "2019-02-26T15:41:34+00:00"
+>>>>>>> 908fad0dbdce78b5a8a56b1f632007cd5f886a0d
         },
         {
             "name": "laravel/nexmo-notification-channel",
@@ -1861,7 +1908,7 @@
                 {
                     "name": "Luís Otávio Cobucci Oblonczyk",
                     "email": "lcobucci@gmail.com",
-                    "role": "Developer"
+                    "role": "developer"
                 }
             ],
             "description": "A simple library to work with JSON Web Token and JSON Web Signature",
@@ -2397,6 +2444,18 @@
         },
         {
             "name": "nikic/php-parser",
+<<<<<<< HEAD
+            "version": "v4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
+                "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
+=======
             "version": "v4.2.1",
             "source": {
                 "type": "git",
@@ -2407,6 +2466,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5221f49a608808c1e4d436df32884cbc1b821ac0",
                 "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0",
+>>>>>>> 908fad0dbdce78b5a8a56b1f632007cd5f886a0d
                 "shasum": ""
             },
             "require": {
@@ -2444,6 +2504,22 @@
                 "parser",
                 "php"
             ],
+<<<<<<< HEAD
+            "time": "2019-01-12T16:31:37+00:00"
+        },
+        {
+            "name": "opis/closure",
+            "version": "3.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/opis/closure.git",
+                "reference": "41f5da65d75cf473e5ee582df8fc7f2c733ce9d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/opis/closure/zipball/41f5da65d75cf473e5ee582df8fc7f2c733ce9d6",
+                "reference": "41f5da65d75cf473e5ee582df8fc7f2c733ce9d6",
+=======
             "time": "2019-02-16T20:54:15+00:00"
         },
         {
@@ -2458,6 +2534,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/opis/closure/zipball/ccb8e3928c5c8181c76cdd0ed9366c5bcaafd91b",
                 "reference": "ccb8e3928c5c8181c76cdd0ed9366c5bcaafd91b",
+>>>>>>> 908fad0dbdce78b5a8a56b1f632007cd5f886a0d
                 "shasum": ""
             },
             "require": {
@@ -2505,7 +2582,11 @@
                 "serialization",
                 "serialize"
             ],
+<<<<<<< HEAD
+            "time": "2019-01-14T14:45:33+00:00"
+=======
             "time": "2019-02-22T10:30:00+00:00"
+>>>>>>> 908fad0dbdce78b5a8a56b1f632007cd5f886a0d
         },
         {
             "name": "paragonie/random_compat",
@@ -6222,7 +6303,23 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
+<<<<<<< HEAD
+            "version": "7.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7c89093bd00f7d5ddf0ab81dee04f801416b4944",
+                "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944",
+=======
+            "version": "7.5.7",
+=======
             "version": "7.5.9",
+>>>>>>> 11321cc400816d2e4e720db78cd393248a69e60a
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
@@ -6230,8 +6327,14 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/eb343b86753d26de07ecba7868fa983104361948",
+                "reference": "eb343b86753d26de07ecba7868fa983104361948",
+>>>>>>> 908fad0dbdce78b5a8a56b1f632007cd5f886a0d
+=======
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/134669cf0eeac3f79bc7f0c793efbc158bffc160",
                 "reference": "134669cf0eeac3f79bc7f0c793efbc158bffc160",
+>>>>>>> 11321cc400816d2e4e720db78cd393248a69e60a
                 "shasum": ""
             },
             "require": {
@@ -6302,7 +6405,15 @@
                 "testing",
                 "xunit"
             ],
+<<<<<<< HEAD
+<<<<<<< HEAD
+            "time": "2019-01-15T08:19:08+00:00"
+=======
+            "time": "2019-03-16T07:31:17+00:00"
+>>>>>>> 908fad0dbdce78b5a8a56b1f632007cd5f886a0d
+=======
             "time": "2019-04-19T15:50:46+00:00"
+>>>>>>> 11321cc400816d2e4e720db78cd393248a69e60a
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

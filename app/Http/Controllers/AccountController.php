@@ -12,6 +12,7 @@ use App\Save;
 use App\Subscribe;
 
 use App\Helpers\Helper;
+use App\Helpers\InstagramHelper;
 
 use App\Mail\ProfileEmail;
 use App\Mail\ProfileBulkEmail;
@@ -86,11 +87,13 @@ class AccountController extends Controller
     //var_dump($arr_res2);
 
     do {
-      $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
-      $arr_res2 = AccountController::igcallback($url2);    
+      // $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
+      // $arr_res2 = AccountController::igcallback($url2);    
+      $arr_res2 = json_decode(InstagramHelper::get_user_feed($arr_res["username"],$end_cursor));
 
-      $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
-      $arr_res3 = AccountController::igcallback($url3,'string');
+      // $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
+      // $arr_res3 = AccountController::igcallback($url3,'string');
+      $arr_res3 = InstagramHelper::get_user_feed_maxid($arr_res["username"],$end_cursor);
       $end_cursor = $arr_res3;
 
       if($end_cursor=='InstagramAPI\Response\UserFeedResponse: Not authorized to view user.'){
@@ -209,9 +212,9 @@ class AccountController extends Controller
           }
         }
 
-        $url = "http://cmx.space/get-user-data/".$request->keywords;
+        // $url = "http://cmx.space/get-user-data/".$request->keywords;
 
-        $arr_res = AccountController::igcallback($url);
+        $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords));
         
         if($arr_res!=null){
           $account = $this->create_account($arr_res);
