@@ -46,7 +46,10 @@ Route::get('/about-us/{page}','HomeController@index_statics_page');
 //pricing
 Route::get('/pricing','OrderController@pricing');
 Route::get('/thankyou','OrderController@thankyou');
+Route::get('/checkout/pro-15hari','OrderController@checkout_free');
 Route::get('/checkout/{id}','OrderController@checkout');
+
+
 Route::post('/confirm-payment','OrderController@confirm_payment');
 Route::post('/register-payment','OrderController@register_payment');
 Route::post('/login-payment','OrderController@login_payment');

@@ -208,7 +208,7 @@ class AccountController extends Controller
             }
           }
         }
-      
+
         $url = "http://cmx.space/get-user-data/".$request->keywords;
 
         $arr_res = AccountController::igcallback($url);

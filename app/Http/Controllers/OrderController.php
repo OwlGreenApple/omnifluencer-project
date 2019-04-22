@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Account;
 use App\HistorySearch;
 use App\User;
+use App\UserLog;
 use App\Group;
 use App\Save;
 use App\Order;
-use App\UserLog;
 use App\Notification;
 
 use App\Mail\ConfirmOrderMail;
@@ -20,7 +20,9 @@ use Auth,Mail,Validator,Storage,DateTime;
 use Carbon\Carbon;
 
 class OrderController extends Controller
-{
+{ 
+  protected $coupon_code ='omnipro2019';
+
   public function pricing(){
     return view('user.pricing.pricing');
   }
@@ -34,7 +36,8 @@ class OrderController extends Controller
       'Pro Monthly' => 197000,
       'Premium Monthly' => 297000,
       'Pro Yearly' => 708000,
-      'Premium Yearly' => 1068000
+      'Premium Yearly' => 1068000,
+      'Pro 15 hari' => 98500,
     );
 
     if(isset($paket[$namapaket])){
@@ -54,6 +57,10 @@ class OrderController extends Controller
 		));
   }
   
+  public function checkout_free(){
+    return view('user.pricing.checkout_free');
+  }
+
   public function register_payment(Request $request){
     $stat = $this->cekharga($request->namapaket,$request->price);
 
@@ -64,6 +71,7 @@ class OrderController extends Controller
     return view('auth.register')->with(array(
 			"price"=>$request->price,
 			"namapaket"=>$request->namapaket,
+      "coupon_code"=>$request->coupon_code,
 		));
   }
   
@@ -77,6 +85,7 @@ class OrderController extends Controller
     return view('auth.login')->with(array(
       "price"=>$request->price,
       "namapaket"=>$request->namapaket,
+      "coupon_code"=>$request->coupon_code,
     ));  
   }
 
@@ -88,36 +97,68 @@ class OrderController extends Controller
     }
 
     $user = Auth::user();
-    
-    //create order 
-    $dt = Carbon::now();
-    $order = new Order;
-    $str = 'OMNI'.$dt->format('ymdHi');
-    $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
-    $order->no_order = $order_number;
-    $order->user_id = $user->id;
-    $order->package = $request->namapaket;
-    $order->jmlpoin = 0;
-    $order->total = $request->price;
-    $order->discount = 0;
-    $order->status = 0;
-    $order->buktibayar = "";
-    $order->keterangan = "";
-    $order->save();
-    
-    //mail order to user 
-    $emaildata = [
-        'order' => $order,
-        'user' => $user,
-        'nama_paket' => $request->namapaket,
-        'no_order' => $order_number,
-    ];
-    Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-      $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
-      $message->to($user->email);
-      $message->bcc(['puspita.celebgramme@gmail.com','it.axiapro@gmail.com']);
-      $message->subject('[Omnifluencer] Order Nomor '.$order_number);
-    });
+
+    if($request->namapaket=='Pro 15 hari' and $request->coupon_code==$this->coupon_code){
+      //create order 
+      $dt = Carbon::now();
+      $order = new Order;
+      $str = 'OMNI'.$dt->format('ymdHi');
+      $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
+      $order->no_order = $order_number;
+      $order->user_id = $user->id;
+      $order->package = $request->namapaket;
+      $order->jmlpoin = 0;
+      $order->total = 0;
+      $order->discount = $request->price;
+      $order->status = 2;
+      $order->buktibayar = "";
+      $order->keterangan = "";
+      $order->save();
+
+      $valid = $this->add_time($user,"+15 days");
+
+      $userlog = new UserLog;
+      $userlog->user_id = $user->id;
+      $userlog->type = 'membership';
+      $userlog->value = 'pro';
+      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
+      //$userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid.')';
+      $userlog->save();
+
+      $user->valid_until = $valid;
+      $user->membership = 'pro';
+      $user->save();
+    } else {
+      //create order 
+      $dt = Carbon::now();
+      $order = new Order;
+      $str = 'OMNI'.$dt->format('ymdHi');
+      $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
+      $order->no_order = $order_number;
+      $order->user_id = $user->id;
+      $order->package = $request->namapaket;
+      $order->jmlpoin = 0;
+      $order->total = $request->price;
+      $order->discount = 0;
+      $order->status = 0;
+      $order->buktibayar = "";
+      $order->keterangan = "";
+      $order->save();
+      
+      //mail order to user 
+      $emaildata = [
+          'order' => $order,
+          'user' => $user,
+          'nama_paket' => $request->namapaket,
+          'no_order' => $order_number,
+      ];
+      Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+        $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+        $message->to($user->email);
+        $message->bcc(['puspita.celebgramme@gmail.com','it.axiapro@gmail.com']);
+        $message->subject('[Omnifluencer] Order Nomor '.$order_number);
+      });
+    }
 
     return view('user.pricing.thankyou');
   }

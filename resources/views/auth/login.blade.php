@@ -13,6 +13,7 @@
             @csrf
             <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
             <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
+            <input type="hidden" name="coupon_code" value="<?php if (isset($coupon_code)) {echo $coupon_code;} ?>">
 
             <h2 class="form-title">Masukkan<br>Email & Password</h2>
 
