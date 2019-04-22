@@ -21,6 +21,7 @@
         "rap2hpoutre/laravel-log-viewer": "^1.0",
         "rvanlaak/wkhtmltopdf-amd64-centos7": "~0.12",
         "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
+        "mgp25/instagram-php": "dev-master"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
