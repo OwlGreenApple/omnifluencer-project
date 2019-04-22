@@ -13,7 +13,7 @@ class TesController extends Controller
     public function tes_igcallback(){
       // $url = "http://cmx.space/get-user-data/heiwahyu_";
       // $arr_res = AccountController::igcallback($url);
-      $arr_res = InstagramHelper::get_user_data("heiwahyu_");
+      $arr_res = json_decode(InstagramHelper::get_user_data("heiwahyu_"));
 
       $count = 0;
       $jmllike = 0;
