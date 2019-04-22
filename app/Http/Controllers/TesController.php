@@ -41,9 +41,9 @@ class TesController extends Controller
         }
 
         if(!is_null($arr_res2) and !empty($arr_res2)){
-          if($count==0){
-            $lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
-          }
+          // if($count==0){
+            // $lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
+          // }
 
           foreach ($arr_res2 as $arr) {
             $arr = json_decode($arr,true);
