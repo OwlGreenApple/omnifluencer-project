@@ -28,7 +28,7 @@ class TesController extends Controller
         // $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
         // $arr_res2 = AccountController::igcallback($url2);    
         // dd(InstagramHelper::get_user_feed($arr_res["username"],$end_cursor));
-        $arr_res2 = InstagramHelper::get_user_feed($arr_res["username"],$end_cursor);
+        $arr_res2 = json_decode(InstagramHelper::get_user_feed($arr_res["username"],$end_cursor),true);
 
         // $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
         // $arr_res3 = AccountController::igcallback($url3,'string');
@@ -46,7 +46,6 @@ class TesController extends Controller
           // }
 
           foreach ($arr_res2 as $arr) {
-            $arr = json_decode($arr,true);
             if($count>=20){
               break;
             } else {
