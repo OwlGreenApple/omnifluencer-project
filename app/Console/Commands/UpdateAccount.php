@@ -69,10 +69,10 @@ class UpdateAccount extends Command
         //kalo belum ada informasi ig_id ngejalanin pake username di database
         if($account->ig_id!=null){
           // $url = "http://cmx.space/get-user-data-byid/".$account->ig_id;
-          $arr_res = json_decode(InstagramHelper::getUserDataByid($account->ig_id));
+          $arr_res = json_decode(InstagramHelper::getUserDataByid($account->ig_id),true);
         } else {
           // $url = "http://cmx.space/get-user-data/".$account->username;
-          $arr_res = json_decode(InstagramHelper::get_user_data($account->username));
+          $arr_res = json_decode(InstagramHelper::get_user_data($account->username),true);
         }
       
         // $arr_res = $this->igcallback($url);
@@ -103,7 +103,7 @@ class UpdateAccount extends Command
           do {
             // $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
             // $arr_res2 = $this->igcallback($mode);
-            $arr_res2 = json_decode(InstagramHelper::get_user_feed($arr_res["username"],$end_cursor));
+            $arr_res2 = json_decode(InstagramHelper::get_user_feed($arr_res["username"],$end_cursor),true);
 
             // $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
             // $arr_res3 = $this->igcallback($url3,'string');

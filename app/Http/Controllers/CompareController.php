@@ -129,7 +129,7 @@ class CompareController extends Controller
     if(is_null($account)){
       // $url = "http://cmx.space/get-user-data/".$request->keywords;
       // $arr_res = AccountController::igcallback($url);
-      $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords));
+      $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
       
       if($arr_res!=null){
         $account = AccountController::create_account($arr_res);
@@ -228,7 +228,7 @@ class CompareController extends Controller
     if(is_null($account) and $keywords!=''){
       // $url = "http://cmx.space/get-user-data/".$keywords;
       // $arr_res = AccountController::igcallback($url);
-      $arr_res = json_decode(InstagramHelper::get_user_data($keywords));
+      $arr_res = json_decode(InstagramHelper::get_user_data($keywords),true);
       
       if($arr_res!=null){
         $account = AccountController::create_account($arr_res);
