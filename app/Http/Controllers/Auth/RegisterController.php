@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\UserLog;
 use App\Referral;
 use App\HistorySearch;
 use App\Order;
@@ -44,6 +45,7 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
     protected $cookie_search = "history_search";
+    protected $coupon_code ='omnipro2019';
 
     /**
      * Create a new controller instance.
@@ -142,35 +144,68 @@ class RegisterController extends Controller
       } 
       
       if ($data['price']<>"") {
-        //create order 
-        $dt = Carbon::now();
-        $order = new Order;
-        $str = 'OMNI'.$dt->format('ymdHi');
-        $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
-        $order->no_order = $order_number;
-        $order->user_id = $user->id;
-        $order->package = $data["namapaket"];
-        $order->jmlpoin = 0;
-        $order->total = $data['price'];
-        $order->discount = 0;
-        $order->status = 0;
-        $order->buktibayar = "";
-        $order->keterangan = "";
-        $order->save();
-        
-        //mail order to user 
-        $emaildata = [
-            'order' => $order,
-            'user' => $user,
-            'nama_paket' => $data['namapaket'],
-            'no_order' => $order_number,
-        ];
-        Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-          $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
-          $message->to($user->email);
-          $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
-          $message->subject('[Omnifluencer] Order Nomor '.$order_number);
-        });
+        if($data['namapaket']=='Pro 15 hari' and $data['coupon_code']==$this->coupon_code){
+          //create order 
+          $dt = Carbon::now();
+          $order = new Order;
+          $str = 'OMNI'.$dt->format('ymdHi');
+          $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
+          $order->no_order = $order_number;
+          $order->user_id = $user->id;
+          $order->package = $data['namapaket'];
+          $order->jmlpoin = 0;
+          $order->total = 0;
+          $order->discount = $data['price'];
+          $order->status = 2;
+          $order->buktibayar = "";
+          $order->keterangan = "";
+          $order->save();
+
+          $ordercont = new OrderController;
+          $valid = $ordercont->add_time($user,"+15 days");
+
+          $userlog = new UserLog;
+          $userlog->user_id = $user->id;
+          $userlog->type = 'membership';
+          $userlog->value = 'pro';
+          $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
+          //$userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid.')';
+          $userlog->save();
+
+          $user->valid_until = $valid;
+          $user->membership = 'pro';
+          $user->save();
+        } else {
+          //create order 
+          $dt = Carbon::now();
+          $order = new Order;
+          $str = 'OMNI'.$dt->format('ymdHi');
+          $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
+          $order->no_order = $order_number;
+          $order->user_id = $user->id;
+          $order->package = $data["namapaket"];
+          $order->jmlpoin = 0;
+          $order->total = $data['price'];
+          $order->discount = 0;
+          $order->status = 0;
+          $order->buktibayar = "";
+          $order->keterangan = "";
+          $order->save();
+          
+          //mail order to user 
+          $emaildata = [
+              'order' => $order,
+              'user' => $user,
+              'nama_paket' => $data['namapaket'],
+              'no_order' => $order_number,
+          ];
+          Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+            $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+            $message->to($user->email);
+            $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
+            $message->subject('[Omnifluencer] Order Nomor '.$order_number);
+          });
+        }
       }
 
       return $user;

@@ -211,11 +211,10 @@ class AccountController extends Controller
             }
           }
         }
-      
+
         // $url = "http://cmx.space/get-user-data/".$request->keywords;
 
         $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords));
-
         
         if($arr_res!=null){
           $account = $this->create_account($arr_res);
