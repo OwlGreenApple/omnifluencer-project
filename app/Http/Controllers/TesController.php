@@ -21,7 +21,7 @@ class TesController extends Controller
       $end_cursor = null;
       $private = false;
       $lastpost = null;
-      var_dump($arr_res2);
+      var_dump($arr_res);
       // echo $arr_res->username;
       exit;
       do {
