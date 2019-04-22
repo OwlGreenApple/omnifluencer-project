@@ -21,8 +21,8 @@ class TesController extends Controller
       $end_cursor = null;
       $private = false;
       $lastpost = null;
-      //var_dump($arr_res2);
-      echo $arr_res->username;
+      var_dump($arr_res2);
+      // echo $arr_res->username;
       exit;
       do {
         // $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
