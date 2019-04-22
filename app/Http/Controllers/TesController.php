@@ -22,6 +22,8 @@ class TesController extends Controller
       $private = false;
       $lastpost = null;
       // dd($arr_res);
+      echo $arr_res["username"];
+      exit;
       do {
         // $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
         // $arr_res2 = AccountController::igcallback($url2);    
