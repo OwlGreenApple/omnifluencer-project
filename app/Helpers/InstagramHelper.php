@@ -226,7 +226,7 @@ class InstagramHelper
 					$i->login("mayymayyaa", "qwerty12345", 300);
 					$feed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
 
-					return (string) $feed->getItems();
+					return json_encode($feed->getItems());
 
 		}  	
 		catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
