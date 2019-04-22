@@ -106,7 +106,7 @@ class InstagramHelper
           $i->login("mayymayyaa", "qwerty12345", 300);
           $userData = $i->people->getInfoById($id)->getUser();
 
-          return $userData;
+          return json_encode($userData);
 
     }  	
     catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
@@ -166,7 +166,7 @@ class InstagramHelper
 					$i->login("mayymayyaa", "qwerty12345", 300);
 					$userData = $i->people->getInfoByName($username)->getUser();
 
-					return $userData;
+					return json_encode($userData);
 
 		}  	
 		catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
