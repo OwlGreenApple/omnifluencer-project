@@ -15,6 +15,8 @@ use App\Http\Controllers\AccountController;
 
 use Auth,PDF,Excel,Validator,Mail,Carbon,DateTime;
 
+use App\Helpers\InstagramHelper;
+
 class CompareController extends Controller
 {
   protected function validator(array $data){
@@ -125,9 +127,9 @@ class CompareController extends Controller
     $account = Account::where('username',$request->keywords)->first();
 
     if(is_null($account)){
-      $url = "http://cmx.space/get-user-data/".$request->keywords;
-
-      $arr_res = AccountController::igcallback($url);
+      // $url = "http://cmx.space/get-user-data/".$request->keywords;
+      // $arr_res = AccountController::igcallback($url);
+      $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords));
       
       if($arr_res!=null){
         $account = AccountController::create_account($arr_res);
@@ -224,9 +226,9 @@ class CompareController extends Controller
 
   public function check_akun($account,$keywords){
     if(is_null($account) and $keywords!=''){
-      $url = "http://cmx.space/get-user-data/".$keywords;
-
-      $arr_res = AccountController::igcallback($url);
+      // $url = "http://cmx.space/get-user-data/".$keywords;
+      // $arr_res = AccountController::igcallback($url);
+      $arr_res = json_decode(InstagramHelper::get_user_data($keywords));
       
       if($arr_res!=null){
         $account = AccountController::create_account($arr_res);

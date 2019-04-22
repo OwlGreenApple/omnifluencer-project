@@ -7,6 +7,8 @@ use Illuminate\Console\Command;
 use App\Account;
 use App\AccountLog;
 
+use App\Helpers\InstagramHelper;
+
 class UpdateAccount extends Command
 {
     /**
@@ -66,12 +68,14 @@ class UpdateAccount extends Command
       foreach($accounts as $account){
         //kalo belum ada informasi ig_id ngejalanin pake username di database
         if($account->ig_id!=null){
-          $url = "http://cmx.space/get-user-data-byid/".$account->ig_id;
+          // $url = "http://cmx.space/get-user-data-byid/".$account->ig_id;
+          $arr_res = json_decode(InstagramHelper::getUserDataByid($account->ig_id));
         } else {
-          $url = "http://cmx.space/get-user-data/".$account->username;
+          // $url = "http://cmx.space/get-user-data/".$account->username;
+          $arr_res = json_decode(InstagramHelper::get_user_data($account->username));
         }
       
-        $arr_res = $this->igcallback($url);
+        // $arr_res = $this->igcallback($url);
         
         if($arr_res!=null){
           $account->ig_id = $arr_res["pk"];
@@ -97,11 +101,13 @@ class UpdateAccount extends Command
           //var_dump($arr_res2);
 
           do {
-            $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
-            $arr_res2 = $this->igcallback($url2);    
+            // $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
+            // $arr_res2 = $this->igcallback($mode);
+            $arr_res2 = json_decode(InstagramHelper::get_user_feed($arr_res["username"],$end_cursor));
 
-            $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
-            $arr_res3 = $this->igcallback($url3,'string');
+            // $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
+            // $arr_res3 = $this->igcallback($url3,'string');
+            $arr_res3 = InstagramHelper::get_user_feed_maxid($arr_res["username"],$end_cursor);
             var_dump('end_cursor = '.$arr_res3);
             $end_cursor = $arr_res3;
 
