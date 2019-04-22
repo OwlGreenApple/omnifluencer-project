@@ -173,10 +173,42 @@ class AccountController extends Controller
                   ->orWhere('id',1500)
                   ->inRandomOrder()
                   ->first();
-    } else {
+    } else {     
       $account = Account::where('username',$request->keywords)->first();
 
       if(is_null($account)){
+        /* pengecekan membership */
+        if(Auth::check()){
+          if(Auth::user()->membership=='free'){
+            $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
+
+            if($currenthistory->count()>=5){
+              $arr['status'] = 'error';
+              $arr['message'] = '<b>Warning!</b><br> Free user hanya dapat menyimpan history search sebanyak 5 kali';
+              return $arr;
+            }
+          } else if(Auth::user()->membership=='pro'){
+            $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
+
+            if($currenthistory->count()>=25){
+              $arr['status'] = 'error';
+              $arr['message'] = '<b>Warning!</b><br> Pro user hanya dapat menyimpan history search sebanyak 25 kali';
+              return $arr;
+            }
+          }
+        } else {
+          //pengecekan kuota cookies
+          if(isset($_COOKIE[$this->cookie_search])) {
+            $cookie_value = json_decode($_COOKIE[$this->cookie_search], true);
+            //var_dump($cookie_value);
+            if(count($cookie_value)>=3){
+              $arr['status'] = 'error';
+              $arr['message'] = 'kuota habis';
+              return $arr;
+            }
+          }
+        }
+      
         $url = "http://cmx.space/get-user-data/".$request->keywords;
 
         $arr_res = AccountController::igcallback($url);
@@ -196,25 +228,6 @@ class AccountController extends Controller
                     ->first();
 
         if(is_null($history)){
-          /* pengecekan membership */
-          if(Auth::user()->membership=='free'){
-            $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
-
-            if($currenthistory->count()>=5){
-              $arr['status'] = 'error';
-              $arr['message'] = '<b>Warning!</b><br> Free user hanya dapat menyimpan history search sebanyak 5 kali';
-              return $arr;
-            }
-          } else if(Auth::user()->membership=='pro'){
-            $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
-
-            if($currenthistory->count()>=25){
-              $arr['status'] = 'error';
-              $arr['message'] = '<b>Warning!</b><br> Pro user hanya dapat menyimpan history search sebanyak 25 kali';
-              return $arr;
-            }
-          } 
-        
           $history = new HistorySearch;
           $history->account_id = $account->id;
           $history->user_id = Auth::user()->id;
