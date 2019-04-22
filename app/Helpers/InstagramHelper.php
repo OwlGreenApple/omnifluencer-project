@@ -248,12 +248,12 @@ class InstagramHelper
 			// } 
 			// else {
 					// all other login errors would get caught here...
-				echo $e->getMessage();
+				// echo $e->getMessage();
 			// }
 		}	
 		catch (NotFoundException $e) {
 			// echo $e->getMessage();
-			echo "asd";
+			// echo "asd";
 		}					
 		catch (Exception $e) {
 			$error_message = $e->getMessage();
@@ -264,7 +264,7 @@ class InstagramHelper
 				$error_message = $e->getMessage();
 			}
 		}
-		return $error_message;
+		// return $error_message;
 	}
 
 	public static function get_user_feed_maxid($username,$maxid = null){
