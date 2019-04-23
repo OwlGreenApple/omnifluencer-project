@@ -31,6 +31,10 @@ class OrderController extends Controller
     return view('user.pricing.thankyou');
   }
 
+  public function thankyou_free(){
+    return view('user.pricing.thankyou_free');
+  }
+
   public function cekharga($namapaket, $price){
     $paket = array(
       'Pro Monthly' => 197000,
@@ -128,6 +132,8 @@ class OrderController extends Controller
       $user->valid_until = $valid;
       $user->membership = 'pro';
       $user->save();
+
+      return view('user.pricing.thankyou_free');
     } else {
       //create order 
       $dt = Carbon::now();
@@ -158,9 +164,9 @@ class OrderController extends Controller
         $message->bcc(['puspita.celebgramme@gmail.com','it.axiapro@gmail.com']);
         $message->subject('[Omnifluencer] Order Nomor '.$order_number);
       });
-    }
 
-    return view('user.pricing.thankyou');
+      return view('user.pricing.thankyou');
+    }
   }
 
   public function index_order(){

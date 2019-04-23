@@ -274,7 +274,11 @@ class RegisterController extends Controller
         Mail::to($user->email)->send(new ConfirmEmail($emaildata));
 
         if ($request->price<>"") {
-          return redirect('thankyou');
+          if($request->namapaket=='Pro 15 hari' and $request->coupon_code==$this->coupon_code){
+            return redirect('thankyou-free');   
+          } else {
+            return redirect('thankyou');  
+          }
         } else {
           return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
           /*Auth::loginUsingId($user->id);

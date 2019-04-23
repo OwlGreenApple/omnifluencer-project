@@ -87,6 +87,8 @@ class LoginController extends Controller
           $user->valid_until = $valid;
           $user->membership = 'pro';
           $user->save();
+
+          return redirect('thankyou-free');   
         } else {
           //create order 
           $dt = Carbon::now();
@@ -117,9 +119,10 @@ class LoginController extends Controller
             $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
             $message->subject('[Omnifluencer] Order Nomor '.$order_number);
           });
-        }
 
-        return redirect('/thankyou');
+          return redirect('/thankyou');
+        }
+        
       }
     }
 
