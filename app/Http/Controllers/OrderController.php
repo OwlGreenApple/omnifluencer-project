@@ -21,7 +21,7 @@ use Carbon\Carbon;
 
 class OrderController extends Controller
 { 
-  protected $coupon_code ='omnipro2019';
+  protected $coupon_code ='OMNIPRO2019';
 
   public function pricing(){
     return view('user.pricing.pricing');
@@ -102,7 +102,7 @@ class OrderController extends Controller
 
     $user = Auth::user();
 
-    if($request->namapaket=='Pro 15 hari' and $request->coupon_code==$this->coupon_code){
+    if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
       //create order 
       $dt = Carbon::now();
       $order = new Order;
@@ -134,6 +134,7 @@ class OrderController extends Controller
       $user->save();
 
       return view('user.pricing.thankyou_free');
+
     } else {
       //create order 
       $dt = Carbon::now();

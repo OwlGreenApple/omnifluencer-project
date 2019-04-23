@@ -36,7 +36,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-    protected $coupon_code ='omnipro2019';
+    protected $coupon_code ='OMNIPRO2019';
 
     /**
      * Create a new controller instance.
@@ -57,7 +57,7 @@ class LoginController extends Controller
           return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
         }
 
-        if($request->namapaket=='Pro 15 hari' and $request->coupon_code==$this->coupon_code){
+        if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
           //create order 
           $dt = Carbon::now();
           $order = new Order;
