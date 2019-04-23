@@ -22,12 +22,14 @@ class InstagramHelper
         "dbpassword"   => env('DB_PASSWORD', ''),
 			]);	
 			
-					$i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+          if ( env('APP_ENV') == "production" ) {
+            $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+          }
 					// JANGAN LUPA DILOGIN TERLEBIH DAHULU
 					// $i->setProxy('http://208.115.112.100:9999');
 					
 					
-					$i->login("mayymayyaa", "qwerty12345", 300);
+					$i->login("mayyyvitri", "qwerty12345", 300);
 					$userData = $i->people->getInfoByName('jajankulinersurabaya')->getUser();
 
 					if (!is_null($userData)) {
@@ -100,10 +102,16 @@ class InstagramHelper
       
           // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
           // JANGAN LUPA DILOGIN TERLEBIH DAHULU
-          $i->setProxy('http://208.115.112.100:9999');
+          if ( env('APP_ENV') == "production" ) {
+            $i->setProxy('http://208.115.112.100:9999');
+          }
           
-          
-          $i->login("mayymayyaa", "qwerty12345", 300);
+          if ( env('APP_ENV') == "local" ) {
+            $i->login("mayyyvitri", "qwerty12345", 300);
+          } 
+          else {
+            $i->login("mayymayyaa", "qwerty12345", 300);
+          }
           $userData = $i->people->getInfoById($id)->getUser();
 
           return json_encode($userData);
@@ -160,10 +168,17 @@ class InstagramHelper
 			
 					// $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
 					// JANGAN LUPA DILOGIN TERLEBIH DAHULU
-					$i->setProxy('http://208.115.112.100:9999');
+          if ( env('APP_ENV') == "production" ) {
+            $i->setProxy('http://208.115.112.100:9999');
+          }
 					
 					
-					$i->login("mayymayyaa", "qwerty12345", 300);
+          if ( env('APP_ENV') == "local" ) {
+            $i->login("mayyyvitri", "qwerty12345", 300);
+          } 
+          else {
+            $i->login("mayymayyaa", "qwerty12345", 300);
+          }
 					$userData = $i->people->getInfoByName($username)->getUser();
 
 					return json_encode($userData);
@@ -220,10 +235,17 @@ class InstagramHelper
 			
 					// $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
 					// JANGAN LUPA DILOGIN TERLEBIH DAHULU
-					$i->setProxy('http://208.115.112.100:9999');
+          if ( env('APP_ENV') == "production" ) {
+            $i->setProxy('http://208.115.112.100:9999');
+          }
 					
 					
-					$i->login("mayymayyaa", "qwerty12345", 300);
+          if ( env('APP_ENV') == "local" ) {
+            $i->login("mayyyvitri", "qwerty12345", 300);
+          } 
+          else {
+            $i->login("mayymayyaa", "qwerty12345", 300);
+          }
 					$feed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
 
 					return json_encode($feed->getItems());
@@ -280,10 +302,17 @@ class InstagramHelper
 			
 					// $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
 					// JANGAN LUPA DILOGIN TERLEBIH DAHULU
-					$i->setProxy('http://208.115.112.100:9999');
+          if ( env('APP_ENV') == "production" ) {
+            $i->setProxy('http://208.115.112.100:9999');
+          }
 					
 					
-					$i->login("mayymayyaa", "qwerty12345", 300);
+          if ( env('APP_ENV') == "local" ) {
+            $i->login("mayyyvitri", "qwerty12345", 300);
+          } 
+          else {
+            $i->login("mayymayyaa", "qwerty12345", 300);
+          }
 					$feed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
 
 					return $feed->getNextMaxId();
