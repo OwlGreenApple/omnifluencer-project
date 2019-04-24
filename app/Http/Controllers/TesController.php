@@ -18,7 +18,8 @@ class TesController extends Controller
       // dd(json_decode(InstagramHelper::check_login(),true));
       // exit;
       
-      $arr_res = json_decode(InstagramHelper::get_user_data("heiwahyu_"),true);
+      $arr_res = InstagramHelper::get_user_profile("successfoundation");
+      // dd($arr_res);
 
       $count = 0;
       $jmllike = 0;
