@@ -36,13 +36,13 @@ class OrderController extends Controller
     return view('user.pricing.thankyou_free');
   }
 
-  public function check_kupon(Request $request){
-    $coupon = Coupon::where('kodekupon',$request->kupon)->first();
+  public function cek_kupon($kodekupon,$harga){
+    $coupon = Coupon::where('kodekupon',$kodekupon)
+                ->first();
 
     if(is_null($coupon)){
       $arr['status'] = 'error';
       $arr['message'] = 'Kupon tidak ditemukan';
-      return $arr;  
     } else {
       $now = new DateTime();
       $date = new DateTime($coupon->valid_until);
@@ -50,22 +50,32 @@ class OrderController extends Controller
       if($date<$now){
         $arr['status'] = 'error';
         $arr['message'] = 'Kupon sudah tidak berlaku';
-        return $arr;  
       } else {
 
         $total = 0;
+        $diskon = 0;
         if($coupon->diskon_value==0 and $coupon->diskon_percent!=0){
-          $diskon = $request->harga * $coupon->diskon_percent/100;
-          $total = $request->harga - $diskon;
+          $diskon = $harga * $coupon->diskon_percent/100;
+          $total = $harga - $diskon;
         } else {
-          $total = $request->harga - $coupon->diskon_value;
+          $diskon = $coupon->diskon_value;
+          $total = $harga - $coupon->diskon_value;
         }
 
         $arr['status'] = 'success';
         $arr['message'] = '';
         $arr['total'] = $total;
+        $arr['diskon'] = $diskon;
+        $arr['coupon'] = $coupon;
       }
     }
+
+    return $arr;
+  }
+
+  public function check_kupon(Request $request){
+    $arr = $this->cek_kupon($request->kupon,$request->harga);
+    return $arr;
   }
 
   public function cekharga($namapaket, $price){

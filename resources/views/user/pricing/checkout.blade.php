@@ -16,10 +16,17 @@
       $( "#select-auto-manage" ).change();
     });
 
+    $("body").on("click", ".btn-kupon", function() {
+      check_kupon();
+    });
+
     function check_kupon(){
       $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: "<?php echo url('/check-kupon') ?>",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         data: {
           harga : $('#price').val(),
           kupon : $('#kupon').val(),
@@ -102,7 +109,7 @@
                     <input type="text" class="form-control form-control-lg" name="kupon" id="kupon" placeholder="Masukkan Kode Kupon Disini" style="width:100%" />  
                   </div>
                   <div class="col-md-1 pl-0">
-                    <button class="btn btn-primary btn-kupon">
+                    <button type="button" class="btn btn-primary btn-kupon">
                       Apply
                     </button>  
                   </div>  
