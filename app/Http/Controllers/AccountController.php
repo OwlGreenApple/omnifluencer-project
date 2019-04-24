@@ -69,6 +69,13 @@ class AccountController extends Controller
 
   public static function create_account($arr_res){
     set_time_limit(0);
+    $arr_res2 = InstagramHelper::get_user_profile(strtolower($arr_res["username"]));
+    $count = $arr_res2["count"];
+    $jmllike = $arr_res2["jmllike"];
+    $jmlcomment = $arr_res2["jmlcomment"];
+    $private = $arr_res2["private"];
+    $lastpost = $arr_res2["lastpost"];
+
     $account = new Account;
     $account->ig_id = $arr_res["pk"];
     $account->username = strtolower($arr_res["username"]);
@@ -77,13 +84,6 @@ class AccountController extends Controller
     $account->jml_following = $arr_res["following_count"];
     $account->jml_followers = $arr_res["follower_count"];
     $account->jml_post = $arr_res["media_count"];
-
-    $arr_res2 = InstagramHelper::get_user_profile($arr_res["username"]);
-    $count = $arr_res2["count"];
-    $jmllike = $arr_res2["jmllike"];
-    $jmlcomment = $arr_res2["jmlcomment"];
-    $private = $arr_res2["private"];
-    $lastpost = $arr_res2["lastpost"];
 
     //hitung rata2 like + comment di 20 post terakhir 
     //check akun private atau nggak
