@@ -81,7 +81,7 @@
 
                 <hr>
 
-                <a href="{{url('history-search')}}">
+                <a href="{{url('history-influencer')}}">
                   View Details &raquo;
                 </a>
               </div>
@@ -136,7 +136,7 @@
 
                 <hr>
 
-                <a href="{{url('history-search')}}">
+                <a href="{{url('history-influencer')}}">
                   View Details &raquo;
                 </a>
 
@@ -173,7 +173,7 @@
 
                 <hr>
 
-                <a href="{{url('history-search')}}">
+                <a href="{{url('history-influencer')}}">
                   View Details &raquo;
                 </a>
 

@@ -85,7 +85,12 @@
           </div>
           <div class="col-md-6 col-12 text-md-right text-left order-md-4 order-4">
             <h5>
-              Expired by : {{date("d-m-Y",strtotime(Auth::user()->valid_until))}}  
+              Expired by : 
+              @if(Auth::user()->membership=='free')
+                No Expired
+              @else 
+                {{date("d-m-Y",strtotime(Auth::user()->valid_until))}}  
+              @endif
             </h5>
           </div>
         </div>
