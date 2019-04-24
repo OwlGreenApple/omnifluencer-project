@@ -45,7 +45,7 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
     protected $cookie_search = "history_search";
-    protected $coupon_code ='omnipro2019';
+    protected $coupon_code ='OMNIPRO2019';
 
     /**
      * Create a new controller instance.
@@ -144,7 +144,7 @@ class RegisterController extends Controller
       } 
       
       if ($data['price']<>"") {
-        if($data['namapaket']=='Pro 15 hari' and $data['coupon_code']==$this->coupon_code){
+        if($data['namapaket']=='Pro 15 hari' and strtoupper($data['coupon_code'])==$this->coupon_code){
           //create order 
           $dt = Carbon::now();
           $order = new Order;
@@ -274,7 +274,11 @@ class RegisterController extends Controller
         Mail::to($user->email)->send(new ConfirmEmail($emaildata));
 
         if ($request->price<>"") {
-          return redirect('thankyou');
+          if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
+            return redirect('thankyou-free');   
+          } else {
+            return redirect('thankyou');  
+          }
         } else {
           return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
           /*Auth::loginUsingId($user->id);

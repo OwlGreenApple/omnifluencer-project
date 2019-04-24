@@ -21,7 +21,7 @@ use Carbon\Carbon;
 
 class OrderController extends Controller
 { 
-  protected $coupon_code ='omnipro2019';
+  protected $coupon_code ='OMNIPRO2019';
 
   public function pricing(){
     return view('user.pricing.pricing');
@@ -29,6 +29,10 @@ class OrderController extends Controller
 
   public function thankyou(){
     return view('user.pricing.thankyou');
+  }
+
+  public function thankyou_free(){
+    return view('user.pricing.thankyou_free');
   }
 
   public function cekharga($namapaket, $price){
@@ -98,7 +102,7 @@ class OrderController extends Controller
 
     $user = Auth::user();
 
-    if($request->namapaket=='Pro 15 hari' and $request->coupon_code==$this->coupon_code){
+    /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
       //create order 
       $dt = Carbon::now();
       $order = new Order;
@@ -128,7 +132,10 @@ class OrderController extends Controller
       $user->valid_until = $valid;
       $user->membership = 'pro';
       $user->save();
-    } else {
+
+      return view('user.pricing.thankyou_free');
+
+    } else {*/
       //create order 
       $dt = Carbon::now();
       $order = new Order;
@@ -158,9 +165,9 @@ class OrderController extends Controller
         $message->bcc(['puspita.celebgramme@gmail.com','it.axiapro@gmail.com']);
         $message->subject('[Omnifluencer] Order Nomor '.$order_number);
       });
-    }
 
-    return view('user.pricing.thankyou');
+      return view('user.pricing.thankyou');
+    //}
   }
 
   public function index_order(){
