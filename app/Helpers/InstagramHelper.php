@@ -364,7 +364,7 @@ class InstagramHelper
  	public static function get_user_profile($username){
 		try {
 			$error_message="";
-			$i = new Instagram(true,true,[
+			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
         "dbhost"       => env('DB_HOST', '127.0.0.1'),
         "dbname"   => env('DB_DATABASE', ''),
