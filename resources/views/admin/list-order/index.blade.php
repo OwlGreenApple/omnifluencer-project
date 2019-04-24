@@ -130,31 +130,31 @@
       <form>
         <table class="table" id="myTable">
           <thead align="center">
-            <th class="header" action="no_order">
+            <th action="no_order">
               No Order
             </th>
-            <th class="header" action="email">
+            <th action="email">
               Email
             </th>
-            <th class="header" action="package">
+            <th action="package">
               Package
             </th>
-            <th class="header" action="total">
+            <th action="total">
               Total
             </th>
-            <th class="header" action="discount">
+            <th action="discount">
               Discount
             </th>
-            <th class="header" action="created_at">
+            <th action="created_at">
               Date
             </th>
-            <th class="header">
+            <th>
               Bukti Bayar
             </th>
-            <th class="header" action="keterangan">
+            <th action="keterangan">
               Keterangan
             </th>
-            <th class="header" action="status">
+            <th action="status">
               Status
             </th>
           </thead>

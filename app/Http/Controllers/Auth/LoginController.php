@@ -57,7 +57,7 @@ class LoginController extends Controller
           return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
         }
 
-        if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
+        /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
           //create order 
           $dt = Carbon::now();
           $order = new Order;
@@ -89,7 +89,7 @@ class LoginController extends Controller
           $user->save();
 
           return redirect('thankyou-free');   
-        } else {
+        } else {*/
           //create order 
           $dt = Carbon::now();
           $order = new Order;
@@ -121,7 +121,7 @@ class LoginController extends Controller
           });
 
           return redirect('/thankyou');
-        }
+        //}
         
       }
     }

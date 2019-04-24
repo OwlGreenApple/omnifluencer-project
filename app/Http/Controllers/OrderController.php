@@ -102,7 +102,7 @@ class OrderController extends Controller
 
     $user = Auth::user();
 
-    if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
+    /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
       //create order 
       $dt = Carbon::now();
       $order = new Order;
@@ -135,7 +135,7 @@ class OrderController extends Controller
 
       return view('user.pricing.thankyou_free');
 
-    } else {
+    } else {*/
       //create order 
       $dt = Carbon::now();
       $order = new Order;
@@ -167,7 +167,7 @@ class OrderController extends Controller
       });
 
       return view('user.pricing.thankyou');
-    }
+    //}
   }
 
   public function index_order(){
