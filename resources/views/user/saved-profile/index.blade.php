@@ -388,11 +388,11 @@
                 <i class="fas fa-chart-bar"></i>
                 Compare
               </button>
-              <button class="btn btn-sm btn-primary btn-save">
+              <button type="button" class="btn btn-sm btn-primary btn-save">
                 <i class="fas fa-folder-plus"></i> 
                 Add to group
               </button>
-              <button class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
+              <button type="button" class="btn btn-sm btn-danger btn-delete-bulk" data-toggle="modal" data-target="#confirm-delete">
                 <i class="far fa-trash-alt"></i> Delete
               </button>
             @endif     
