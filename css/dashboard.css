@@ -309,11 +309,11 @@ ul ul a {
   padding-top: 30px;
 }
 
-.card-body > a {
+.card-body > a, .hover-details {
   color: #3490dc;
 }
 
-.card-body > a:hover {
+.card-body > a:hover, .hover-details:hover {
   text-decoration: underline;
 }
 
