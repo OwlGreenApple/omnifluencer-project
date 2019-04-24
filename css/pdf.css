@@ -120,8 +120,8 @@
     position: absolute; 
     top: -100px;
     left: 50%;
-    margin-left: -70px;
-    max-width: 125px;
+    margin-left: -50px;
+    max-width: 100px;
     border-radius: 50%;
   }
 
@@ -156,7 +156,7 @@
   }
 
   .username-compare {
-    font-size: 23px !important;
+    font-size: 18px !important;
   }
 
   /* Plain */
