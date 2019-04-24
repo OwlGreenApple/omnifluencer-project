@@ -6,11 +6,46 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $( "#select-auto-manage" ).change(function() {
-        $("#price").val($(this).find("option:selected").attr("data-price"));
-        $("#namapaket").val($(this).find("option:selected").attr("data-paket"));
+        var price = $(this).find("option:selected").attr("data-price");
+        var namapaket = $(this).find("option:selected").attr("data-paket");
+
+        $("#price").val(price);
+        $('.total').html('Rp. ' + price);
+        $("#namapaket").val(namapaket);
       });
       $( "#select-auto-manage" ).change();
     });
+
+    function check_kupon(){
+      $.ajax({
+        type: 'GET',
+        url: "<?php echo url('/check-kupon') ?>",
+        data: {
+          harga : $('#price').val(),
+          kupon : $('#kupon').val(),
+        },
+        dataType: 'text',
+        beforeSend: function() {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        },
+        success: function(result) {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+
+          var data = jQuery.parseJSON(result);
+
+          if (data.status == 'success') {
+            $('.total').html('Rp. ' + data.total);
+          } else {
+            $('#pesan').html(data.message);
+            $('#pesan').removeClass('alert-success');
+            $('#pesan').addClass('alert-warning');
+            $('#pesan').show();
+          }
+        }
+      });
+    }
   </script>
 
   <div class="container">
@@ -18,12 +53,14 @@
       <div class="col-12">
         <div class="signup">
           <div class="signup-content">
-             @if (session('error') )
+            @if (session('error') )
               <div class="col-md-12 alert alert-danger">
                 <strong>Warning!</strong> {{session('error')}}
               </div>
             @endif
             
+            <div id="pesan" class="alert"></div>
+
             <?php if (Auth::check()) {?>
               <!-- ditaruh di session -->
               <form method="POST" action="{{url('confirm-payment')}}" id="signup-form" class="signup-form">
@@ -59,8 +96,26 @@
                 <label class="label-title-test" for="formGroupExampleInput">
                   Masukkan Kode Kupon:
                 </label>
-                <input type="text" class="form-input" name="text" id="text" placeholder="Masukkan Kode Kupon Disini" />
+
+                <div class="col-md-12 row">
+                  <div class="col-md-11 pl-0">
+                    <input type="text" class="form-control form-control-lg" name="kupon" id="kupon" placeholder="Masukkan Kode Kupon Disini" style="width:100%" />  
+                  </div>
+                  <div class="col-md-1 pl-0">
+                    <button class="btn btn-primary btn-kupon">
+                      Apply
+                    </button>  
+                  </div>  
+                </div>
               </div>
+              <div class="form-group">
+                <label class="label-title-test" for="formGroupExampleInput">
+                  Total: 
+                </label>
+                <div class="col-md-12 pl-0">
+                  <span class="total" style="font-size:18px"></span>
+                </div>
+              </div>              
               <div class="form-group">
                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
                 <label for="agree-term" class="label-agree-term">

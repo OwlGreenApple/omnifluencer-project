@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCouponsTable extends Migration
+class CreatePackagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateCouponsTable extends Migration
      */
     public function up()
     {
-        Schema::create('coupons', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kodekupon');
-            $table->integer('diskon_value');
-            $table->integer('diskon_percent');
-            $table->timestamp('valid_until');
-            $table->text('keterangan');
-            $table->integer('package_id');
+            $table->string('namapaket');
+            $table->integer('harga');
+            $table->string('membership');
+            $table->integer('valid_until');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateCouponsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coupons');
+        Schema::dropIfExists('packages');
     }
 }

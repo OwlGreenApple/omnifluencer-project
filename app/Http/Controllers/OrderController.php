@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Account;
 use App\HistorySearch;
 use App\User;
+use App\Coupon;
 use App\UserLog;
 use App\Group;
 use App\Save;
@@ -33,6 +34,38 @@ class OrderController extends Controller
 
   public function thankyou_free(){
     return view('user.pricing.thankyou_free');
+  }
+
+  public function check_kupon(Request $request){
+    $coupon = Coupon::where('kodekupon',$request->kupon)->first();
+
+    if(is_null($coupon)){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Kupon tidak ditemukan';
+      return $arr;  
+    } else {
+      $now = new DateTime();
+      $date = new DateTime($coupon->valid_until);
+      
+      if($date<$now){
+        $arr['status'] = 'error';
+        $arr['message'] = 'Kupon sudah tidak berlaku';
+        return $arr;  
+      } else {
+
+        $total = 0;
+        if($coupon->diskon_value==0 and $coupon->diskon_percent!=0){
+          $diskon = $request->harga * $coupon->diskon_percent/100;
+          $total = $request->harga - $diskon;
+        } else {
+          $total = $request->harga - $coupon->diskon_value;
+        }
+
+        $arr['status'] = 'success';
+        $arr['message'] = '';
+        $arr['total'] = $total;
+      }
+    }
   }
 
   public function cekharga($namapaket, $price){
