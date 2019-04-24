@@ -374,17 +374,91 @@ class InstagramHelper
 			
       // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
       // JANGAN LUPA DILOGIN TERLEBIH DAHULU
-      if ( env('APP_ENV') == "production" ) {
-        // $i->setProxy('http://208.115.112.100:9999');
-        $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
-      }
-      
-      
+      // if ( env('APP_ENV') == "production" ) {
+        // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+      // }
+
       if ( env('APP_ENV') == "local" ) {
         $i->login("mayyyvitri", "qwerty12345", 300);
       } 
-      else {
-        $i->login("mayymayyaa", "qwerty12345", 300);
+      else if ( env('APP_ENV') == "production" ) {
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9868",
+          "username"=>"melodianaelisa",
+          "password"=>"qazwsx123",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9870",
+          "username"=>"dessiarumi",
+          "password"=>"abcde12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9871",
+          "username"=>"renawilliams222",
+          "password"=>"abcde12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9873",
+          "username"=>"marianalaskmi",
+          "password"=>"qwerty12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9874",
+          "username"=>"magdalenapeter96",
+          "password"=>"qazwsx123",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9875",
+          "username"=>"felysamora",
+          "password"=>"abcde12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9876",
+          "username"=>"nithaasyari",
+          "password"=>"qweasdzxc123",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9878",
+          "username"=>"thalianasarifernand",
+          "password"=>"987456321qwerty",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9881",
+          "username"=>"naningtyasa",
+          "password"=>"qwerty12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9999",
+          "username"=>"mayymayyaa",
+          "password"=>"qwerty12345",
+        ];			
+        
+        $arr_user = $arr_users[array_rand($arr_users)];
+			
+        
+        // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+        // $i->login("mayymayyaa", "qwerty12345", 300);
+        $i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
+        $i->login($arr_user["username"], $arr_user["password"], 300);
       }
       
       $count = 0;

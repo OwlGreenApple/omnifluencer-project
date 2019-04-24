@@ -15,8 +15,8 @@ class TesController extends Controller
       // $arr_res = AccountController::igcallback($url);
       
       //buat login 
-      // dd(json_decode(InstagramHelper::check_login(),true));
-      // exit;
+      dd(json_decode(InstagramHelper::check_login(),true));
+      exit;
       
       $arr_res = InstagramHelper::get_user_profile("successfoundation");
       // dd($arr_res);
