@@ -93,39 +93,41 @@ class UpdateAccount extends Command
           var_dump($arr_res["username"]);
 
           $arr_res2 = InstagramHelper::get_user_profile($arr_res["username"]);
-          $count = $arr_res2["count"];
-          $jmllike = $arr_res2["jmllike"];
-          $jmlcomment = $arr_res2["jmlcomment"];
-          $private = $arr_res2["private"];
-          $lastpost = $arr_res2["lastpost"];
+          if ($arr_res2["error_message"]=="") {
+            $count = $arr_res2["count"];
+            $jmllike = $arr_res2["jmllike"];
+            $jmlcomment = $arr_res2["jmlcomment"];
+            $private = $arr_res2["private"];
+            $lastpost = $arr_res2["lastpost"];
 
+              
+            //hitung rata2 like + comment di 20 post terakhir 
+            //check akun private atau nggak
+            var_dump('Last post ='.$lastpost);
+            if($private==false){
+              $ratalike = $jmllike/$count;
+              $ratacomment = $jmlcomment/$count;
+            } else {
+              $ratalike = 0;
+              $ratacomment = 0;
+            }
+
+            $account->lastpost = $lastpost;
+            $account->jml_likes = floor($ratalike);
+            $account->jml_comments = floor($ratacomment);
+            //$account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
+
+            if($account->jml_followers>0){
+              $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers*20);
+              $account->total_influenced = $account->eng_rate*$account->jml_followers;
+            }
             
-          //hitung rata2 like + comment di 20 post terakhir 
-          //check akun private atau nggak
-          var_dump('Last post ='.$lastpost);
-          if($private==false){
-            $ratalike = $jmllike/$count;
-            $ratacomment = $jmlcomment/$count;
-          } else {
-            $ratalike = 0;
-            $ratacomment = 0;
+            var_dump('ratalike = '.floor($ratalike));
+            var_dump('ratacomment = '.floor($ratacomment));
+            var_dump('Eng rate = '.round($account->eng_rate*100,2));
+
+            $account->save();
           }
-
-          $account->lastpost = $lastpost;
-          $account->jml_likes = floor($ratalike);
-          $account->jml_comments = floor($ratacomment);
-          //$account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
-
-          if($account->jml_followers>0){
-            $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers*20);
-            $account->total_influenced = $account->eng_rate*$account->jml_followers;
-          }
-          
-          var_dump('ratalike = '.floor($ratalike));
-          var_dump('ratacomment = '.floor($ratacomment));
-          var_dump('Eng rate = '.round($account->eng_rate*100,2));
-
-          $account->save();
 
           $accountlog = new AccountLog;
           $accountlog->account_id = $account->id;
