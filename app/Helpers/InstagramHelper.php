@@ -646,7 +646,7 @@ class InstagramHelper
             }
 
             foreach ($arr_res2 as $arr) {
-              if($count>=3){
+              if($count>=12){
                 break;
               } else {
                 $jmllike = $jmllike + $arr["like_count"];
@@ -664,7 +664,7 @@ class InstagramHelper
             }
             break;
           }
-        } while ($count<3);
+        } while ($count<12);
       }
       
 
