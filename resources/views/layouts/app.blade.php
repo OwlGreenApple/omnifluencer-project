@@ -300,8 +300,8 @@
                 <div class="col">
                   <ul>
                     <li> 
-                      <a href="mailto:support@omnifluencer.com?subject=Mail from Our Site"> 
-                        support@omnifluencer.com
+                      <a href="mailto:omnifluencer@gmail.com?subject=Mail from Our Site"> 
+                        omnifluencer@gmail.com
                       </a> 
                     </li>
                     <!--<li> 
