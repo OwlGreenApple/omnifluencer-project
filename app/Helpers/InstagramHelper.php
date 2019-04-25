@@ -516,6 +516,12 @@ class InstagramHelper
  	public static function get_user_profile($username){
 		try {
 			$error_message="";
+      $count = 0;
+      $jmllike = 0;
+      $jmlcomment = 0;
+      $private = false;
+      $lastpost = null;
+      $maxid = null;
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
         "dbhost"       => env('DB_HOST', '127.0.0.1'),
@@ -613,12 +619,6 @@ class InstagramHelper
         $i->login($arr_user["username"], $arr_user["password"], 300);
       }
       
-      $count = 0;
-      $jmllike = 0;
-      $jmlcomment = 0;
-      $private = false;
-      $lastpost = null;
-      $maxid = null;
       //var_dump($arr_res2);
 
       $username = str_replace("@", "", $username);
@@ -668,16 +668,6 @@ class InstagramHelper
       }
       
 
-      $arr_res = [
-        "count"=>$count,
-        "jmllike"=>$jmllike,
-        "jmlcomment"=>$jmlcomment,
-        "private"=>$private,
-        "lastpost"=>$lastpost,
-      ];
-      
-      return $arr_res;
-
 		}  	
 		catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
 			//klo error password
@@ -716,7 +706,17 @@ class InstagramHelper
 				$error_message = $e->getMessage();
 			}
 		}
-		return $error_message;
+    
+    $arr_res = [
+      "count"=>$count,
+      "jmllike"=>$jmllike,
+      "jmlcomment"=>$jmlcomment,
+      "private"=>$private,
+      "lastpost"=>$lastpost,
+      "error_message"=>$error_message,
+    ];
+
+		return $arr_res;
 	}
 
 }
