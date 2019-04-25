@@ -69,6 +69,13 @@ class AccountController extends Controller
 
   public static function create_account($arr_res){
     set_time_limit(0);
+    $arr_res2 = InstagramHelper::get_user_profile(strtolower($arr_res["username"]));
+    $count = $arr_res2["count"];
+    $jmllike = $arr_res2["jmllike"];
+    $jmlcomment = $arr_res2["jmlcomment"];
+    $private = $arr_res2["private"];
+    $lastpost = $arr_res2["lastpost"];
+
     $account = new Account;
     $account->ig_id = $arr_res["pk"];
     $account->username = strtolower($arr_res["username"]);
@@ -77,53 +84,6 @@ class AccountController extends Controller
     $account->jml_following = $arr_res["following_count"];
     $account->jml_followers = $arr_res["follower_count"];
     $account->jml_post = $arr_res["media_count"];
-
-    $count = 0;
-    $jmllike = 0;
-    $jmlcomment = 0;
-    $end_cursor = null;
-    $private = false;
-    $lastpost = null;
-    //var_dump($arr_res2);
-
-    do {
-      // $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
-      // $arr_res2 = AccountController::igcallback($url2);    
-      $arr_res2 = json_decode(InstagramHelper::get_user_feed($arr_res["username"],$end_cursor),true);
-
-      // $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
-      // $arr_res3 = AccountController::igcallback($url3,'string');
-      $arr_res3 = InstagramHelper::get_user_feed_maxid($arr_res["username"],$end_cursor);
-      $end_cursor = $arr_res3;
-
-      if($end_cursor=='InstagramAPI\Response\UserFeedResponse: Not authorized to view user.'){
-          $private = true;
-          break;
-      }
-
-      if(!is_null($arr_res2) and !empty($arr_res2)){
-        if($count==0){
-          $lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
-        }
-
-        foreach ($arr_res2 as $arr) {
-          if($count>=20){
-            break;
-          } else {
-            $jmllike = $jmllike + $arr["like_count"];
-            if(array_key_exists('comment_count', $arr)){
-              $jmlcomment = $jmlcomment + $arr["comment_count"];  
-            } 
-            $count++;
-          }
-        }
-      } else {
-        if($count==0){
-          $private = true;
-        }
-        break;
-      }
-    } while ($count<20);
 
     //hitung rata2 like + comment di 20 post terakhir 
     //check akun private atau nggak

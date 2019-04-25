@@ -361,7 +361,7 @@ class InstagramHelper
 	}
 
   // get_user_feed + get_user_feed_maxid
- 	public static function get_user_profile($username,$maxid = null){
+ 	public static function get_user_profile($username){
 		try {
 			$error_message="";
 			$i = new Instagram(false,false,[
@@ -372,84 +372,159 @@ class InstagramHelper
         "dbpassword"   => env('DB_PASSWORD', ''),
 			]);	
 			
-					// $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
-					// JANGAN LUPA DILOGIN TERLEBIH DAHULU
-          if ( env('APP_ENV') == "production" ) {
-            $i->setProxy('http://208.115.112.100:9999');
-          }
-					
-					
-          if ( env('APP_ENV') == "local" ) {
-            $i->login("mayyyvitri", "qwerty12345", 300);
-          } 
-          else {
-            $i->login("mayymayyaa", "qwerty12345", 300);
-          }
+      // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
+      // JANGAN LUPA DILOGIN TERLEBIH DAHULU
+      // if ( env('APP_ENV') == "production" ) {
+        // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+      // }
 
-          $count = 0;
-          $jmllike = 0;
-          $jmlcomment = 0;
-          $end_cursor = null;
-          $private = false;
-          $lastpost = null;
-          //var_dump($arr_res2);
+      if ( env('APP_ENV') == "local" ) {
+        $i->login("mayyyvitri", "qwerty12345", 300);
+      } 
+      else if ( env('APP_ENV') == "production" ) {
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9868",
+          "username"=>"melodianaelisa",
+          "password"=>"qazwsx123",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9870",
+          "username"=>"dessiarumi",
+          "password"=>"abcde12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9871",
+          "username"=>"renawilliams222",
+          "password"=>"abcde12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9873",
+          "username"=>"marianalaskmi",
+          "password"=>"qwerty12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9874",
+          "username"=>"magdalenapeter96",
+          "password"=>"qazwsx123",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9875",
+          "username"=>"felysamora",
+          "password"=>"abcde12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9876",
+          "username"=>"nithaasyari",
+          "password"=>"qweasdzxc123",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9878",
+          "username"=>"thalianasarifernand",
+          "password"=>"987456321qwerty",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9881",
+          "username"=>"naningtyasa",
+          "password"=>"qwerty12345",
+        ];			
+        
+        $arr_users[] = [
+          "proxy"=>"208.115.112.100",
+          "port"=>"9999",
+          "username"=>"mayymayyaa",
+          "password"=>"qwerty12345",
+        ];			
+        
+        $arr_user = $arr_users[array_rand($arr_users)];
+			
+        
+        // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+        // $i->login("mayymayyaa", "qwerty12345", 300);
+        $i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
+        $i->login($arr_user["username"], $arr_user["password"], 300);
+      }
+      
+      $count = 0;
+      $jmllike = 0;
+      $jmlcomment = 0;
+      $private = false;
+      $lastpost = null;
+      $maxid = null;
+      //var_dump($arr_res2);
 
-          do {
-            // $url2 = "http://cmx.space/get-user-feed/".$arr_res["username"].'/'.$end_cursor;
-            // $arr_res2 = $this->igcallback($mode);
-            $arr_res2 = json_decode(InstagramHelper::get_user_feed($arr_res["username"],$end_cursor),true);
-            $feed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
-            $feed->getNextMaxId();
+      $username = str_replace("@", "", $username);
+      if (!$i->account->checkUsername($username)->getAvailable()) {
+        $userData = $i->people->getInfoByName($username)->getUser();
+        if (!is_null($userData)) {
+          //new
+          $private = (int) $userData->getIsPrivate();
+        }
+      }
+      
+      if (!$private){
+        do {
+          $feed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
+          $temp = json_encode($feed->getItems());
+          $maxid = $feed->getNextMaxId();
+          $arr_res2 = json_decode($temp,true);
+          // dd($arr_res2);
+          // var_dump('end_cursor = '.$maxid);
 
-            // $url3 = "http://cmx.space/get-user-feed-maxid/".$arr_res["username"].'/'.$end_cursor;
-            // $arr_res3 = $this->igcallback($url3,'string');
-            $arr_res3 = InstagramHelper::get_user_feed_maxid($arr_res["username"],$end_cursor);
-            var_dump('end_cursor = '.$arr_res3);
-            $end_cursor = $arr_res3;
+          if(!is_null($arr_res2) and !empty($arr_res2))
+          {
+            if($count==0){
+              $lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
+            }
 
-            if($end_cursor=='InstagramAPI\Response\UserFeedResponse: Not authorized to view user.'){
+            foreach ($arr_res2 as $arr) {
+              if($count>=20){
+                break;
+              } else {
+                $jmllike = $jmllike + $arr["like_count"];
+                // var_dump('like = '.$arr["like_count"]);
+                if(array_key_exists('comment_count', $arr)){
+                  $jmlcomment = $jmlcomment + $arr["comment_count"];  
+                  // var_dump('comment = '.$arr["comment_count"]);
+                } 
+                $count++;
+              }
+            }
+          } else {
+            if($count==0){
               $private = true;
-              break;
             }
+            break;
+          }
+        } while ($count<20);
+      }
+      
 
-            if(!is_null($arr_res2) and !empty($arr_res2))
-            {
-              if($count==0){
-                $lastpost = date("Y-m-d h:i:s",$arr_res2[0]["taken_at"]);
-              }
-
-              foreach ($arr_res2 as $arr) {
-                if($count>=20){
-                  break;
-                } else {
-                  $jmllike = $jmllike + $arr["like_count"];
-                  var_dump('like = '.$arr["like_count"]);
-                  if(array_key_exists('comment_count', $arr)){
-                    $jmlcomment = $jmlcomment + $arr["comment_count"];  
-                    var_dump('comment = '.$arr["comment_count"]);
-                  } 
-                  $count++;
-                }
-              }
-            } else {
-              if($count==0){
-                $private = true;
-              }
-              break;
-            }
-          } while ($count<20);
-          
-
-          $arr = [
-            "count"=>$count,
-            "jmllike"=>$jmllike,
-            "jmlcomment"=>$jmlcomment,
-            "end_cursor"=>$end_cursor,
-            "private"=>$private,
-            "lastpost"=>$lastpost,
-          ];
-          
-					return $arr;
+      $arr_res = [
+        "count"=>$count,
+        "jmllike"=>$jmllike,
+        "jmlcomment"=>$jmlcomment,
+        "private"=>$private,
+        "lastpost"=>$lastpost,
+      ];
+      
+      return $arr_res;
 
 		}  	
 		catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
@@ -466,6 +541,7 @@ class InstagramHelper
 		}
 		catch (\InstagramAPI\Exception\InstagramException $e) {
 			$is_error = true;
+			$error_message = $e->getMessage();
 			// if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
 				// echo "2 Factor perlu dioffkan";
 			// } 
@@ -475,6 +551,7 @@ class InstagramHelper
 			// }
 		}	
 		catch (NotFoundException $e) {
+			$error_message = $e->getMessage();
 			// echo $e->getMessage();
 			// echo "asd";
 		}					
@@ -487,7 +564,7 @@ class InstagramHelper
 				$error_message = $e->getMessage();
 			}
 		}
-		// return $error_message;
+		return $error_message;
 	}
 
 }
