@@ -36,37 +36,50 @@ class OrderController extends Controller
     return view('user.pricing.thankyou_free');
   }
 
-  public function cek_kupon($kodekupon,$harga){
-    $coupon = Coupon::where('kodekupon',$kodekupon)
+  public function cek_kupon($kodekupon,$harga,$idpaket){
+    $arr['status'] = 'success';
+    $arr['message'] = '';
+    $arr['total'] = $harga;
+    $arr['diskon'] = 0;
+    $arr['coupon'] = null;
+
+    if($kodekupon!=''){
+      $coupon = Coupon::where('kodekupon',$kodekupon)
+                ->where('package_id',$idpaket)
                 ->first();
 
-    if(is_null($coupon)){
-      $arr['status'] = 'error';
-      $arr['message'] = 'Kupon tidak ditemukan';
-    } else {
-      $now = new DateTime();
-      $date = new DateTime($coupon->valid_until);
-      
-      if($date<$now){
+      if(is_null($coupon)){
         $arr['status'] = 'error';
-        $arr['message'] = 'Kupon sudah tidak berlaku';
+        $arr['message'] = 'Kupon tidak ditemukan';
       } else {
-
-        $total = 0;
-        $diskon = 0;
-        if($coupon->diskon_value==0 and $coupon->diskon_percent!=0){
-          $diskon = $harga * $coupon->diskon_percent/100;
-          $total = $harga - $diskon;
+        $now = new DateTime();
+        $date = new DateTime($coupon->valid_until);
+        
+        if($date<$now){
+          $arr['status'] = 'error';
+          $arr['message'] = 'Kupon sudah tidak berlaku';
         } else {
-          $diskon = $coupon->diskon_value;
-          $total = $harga - $coupon->diskon_value;
-        }
+          if($coupon->valid_to=='new' and Auth::check()){
 
-        $arr['status'] = 'success';
-        $arr['message'] = '';
-        $arr['total'] = $total;
-        $arr['diskon'] = $diskon;
-        $arr['coupon'] = $coupon;
+          } else {
+            $total = 0;
+            $diskon = 0;
+
+            if($coupon->diskon_value==0 and $coupon->diskon_percent!=0){
+              $diskon = $harga * $coupon->diskon_percent/100;
+              $total = $harga - $diskon;
+            } else {
+              $diskon = $coupon->diskon_value;
+              $total = $harga - $coupon->diskon_value;
+            }
+
+            $arr['status'] = 'success';
+            $arr['message'] = '';
+            $arr['total'] = $total;
+            $arr['diskon'] = $diskon;
+            $arr['coupon'] = $coupon;
+          }
+        }
       }
     }
 
@@ -74,7 +87,7 @@ class OrderController extends Controller
   }
 
   public function check_kupon(Request $request){
-    $arr = $this->cek_kupon($request->kupon,$request->harga);
+    $arr = $this->cek_kupon($request->kupon,$request->harga,$request->idpaket);
     return $arr;
   }
 
@@ -115,10 +128,17 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
+    $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
+
+    if($arr['status']=='error'){
+      return redirect("checkout/1")->with("error", $arr['message']);
+    }
+
     return view('auth.register')->with(array(
 			"price"=>$request->price,
 			"namapaket"=>$request->namapaket,
-      "coupon_code"=>$request->coupon_code,
+      "coupon_code"=>$request->kupon,
+      "idpaket" => $request->idpaket,
 		));
   }
   
@@ -129,10 +149,17 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
+    $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
+
+    if($arr['status']=='error'){
+      return redirect("checkout/1")->with("error", $arr['message']);
+    }
+
     return view('auth.login')->with(array(
       "price"=>$request->price,
       "namapaket"=>$request->namapaket,
-      "coupon_code"=>$request->coupon_code,
+      "coupon_code"=>$request->kupon,
+      "idpaket" => $request->idpaket,
     ));  
   }
 
@@ -179,6 +206,24 @@ class OrderController extends Controller
       return view('user.pricing.thankyou_free');
 
     } else {*/
+      $diskon = 0;
+      $total = $request->price;
+      $kuponid = null;
+      if($request->kupon!=''){
+        $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
+
+        if($arr['status']=='error'){
+          return redirect("checkout/1")->with("error", $arr['message']);
+        } else {
+          $total = $arr['total'];
+          $diskon = $arr['diskon'];
+          
+          if($arr['coupon']!=null){
+            $kuponid = $arr['coupon']->id;
+          }
+        }
+      }
+
       //create order 
       $dt = Carbon::now();
       $order = new Order;
@@ -188,28 +233,35 @@ class OrderController extends Controller
       $order->user_id = $user->id;
       $order->package = $request->namapaket;
       $order->jmlpoin = 0;
+      $order->coupon_id = $kuponid;
       $order->total = $request->price;
-      $order->discount = 0;
+      $order->discount = $diskon;
+      $order->grand_total = $total;
       $order->status = 0;
       $order->buktibayar = "";
       $order->keterangan = "";
       $order->save();
       
-      //mail order to user 
-      $emaildata = [
-          'order' => $order,
-          'user' => $user,
-          'nama_paket' => $request->namapaket,
-          'no_order' => $order_number,
-      ];
-      Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-        $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
-        $message->to($user->email);
-        $message->bcc(['puspita.celebgramme@gmail.com','it.axiapro@gmail.com']);
-        $message->subject('[Omnifluencer] Order Nomor '.$order_number);
-      });
+      if($order->grand_total!=0){
+        //mail order to user 
+        $emaildata = [
+            'order' => $order,
+            'user' => $user,
+            'nama_paket' => $request->namapaket,
+            'no_order' => $order_number,
+        ];
+        Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+          $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+          $message->to($user->email);
+          $message->bcc(['puspita.celebgramme@gmail.com','it.axiapro@gmail.com']);
+          $message->subject('[Omnifluencer] Order Nomor '.$order_number);
+        });
 
-      return view('user.pricing.thankyou');
+        return view('user.pricing.thankyou');
+      } else {
+        return view('user.pricing.thankyou_free');
+      }
+      
     //}
   }
 

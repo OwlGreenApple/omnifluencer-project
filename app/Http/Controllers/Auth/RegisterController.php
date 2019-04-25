@@ -144,7 +144,9 @@ class RegisterController extends Controller
       } 
       
       if ($data['price']<>"") {
-        if($data['namapaket']=='Pro 15 hari' and strtoupper($data['coupon_code'])==$this->coupon_code){
+        $ordercont = new OrderController;
+
+        /*if($data['namapaket']=='Pro 15 hari' and strtoupper($data['coupon_code'])==$this->coupon_code){
           //create order 
           $dt = Carbon::now();
           $order = new Order;
@@ -161,7 +163,6 @@ class RegisterController extends Controller
           $order->keterangan = "";
           $order->save();
 
-          $ordercont = new OrderController;
           $valid = $ordercont->add_time($user,"+15 days");
 
           $userlog = new UserLog;
@@ -175,7 +176,24 @@ class RegisterController extends Controller
           $user->valid_until = $valid;
           $user->membership = 'pro';
           $user->save();
-        } else {
+        } else {*/
+          $diskon = 0;
+          $total = $data['price'];
+          $kuponid = null;
+          if($data['kupon']!=''){
+            $arr = $ordercont->cek_kupon($data['kupon'],$data['price'],$data['idpaket']);
+
+            if($arr['status']=='error'){
+              return redirect("checkout/1")->with("error", $arr['message']);
+            } else {
+              $total = $arr['total'];
+              $diskon = $arr['diskon'];
+              if($arr['coupon']!=null){
+                $kuponid = $arr['coupon']->id;
+              }
+            }
+          }
+
           //create order 
           $dt = Carbon::now();
           $order = new Order;
@@ -185,27 +203,32 @@ class RegisterController extends Controller
           $order->user_id = $user->id;
           $order->package = $data["namapaket"];
           $order->jmlpoin = 0;
-          $order->total = $data['price'];
-          $order->discount = 0;
+          $order->coupon_id = $kuponid;
+          $order->total = $data["price"];
+          $order->discount = $diskon;
+          $order->grand_total = $total;
           $order->status = 0;
           $order->buktibayar = "";
           $order->keterangan = "";
           $order->save();
           
-          //mail order to user 
-          $emaildata = [
-              'order' => $order,
-              'user' => $user,
-              'nama_paket' => $data['namapaket'],
-              'no_order' => $order_number,
-          ];
-          Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-            $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
-            $message->to($user->email);
-            $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
-            $message->subject('[Omnifluencer] Order Nomor '.$order_number);
-          });
-        }
+          if($order->grand_total!=0){
+            //mail order to user 
+            $emaildata = [
+                'order' => $order,
+                'user' => $user,
+                'nama_paket' => $data['namapaket'],
+                'no_order' => $order_number,
+            ];
+            Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+              $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+              $message->to($user->email);
+              $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
+              $message->subject('[Omnifluencer] Order Nomor '.$order_number);
+            });
+          }
+          
+        //}
       }
 
       return $user;
@@ -241,8 +264,8 @@ class RegisterController extends Controller
     public function register(Request $request){
       $validator = $this->validator($request->all());
 
+      $ordercont = new OrderController;
       if($request->price<>""){
-        $ordercont = new OrderController;
         $stat = $ordercont->cekharga($request->namapaket,$request->price);
         if($stat==false){
           return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
@@ -274,11 +297,20 @@ class RegisterController extends Controller
         Mail::to($user->email)->send(new ConfirmEmail($emaildata));
 
         if ($request->price<>"") {
-          if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
+          /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
             return redirect('thankyou-free');   
           } else {
             return redirect('thankyou');  
+          }*/
+
+          $arr = $ordercont->cek_kupon($request->kupon,$request->price,$request->idpaket);
+
+          if($arr['status']=='success' and $arr['total']==0){
+            return redirect('thankyou-free');  
+          } else {
+            return redirect('thankyou');  
           }
+
         } else {
           return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
           /*Auth::loginUsingId($user->id);

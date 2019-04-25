@@ -6,7 +6,9 @@ Info Order anda adalah sebagai berikut <br>
 <strong>Status Order :</strong> Pending <br>
 Anda telah memesan paket 
 
-{{$nama_paket}} <strong>Rp. {{number_format($order->total - $order->discount,0,'','.')}} </strong><br>
+{{$nama_paket}} <strong>Rp. {{number_format($order->total)}} </strong><br>
+<strong>Diskon :</strong>Rp. {{number_format($order->discount)}} </strong><br>
+<strong>Total :</strong>Rp. {{number_format($order->grand_total)}} </strong><br>
 
 <br>
 	Harap SEGERA melakukan pembayaran,<br> 

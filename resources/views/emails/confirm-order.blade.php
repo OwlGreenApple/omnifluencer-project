@@ -7,7 +7,7 @@ berikut ini adalah rincian ORDER yang telah dikonfirmasi admin <br>
 <strong>Status Order :</strong> Confirmed <br>
 Anda telah memesan paket 
 
-{{$order->package}} <strong>Rp. {{number_format($order->total - $order->discount,0,'','.')}} </strong><br>
+{{$order->package}} <strong>Rp. {{number_format($order->total)}} </strong><br>
 
 <br>
 Aktivasi telah sukses dilakukan. Anda sudah bisa menggunakan layanan Omnifluencer. Segera hubungi kami jika masih ada ditanyakan.<br>

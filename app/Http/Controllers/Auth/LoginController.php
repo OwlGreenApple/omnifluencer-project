@@ -90,6 +90,23 @@ class LoginController extends Controller
 
           return redirect('thankyou-free');   
         } else {*/
+          $diskon = 0;
+          $total = $request->price;
+          $kuponid = null;
+          if($request->kupon!=''){
+            $arr = $ordercont->cek_kupon($request->kupon,$request->price,$request->idpaket);
+            
+            if($arr['status']=='error'){
+              return redirect("checkout/1")->with("error", $arr['message']);
+            } else {
+              $total = $arr['total'];
+              $diskon = $arr['diskon'];
+              if($arr['coupon']!=null){
+                $kuponid = $arr['coupon']->id;
+              }
+            }
+          }
+
           //create order 
           $dt = Carbon::now();
           $order = new Order;
@@ -99,28 +116,35 @@ class LoginController extends Controller
           $order->user_id = $user->id;
           $order->package = $request->namapaket;
           $order->jmlpoin = 0;
+          $order->coupon_id = $kuponid;
           $order->total = $request->price;
-          $order->discount = 0;
+          $order->discount = $diskon;
+          $order->grand_total = $total;
           $order->status = 0;
           $order->buktibayar = "";
           $order->keterangan = "";
           $order->save();
           
-          //mail order to user 
-          $emaildata = [
-              'order' => $order,
-              'user' => $user,
-              'nama_paket' => $request->namapaket,
-              'no_order' => $order_number,
-          ];
-          Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-            $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
-            $message->to($user->email);
-            $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
-            $message->subject('[Omnifluencer] Order Nomor '.$order_number);
-          });
+          if($order->grand_total!=0){
+            //mail order to user 
+            $emaildata = [
+                'order' => $order,
+                'user' => $user,
+                'nama_paket' => $request->namapaket,
+                'no_order' => $order_number,
+            ];
+            Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+              $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+              $message->to($user->email);
+              $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
+              $message->subject('[Omnifluencer] Order Nomor '.$order_number);
+            });
 
-          return redirect('/thankyou');
+            return redirect('/thankyou');
+          } else {
+            return redirect('/thankyou-free');
+          }
+          
         //}
         
       }

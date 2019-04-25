@@ -10,8 +10,8 @@
         var namapaket = $(this).find("option:selected").attr("data-paket");
 
         $("#price").val(price);
-        $('.total').html('Rp. ' + price);
         $("#namapaket").val(namapaket);
+        check_kupon();
       });
       $( "#select-auto-manage" ).change();
     });
@@ -30,6 +30,7 @@
         data: {
           harga : $('#price').val(),
           kupon : $('#kupon').val(),
+          idpaket : $( "#select-auto-manage" ).val(),
         },
         dataType: 'text',
         beforeSend: function() {
@@ -47,7 +48,7 @@
           } else {
             $('#pesan').html(data.message);
             $('#pesan').removeClass('alert-success');
-            $('#pesan').addClass('alert-warning');
+            $('#pesan').addClass('alert-danger');
             $('#pesan').show();
           }
         }
@@ -62,7 +63,7 @@
           <div class="signup-content">
             @if (session('error') )
               <div class="col-md-12 alert alert-danger">
-                <strong>Warning!</strong> {{session('error')}}
+                {{session('error')}}
               </div>
             @endif
             
