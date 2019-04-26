@@ -20,7 +20,7 @@ class CreateCouponsTable extends Migration
             $table->integer('diskon_percent');
             $table->timestamp('valid_until');
             $table->string('valid_to');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->integer('package_id');
             $table->timestamps();
         });

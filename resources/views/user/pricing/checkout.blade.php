@@ -45,6 +45,7 @@
 
           if (data.status == 'success') {
             $('.total').html('Rp. ' + data.total);
+            $('#pesan').hide();
           } else {
             $('#pesan').html(data.message);
             $('#pesan').removeClass('alert-success');
@@ -85,17 +86,17 @@
                 <label class="label-title-test" for="formGroupExampleInput">
                   Pilih Paket:
                 </label>
-                <select class="form-control form-control-lg" name="select-auto-manage" id="select-auto-manage" style="width: 100%">
-                  <option data-price="197000" data-paket="Pro Monthly" value="{{$id}}" <?php if ($id==1) echo "selected"; ?>>
+                <select class="form-control form-control-lg" name="idpaket" id="select-auto-manage" style="width: 100%">
+                  <option data-price="197000" data-paket="Pro Monthly" value="1" <?php if ($id==1) echo "selected"; ?>>
                     Pro Monthly - Rp 197.000/bln
                   </option>
-                  <option data-price="297000" data-paket="Premium Monthly" value="{{$id}}" <?php if ($id==3) echo "selected"; ?>>
+                  <option data-price="297000" data-paket="Premium Monthly" value="3" <?php if ($id==3) echo "selected"; ?>>
                     Premium Monthly - Rp 297.000/bln
                   </option>
-                  <option data-price="708000" data-paket="Pro Yearly" value="{{$id}}" <?php if ($id==2) echo "selected"; ?>>
+                  <option data-price="708000" data-paket="Pro Yearly" value="2" <?php if ($id==2) echo "selected"; ?>>
                     Pro Yearly - Rp 708.000/tahun
                   </option>
-                  <option data-price="1068000" data-paket="Premium Yearly" value="{{$id}}" <?php if ($id==4) echo "selected"; ?>>
+                  <option data-price="1068000" data-paket="Premium Yearly" value="4" <?php if ($id==4) echo "selected"; ?>>
                     Premium Yearly - Rp 1.068.000/tahun
                   </option>
                 </select>

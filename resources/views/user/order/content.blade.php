@@ -20,8 +20,13 @@
     <td class="menu-nomobile" data-label="Discount">
       Rp. <?php echo number_format($order->discount) ?>
     </td>
+    <td class="menu-nomobile" data-label="Grand Total">
+      Rp. <?php echo number_format($order->grand_total) ?>
+    </td>
     <td class="menu-nomobile" data-label="Date">
-      {{$order->created_at}}
+      {{ date("H:i", strtotime($order->created_at))  }}
+      <br>
+      {{ date("Y/m/d", strtotime($order->created_at))  }}
     </td>
     <td class="menu-nomobile" data-label="Bukti Bayar">
       @if($order->buktibayar=='' or $order->buktibayar==null)
@@ -67,12 +72,15 @@
   <tr class="details-{{$order->id}} d-none">
     <td>
       Package : <b>{{$order->package}}</b><br>
-      Total : <b>
+      Harga : <b>
                 Rp. <?php echo number_format($order->total) ?>    
               </b><br>
       Discount : <b>
                   Rp. <?php echo number_format($order->discount) ?>
                  </b><br>
+      Total : <b>
+                Rp. <?php echo number_format($order->grand_total) ?>
+              </b><br>
     </td>
     <td>
       Date : <b>{{$order->created_at}}</b><br>

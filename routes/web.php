@@ -165,6 +165,13 @@ Route::group(['middleware' => ['web','auth','admin']], function()
   Route::get('/list-account','AccountController@index_account');
   Route::get('/list-account/load-account','AccountController@load_account');
   Route::get('/list-account/view-log','AccountController@view_account_log');
+
+  //List Coupon
+  Route::get('/list-coupon','CouponController@index');
+  Route::get('/list-coupon/load-coupon','CouponController@load_coupon');
+  Route::get('/list-coupon/add','CouponController@add_coupon');
+  Route::get('/list-coupon/edit','CouponController@edit_coupon');
+  Route::get('/list-coupon/delete','CouponController@delete_coupon');
 });
 
 Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

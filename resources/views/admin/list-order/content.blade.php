@@ -15,8 +15,12 @@
     <td data-label="Discount">
       Rp. <?php echo number_format($order->discount) ?>
     </td>
+    <td data-label="Grand Total">
+      Rp. <?php echo number_format($order->grand_total) ?>
+    </td>
     <td data-label="Date">
-      {{$order->created_at}}
+      {{ date("H:i", strtotime($order->created_at)) }}
+      {{ date("Y/m/d", strtotime($order->created_at)) }}
     </td>
     <td data-label="Bukti Bayar" align="center">
       @if($order->buktibayar=='' or $order->buktibayar==null)

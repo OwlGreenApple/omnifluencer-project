@@ -45,7 +45,10 @@ class OrderController extends Controller
 
     if($kodekupon!=''){
       $coupon = Coupon::where('kodekupon',$kodekupon)
-                ->where('package_id',$idpaket)
+                ->where(function($query) use ($idpaket) {
+                  $query->where('package_id',$idpaket)
+                        ->orwhere('package_id',0);
+                })
                 ->first();
 
       if(is_null($coupon)){
@@ -60,6 +63,8 @@ class OrderController extends Controller
           $arr['message'] = 'Kupon sudah tidak berlaku';
         } else {
           if($coupon->valid_to=='new' and Auth::check()){
+
+          } else if($coupon->valid_to=='extend' and !Auth::check()){
 
           } else {
             $total = 0;

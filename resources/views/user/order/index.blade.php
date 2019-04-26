@@ -154,31 +154,34 @@
       <form>
         <table class="table responsive">
           <thead>
-            <th class="menu-mobile">
+            <th class="menu-mobile" style="vertical-align: middle;">
               Details
             </th>
-            <th class="menu-nomobile header" action="no_order">
+            <th class="menu-nomobile header" action="no_order" style="vertical-align: middle;">
               No Order
             </th>
-            <th class="menu-nomobile header" action="package">
+            <th class="menu-nomobile header" action="package" style="vertical-align: middle;">
               Package
             </th>
-            <th class="menu-nomobile header" action="total">
-              Total
+            <th class="menu-nomobile header" action="total" style="vertical-align: middle;">
+              Harga
             </th>
-            <th class="menu-nomobile header" action="discount">
+            <th class="menu-nomobile header" action="discount" style="vertical-align: middle;">
               Discount
             </th>
-            <th class="menu-nomobile header" action="created_at">
+            <th class="menu-nomobile header" action="grand_total" style="vertical-align: middle;">
+              Total
+            </th>
+            <th class="menu-nomobile header" action="created_at" style="vertical-align: middle;">
               Date
             </th>
-            <th class="menu-nomobile">
+            <th class="menu-nomobile" style="vertical-align: middle;">
               Bukti Bayar
             </th>
-            <th class="menu-nomobile" action="keterangan">
+            <th class="menu-nomobile" action="keterangan" style="vertical-align: middle;">
               Keterangan
             </th>
-            <th class="colstatus" action="status">
+            <th class="colstatus" action="status" style="vertical-align: middle;">
               Status
             </th>
           </thead>

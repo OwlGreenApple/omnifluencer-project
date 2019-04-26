@@ -45,6 +45,7 @@
 
           if (data.status == 'success') {
             $('.total').html('Rp. ' + data.total);
+            $('#pesan').hide();
           } else {
             $('#pesan').html(data.message);
             $('#pesan').removeClass('alert-success');
@@ -67,6 +68,8 @@
               </div>
             @endif
             
+            <div id="pesan" class="alert"></div>
+
             <?php if (Auth::check()) {?>
               <!-- ditaruh di session -->
               <form method="POST" action="{{url('confirm-payment')}}" id="signup-form" class="signup-form">

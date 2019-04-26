@@ -423,6 +423,15 @@
           </span>
         </li>
 
+        <li class="<?php if(Request::is('list-coupon')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('list-coupon')}}">
+              <i class="fas fa-ticket-alt icon-menu"></i>
+              Coupons
+            </a>
+          </span>
+        </li>
+
         <li class="<?php if(Request::is('list-account')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="{{url('list-account')}}">

@@ -6,6 +6,7 @@
 
   $(document).ready(function() {
     table = $('#myTable').DataTable({
+      responsive : true,
       destroy: true,
       "order": [],
     });
@@ -37,6 +38,7 @@
         $('#content').html(data.view);
         
         table = $('#myTable').DataTable({
+                responsive : true,
                 destroy: true,
                 "order": [],
             });
@@ -130,31 +132,34 @@
       <form>
         <table class="table" id="myTable">
           <thead align="center">
-            <th action="no_order">
+            <th data-priority="1" action="no_order all">
               No Order
             </th>
-            <th action="email">
+            <th data-priority="2" action="email all">
               Email
             </th>
-            <th action="package">
+            <th action="package none">
               Package
             </th>
-            <th action="total">
-              Total
+            <th action="total all">
+              Harga
             </th>
-            <th action="discount">
+            <th action="discount all">
               Discount
             </th>
-            <th action="created_at">
+            <th action="grand_total all">
+              Total
+            </th>
+            <th action="created_at none">
               Date
             </th>
-            <th>
+            <th class="all">
               Bukti Bayar
             </th>
-            <th action="keterangan">
+            <th action="keterangan none">
               Keterangan
             </th>
-            <th action="status">
+            <th data-priority="3" action="status all">
               Status
             </th>
           </thead>
