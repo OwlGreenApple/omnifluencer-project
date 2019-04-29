@@ -77,7 +77,8 @@ class UpdateAccount extends Command
       
         // $arr_res = $this->igcallback($url);
         
-        if($arr_res!=null){
+        // if($arr_res!=null){
+        if(is_array($arr_res)){
           $account->ig_id = $arr_res["pk"];
           //replace username di database kalo beda sama yang diambil
           if($account->username!=$arr_res["username"]){

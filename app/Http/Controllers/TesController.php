@@ -15,18 +15,20 @@ class TesController extends Controller
       // $arr_res = AccountController::igcallback($url);
       
       //buat login 
-      dd(json_decode(InstagramHelper::check_login(),true));
-      exit;
+      // dd(json_decode(InstagramHelper::check_login(),true));
+      // exit;
       
-      $arr_res = InstagramHelper::get_user_profile("successfoundation");
-      // dd($arr_res);
-
       $count = 0;
       $jmllike = 0;
       $jmlcomment = 0;
       $end_cursor = null;
       $private = false;
       $lastpost = null;
+      $arr_res = InstagramHelper::get_user_profile("successfoundation");
+      
+      dd($arr_res);
+      exit;
+
       // dd($arr_res);
       // echo $arr_res["username"];
       // exit;

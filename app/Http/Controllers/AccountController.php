@@ -176,7 +176,8 @@ class AccountController extends Controller
 
         $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
         
-        if($arr_res!=null){
+        // if($arr_res!=null){
+        if(is_array($arr_res)){
           $account = $this->create_account($arr_res);
         } else {
           $arr['status'] = 'error';
