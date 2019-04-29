@@ -24,7 +24,7 @@
     </p>
     
     <p class="card-text">
-      Jika anda mempunyai pertanyaan, silahkan hubungi kami via email omnifluencer.com
+      Jika anda mempunyai pertanyaan, silahkan hubungi kami via email omnifluencer@gmail.com
     </p>
 
     <!--<div class="offset-sm-2 col-sm-8">
