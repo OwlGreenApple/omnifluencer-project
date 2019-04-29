@@ -357,12 +357,13 @@ class InstagramHelper
 			// } 
 			// else {
 					// all other login errors would get caught here...
-				echo $e->getMessage();
+				// echo $e->getMessage();
+        $error_message = $e->getMessage();
 			// }
 		}	
 		catch (NotFoundException $e) {
 			// echo $e->getMessage();
-			echo "asd";
+      $error_message = $e->getMessage();
 		}					
 		catch (Exception $e) {
 			$error_message = $e->getMessage();
