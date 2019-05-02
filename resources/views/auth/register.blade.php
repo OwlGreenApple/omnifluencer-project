@@ -166,7 +166,7 @@
               <label for="agree-term" class="label-agree-term">
                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term mr-1" required/>
                 Menyetujui
-                <a href="{{url('statics/terms-conditions')}}" class="term-service">
+                <a href="{{url('about-us/terms-conditions')}}" class="term-service">
                   Syarat dan Ketentuan 
                 </a>
               </label>
