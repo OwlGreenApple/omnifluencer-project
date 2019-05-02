@@ -675,14 +675,14 @@ class InstagramHelper
 
             foreach($userFeedItems as $item) {
               if($count==0){
-                $itemInfo = $ig->media->getInfo($item->getId());
+                $itemInfo = $i->media->getInfo($item->getId());
                 $lastpost = date("Y-m-d h:i:s",$itemInfo->getItems()[0]->getTakenAt());
               }
               
               if($count>=12){
                 break;
               } else {
-                $itemInfo = $ig->media->getInfo($item->getId());
+                $itemInfo = $i->media->getInfo($item->getId());
                 $jmllike += $itemInfo->getItems()[0]->getLikeCount();
                 $jmlcomment += $itemInfo->getItems()[0]->getCommentCount();
                 $count++;
