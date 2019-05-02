@@ -633,7 +633,7 @@ class InstagramHelper
       
       if (!$private){
         do {
-          $feed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
+          /*$feed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
           $temp = json_encode($feed->getItems());
           // $maxid = $feed->getNextMaxId();
           $arr_res2 = json_decode($temp,true);
@@ -665,6 +665,36 @@ class InstagramHelper
             }
             break;
           }
+          */
+          $userFeed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
+          $userFeedItems = $userFeed->getItems();
+
+
+          if(!is_null($userFeedItems) and !empty($userFeedItems))
+          {
+
+            foreach($userFeedItems as $item) {
+              if($count==0){
+                $itemInfo = $ig->media->getInfo($item->getId());
+                $lastpost = date("Y-m-d h:i:s",$itemInfo->getItems()[0]->getTakenAt());
+              }
+              
+              if($count>=12){
+                break;
+              } else {
+                $itemInfo = $ig->media->getInfo($item->getId());
+                $jmllike += $itemInfo->getItems()[0]->getLikeCount();
+                $jmlcomment += $itemInfo->getItems()[0]->getCommentCount();
+                $count++;
+              }
+            }
+          } else {
+            if($count==0){
+              $private = true;
+            }
+            break;
+          }
+
         } while ($count<12);
       }
       
