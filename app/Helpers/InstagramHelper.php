@@ -637,7 +637,7 @@ class InstagramHelper
           $temp = json_encode($feed->getItems());
           // $maxid = $feed->getNextMaxId();
           $arr_res2 = json_decode($temp,true);
-          dd($arr_res2);
+          // dd($arr_res2);
           // var_dump('end_cursor = '.$maxid);
 
           if(!is_null($arr_res2) and !empty($arr_res2))
