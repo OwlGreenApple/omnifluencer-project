@@ -226,6 +226,51 @@ class RegisterController extends Controller
               $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
               $message->subject('[Omnifluencer] Order Nomor '.$order_number);
             });
+          } else {
+            $order->status = 2;
+            $order->save();
+
+            if(substr($order->package,0,3) === "Pro"){
+              if($order->package=='Pro Monthly'){
+                //$valid = new DateTime("+1 months");
+                $valid = $ordercont->add_time($user,"+1 months");
+              } else if($order->package=='Pro Yearly'){
+                //$valid = new DateTime("+12 months");
+                $valid = $ordercont->add_time($user,"+12 months");
+              } else if($order->package=='Pro 15 hari'){
+                $valid = $ordercont->add_time($user,"+15 days");
+              }
+
+              $userlog = new UserLog;
+              $userlog->user_id = $user->id;
+              $userlog->type = 'membership';
+              $userlog->value = 'pro';
+              $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
+              $userlog->save();
+
+              $user->valid_until = $valid;
+              $user->membership = 'pro';
+            } else if(substr($order->package,0,7) === "Premium"){
+              if($order->package=='Premium Monthly'){
+                //$valid = new DateTime("+1 months");
+                $valid = $ordercont->add_time($user,"+1 months");
+              } else if($order->package=='Premium Yearly'){
+                //$valid = new DateTime("+12 months");
+                $valid = $ordercont->add_time($user,"+12 months");
+              }
+
+              $userlog = new UserLog;
+              $userlog->user_id = $user->id;
+              $userlog->type = 'membership';
+              $userlog->value = 'premium';
+              $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to premium('.$valid->format('Y-m-d h:i:s').')';
+              $userlog->save();
+
+              $user->valid_until = $valid;
+              $user->membership = 'premium';
+            }
+
+            $user->save();
           }
           
         //}
