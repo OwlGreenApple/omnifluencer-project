@@ -168,7 +168,11 @@
       <div id="pesan" class="alert"></div>
 
       <br>  
-
+      <div class="form-group">
+        <button class="btn btn-info" data-toggle="modal" data-target="#modal-add-user">
+          Add User
+        </button>
+      </div>
       <form>
         <table class="table" id="myTable">
           <thead align="center">
@@ -197,8 +201,53 @@
           <tbody id="content"></tbody>
         </table>
 
-        <div id="pager"></div>    
+        <div id="pager"></div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add User-->
+<div class="modal fade" id="modal-add-user" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Add User
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data"id="form-add-user">
+          {{csrf_field()}}
+          <div class="form-group">
+            <label class="control-label col-md-5">Attach File Excel</label>
+            <div class="col-md-5">
+              <label class="btn btn-default btn-file">
+                <input type="file" name="import_file" >
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-5" for="Day">Trial Day</label>
+            <div class="col-md-5">
+              <input type="number" name="time_d" class="form-control" placeholder="active time">
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" data-dismiss="modal" class="btn btn-primary" id="btn-add-user">
+          Add
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -297,6 +346,36 @@
 </div>
 
 <script type="text/javascript">
+  $( "body" ).on( "click", "#btn-add-user", function() {
+    var uf = $('#form-add-user');
+    var fd = new FormData(uf[0]);
+    $.ajax({
+      url: "{{url('import-excel-user')}}",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: 'post',
+      data : fd,
+      processData:false,
+      contentType: false,
+      beforeSend: function(result) {
+        $("#div-loading").show();
+      },
+      dataType: 'text',
+      success: function(result)
+      {
+        var data = jQuery.parseJSON(result);
+        /*if(data.status=='error'){
+          $('#pesan').html('<div class="alert alert-warning"><strong>Warning!</strong> '+data.message+'</div>');
+        } else {
+          $('#pesan').html('<div class="alert alert-success"><strong>Success!</strong> '+data.message+'</div>');
+        }*/
+        $("#div-loading").hide();
+        alert(data.message);
+      }        
+    });
+  });
+  
   $( "body" ).on( "click", ".btn-poin", function() {
     $('#idpoin').val($(this).attr('data-id'));
     get_point_log();

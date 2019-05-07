@@ -99,7 +99,7 @@
               </a>
             </li>
             <li class="nav-item main-menu">
-              <a class="nav-link" href="#">Blog</a>
+              <a class="nav-link" href="https://omnifluencer.com/n/blog-post/">Blog</a>
             </li>
             <li class="nav-item main-menu">
               <a class="nav-link <?php if(Request::is('pricing')) echo 'nav-active' ?>" href="{{url('pricing')}}">
