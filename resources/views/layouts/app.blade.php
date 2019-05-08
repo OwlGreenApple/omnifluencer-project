@@ -250,7 +250,7 @@
                     <li> 
                       <a href="{{url('/')}}"> Home</a> 
                     </li>
-                    <li> <a href="#"> Blog</a> </li>
+                    <li> <a href="https://omnifluencer.com/n/blog-post/"> Blog</a> </li>
                     <li> 
                       <a href="{{url('pricing')}}"> 
                         Pricing   
@@ -301,7 +301,7 @@
                   <ul>
                     <li> 
                       <a href="mailto:omnifluencer@gmail.com?subject=Mail from Our Site"> 
-                        omnifluencer@gmail.com
+                        omnifluencer
                       </a> 
                     </li>
                     <!--<li> 
