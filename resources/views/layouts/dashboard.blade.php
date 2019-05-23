@@ -307,7 +307,7 @@
           </span>
         </li>
 
-        <li class="<?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile')) echo 'active' ?>">
+        <li class="<?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile') or Request::is('groups') or Request::is('groups/*')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="#infSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
               <i class="fas fa-certificate icon-menu"></i>
@@ -315,7 +315,7 @@
             </a>
           </span>
           
-          <ul class="collapse list-unstyled <?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile')) echo 'show' ?>" id="infSubmenu">
+          <ul class="collapse list-unstyled <?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile') or Request::is('groups') or Request::is('groups/*')) echo 'show' ?>" id="infSubmenu">
             <li class="<?php if(Request::is('history-influencer')) echo 'active' ?>">
               <a href="{{url('history-influencer')}}">
                 <i class="fas fa-history icon-menu"></i>
@@ -337,20 +337,16 @@
                     Saved Profile
                 </a>
               </li>
+
+              <li class="<?php if(Request::is('groups') or Request::is('groups/*')) echo 'active' ?>">
+                <a href="{{url('groups')}}">
+                  <i class="fas fa-folder-plus icon-menu"></i>
+                  Groups
+                </a>
+              </li>
             <?php } ?>
           </ul>
         </li>
-
-        <?php if(Auth::user()->membership=='premium' or Auth::user()->membership=='pro') { ?>
-          <li class="<?php if(Request::is('groups') or Request::is('groups/*')) echo 'active' ?>">
-            <span class="submenu-navbar">
-              <a href="{{url('groups')}}">
-                <i class="fas fa-folder-plus icon-menu"></i>
-                Groups
-              </a>
-            </span>
-          </li>
-        <?php } ?>
 
         <li class="<?php if(Request::is('upgrade-account')) echo 'active' ?>">
           <span class="submenu-navbar">
