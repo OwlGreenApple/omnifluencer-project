@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('backup:db')->daily();
         $schedule->command('check:membership')->dailyAt('00:00');
-        $schedule->command('update:account')->dailyAt('01:00');
+        $schedule->command('update:account')->dailyAt('02:00');
     }
 
     /**
