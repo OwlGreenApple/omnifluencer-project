@@ -154,6 +154,10 @@ Route::group(['middleware' => ['web','auth','admin']], function()
   Route::get('/list-order/load-order','OrderController@load_list_order');
   Route::get('/list-order/confirm','OrderController@confirm_order');
 
+  //List Coupons
+  Route::get('list-coupons','CouponController@index');
+  Route::post('addcoupon','CouponController@addCoupon')->middleware('coupon')->name('addcoupon');
+
   //List User
   Route::get('/list-user','UserController@index');
   Route::get('/list-user/load-user','UserController@load_user');

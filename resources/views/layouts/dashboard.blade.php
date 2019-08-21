@@ -419,6 +419,15 @@
           </span>
         </li>
 
+        <li class="<?php if(Request::is('list-coupons')) echo 'active' ?>">
+          <span class="submenu-navbar">
+            <a href="{{url('list-coupons')}}">
+              <i class="fas fa-percent icon-menu"></i>
+              Coupons
+            </a>
+          </span>
+        </li>
+
         <li class="<?php if(Request::is('list-account')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="{{url('list-account')}}">
