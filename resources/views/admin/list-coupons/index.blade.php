@@ -2,84 +2,40 @@
 
 @section('content')
 <script type="text/javascript">
-  //var table;
-
+  var table;
   $(document).ready(function() {
-    /*table = $('#myTable').DataTable({
-      destroy: true,
-      "order": [],
-    });
-    $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
-    */
-
-    //refresh_page();
     datePicker();
     addCoupon();
     getDiscount();
+    getData();
   });
 
-  function refresh_page(){
-    table.destroy();
-    $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/list-order/load-order') ?>",
-      dataType: 'text',
-      beforeSend: function()
-      {
-        $('#loader').show();
-        $('.div-loading').addClass('background-load');
-      },
-      success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
-        var data = jQuery.parseJSON(result);
-        $('#content').html(data.view);
-        
-        table = $('#myTable').DataTable({
-                destroy: true,
-                "order": [],
-            });
-
-      }
+ function getData()
+  {
+    $('#coupon_table').DataTable({
+      "processing": true,
+      "serverSide": true,
+      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+      "ajax": "{{route('couponTable')}}",
+      "columns": [
+            { "data": "no" },
+            { "data": "coupon_code" },
+            { "data": "percent" },
+            { "data": "value" },
+            { "data": "valid" },
+            { "data": "created" },
+            { "data": "updated" },
+            { "data": "description" },
+        ],
     });
+    //$.fn.DataTable.ext.pager.numbers_length = {'data':'paging'};
   }
 
+  /* Display calendar */
   function datePicker(){
      $(".datepicker").datepicker({
        dateFormat : 'yy-mm-dd',
     })
-  }
-
-  function delete_order(){
-    $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/list-order/delete') ?>",
-      data: {
-        id : $('#id_delete').val(),
-      },
-      dataType: 'text',
-      beforeSend: function()
-      {
-        $('#loader').show();
-        $('.div-loading').addClass('background-load');
-      },
-      success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
-        var data = jQuery.parseJSON(result);
-
-        if(data.status=='success'){
-          refresh_page();
-        } else {
-          $('#pesan').html(data.message);
-          $('#pesan').removeClass('alert-success');
-          $('#pesan').addClass('alert-warning');
-          $('#pesan').show();
-        }
-      }
-    });
   }
 
  /* Insert coupon data into database */
@@ -109,8 +65,8 @@
             $('#loader').hide();
             $('.div-loading').removeClass('background-load');
             alert(result.message);
-            $("input, textarea").val('');
-            $("select[name='coupon_discount']>option:eq(0)").prop('selected', true);
+            getDiscount();
+            emptyCols();
           } else {
             $(".coupon_code").html(result.coupon_code);
             $(".coupon_discount").html(result.coupon_discount);
@@ -133,7 +89,7 @@
     $('.discount-percent').hide();
     $('.discount-cash').hide();
 
-    $("input[name='discount']").on('change',function(){
+    $("body").on('change','input[name="discount"]',function(){
        var get_radio_value = $(this).val();
        if(get_radio_value == 0)
        {
@@ -144,6 +100,18 @@
           $('.discount-cash').show();
        }
     });
+  }
+
+  /* Make column empty after insert database */
+  function emptyCols()
+  {
+    $("input[name='coupon_code']").val('');
+    $("input[name='coupon_value']").val('');
+    $("input[name='valid_until']").val('');
+    $("textarea").val('');
+    $(".error").html('');
+    $("input[name='discount']").prop('checked',false);
+    $("select[name='coupon_discount'] > option:eq(0)").prop('selected',true);
   }
 
 
@@ -170,16 +138,16 @@
       <br>  
 
       <form>
-        <table class="table" id="myTable">
+        <table class="table" id="coupon_table">
           <thead align="center">
             <th>No Order</th>
-            <th>Coupon Name</th>
             <th>Coupon Code</th>
             <th>Discount (%)</th>
             <th>Value</th>
             <th>Valid Until</th>
             <th>Created At</th>
             <th>Updated At</th>
+            <th>Coupon Description</th>
           </thead>
           <tbody id="content"></tbody>
         </table>

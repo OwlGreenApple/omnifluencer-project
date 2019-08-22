@@ -61,6 +61,17 @@
                 </label>
                 <input type="text" class="form-input" name="text" id="text" placeholder="Masukkan Kode Kupon Disini" />
               </div>
+
+              <div class="form-group">
+                <label class="label-title-test" for="formGroupExampleInput">
+                  Pilih Metode Pembayaran:
+                </label>
+                <select class="form-control form-control-lg col-lg-12" name="ordertype">
+                  <option value="0">Bank Transfer</option>
+                  <option value="1">OVO</option>
+                </select>
+              </div>
+
               <div class="form-group">
                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
                 <label for="agree-term" class="label-agree-term">

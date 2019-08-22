@@ -116,7 +116,10 @@ class LoginController extends Controller
           Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
             $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
             $message->to($user->email);
-            $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
+            if(env('APP_ENV')!=='local')
+            {
+              $message->bcc(['celebgramme.dev@gmail.com','endah.celebgram@gmail.com']);
+            }
             $message->subject('[Omnifluencer] Order Nomor '.$order_number);
           });
 

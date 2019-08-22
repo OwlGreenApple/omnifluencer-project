@@ -26,22 +26,18 @@ class CheckCouponCode implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $this->couponCheck($value);
+        return $this->couponCheckUnique($value);
     }
 
-   /* Check coupon code */
-    private function couponCheck($coupon_code)
+   /* Check coupon code whether unique or not */
+    private function couponCheckUnique($coupon_code)
     {
-        /* Get coupon code data */
-        $check_code = Coupons::where([
-            ['coupon_code','=',$coupon_code],
-        ])->count();
-
-        /* Check whether coupon code had used or not  */
-        if($check_code > 0){
-            return false;
-        } else {
+        /* Get coupon code value from form */
+        $check_code = count(array_count_values(str_split($coupon_code)));
+        if($check_code >= 5){
             return true;
+        } else {
+            return false;
         }
     }
 
@@ -52,6 +48,6 @@ class CheckCouponCode implements Rule
      */
     public function message()
     {
-        return 'Kode Kupon Telah Terpakai! Silahkan Buat Yang Lain';
+        return 'Kode kupon harus unik';
     }
 }

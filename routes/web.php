@@ -55,6 +55,10 @@ Route::post('/confirm-payment','OrderController@confirm_payment');
 Route::post('/register-payment','OrderController@register_payment');
 Route::post('/login-payment','OrderController@login_payment');
 
+//Auto Confirm
+Route::get('/testjson','AutoConfirmController@virtualRestApi');
+Route::post('/autoconfirm','AutoConfirmController@confirm');
+
 Route::post('/subscribe-email','AccountController@subscribe_email');
 
 Route::group(['middleware' => ['web','auth']], function() 
@@ -157,6 +161,7 @@ Route::group(['middleware' => ['web','auth','admin']], function()
   //List Coupons
   Route::get('list-coupons','CouponController@index');
   Route::post('addcoupon','CouponController@addCoupon')->middleware('coupon')->name('addcoupon');
+  Route::get('coupon-table','CouponController@couponList')->name('couponTable');
 
   //List User
   Route::get('/list-user','UserController@index');

@@ -18,12 +18,24 @@ class CouponValidator
      */
     public function handle($request, Closure $next)
     {
-         $validator = Validator::make($request->all(), [
-            'coupon_code'=> ['required',new CheckCouponCode,'numeric'],
+
+        $customMessages = [
+            'required' => 'Kolom tidak boleh kosong.',
+            'numeric' => 'Kolom harus berupa angka.',
+            'date' => 'Kolom harus berupa tanggal.',
+            'unique' => 'Kode kupon sudah terpakai.',
+            'min' => 'Kolom paling sedikit :min karakter.',
+            'max' => 'Kolom maksimal adalah :max karakter.',
+        ];
+
+        $rules = [
+            'coupon_code'=> ['required','unique:coupons,coupon_code','min:5','max:190',new CheckCouponCode],
             'coupon_discount'=> ['numeric'],
-            'coupon_value'=> ['numeric'],
+            'coupon_value'=> ['numeric','nullable'],
             'valid_until'=> ['required','date'],
-        ]);
+        ];
+
+         $validator = Validator::make($request->all(), $rules, $customMessages);
 
         if ($validator->fails()) {
             $data['success'] = false;

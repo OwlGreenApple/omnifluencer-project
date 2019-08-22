@@ -100,6 +100,11 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
+    if($request->ordertype !== 0 || $request->ordertype !== 1 )
+    {
+       return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
+    }
+
     $user = Auth::user();
 
     /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
@@ -148,6 +153,7 @@ class OrderController extends Controller
       $order->total = $request->price;
       $order->discount = 0;
       $order->status = 0;
+      $order->order_type = $request->ordertype;
       $order->buktibayar = "";
       $order->keterangan = "";
       $order->save();
@@ -159,15 +165,50 @@ class OrderController extends Controller
           'nama_paket' => $request->namapaket,
           'no_order' => $order_number,
       ];
-      Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-        $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
-        $message->to($user->email);
-        $message->bcc(['puspita.celebgramme@gmail.com','it.axiapro@gmail.com']);
-        $message->subject('[Omnifluencer] Order Nomor '.$order_number);
-      });
 
-      return view('user.pricing.thankyou');
+         Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+          $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+          $message->to($user->email);
+          if(env('APP_ENV')!=='local')
+          {
+            $message->bcc(['celebgramme.dev@gmail.com','it.axiapro@gmail.com']);
+          }
+          $message->subject('[Omnifluencer] Order Nomor '.$order_number);
+        });
+
+         if($request->ordertype == 0){
+            return view('user.pricing.thankyou');
+         } else {
+            return view('user.pricing.thankyou-ovo');
+         }
+      
     //}
+  }
+
+  /*To check generate random number according on status, payment_type, and total*/
+  public function checkUniqueNumber($number,$order_type)
+  {
+    $check_pricing = Order::where('total','=',$number)
+            ->where('order_type','=',$order_type)
+            ->where('status',0)
+            ->count();
+
+    if($check_pricing > 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /*To generate random number for total*/
+  function generateRandomPricingNumber($payment) {
+      $number = mt_rand(0, 1000); // better than rand()
+
+      if ($this->checkUniqueNumber($number,$payment) == true) {
+          return generateRandomPricingNumber($payment);
+      }
+
+      return $number;
   }
 
   public function index_order(){
