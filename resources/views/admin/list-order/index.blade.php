@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
 <script type="text/javascript">
   var table;
 

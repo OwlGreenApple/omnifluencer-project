@@ -15,7 +15,8 @@ class CouponController extends Controller
     /* Display coupon's code */
     public function index()
     {
-    	return View('admin.list-coupons.index');
+    	$getcoupon = Coupons::all();
+    	return View('admin.list-coupons.index',['coupons'=>$getcoupon]);
     }
 
     /* Add coupon */
@@ -39,47 +40,50 @@ class CouponController extends Controller
     	return response()->json($data);
     }
 
-    /* See coupon list on data table  */
-
-    public function couponList(Request $request)
+    /* Display coupons data on edit form */
+    public function getCoupon(Request $request)
     {
-    	$no = 1;
-    	$draw = $request->input('draw');
-    	$start = $request->input('start');
-    	$length =  $request->input('length');
-    	$search = $request->input('search')['value'];
+    	$id = $request->id_coupon;
+    	$getcoupon = Coupons::where('id','=',$id)->first();
+    	$data = array(
+    		'id'=>$id,
+    		'code'=>$getcoupon->coupon_code,
+    		'coupon_discount'=>$getcoupon->discount,
+    		'coupon_value'=>$getcoupon->value,
+    		'valid_until'=>$getcoupon->valid_until,
+    		'description'=>$getcoupon->coupon_description,
+    	);
+    	return response()->json($data);
+    }
 
-    	if(!empty($search))
-    	{
-			/* Search according on : coupon code, and valid until */
-    		$getcoupon = Coupons::where([
-    			['coupon_code','=',$search],
-    			['valid_until','=',$search],
-    		])->get();
+    /* Update coupon data */
+    public function updateCoupon(Request $request)
+    {
+
+    	/* Change value or percent if admin change from % to value and otherwise */
+    	if($request->edit_discount == 0){
+    		$percent = $request->edit_coupon_discount;
+    		$value = null;
     	} else {
-    		$getcoupon = Coupons::skip($start)->take($length)->get();
+    		$percent = 0;
+    		$value = $request->edit_coupon_value;
     	}
+    	$coupon = Coupons::where('id','=',$request->edit_id)->update([
+    		'coupon_code'=>$request->edit_coupon_code,
+    		'discount'=> $percent,
+    		'value'=>$value,
+    		'valid_until'=>$request->edit_valid_until,
+    		'coupon_description'=>$request->edit_coupon_description,
+    	]);
 
-    	if($getcoupon->count() == 0){
-    		$getcoupon = Coupons::skip($start)->take($length)->get();
-    	}	
-
-		foreach($getcoupon as $row){
-    	  $data['data'][] = 
-    	  	array(
-				"no" => $no,
-		      	"coupon_code" => $row->coupon_code,
-		     	"percent" => $row->discount,
-		      	"value" => number_format($row->value,2),
-		      	"valid" => $row->valid_until,
-		      	"created" => date_format($row->created_at,'Y-m-d H:i:s'),
-		      	"updated" =>date_format($row->updated_at,'Y-m-d H:i:s'),
-		      	"description" =>$row->coupon_description
-    	  	)
-    	  ;	
-		  $no++;
+    	if($coupon == true)
+    	{
+    		$data['message'] = 'Data kupon telah berhasil diubah';
+    	} else {
+    		$data['message'] = 'Error! data kupon gagal diubah';
     	}
     	return response()->json($data);
-
     }
+
+/* end CouponController */
 }

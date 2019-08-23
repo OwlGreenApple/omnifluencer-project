@@ -11,6 +11,8 @@ use App\Group;
 use App\Save;
 use App\Order;
 use App\Notification;
+use App\Coupons;
+use DB;
 
 use App\Mail\ConfirmOrderMail;
 
@@ -100,10 +102,63 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
-    if($request->ordertype !== 0 || $request->ordertype !== 1 )
-    {
-       return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
+    $ordertypecheck = false;
+    if($request->ordertype == 'bt' || $request->ordertype == 'ov'){
+      $ordertypecheck = true;
+    } else {
+      return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
     }
+
+    if($ordertypecheck == true && $request->ordertype == 'bt')
+    {
+       $ordertype = 0;
+    } elseif($ordertypecheck == true && $request->ordertype == 'ov') {
+       $ordertype = 1;
+    }
+
+    $today = Carbon::now()->toDateString();
+    $coupon_available = false;
+    $id_coupon = 0;
+    $discount_value = 0;
+    $discount_percent = 0;
+    $discount_cash = 0;
+    $pricing = $request->price;
+    $total = $pricing;
+
+    /* Check whether coupon is valid or not And is empty or not */
+    if(!empty($request->coupon))
+    {
+        $coupon = DB::table('coupons')->where(array(
+            ['coupon_code','=',$request->coupon],
+        ))->first();
+        $coupon_available = true;
+    }
+
+    /* if valid then get discount from coupon */
+    if($coupon_available == true && $today <= $coupon->valid_until)
+    {
+        $discount = $coupon;
+        $id_coupon = $discount->id;
+        $discount_percent = $discount->discount;
+        $discount_value = $discount->value;
+        $coupon_available = true;
+    } 
+
+    /* determine which discount is available */
+    if($coupon_available == true && $discount_percent !== 0)
+    {
+        $discount_cash = ($discount_percent/100) * $request->price;
+        $total = $pricing - $discount_cash;
+    } 
+    elseif($coupon_available == true && $discount_value !== null)
+    {
+        $discount_cash = $discount_value;
+        $total = $pricing - $discount_cash;
+    }
+
+    //echo  $discount_cash;
+
+    //die('xxxx');
 
     $user = Auth::user();
 
@@ -141,6 +196,7 @@ class OrderController extends Controller
       return view('user.pricing.thankyou_free');
 
     } else {*/
+
       //create order 
       $dt = Carbon::now();
       $order = new Order;
@@ -150,10 +206,12 @@ class OrderController extends Controller
       $order->user_id = $user->id;
       $order->package = $request->namapaket;
       $order->jmlpoin = 0;
-      $order->total = $request->price;
-      $order->discount = 0;
+      $order->id_coupon = $id_coupon;
+      $order->pricing = $request->price;
+      $order->total = $total + $this->generateRandomPricingNumber($total);
+      $order->discount = $discount_cash;
       $order->status = 0;
-      $order->order_type = $request->ordertype;
+      $order->order_type = $ordertype;
       $order->buktibayar = "";
       $order->keterangan = "";
       $order->save();
@@ -190,7 +248,7 @@ class OrderController extends Controller
   {
     $check_pricing = Order::where('total','=',$number)
             ->where('order_type','=',$order_type)
-            ->where('status',0)
+            ->where('status','=',0)
             ->count();
 
     if($check_pricing > 0){
@@ -201,11 +259,11 @@ class OrderController extends Controller
   }
 
   /*To generate random number for total*/
-  function generateRandomPricingNumber($payment) {
+  function generateRandomPricingNumber($total) {
       $number = mt_rand(0, 1000); // better than rand()
 
-      if ($this->checkUniqueNumber($number,$payment) == true) {
-          return generateRandomPricingNumber($payment);
+      if ($this->checkUniqueNumber($number,$total) == true) {
+          return generateRandomPricingNumber($total);
       }
 
       return $number;

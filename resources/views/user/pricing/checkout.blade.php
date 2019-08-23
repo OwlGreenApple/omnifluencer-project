@@ -59,7 +59,7 @@
                 <label class="label-title-test" for="formGroupExampleInput">
                   Masukkan Kode Kupon:
                 </label>
-                <input type="text" class="form-input" name="text" id="text" placeholder="Masukkan Kode Kupon Disini" />
+                <input type="text" class="form-input" name="coupon" id="text" placeholder="Masukkan Kode Kupon Disini" />
               </div>
 
               <div class="form-group">
@@ -67,8 +67,8 @@
                   Pilih Metode Pembayaran:
                 </label>
                 <select class="form-control form-control-lg col-lg-12" name="ordertype">
-                  <option value="0">Bank Transfer</option>
-                  <option value="1">OVO</option>
+                  <option value="bt">Bank Transfer</option>
+                  <option value="ov">OVO</option>
                 </select>
               </div>
 

@@ -12,7 +12,7 @@ class AutoConfirmController extends Controller
 	public function virtualRestApi()
 	{
 		//API URL
-		$url = 'http://localhost/omnifluencer/autoconfirm';
+		$url = route('autoconfirm');
 
 		//Initiate cURL.
 		$ch = curl_init($url);
@@ -24,12 +24,12 @@ class AutoConfirmController extends Controller
 		    	'service_name'=>"BCA",
 		    	'service_code'=>"bca",
 		    	'account_number'=>"8290981477",
-		    	'account_name'=>"test 2",
+		    	'account_name'=>"OMNI1908230940001",
 		    	'data'=>array(array(
-			    	'unix_timestamp'=>1565941739,
+			    	'unix_timestamp'=>1565941737,
 			    	'type'=>'credit',
-			    	'amount'=>'	300000.00',
-			    	'description'=>'Test No Coupon',
+			    	'amount'=>'	197807.00',
+			    	'description'=>'Test executed 2',
 			    	'balance'=>'1.00',
 			    	)
 			    )
@@ -86,10 +86,10 @@ class AutoConfirmController extends Controller
 		$uniqueprice = $json['content']['data'][0]['amount'];
 
 		/* Check user's pricing amount matched or not */
-		$checkunique = Order::where('total',$uniqueprice)->count();
+		$checkunique = Order::where('total','=',$uniqueprice)->count();
 
 		if($checkunique > 0 && $valid == true){
-			Order::where('total',$uniqueprice)->update(['status' => 1]);
+			Order::where('total','=',$uniqueprice)->update(['status' => 1]);
 			$is_executed = 1;
 		} else {
 			$is_executed = 0;

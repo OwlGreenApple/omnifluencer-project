@@ -50,17 +50,18 @@ Route::get('/thankyou-free','OrderController@thankyou_free');
 //Route::get('/checkout/pro-15hari','OrderController@checkout_free');
 Route::get('/checkout/{id}','OrderController@checkout');
 
-
+//payment
 Route::post('/confirm-payment','OrderController@confirm_payment');
 Route::post('/register-payment','OrderController@register_payment');
 Route::post('/login-payment','OrderController@login_payment');
 
 //Auto Confirm
-Route::get('/testjson','AutoConfirmController@virtualRestApi');
-Route::post('/autoconfirm','AutoConfirmController@confirm');
+//Route::get('/testjson','AutoConfirmController@virtualRestApi');
+Route::post('/autoconfirm','AutoConfirmController@confirm')->name('autoconfirm');
 
 Route::post('/subscribe-email','AccountController@subscribe_email');
 
+//User
 Route::group(['middleware' => ['web','auth']], function() 
 {
   //Compare 
@@ -149,6 +150,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
 });
 
+//Admin
 Route::group(['middleware' => ['web','auth','admin']], function()
 {
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
@@ -161,7 +163,8 @@ Route::group(['middleware' => ['web','auth','admin']], function()
   //List Coupons
   Route::get('list-coupons','CouponController@index');
   Route::post('addcoupon','CouponController@addCoupon')->middleware('coupon')->name('addcoupon');
-  Route::get('coupon-table','CouponController@couponList')->name('couponTable');
+  Route::get('getcoupon','CouponController@getCoupon')->name('getcoupon');
+  Route::post('updatecoupon','CouponController@updateCoupon')->name('updateCoupon');
 
   //List User
   Route::get('/list-user','UserController@index');
