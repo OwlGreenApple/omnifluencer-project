@@ -11,9 +11,10 @@ class Order extends Model
 
     /*
 	status :
-	0 => hasn't paid off
-	1 => paid off
-	2 => expired
+	0 => pending
+	1 => user has confirmed
+	2 => admin confirm / autoconfirm
+	3 => expired
     */
 
     /*

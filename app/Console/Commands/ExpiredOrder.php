@@ -45,7 +45,7 @@ class ExpiredOrder extends Command
             $expired = Carbon::parse($tm->created_at)->addDay();
             if($today >= $expired) 
             {
-                DB::connection('mysql2')->table('orders')->where('id',$tm->id)->update(['status' => 2]);
+                DB::connection('mysql2')->table('orders')->where('id',$tm->id)->update(['status' => 3]);
             }
         }
     }

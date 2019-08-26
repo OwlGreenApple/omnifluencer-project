@@ -190,6 +190,7 @@ class RegisterController extends Controller
           $order->status = 0;
           $order->buktibayar = "";
           $order->keterangan = "";
+          $order->order_type = $data['ordertype'];
           $order->save();
           
           //mail order to user 
