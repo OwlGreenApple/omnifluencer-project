@@ -11,8 +11,6 @@
       <hr>
 
       <p><a class="btn btn-warning" data-toggle="modal" data-target="#add-coupon">Add Coupon</a></p>
-
-      <form>
         <table class="table table-responsive" id="coupon_table">
           <thead align="center">
             <th>No</th>
@@ -26,11 +24,8 @@
             <th>Edit</th>
             <th>Delete</th>
           </thead>
-          <tbody>
-            @include('admin.list-coupons.content')
-          </tbody>
+          <tbody id="data-content"></tbody>
         </table>
-      </form>
     </div>
   </div>
 
@@ -51,6 +46,8 @@
       </div>
 
       <div class="modal-body">
+        <!-- display error when admin doesn't choose either discount-->
+        <span class="error err_choose"></span>
 
          <form role="form" id="add_coupon">
              <div class="row">
@@ -108,7 +105,6 @@
               <div class="form-group col-md-12">
                 <label for="Name">Kupon Deskripsi:</label>
                 <textarea class="form-control" name="coupon_description"></textarea>
-                <span class="error coupon_description"></span>
               </div>
             </div> 
       <!-- end modal body -->      
@@ -140,12 +136,15 @@
 
       <div class="modal-body">
 
+        <!-- display error when admin doesn't choose either discount-->
+        <span class="error err_edit_choose"></span>
+
          <form role="form" id="edit_coupon">
              <div class="row">
               <div class="form-group col-md-12">
                 <label for="Name">Kode Kupon:</label>
-                <input type="text" class="form-control" name="edit_coupon_code"/>
-                <span class="error er_edit_coupon_code"></span>
+                <input type="text" class="form-control" name="edit_coupon_code" />
+                <span class="error err_edit_coupon_code"></span>
               </div>
             </div> 
 
@@ -196,10 +195,11 @@
               <div class="form-group col-md-12">
                 <label for="Name">Kupon Deskripsi:</label>
                 <textarea class="form-control" name="edit_coupon_description"></textarea>
-                <span class="error err_edit_coupon_description"></span>
               </div>
             </div> 
             <input type="hidden" name="edit_id" />
+            <input type="hidden" name="page_position" />
+            <input type="hidden" name="editable" value="1" />
       <!-- end modal body -->      
       </div>
 
@@ -214,28 +214,35 @@
 </div>
 
 <script type="text/javascript">
-
-  /*var table =  $('#coupon_table').DataTable({
-      "pageLength":5,
-      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-    });*/
-
+  var table;
   $(document).ready(function() {
+    getData();
     datePicker();
     addCoupon();
     getDiscount();
     editCoupon();
     updateCoupon();
-    getData();
+    delCoupon();
   });
 
  /* Convert regular table to dataTable */
- function getData()
+ function getData(pagination = 0)
   {
-    $('#coupon_table').DataTable({
-      "pageLength":5,
-      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+    $.ajax({
+      type : "GET",
+      url : "{{route('getcoupontable')}}",
+      dataType : "html",
+      success : function(data){
+           $("#data-content").html(data);
+           var table = $('#coupon_table').DataTable({
+            "pageLength":5,
+            "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            "destroy" : true,
+          });
+          table.page(pagination).draw( 'page' );
+      }
     });
+    /* end ajax */
   }
 
   /* Display calendar */
@@ -245,30 +252,15 @@
     })
   }
 
-  /* function getData()
-  {
-    $('#coupon_table').DataTable({
-      "processing": true,
-      "serverSide": true,
-      "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-      "ajax": "route('couponTable')",
-      "columns": [
-            { "data": "no" },
-            { "data": "coupon_code" },
-            { "data": "percent" },
-            { "data": "value" },
-            { "data": "valid" },
-            { "data": "created" },
-            { "data": "updated" },
-            { "data": "description" },
-        ],
-    });
-  }*/
-
  /* Insert coupon data into database */
  function addCoupon() {
     $("#add_coupon").on("submit",function(e){
       e.preventDefault();
+      var table = $('#coupon_table').DataTable({
+        "pageLength":5,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "destroy" : true,
+      });
       var data = $(this).serialize();
 
       $.ajaxSetup({
@@ -288,18 +280,21 @@
           $('.div-loading').addClass('background-load');
         },
         success: function(result){
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+
           if(result.success == true){
-            $('#loader').hide();
-            $('.div-loading').removeClass('background-load');
             alert(result.message);
             getDiscount();
             emptyCols();
+            table.destroy();
+            getData();
           } else {
+            $(".err_choose").html(result.error);
             $(".coupon_code").html(result.coupon_code);
             $(".coupon_discount").html(result.coupon_discount);
             $(".coupon_value").html(result.coupon_value);
             $(".valid_until").html(result.valid_until);
-            $(".coupon_description").html(result.coupon_description);
           }
         },
         error: function(jqXHR) {
@@ -315,6 +310,7 @@
   {
     $("body").on("click",".edit",function(){
       var id = $(this).attr('id'); // get id coupon
+      var databutton = $(".paginate_button.current").attr("data-dt-idx"); // get page button
       $.ajax({
         type : 'GET',
         url : "{{route('getcoupon')}}",
@@ -344,6 +340,7 @@
             $("input[name='edit_valid_until']").val(result.valid_until);
             $("textarea[name='edit_coupon_description']").val(result.description);
             $("input[name='edit_id']").val(result.id);
+            $("input[name='page_position']").val(databutton);
         },
         error: function(jqXHR) {
           console.log(jqXHR);
@@ -358,6 +355,13 @@
   {
     $("body").on("submit","#edit_coupon",function(e){
       e.preventDefault();
+        var table =  $('#coupon_table').DataTable({
+            "pageLength":5,
+            "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            "destroy" : true,
+          });
+       var databutton = $("input[name='page_position']").val(); // get data button position
+       databutton = parseInt(databutton) -1;
        var data = $(this).serialize();
 
         $.ajaxSetup({
@@ -371,11 +375,28 @@
           url : "{{route('updateCoupon')}}",
           data : data,
           dataType : "json",
+          beforeSend: function()
+          {
+            $('#loader').show();
+            $('.div-loading').addClass('background-load');
+          },
           success : function(result){
-            $(".destroy").html('');
-            alert(result.message);
-             getData();
-          }
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+
+            if(result.success == true){
+               alert(result.message);
+               $(".error").html('');
+               table.destroy();
+               getData(databutton);
+            } else {
+               $(".err_edit_coupon_code").html(result.edit_coupon_code);
+               $(".err_edit_choose").html(result.error);
+               $(".err_edit_coupon_discount").html(result.edit_coupon_discount);
+               $(".err_edit_coupon_value").html(result.edit_coupon_value);
+               $(".err_edit_valid_until").html(result.edit_valid_until);
+            }
+          } // end success
         });
        /* end ajax */
     });
@@ -384,15 +405,33 @@
   /* Delete coupon */
   function delCoupon()
   {
-    var confirm = confirm('Apakah anda sudah yakin akan menghapus?');
-    var id = $(this).attr('id'); // get id coupon
-
-    if(confirm == true)
-    {
-      //ajax
-    } else {
-      return false;
-    }
+    $(document).on("click",".del",function(){
+        var conf = confirm('Apakah anda sudah yakin akan menghapus?');
+        var id = $(this).attr('id'); // get id coupon
+      
+        if(conf == true)
+        {
+          var table = $('#coupon_table').DataTable({
+            "pageLength":5,
+            "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            "destroy" : true,
+          }); 
+           $.ajax({
+              type : 'GET',
+              url : "{{route('delCoupon')}}",
+              data : {'id_coupon':id},
+              dataType : "json",
+              success : function(result){
+                alert(result.message);
+                table.destroy();
+                getData();
+              }
+            });
+           /* end ajax */
+        } else {
+          return false;
+        } 
+    });
   }
 
   /* Display discount type input form */
@@ -406,8 +445,12 @@
        if(get_radio_value == 0)
        {
           $('.discount-percent').show();
+          $('input[name="coupon_value"]').val('');
+          $('input[name="edit_coupon_value"]').val('');
           $('.discount-cash').hide();
        } else {
+          $("select[name='coupon_discount'] > option:eq(0)").prop('selected',true);
+          $("select[name='edit_coupon_discount'] > option:eq(0)").prop('selected',true);
           $('.discount-percent').hide();
           $('.discount-cash').show();
        }

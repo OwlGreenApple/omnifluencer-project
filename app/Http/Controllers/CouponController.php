@@ -16,7 +16,7 @@ class CouponController extends Controller
     public function index()
     {
     	$getcoupon = Coupons::all();
-    	return View('admin.list-coupons.index',['coupons'=>$getcoupon]);
+    	return View('admin.list-coupons.index');
     }
 
     /* Add coupon */
@@ -53,13 +53,22 @@ class CouponController extends Controller
     		'valid_until'=>$getcoupon->valid_until,
     		'description'=>$getcoupon->coupon_description,
     	);
-    	return response()->json($data);
+        $json = response()->json($data);
+    	return $json;
+    }
+
+     /* Display coupons data on data table */
+    public function getCouponTable(Request $request)
+    {
+        $getcoupon = Coupons::all();
+        return View('admin.list-coupons.content',['coupons'=>$getcoupon]);
     }
 
     /* Update coupon data */
     public function updateCoupon(Request $request)
     {
 
+        $data['success'] = true;
     	/* Change value or percent if admin change from % to value and otherwise */
     	if($request->edit_discount == 0){
     		$percent = $request->edit_coupon_discount;
@@ -83,6 +92,20 @@ class CouponController extends Controller
     		$data['message'] = 'Error! data kupon gagal diubah';
     	}
     	return response()->json($data);
+    }
+
+    /* Delete Coupon */
+
+    public function delCoupon(Request $request){
+        $id_coupon = $request->id_coupon;
+        $delete = Coupons::where('id','=',$id_coupon)->delete();
+
+        if($delete == true){
+            $data['message'] = 'Data kupon telah di hapus';
+        } else {
+            $data['message'] = 'Data kupon gagal di hapus';
+        }
+        return response()->json($data);
     }
 
 /* end CouponController */

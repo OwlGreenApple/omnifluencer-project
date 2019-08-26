@@ -164,7 +164,9 @@ Route::group(['middleware' => ['web','auth','admin']], function()
   Route::get('list-coupons','CouponController@index');
   Route::post('addcoupon','CouponController@addCoupon')->middleware('coupon')->name('addcoupon');
   Route::get('getcoupon','CouponController@getCoupon')->name('getcoupon');
-  Route::post('updatecoupon','CouponController@updateCoupon')->name('updateCoupon');
+  Route::get('getcoupontable','CouponController@getCouponTable')->name('getcoupontable');
+  Route::post('updatecoupon','CouponController@updateCoupon')->middleware('coupon')->name('updateCoupon');
+  Route::get('delcoupon','CouponController@delCoupon')->name('delCoupon');
 
   //List User
   Route::get('/list-user','UserController@index');
