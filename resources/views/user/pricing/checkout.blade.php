@@ -59,7 +59,7 @@
                 <label class="label-title-test" for="formGroupExampleInput">
                   Masukkan Kode Kupon:
                 </label>
-                <input type="text" class="form-input" name="coupon" id="text" placeholder="Masukkan Kode Kupon Disini" />
+                <input type="text" class="form-input" name="coupon_code" id="text" placeholder="Masukkan Kode Kupon Disini" />
               </div>
 
               <div class="form-group">

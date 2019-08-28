@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AutoConfirm;
 use App\Order;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class AutoConfirmController extends Controller
 {
@@ -12,8 +14,7 @@ class AutoConfirmController extends Controller
 	public function virtualRestApi()
 	{
 		//API URL
-		//$url = route('autoconfirm');
-		$url = 'https://127.0.0.1/omnifluencer/autoconfirm';
+		$url = route('autoconfirm');
 
 		//Initiate cURL.
 		$ch = curl_init($url);
@@ -25,12 +26,12 @@ class AutoConfirmController extends Controller
 		    	'service_name'=>"BCA",
 		    	'service_code'=>"bca",
 		    	'account_number'=>"8290981477",
-		    	'account_name'=>"OMNI1908261639001",
+		    	'account_name'=>"OMNI1908281306001",
 		    	'data'=>array(array(
 			    	'unix_timestamp'=>1565941737,
 			    	'type'=>'credit',
-			    	'amount'=>'	197340.00',
-			    	'description'=>'Test executed 2',
+			    	'amount'=>'708000.00',
+			    	'description'=>'Test autoconfirm not executed',
 			    	'balance'=>'1.00',
 			    	)
 			    )
@@ -101,6 +102,61 @@ class AutoConfirmController extends Controller
 		$confirm->callback = $post;
 		$confirm->is_executed = $is_executed;
 		$confirm->save();
+    }
+
+    public function index()
+    {
+    	return view('admin.list-transfers.index');
+    }
+
+    /* Retrieve user transfer data */
+	public function adminUserTransfer()
+    {
+    	$id_admin = Auth::id();
+    	$autoconfirm = AutoConfirm::orderBy('id', 'DESC')->get();
+    	$data = array(); //prevent error on datatable
+
+        if(!is_null($autoconfirm))
+        {	
+          foreach($autoconfirm as $row)
+            {
+                $getdata = array(
+                    'id'=>$row['id'],
+                    'created'=>date_format($row['created_at'],"d-m-Y H:i:s"),
+                    'updated'=>date_format($row['updated_at'],"d-m-Y H:i:s"),
+                    'isexecute'=>$row['is_executed'],
+                );
+                $callback = json_decode($row['callback'],true);
+                $data[] = array_merge($getdata,$callback);
+            }   
+        } 
+
+        //print("<pre>".print_r($data, true)."</pre>");
+    	return View::make('admin.list-transfers.content',["data"=>$data]);
+    }
+
+    /* Retrieve detail transfer data on popup */
+    public function adminDetailTransfer(Request $request)
+    {
+    	$id_transfer = $request->id_transfer;
+    	$id_admin = Auth::id();
+    	$autoconfirm = AutoConfirm::select('callback')->where('id',$id_transfer)->first();
+    	$callback = json_decode($autoconfirm['callback'],true);
+    	//print_r($callback);
+
+    	$data = array(
+    		'service_name'=>$callback['content']['service_name'],
+    		'service_code'=>$callback['content']['service_code'],
+    		'account_number'=>$callback['content']['account_number'],
+    		'account_name'=>$callback['content']['account_name'],
+    		'data_time'=> Date("d-M-Y H:i:s",strtotime($callback['content']['data'][0]['unix_timestamp'])),
+    		'data_type'=>$callback['content']['data'][0]['type'],
+    		'data_amount'=>number_format($callback['content']['data'][0]['amount'],2),
+    		'data_balance'=>$callback['content']['data'][0]['balance'],
+    		'data_desc'=>$callback['content']['data'][0]['description'],
+    	);
+
+    	return response()->json($data);
     }
 
 }

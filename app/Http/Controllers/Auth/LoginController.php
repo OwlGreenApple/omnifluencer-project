@@ -57,6 +57,13 @@ class LoginController extends Controller
           return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
         }
 
+        $checkordertype = $ordercont->checkOrderTypeValue($request->ordertype);
+         if($checkordertype == false){
+            return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
+         } else {
+            $ordertype = $ordercont->orderValue($request->ordertype);
+         }
+
         /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
           //create order 
           $dt = Carbon::now();
@@ -90,7 +97,21 @@ class LoginController extends Controller
 
           return redirect('thankyou-free');   
         } else {*/
+
           //create order 
+
+           /* check coupon and count total payment */
+          $ordercontroller = new OrderController;
+          $pricing = $request->price;
+          $checkCoupon = $ordercontroller->checkCoupon($request->coupon_code);
+          if($checkCoupon == true){
+             $coupon = $ordercontroller->getTotal($pricing,$request->coupon_code);
+          } else {
+             $coupon['id_coupon'] = 0;
+             $coupon['discount'] = 0;
+             $coupon['total'] = $pricing + $ordercontroller->generateRandomPricingNumber($pricing);
+          }
+
           $dt = Carbon::now();
           $order = new Order;
           $str = 'OMNI'.$dt->format('ymdHi');
@@ -99,11 +120,15 @@ class LoginController extends Controller
           $order->user_id = $user->id;
           $order->package = $request->namapaket;
           $order->jmlpoin = 0;
-          $order->total = $request->price;
           $order->discount = 0;
           $order->status = 0;
           $order->buktibayar = "";
           $order->keterangan = "";
+          $order->pricing = $pricing;
+          $order->order_type = $ordertype;
+          $order->id_coupon = $coupon['id_coupon'];
+          $order->total = $coupon['total'];
+          $order->discount = $coupon['discount'];
           $order->save();
           
           //mail order to user 
@@ -123,7 +148,12 @@ class LoginController extends Controller
             $message->subject('[Omnifluencer] Order Nomor '.$order_number);
           });
 
-          return redirect('/thankyou');
+          if($ordertype == 0){
+             return redirect('/thankyou');
+          } else {
+             return redirect(route("thankyouovo"));
+          }
+          
         //}
         
       }

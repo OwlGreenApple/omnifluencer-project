@@ -35,6 +35,10 @@ class OrderController extends Controller
 
   public function thankyou_free(){
     return view('user.pricing.thankyou_free');
+  } 
+
+  public function thankyou_ovo(){
+    return view('user.pricing.thankyou-ovo');
   }
 
   public function cekharga($namapaket, $price){
@@ -74,10 +78,16 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
+     $checkordertype = $this->checkOrderTypeValue($request->ordertype);
+     if($checkordertype == false){
+        return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
+     }
+    
     return view('auth.register')->with(array(
 			"price"=>$request->price,
 			"namapaket"=>$request->namapaket,
       "coupon_code"=>$request->coupon_code,
+      "order_type"=>$request->ordertype,
 		));
   }
   
@@ -88,10 +98,16 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
+     $checkordertype = $this->checkOrderTypeValue($request->ordertype);
+     if($checkordertype == false){
+        return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
+     }
+
     return view('auth.login')->with(array(
       "price"=>$request->price,
       "namapaket"=>$request->namapaket,
       "coupon_code"=>$request->coupon_code,
+      "order_type"=>$request->ordertype,
     ));  
   }
 
@@ -102,63 +118,24 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
-    $ordertypecheck = false;
-    if($request->ordertype == 'bt' || $request->ordertype == 'ov'){
-      $ordertypecheck = true;
+    $checkordertype = $this->checkOrderTypeValue($request->ordertype);
+
+    if($checkordertype == false){
+       return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
     } else {
-      return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
+        $ordertype = $this->orderValue($request->ordertype);
     }
 
-    if($ordertypecheck == true && $request->ordertype == 'bt')
-    {
-       $ordertype = 0;
-    } elseif($ordertypecheck == true && $request->ordertype == 'ov') {
-       $ordertype = 1;
-    }
-
-    $today = Carbon::now()->toDateString();
-    $coupon_available = false;
-    $id_coupon = 0;
-    $discount_value = 0;
-    $discount_percent = 0;
-    $discount_cash = 0;
+    /* check coupon and count total payment */
     $pricing = $request->price;
-    $total = $pricing;
-
-    /* Check whether coupon is valid or not And is empty or not */
-    if(!empty($request->coupon))
-    {
-        $coupon = DB::table('coupons')->where(array(
-            ['coupon_code','=',$request->coupon],
-        ))->first();
-        $coupon_available = true;
+    $checkCoupon = $this->checkCoupon($request->coupon_code);
+    if($checkCoupon == true){
+       $coupon = $this->getTotal($pricing,$request->coupon_code);
+    } else {
+       $coupon['id_coupon'] = 0;
+       $coupon['discount'] = 0;
+       $coupon['total'] = $pricing + $this->generateRandomPricingNumber($pricing);
     }
-
-    /* if valid then get discount from coupon */
-    if($coupon_available == true && $today <= $coupon->valid_until)
-    {
-        $discount = $coupon;
-        $id_coupon = $discount->id;
-        $discount_percent = $discount->discount;
-        $discount_value = $discount->value;
-        $coupon_available = true;
-    } 
-
-    /* determine which discount is available */
-    if($coupon_available == true && $discount_percent !== 0)
-    {
-        $discount_cash = ($discount_percent/100) * $request->price;
-        $total = $pricing - $discount_cash;
-    } 
-    elseif($coupon_available == true && $discount_value !== null)
-    {
-        $discount_cash = $discount_value;
-        $total = $pricing - $discount_cash;
-    }
-
-    //echo  $discount_cash;
-
-    //die('xxxx');
 
     $user = Auth::user();
 
@@ -206,14 +183,14 @@ class OrderController extends Controller
       $order->user_id = $user->id;
       $order->package = $request->namapaket;
       $order->jmlpoin = 0;
-      $order->id_coupon = $id_coupon;
-      $order->pricing = $request->price;
-      $order->total = $total + $this->generateRandomPricingNumber($total);
-      $order->discount = $discount_cash;
       $order->status = 0;
-      $order->order_type = $ordertype;
       $order->buktibayar = "";
       $order->keterangan = "";
+      $order->pricing = $request->price;
+      $order->id_coupon = $coupon['id_coupon'];
+      $order->total = $coupon['total'];
+      $order->discount = $coupon['discount'];
+      $order->order_type = $ordertype;
       $order->save();
       
       //mail order to user 
@@ -234,7 +211,7 @@ class OrderController extends Controller
           $message->subject('[Omnifluencer] Order Nomor '.$order_number);
         });
 
-         if($request->ordertype == 0){
+         if($ordertype == 0){
             return view('user.pricing.thankyou');
          } else {
             return view('user.pricing.thankyou-ovo');
@@ -242,6 +219,65 @@ class OrderController extends Controller
       
     //}
   }
+
+  /* To check whether coupon available or not */
+ public function checkCoupon($coupon){
+    /* Check whether coupon is valid or not And is empty or not */
+    if(!empty($coupon))
+    {
+        $coupon_available = DB::table('coupons')->where(array(
+            ['coupon_code','=',$coupon],
+        ))->first();
+    } else {
+        return false;
+    }
+
+    if(is_null($coupon_available)){
+       return false;
+    } else {
+       return true;
+    }
+  }
+
+  /* get discount and total price after count with discount */
+  public function getTotal($pricing,$coupon_code){
+      $today = Carbon::now()->toDateString();
+      $coupon = DB::table('coupons')->where(array(
+            ['coupon_code','=',$coupon_code],
+        ))->first();
+
+      /* if valid then get discount from coupon */
+      if($today <= $coupon->valid_until)
+      {
+          $discount_percent = $coupon->discount;
+          $discount_value = $coupon->value;
+      } else {
+          $discount_percent = 0;
+          $discount_value = null;
+      } 
+
+      /* determine which discount is available */
+      if($discount_percent !== 0)
+      {
+          $discount = ($discount_percent/100) * $pricing;
+          $total = $pricing - $discount;
+      } 
+      elseif($discount_value !== null)
+      {
+          $discount = $discount_value;
+          $total = $pricing - $discount;
+      } else {
+          $discount = 0;
+          $total = $pricing;
+      }
+
+       $data = array(
+              'id_coupon' => $coupon->id,
+              'discount' => $discount,
+              'total' => $total + $this->generateRandomPricingNumber($total),
+        );
+       return $data;
+    }
 
   /*To check generate random number according on status, payment_type, and total*/
   public function checkUniqueNumber($number,$order_type)
@@ -267,6 +303,26 @@ class OrderController extends Controller
       }
 
       return $number;
+  }
+
+  /* Check valid value from bank order payment type */
+  public function checkOrderTypeValue($ordertype)
+  {
+    if($ordertype == 'bt' || $ordertype == 'ov'){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function orderValue($ordertype){
+     if($ordertype == 'bt')
+    {
+       $ordervalue = 0;
+    } elseif($ordertype == 'ov') {
+       $ordervalue = 1;
+    }
+    return $ordervalue;
   }
 
   public function index_order(){
@@ -328,9 +384,10 @@ class OrderController extends Controller
   }
 
   public function load_list_order(Request $request){
-    $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id')  
-                ->select('orders.*','users.email')
-                ->orderBy('created_at','descend')
+    $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id') 
+                ->rightJoin(env('DB_DATABASE').'.coupons', 'orders.id_coupon', '=', 'coupons.id') 
+                ->select('orders.*','users.email','coupons.coupon_code')
+                ->orderBy('orders.created_at','descend')
                 ->get();
 
     $arr['view'] = (string) view('admin.list-order.content')

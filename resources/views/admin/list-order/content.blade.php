@@ -10,11 +10,17 @@
       {{$order->package}}
     </td> 
     <td data-label="Total">
-      Rp. <?php echo number_format($order->total) ?>
-    </td>
-    <td data-label="Discount">
+      Rp. {{number_format($order->pricing)}}
+    </td> 
+     <td data-label="Discount">
       Rp. <?php echo number_format($order->discount) ?>
     </td>
+    <td data-label="Total">
+      Rp. <?php echo number_format($order->total) ?>
+    </td>
+    <td data-label="ID Coupon">
+        {{$order->coupon_code}}
+    </td> 
     <td data-label="Date">
       {{$order->created_at}}
     </td>
