@@ -289,7 +289,7 @@ class RegisterController extends Controller
       }
     }
 
-    /*public function post_register(Request $request){
+    public function post_register(Request $request){
       $validator = $this->validator($request->all());
 
       if(!$validator->fails()) {
@@ -319,5 +319,5 @@ class RegisterController extends Controller
       } else {
         return redirect("register")->with("error",$validator->errors()->first());
       }
-    }*/
+    }
 }
