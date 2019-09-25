@@ -618,7 +618,8 @@ class InstagramHelper
         
         // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
         // $i->login("mayymayyaa", "qwerty12345", 300);
-        $i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
+        // $i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
+        $i->setProxy("http://".$arr_user['username'].":".$arr_user['password']."@".$arr_user['proxy'].":".$arr_user['port']);
         $i->login($arr_user["username"], $arr_user["password"], 300);
       }
       
