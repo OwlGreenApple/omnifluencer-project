@@ -18,6 +18,9 @@
     <td data-label="Valid Until">
       {{$user->valid_until}}
     </td>
+    <td data-label="created">
+      {{$user->created_at}}
+    </td>
     <td data-label="Action">
       <button type="button" class="btn btn-primary btn-poin" data-toggle="modal" data-target="#point-log" data-id="{{$user->id}}">
         Point Log

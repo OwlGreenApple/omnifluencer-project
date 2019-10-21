@@ -194,6 +194,9 @@
             <th class="header" action="valid_until">
               Valid Until
             </th>
+            <th class="header" action="created">
+              Created
+            </th>
             <th>
               Action
             </th>
