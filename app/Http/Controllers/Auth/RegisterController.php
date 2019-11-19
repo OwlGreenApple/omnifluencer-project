@@ -93,7 +93,8 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'gender'=> $data['gender'],
                 'password' => Hash::make($data['password']),
-                'username' => 'tes',
+                'username' => '',
+                'wa_number' => $data['wa_number'],
             ]);
       $user->referral_link = uniqid().md5($user->id);
       $user->point = 10;
@@ -239,6 +240,10 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request){
+      if(!is_numeric($request->wa_number)){
+        return redirect("register")->with("error", " No WA harus angka");
+      }
+
       $validator = $this->validator($request->all());
 
       if($request->price<>""){
@@ -290,6 +295,10 @@ class RegisterController extends Controller
     }
 
     public function post_register(Request $request){
+      if(!is_numeric($request->wa_number)){
+        return redirect("register")->with("error", " No WA harus angka");
+      }
+      
       $validator = $this->validator($request->all());
 
       if(!$validator->fails()) {
