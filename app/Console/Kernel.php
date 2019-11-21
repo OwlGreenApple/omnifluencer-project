@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\BackupDB::class,
         Commands\UpdateAccount::class,
         Commands\CheckMembership::class,
+        Commands\ExpiredOrder::class,
     ];
 
     /**
@@ -29,6 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:db')->daily();
         $schedule->command('check:membership')->dailyAt('00:00');
         $schedule->command('update:account')->dailyAt('02:00')->withoutOverlapping();
+        $schedule->command('expired:order')->dailyAt('02:00');
     }
 
     /**

@@ -57,6 +57,11 @@ th.asc {
   background-size: 10px 9px; 
 }
 
+/* Error form validation */
+.error {
+  color : red;
+}
+
 /* loader */
 .background-load {
   background-color: #a39f9f;
