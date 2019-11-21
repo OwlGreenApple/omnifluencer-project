@@ -44,6 +44,12 @@
       }
     });
   }
+  function hanyaAngka(evt) {
+      var charCode = (evt.which) ? evt.which :event.keyCode
+      if (charCode > 31 && (charCode < 48 || charCode > 57))
+          return false;
+      return true;
+  }
 </script>
 
 <div class="container">
@@ -149,6 +155,16 @@
             </div>
 
             <div class="form-group">
+              <label class="label-title-test">
+                Masukkan No WA
+              </label>
+
+              <div class="input-group" id="show_wa_number">
+                <input id="wa-number" type="text" class="form-input form-control" name="wa_number" placeholder="No WA ex: 6281..." required style="width: auto !important" onkeypress="return hanyaAngka(event)">
+              </div>
+            </div>
+
+            <div class="form-group">
               <label class="label-title-test" for="gender">
                 Gender:
               </label>
@@ -242,6 +258,42 @@
         $('#show_password_confirm .icon-pass-confirm').html('<i class="fas fa-eye" aria-hidden="true"></i>');
       }
     });
+    $('#wa-number').keypress(function(e){
+      if (this.value.length == 0 && e.which == 48 ){
+        return false;
+      }
+    });
+    $('#wa-number').on('input propertychange paste', function (e) {
+        var reg = /^0+/gi;
+        if (this.value.match(reg)) {
+            this.value = this.value.replace(reg, '');
+        }
+    });
   });  
 </script>
+<!-- Provely Conversions App Data Code -->
+<script>(function(w,n) {
+if (typeof(w[n]) == 'undefined'){ob=n+'Obj';w[ob]=[];w[n]=function(){w[ob].push(arguments);};
+d=document.createElement('script');d.type = 'text/javascript';d.async=1;
+d.src='https://s3.amazonaws.com/provely-public/w/provely-2.0.js';x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(d,x);}
+})(window, 'provelys', '');
+provelys('config', 'baseUrl', 'app.provely.io');
+provelys('config', 'https', 1);
+provelys('data', 'campaignId', '16163');
+provelys('config', 'track', 1);
+</script>
+<!-- End Provely Conversions App Data Code -->
+
+<!-- Provely Conversions App Display Code -->
+<script>(function(w,n) {
+if (typeof(w[n]) == 'undefined'){ob=n+'Obj';w[ob]=[];w[n]=function(){w[ob].push(arguments);};
+d=document.createElement('script');d.type = 'text/javascript';d.async=1;
+d.src='https://s3.amazonaws.com/provely-public/w/provely-2.0.js';x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(d,x);}
+})(window, 'provelys', '');
+provelys('config', 'baseUrl', 'app.provely.io');
+provelys('config', 'https', 1);
+provelys('data', 'campaignId', '16163');
+provelys('config', 'widget', 1);
+</script>
+<!-- End Provely Conversions App Display Code -->
 @endsection

@@ -194,6 +194,9 @@
             <th class="header" action="valid_until">
               Valid Until
             </th>
+            <th class="header" action="created">
+              Created
+            </th>
             <th>
               Action
             </th>
@@ -227,8 +230,9 @@
             <label class="control-label col-md-5">Attach File Excel</label>
             <div class="col-md-5">
               <label class="btn btn-default btn-file">
-                <input type="file" name="import_file" >
+                <input type="file" name="import_file">
               </label>
+              <a href="{{url('example-add-user.xlsx')}}" target="_blank">example</a>
             </div>
           </div>
           <div class="form-group">
