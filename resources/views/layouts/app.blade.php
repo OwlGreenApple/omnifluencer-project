@@ -36,6 +36,9 @@
   <link href="{{ asset('css/all.css') }}" rel="stylesheet">
   <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
 
+  <!-- ESPAY API URL -->
+  <script type="text/javascript" src="https://sandbox-kit.espay.id/public/signature/js"></script>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-3"></script>
   <script>

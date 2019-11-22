@@ -39,6 +39,10 @@ class OrderController extends Controller
 
   public function thankyou_ovo(){
     return view('user.pricing.thankyou-ovo');
+  } 
+
+  public function cardpayment(){
+    return view('user.pricing.cardpaymentresponse');
   }
 
   public function cekharga($namapaket, $price){
@@ -118,6 +122,7 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
+    # CHECK ORDER TYPE TO AVOID IGNORANT USER
     $checkordertype = $this->checkOrderTypeValue($request->ordertype);
 
     if($checkordertype == false){
@@ -213,8 +218,10 @@ class OrderController extends Controller
 
          if($ordertype == 0){
             return view('user.pricing.thankyou');
-         } else {
+         } elseif($ordertype == 1) {
             return view('user.pricing.thankyou-ovo');
+         } else {
+            return view('user.pricing.inquiry',['invoiceid'=>$str]);
          }
       
     //}
@@ -308,7 +315,7 @@ class OrderController extends Controller
   /* Check valid value from bank order payment type */
   public function checkOrderTypeValue($ordertype)
   {
-    if($ordertype == 'bt' || $ordertype == 'ov'){
+    if($ordertype == 'bt' || $ordertype == 'cp' || $ordertype == 'ov'){
       return true;
     } else {
       return false;
@@ -321,6 +328,10 @@ class OrderController extends Controller
        $ordervalue = 0;
     } elseif($ordertype == 'ov') {
        $ordervalue = 1;
+    }
+    elseif($ordertype == 'cp')
+    {
+      $ordervalue = 2;
     }
     return $ordervalue;
   }

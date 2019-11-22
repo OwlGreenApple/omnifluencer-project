@@ -68,6 +68,7 @@
                 </label>
                 <select class="form-control form-control-lg col-lg-12" name="ordertype">
                   <option value="bt">Bank Transfer</option>
+                  <option value="cp">Kredit Card / Debit Card</option>
                   <option value="ov">OVO</option>
                 </select>
               </div>
@@ -83,7 +84,10 @@
               </div>
             </form>
           </div>
+          <!-- logo payment goes here  -->
+
         </div>
+
       </div>
     </div>
   </div>

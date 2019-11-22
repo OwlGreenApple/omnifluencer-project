@@ -48,6 +48,7 @@ Route::get('/pricing','OrderController@pricing');
 Route::get('/thankyou','OrderController@thankyou');
 Route::get('/thankyou-free','OrderController@thankyou_free');
 Route::get('/thankyou-ovo','OrderController@thankyou_ovo')->name('thankyouovo');
+Route::get('/cardpaymentresponse','OrderController@cardpayment')->name('cardpayment');
 //Route::get('/checkout/pro-15hari','OrderController@checkout_free');
 Route::get('/checkout/{id}','OrderController@checkout');
 
