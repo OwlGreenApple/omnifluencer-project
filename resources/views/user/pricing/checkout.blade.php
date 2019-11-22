@@ -64,7 +64,7 @@
               <div class="form-group">
                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
                 <label for="agree-term" class="label-agree-term">
-                  Menyetujui <a href="{{url('statics/terms-conditions')}}" class="term-service">Syarat dan Ketentuan</a>
+                  Menyetujui <a href="{{url('about-us/terms-conditions')}}" class="term-service">Syarat dan Ketentuan</a>
                 </label>
               </div>
               <div class="form-group">

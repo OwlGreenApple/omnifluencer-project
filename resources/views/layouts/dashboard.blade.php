@@ -461,7 +461,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-2 footer-txt center-mobile">
-          <span>Omnifluencer © 2018</span>
+          <span>Omnifluencer © 2019</span>
         </div>
 
         <div class="col-md-10 footer-txt center-mobile" align="right">

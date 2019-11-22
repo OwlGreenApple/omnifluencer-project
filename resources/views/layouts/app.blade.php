@@ -290,11 +290,13 @@
                         Earnings and Legal Disclaimer
                       </a> 
                     </li>
+                    <!--
                     <li> 
                       <a href="{{url('about-us/disclaimer')}}"> 
                         Disclaimer
                       </a> 
                     </li>
+                    -->
                     <li> 
                       <a href="{{url('about-us/terms-conditions')}}"> 
                         Terms and Conditions 
