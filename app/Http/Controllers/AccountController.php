@@ -126,130 +126,141 @@ class AccountController extends Controller
   }
 
   public function load_search(Request $request){
-    $arr['status'] = 'success';
-    $arr['message'] = '';
+    if($request->ajax()){
+      $arr['status'] = 'success';
+      $arr['message'] = '';
 
-    if($request->keywords==''){
-      //$account = Account::find(1);
-      //$account = Account::where('jml_followers','>=',500000)->inRandomOrder()->first();
-      $account = Account::where('id',1499)
-                  ->orWhere('id',1500)
-                  ->inRandomOrder()
-                  ->first();
-    } else {     
-      $account = Account::where('username',$request->keywords)->first();
+      if($request->keywords==''){
+        //$account = Account::find(1);
+        //$account = Account::where('jml_followers','>=',500000)->inRandomOrder()->first();
+        $account = Account::where('id',1499)
+                    ->orWhere('id',1500)
+                    ->inRandomOrder()
+                    ->first();
+      } else {     
+        $account = Account::where('username',$request->keywords)->first();
 
-      if(is_null($account)){
-        /* pengecekan membership */
-        if(Auth::check()){
-          if(Auth::user()->membership=='free'){
-            $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
+        if(is_null($account)){
+          /* pengecekan membership */
+          if(Auth::check()){
+            if(Auth::user()->membership=='free'){
+              $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
 
-            if($currenthistory->count()>=5){
-              $arr['status'] = 'error';
-              $arr['message'] = '<b>Warning!</b><br> Free user hanya dapat menyimpan history search sebanyak 5 kali';
-              return $arr;
+              if($currenthistory->count()>=5){
+                $arr['status'] = 'error';
+                $arr['message'] = '<b>Warning!</b><br> Free user hanya dapat menyimpan history search sebanyak 5 kali';
+                return $arr;
+              }
+            } else if(Auth::user()->membership=='pro'){
+              $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
+
+              if($currenthistory->count()>=25){
+                $arr['status'] = 'error';
+                $arr['message'] = '<b>Warning!</b><br> Pro user hanya dapat menyimpan history search sebanyak 25 kali';
+                return $arr;
+              }
             }
-          } else if(Auth::user()->membership=='pro'){
-            $currenthistory = HistorySearch::where('user_id',Auth::user()->id)->get();
-
-            if($currenthistory->count()>=25){
-              $arr['status'] = 'error';
-              $arr['message'] = '<b>Warning!</b><br> Pro user hanya dapat menyimpan history search sebanyak 25 kali';
-              return $arr;
+          } else {
+            //pengecekan kuota cookies
+            if(isset($_COOKIE[$this->cookie_search])) {
+              $cookie_value = json_decode($_COOKIE[$this->cookie_search], true);
+              //var_dump($cookie_value);
+              if(count($cookie_value)>=3){
+                $arr['status'] = 'error';
+                $arr['message'] = 'kuota habis';
+                return $arr;
+              }
             }
           }
+
+          // $url = "http://cmx.space/get-user-data/".$request->keywords;
+
+          $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
+          
+          // if($arr_res!=null){
+          if(is_array($arr_res)){
+            $account = $this->create_account($arr_res);
+          } else {
+            $arr['status'] = 'error';
+            $arr['message'] = 'Username tidak ditemukan!';
+            return $arr;
+          }
+        }
+
+        if(Auth::check()){
+          $history = HistorySearch::where('user_id',Auth::user()->id) 
+                      ->where('account_id',$account->id)
+                      ->first();
+
+          if(is_null($history)){
+            $history = new HistorySearch;
+            $history->account_id = $account->id;
+            $history->user_id = Auth::user()->id;
+          } else {
+            $history->updated_at = new Datetime();
+          }
+   
+          $history->save();
+
+          $user = User::find(Auth::user()->id);
+          $user->count_calc = $user->count_calc + 1;
+          $user->save();
+
+          $account->total_calc = $account->total_calc + 1;
+          $account->save();
         } else {
-          //pengecekan kuota cookies
-          if(isset($_COOKIE[$this->cookie_search])) {
+          //$request->session()->put('account_search', $account->username);
+          if(!isset($_COOKIE[$this->cookie_search])) {
+            $cookie_value[] = $account->id;
+            // set cookie for 30days, 86400 = 1 day
+            setcookie($this->cookie_search, json_encode($cookie_value), time() + (86400 * 30), "/");
+          } else {
             $cookie_value = json_decode($_COOKIE[$this->cookie_search], true);
             //var_dump($cookie_value);
             if(count($cookie_value)>=3){
               $arr['status'] = 'error';
               $arr['message'] = 'kuota habis';
-              return $arr;
+            } else {
+              array_push($cookie_value, $account->id);
+              setcookie($this->cookie_search, json_encode($cookie_value), time() + (86400 * 30), "/");
             }
           }
         }
-
-        // $url = "http://cmx.space/get-user-data/".$request->keywords;
-
-        $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
-        
-        // if($arr_res!=null){
-        if(is_array($arr_res)){
-          $account = $this->create_account($arr_res);
-        } else {
-          $arr['status'] = 'error';
-          $arr['message'] = 'Username tidak ditemukan!';
-          return $arr;
-        }
       }
 
-      if(Auth::check()){
-        $history = HistorySearch::where('user_id',Auth::user()->id) 
-                    ->where('account_id',$account->id)
-                    ->first();
+      $arr['view'] = (string) view('user.search.content-akun')->with('account',$account);
 
-        if(is_null($history)){
-          $history = new HistorySearch;
-          $history->account_id = $account->id;
-          $history->user_id = Auth::user()->id;
-        } else {
-          $history->updated_at = new Datetime();
-        }
- 
-        $history->save();
-
-        $user = User::find(Auth::user()->id);
-        $user->count_calc = $user->count_calc + 1;
-        $user->save();
-
-        $account->total_calc = $account->total_calc + 1;
-        $account->save();
-      } else {
-        //$request->session()->put('account_search', $account->username);
-        if(!isset($_COOKIE[$this->cookie_search])) {
-          $cookie_value[] = $account->id;
-          // set cookie for 30days, 86400 = 1 day
-          setcookie($this->cookie_search, json_encode($cookie_value), time() + (86400 * 30), "/");
-        } else {
-          $cookie_value = json_decode($_COOKIE[$this->cookie_search], true);
-          //var_dump($cookie_value);
-          if(count($cookie_value)>=3){
-            $arr['status'] = 'error';
-            $arr['message'] = 'kuota habis';
-          } else {
-            array_push($cookie_value, $account->id);
-            setcookie($this->cookie_search, json_encode($cookie_value), time() + (86400 * 30), "/");
-          }
-        }
-      }
+      return $arr;
     }
-
-    $arr['view'] = (string) view('user.search.content-akun')->with('account',$account);
-
-    return $arr;
+    else {
+      return redirect('home');
+    }
   }
 
   public function load_search_byid(Request $request){
-    $arr['status'] = 'success';
-    $arr['message'] = '';
+    if($request->ajax()){
+      $arr['status'] = 'success';
+      $arr['message'] = '';
 
-    $account = Account::find($request->id);
+      $account = Account::find($request->id);
 
-    /*if(Auth::check()){
-      $history = HistorySearch::where('user_id',Auth::user()->id) 
-                    ->where('account_id',$account->id)
-                    ->first(); 
+      /*if(Auth::check()){
+        $history = HistorySearch::where('user_id',Auth::user()->id) 
+                      ->where('account_id',$account->id)
+                      ->first(); 
 
-      $history->updated_at = new Datetime();
-      $history->save();
-    }*/
-    
-    $arr['view'] = (string) view('user.search.content-akun')->with('account',$account);
+        $history->updated_at = new Datetime();
+        $history->save();
+      }*/
+      
+      $arr['view'] = (string) view('user.search.content-akun')->with('account',$account);
 
-    return $arr;
+      return $arr;
+    }
+    else {
+      return redirect('home');
+    }
+
   }
 
   public function load_history(Request $request){
@@ -366,6 +377,9 @@ class AccountController extends Controller
                         ->with('accounts',$accounts); 
 
       return $arr;
+    }
+    else {
+      return redirect('home');
     }
   }
 
