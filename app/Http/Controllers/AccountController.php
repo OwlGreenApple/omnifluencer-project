@@ -337,34 +337,36 @@ class AccountController extends Controller
   }
 
   public function load_history_search(Request $request){
-    $accounts = HistorySearch::join('accounts','accounts.id','=','history_searchs.account_id')
-          ->select('history_searchs.*','accounts.id as accountid','accounts.username','accounts.prof_pic','accounts.eng_rate','accounts.jml_followers','accounts.jml_post')
-          ->where('history_searchs.user_id',Auth::user()->id)
-          ->where('accounts.username','like','%'.$request->keywords.'%');
+    if($request->ajax()){
+      $accounts = HistorySearch::join('accounts','accounts.id','=','history_searchs.account_id')
+            ->select('history_searchs.*','accounts.id as accountid','accounts.username','accounts.prof_pic','accounts.eng_rate','accounts.jml_followers','accounts.jml_post')
+            ->where('history_searchs.user_id',Auth::user()->id)
+            ->where('accounts.username','like','%'.$request->keywords.'%');
 
-    if($request->from!=null and $request->to!=null){
-      $dt = Carbon::createFromFormat("Y/m/d h:i:s", $request->from.' 00:00:00'); 
+      if($request->from!=null and $request->to!=null){
+        $dt = Carbon::createFromFormat("Y/m/d h:i:s", $request->from.' 00:00:00'); 
 
-      $dt1 = Carbon::createFromFormat("Y/m/d h:i:s", $request->to.' 00:00:00');
+        $dt1 = Carbon::createFromFormat("Y/m/d h:i:s", $request->to.' 00:00:00');
 
-      $accounts = $accounts->whereDate("history_searchs.created_at",">=",$dt)
-              ->whereDate("history_searchs.created_at","<=",$dt1);
+        $accounts = $accounts->whereDate("history_searchs.created_at",">=",$dt)
+                ->whereDate("history_searchs.created_at","<=",$dt1);
+      }
+
+      if($request->status=='not-sort'){
+        $accounts = $accounts->orderBy('history_searchs.updated_at','desc');
+      } else {
+        $accounts = Helper::sorting($accounts,$request->status,$request->act);
+      }
+      
+      $accounts = $accounts->paginate(15);
+
+      $arr['view'] = (string) view('user.history-search.content')
+                        ->with('accounts',$accounts);
+      $arr['pager'] = (string) view('user.history-search.pagination')
+                        ->with('accounts',$accounts); 
+
+      return $arr;
     }
-
-    if($request->status=='not-sort'){
-      $accounts = $accounts->orderBy('history_searchs.updated_at','desc');
-    } else {
-      $accounts = Helper::sorting($accounts,$request->status,$request->act);
-    }
-    
-    $accounts = $accounts->paginate(15);
-
-    $arr['view'] = (string) view('user.history-search.content')
-                      ->with('accounts',$accounts);
-    $arr['pager'] = (string) view('user.history-search.pagination')
-                      ->with('accounts',$accounts); 
-
-    return $arr;
   }
 
   public function print_pdf($id,$type){
