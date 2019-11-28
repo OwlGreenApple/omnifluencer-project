@@ -250,10 +250,33 @@ class InstagramHelper
             // $i->setProxy('http://208.115.112.100:9999');
             $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
           }*/
+
+          $i->login('mayyyvitri','qwerty12345', 300);
+          $userData = $i->people->getInfoByName($username)->getUser();
+
+          dd($userData);
+          die('');
 					
-					
-          if ( env('APP_ENV') == "local" ) {
-            $i->login("mayyyvitri", "qwerty12345", 300);
+          if ( env('APP_ENV') == "local" ) 
+          {
+            $local_users[] = array(
+               "username"=>"mayyyvitri",
+               "password"=>"qwerty12345",
+            );
+
+            $local_users[] = array(
+               "username"=>"tesyamayanatasha",
+               "password"=>"qwerty12345",
+            );
+
+            $local_users[] = array(
+               "username"=>"septiana_mayadewi",
+               "password"=>"qwerty12345",
+            );
+
+            $local_users = $local_users[array_rand($local_users)];
+            $i->login('mayyyvitri','qwerty12345', 300);
+            echo 'aaa';
           } 
           else if ( env('APP_ENV') == "production" ) {
             $arr_users[] = [
@@ -335,7 +358,11 @@ class InstagramHelper
             // $i->setProxy("http://".$arr_user['username'].":".$arr_user['password']."@".$arr_user['proxy'].":".$arr_user['port']);
             $i->login($arr_user["username"], $arr_user["password"], 300);
           }
+
 					$userData = $i->people->getInfoByName($username)->getUser();
+
+          dd($userData);
+          die('');
 
 					return json_encode($userData);
 

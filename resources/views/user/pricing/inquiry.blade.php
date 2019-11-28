@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
 <link href="{{ asset('css/style-thankyou.css') }}" rel="stylesheet">
 
 <section class="page-title">
@@ -66,8 +63,8 @@
     window.onload = function() {
         var data = {
             key: "ca094586eb5eaef6421d629a40fdd6ba",
-            paymentId: "@if(isset($invoiceid)){{$invoiceid}}@endif",
-            backUrl: "{{route('cardpayment')}}"
+            paymentId: "OMNI-2000",
+            backUrl: "https://www.omnifluencer.com"
         },
         sgoPlusIframe = document.getElementById("sgoplus-iframe");
         if (sgoPlusIframe !== null) sgoPlusIframe.src = SGOSignature.getIframeURL(data);

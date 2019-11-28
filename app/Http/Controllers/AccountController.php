@@ -19,6 +19,8 @@ use App\Mail\ProfileBulkEmail;
 
 use Auth,PDF,Excel,Mail,Validator,Carbon,Datetime;
 
+use \InstagramAPI\Instagram;
+
 class AccountController extends Controller
 {
   protected $cookie_search = "history_search";
@@ -125,6 +127,72 @@ class AccountController extends Controller
     return $account;
   }
 
+
+public function test_search(Request $request)
+{
+    try {
+      $error_message="";
+      $i = new Instagram(false,false,[
+        "storage"       => "mysql",
+        "dbhost"       => env('DB_HOST', '127.0.0.1'),
+        "dbname"   => env('DB_DATABASE', ''),
+        "dbusername"   => env('DB_USERNAME', ''),
+        "dbpassword"   => env('DB_PASSWORD', ''),
+      ]); 
+      
+          // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
+          // JANGAN LUPA DILOGIN TERLEBIH DAHULU
+          /*if ( env('APP_ENV') == "production" ) {
+            // $i->setProxy('http://208.115.112.100:9999');
+            $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+          }*/
+
+          $i->login('mayyyvitri','qwerty12345', 300);
+          $userData = $i->people->getInfoByName('dyodoran')->getUser();
+
+          dd($userData);
+          die('');
+
+    }   
+    catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
+      //klo error password
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\AccountDisabledException $e) {
+      //klo error password
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\CheckpointRequiredException $e) {
+      //klo error email / phone verification 
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\InstagramException $e) {
+      $is_error = true;
+      // if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
+        // echo "2 Factor perlu dioffkan";
+      // } 
+      // else {
+          // all other login errors would get caught here...
+        // echo $e->getMessage();
+        $error_message = $e->getMessage();
+      // }
+    } 
+    catch (NotFoundException $e) {
+      // echo $e->getMessage();
+      $error_message = $e->getMessage();
+    }         
+    catch (Exception $e) {
+      $error_message = $e->getMessage();
+      if ($error_message == "InstagramAPI\Response\LoginResponse: The password you entered is incorrect. Please try again.") {
+        $error_message = $e->getMessage();
+      } 
+      if ( ($error_message == "InstagramAPI\Response\LoginResponse: Challenge required.") || ( substr($error_message, 0, 18) == "challenge_required") || ($error_message == "InstagramAPI\Response\TimelineFeedResponse: Challenge required.") || ($error_message == "InstagramAPI\Response\LoginResponse: Sorry, there was a problem with your request.") ){
+        $error_message = $e->getMessage();
+      }
+    }
+    return $error_message;
+}
+
   public function load_search(Request $request){
     if($request->ajax()){
       $arr['status'] = 'success';
@@ -176,6 +244,8 @@ class AccountController extends Controller
           // $url = "http://cmx.space/get-user-data/".$request->keywords;
 
           $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
+
+          die('');
           
           // if($arr_res!=null){
           if(is_array($arr_res)){

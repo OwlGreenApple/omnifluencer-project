@@ -26,6 +26,7 @@ Route::get('/home', 'AccountController@index')
 Route::get('/', 'AccountController@index');
 
 //Search
+Route::get('/testsearch','AccountController@test_search');
 Route::get('/search','AccountController@index_post');
 Route::get('/search/load-search','AccountController@load_search');
 Route::get('/search/load-search-byid','AccountController@load_search_byid');

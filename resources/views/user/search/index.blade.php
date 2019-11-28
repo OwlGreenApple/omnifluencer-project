@@ -719,6 +719,7 @@
   </div>
 </div>
 <!-- Provely Conversions App Display Code -->
+@if(env('APP_ENV') <> 'local')
 <script>(function(w,n) {
 if (typeof(w[n]) == 'undefined'){ob=n+'Obj';w[ob]=[];w[n]=function(){w[ob].push(arguments);};
 d=document.createElement('script');d.type = 'text/javascript';d.async=1;
@@ -730,4 +731,5 @@ provelys('data', 'campaignId', '16163');
 provelys('config', 'widget', 1);
 </script>
 <!-- End Provely Conversions App Display Code -->
+@endif
 @endsection
