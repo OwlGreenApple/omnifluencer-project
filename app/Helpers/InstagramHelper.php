@@ -250,33 +250,21 @@ class InstagramHelper
             // $i->setProxy('http://208.115.112.100:9999');
             $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
           }*/
-
-          $i->login('mayyyvitri','qwerty12345', 300);
-          $userData = $i->people->getInfoByName($username)->getUser();
-
-          dd($userData);
-          die('');
 					
           if ( env('APP_ENV') == "local" ) 
           {
-            $local_users[] = array(
-               "username"=>"mayyyvitri",
-               "password"=>"qwerty12345",
-            );
+              $arr_users[] = [
+                "username"=>"bungariaanastasya",
+                "password"=>"qazwsx123",
+              ];      
 
-            $local_users[] = array(
-               "username"=>"tesyamayanatasha",
-               "password"=>"qwerty12345",
-            );
+              $arr_users[] = [
+                "username"=>"mayyyvitri",
+                "password"=>"12345qwerty",
+              ];
 
-            $local_users[] = array(
-               "username"=>"septiana_mayadewi",
-               "password"=>"qwerty12345",
-            );
-
-            $local_users = $local_users[array_rand($local_users)];
-            $i->login('mayyyvitri','qwerty12345', 300);
-            echo 'aaa';
+              $arr_user = $arr_users[array_rand($arr_users)];      
+              $i->login($arr_user['username'],$arr_user['password'], 300);
           } 
           else if ( env('APP_ENV') == "production" ) {
             $arr_users[] = [
@@ -360,10 +348,6 @@ class InstagramHelper
           }
 
 					$userData = $i->people->getInfoByName($username)->getUser();
-
-          dd($userData);
-          die('');
-
 					return json_encode($userData);
 
 		}  	
@@ -567,7 +551,18 @@ class InstagramHelper
       // }
 
       if ( env('APP_ENV') == "local" ) {
-        $i->login("mayyyvitri", "qwerty12345", 300);
+            $arr_users[] = [
+              "username"=>"bungariaanastasya",
+              "password"=>"qazwsx123",
+            ];      
+
+            $arr_users[] = [
+              "username"=>"mayyyvitri",
+              "password"=>"12345qwerty",
+            ];
+
+            $arr_user = $arr_users[array_rand($arr_users)];      
+            $i->login($arr_user['username'],$arr_user['password'], 300);
       } 
       else if ( env('APP_ENV') == "production" ) {
             $arr_users[] = [
@@ -780,6 +775,166 @@ class InstagramHelper
 		return $arr_res;
 	}
 
-}
+  public static function get_user_following($igid,$maxId){
+    try {
+      $error_message="";
+      $i = new Instagram(false,false,[
+        "storage"       => "mysql",
+        "dbhost"       => env('DB_HOST', '127.0.0.1'),
+        "dbname"   => env('DB_DATABASE', ''),
+        "dbusername"   => env('DB_USERNAME', ''),
+        "dbpassword"   => env('DB_PASSWORD', ''),
+      ]); 
+      
+          // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
+          // JANGAN LUPA DILOGIN TERLEBIH DAHULU
+          /*if ( env('APP_ENV') == "production" ) {
+            // $i->setProxy('http://208.115.112.100:9999');
+            $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+          }*/
+          
+          if ( env('APP_ENV') == "local" ) 
+          {
+              $arr_users[] = [
+                "username"=>"bungariaanastasya",
+                "password"=>"qazwsx123",
+              ];      
 
+              $arr_users[] = [
+                "username"=>"mayyyvitri",
+                "password"=>"12345qwerty",
+              ];
+
+              $arr_user = $arr_users[array_rand($arr_users)];      
+              $i->login($arr_user['username'],$arr_user['password'], 300);
+          } 
+          else if ( env('APP_ENV') == "production" ) {
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13889",
+              "username"=>"melodianaelisa",
+              "password"=>"qazwsx123",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13890",
+              "username"=>"dessiarumi",
+              "password"=>"abcde12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13891",
+              "username"=>"renawilliams222",
+              "password"=>"abcde12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13892",
+              "username"=>"marianalaskmi",
+              "password"=>"qwerty12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13893",
+              "username"=>"magdalenapeter96",
+              "password"=>"qazwsx123",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13894",
+              "username"=>"felysamora",
+              "password"=>"abcde12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13895",
+              "username"=>"nithaasyari",
+              "password"=>"qweasdzxc123",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13896",
+              "username"=>"thalianasarifernand",
+              "password"=>"987456321qwerty",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13897",
+              "username"=>"naningtyasa",
+              "password"=>"qwerty12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13898",
+              "username"=>"mayymayyaa",
+              "password"=>"qwerty12345",
+            ];      
+        
+            $arr_user = $arr_users[array_rand($arr_users)];
+          
+            
+            // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+            // $i->login("mayymayyaa", "qwerty12345", 300);
+            $i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
+            // $i->setProxy("http://".$arr_user['username'].":".$arr_user['password']."@".$arr_user['proxy'].":".$arr_user['port']);
+            $i->login($arr_user["username"], $arr_user["password"], 300);
+          }
+
+          $rankToken = \InstagramAPI\Signatures::generateUUID();
+          $searchQuery = null;
+    
+          $following = $i->people->getFollowing($igid,$rankToken,$searchQuery,$maxId);
+          return json_encode($following);
+
+    }   
+    catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
+      //klo error password
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\AccountDisabledException $e) {
+      //klo error password
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\CheckpointRequiredException $e) {
+      //klo error email / phone verification 
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\InstagramException $e) {
+      $is_error = true;
+      // if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
+        // echo "2 Factor perlu dioffkan";
+      // } 
+      // else {
+          // all other login errors would get caught here...
+        // echo $e->getMessage();
+        $error_message = $e->getMessage();
+      // }
+    } 
+    catch (NotFoundException $e) {
+      // echo $e->getMessage();
+      $error_message = $e->getMessage();
+    }         
+    catch (Exception $e) {
+      $error_message = $e->getMessage();
+      if ($error_message == "InstagramAPI\Response\LoginResponse: The password you entered is incorrect. Please try again.") {
+        $error_message = $e->getMessage();
+      } 
+      if ( ($error_message == "InstagramAPI\Response\LoginResponse: Challenge required.") || ( substr($error_message, 0, 18) == "challenge_required") || ($error_message == "InstagramAPI\Response\TimelineFeedResponse: Challenge required.") || ($error_message == "InstagramAPI\Response\LoginResponse: Sorry, there was a problem with your request.") ){
+        $error_message = $e->getMessage();
+      }
+    }
+    return $error_message;
+  }
+
+/* end helper */
+}
 ?>
