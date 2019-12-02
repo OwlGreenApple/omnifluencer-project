@@ -146,14 +146,22 @@ class UpdateAccount extends Command
               mkdir( $dir,0755 );       
           } 
 
-          $created_json = file_get_contents(storage_path('jsondata').'/'.$account->id.'.json');
-          $log = json_decode($created_json,true);
+          if(file_exists(storage_path('jsondata').'/'.$account->id.'.json'))
+          {
+            $created_json = file_get_contents(storage_path('jsondata').'/'.$account->id.'.json');
+            $log = json_decode($created_json,true);
+          }
+          else
+          {
+            $log = null;
+          }
+          
 
-          if(empty($log['created_at']))
+          if(empty($log['created_at']) && $log <> null)
           {
               $created = Date("Y-m-d H:i:s");
           }
-          else
+          elseif($log <> null)
           {
               $created = $log['created_at'];
           }
