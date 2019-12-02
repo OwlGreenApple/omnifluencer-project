@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Account;
-use App\AccountLog;
+//use App\AccountLog;
 use App\HistorySearch;
 use App\User;
 use App\Group;
@@ -78,6 +78,7 @@ class AccountController extends Controller
     $jmlcomment = $arr_res2["jmlcomment"];
     $private = $arr_res2["private"];
     $lastpost = $arr_res2["lastpost"];
+    $jmlvideoview = $arr_res2["jmlvideoview"];
 
     $account = new Account;
     $account->ig_id = $arr_res["pk"];
@@ -98,23 +99,58 @@ class AccountController extends Controller
     if($private==false){
       $ratalike = $jmllike/$count;
       $ratacomment = $jmlcomment/$count;
+      $ratavideoview = $jmlvideoview/$count;
     } else {
       $ratalike = 0;
       $ratacomment = 0;
+      $ratavideoview = 0;
     }
 
     $account->lastpost = $lastpost;
     $account->jml_likes = floor($ratalike);
     $account->jml_comments = floor($ratacomment);
 
-    if($account->jml_followers>0){
-      $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers*20);
+    if($account->jml_followers > 0){
+      $account->eng_rate = ($jmlvideoview + $jmllike + $jmlcomment)/($account->jml_followers*12);
       $account->total_influenced = $account->eng_rate*$account->jml_followers;
     }
 
     $account->save();
 
-    $accountlog = new AccountLog;
+    $dir = storage_path('jsondata');
+    if ( !file_exists( $dir ) && !is_dir( $dir ) ) {
+        mkdir( $dir,0755 );       
+    } 
+
+    $data = array(
+       'account_id'=>$account->id,
+       'jml_followers'=>$account->jml_followers,
+       'jml_following'=>$account->jml_following,
+       'jml_post'=>$account->jml_post,
+       'lastpost'=>$account->lastpost,
+       'jml_likes'=>$account->jml_likes,
+       'jml_comments'=>$account->jml_comments,
+       'total_calc'=>$account->total_calc,
+       'total_compare'=>$account->total_compare,
+       'jmlvideoview'=>$jmlvideoview,
+       'ratavideoview'=>$ratavideoview,
+       'created_at'=>Date("Y-m-d H:i:s"),
+       'updated_at'=>Date("Y-m-d H:i:s"),
+    );
+
+    if($account->jml_followers>0){
+      $data['eng_rate'] = $account->eng_rate;
+      $data['total_influenced'] = $account->total_influenced;  
+    }
+
+    $json = json_encode($data);
+
+    if ( file_exists( $dir ) && is_dir( $dir ) ) {
+        file_put_contents(storage_path('jsondata').'/'.$account->id.'.json', $json);
+    }
+
+
+    /*$accountlog = new AccountLog;
     $accountlog->account_id = $account->id;
     $accountlog->jml_followers = $account->jml_followers;
     $accountlog->jml_following = $account->jml_following;
@@ -129,6 +165,7 @@ class AccountController extends Controller
     }
 
     $accountlog->save();
+    */
 
     return $account;
   }
@@ -136,40 +173,8 @@ class AccountController extends Controller
 
 public function test_search(Request $request)
 {
-      $accounts = Account::all();
-      foreach($accounts as $index=>$rows)
-      {
-          echo $index.'----'.$rows->username.'<br/>';
-      }
-     die('');
-     $account = Account::where('id','1572')->first();
-     $ig_id = $account->ig_id;
-     
-     $db = array();
-
-     $arr_res = json_decode(InstagramHelper::get_user_following($ig_id),true);
-     $following = $arr_res['users'];
-
-     foreach($following as $rows)
-     {
-        echo $rows['username'].'<br/>';
-        //$account = Account::where('username',$request->keywords)->first();
-
-     }
-
-     //$arr_res['next_max_id']
-     //$this->load_search()
-     //  $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
-     /*
-         if(is_array($arr_res)){
-            $account = $this->create_account($arr_res);
-          } else {
-            $arr['status'] = 'error';
-            $arr['message'] = 'Username tidak ditemukan!';
-            return $arr;
-          }
-     */
-     //dd($following);
+      $arr_res = InstagramHelper::get_user_profile('dyodoran');
+      dd($arr_res);
 }
 
   public function following_pagination($ig_id,$maxId,$total_following)
@@ -861,7 +866,8 @@ public function test_search(Request $request)
       $subscribe->email = $request->email;
       $subscribe->save();
     }
-    else {
+    else 
+    {
       return $validator->errors()->first();
     }
     
@@ -880,12 +886,26 @@ public function test_search(Request $request)
     return $arr;
   }
 
-  public function view_account_log(Request $request){
-    $logs = AccountLog::where('account_id',$request->id)
-              ->get();
+  public function view_account_log(Request $request)
+  {
+    //$logs = AccountLog::where('account_id',$request->id)
+              //->get();
+     $file = storage_path('jsondata').'/'.$request->id.'.json';
+     if (file_exists($file)) 
+     {
+        $log = file_get_contents(storage_path('jsondata').'/'.$request->id.'.json');
+     }
+     else
+     {
+        $arr['view'] = 'ID not available';
+        return $arr;
+     }
 
+    $logs = json_decode($log,true);
     $arr['view'] = (string) view('admin.list-account.content-log')->with('logs',$logs);
     
     return $arr;
   }
+
+/* AccountController */  
 }

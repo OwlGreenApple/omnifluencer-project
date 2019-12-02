@@ -536,6 +536,7 @@ class InstagramHelper
       $private = false;
       $lastpost = null;
       $maxid = null;
+      $jmlvideoview = 0;
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
         "dbhost"       => env('DB_HOST', '127.0.0.1'),
@@ -694,7 +695,6 @@ class InstagramHelper
           $userFeed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
           $userFeedItems = $userFeed->getItems();
 
-
           if(!is_null($userFeedItems) and !empty($userFeedItems))
           {
 
@@ -710,6 +710,7 @@ class InstagramHelper
                 $itemInfo = $i->media->getInfo($item->getId());
                 $jmllike += $itemInfo->getItems()[0]->getLikeCount();
                 $jmlcomment += $itemInfo->getItems()[0]->getCommentCount();
+                $jmlvideoview += $itemInfo->getItems()[0]->getViewCount();
                 $count++;
               }
             }
@@ -770,6 +771,7 @@ class InstagramHelper
       "private"=>$private,
       "lastpost"=>$lastpost,
       "error_message"=>$error_message,
+      "jmlvideoview"=>$jmlvideoview,
     ];
 
 		return $arr_res;
@@ -893,6 +895,166 @@ class InstagramHelper
           $searchQuery = null;
     
           $following = $i->people->getFollowing($igid,$rankToken,$searchQuery,$maxId);
+          return json_encode($following);
+
+    }   
+    catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
+      //klo error password
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\AccountDisabledException $e) {
+      //klo error password
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\CheckpointRequiredException $e) {
+      //klo error email / phone verification 
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\InstagramException $e) {
+      $is_error = true;
+      // if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
+        // echo "2 Factor perlu dioffkan";
+      // } 
+      // else {
+          // all other login errors would get caught here...
+        // echo $e->getMessage();
+        $error_message = $e->getMessage();
+      // }
+    } 
+    catch (NotFoundException $e) {
+      // echo $e->getMessage();
+      $error_message = $e->getMessage();
+    }         
+    catch (Exception $e) {
+      $error_message = $e->getMessage();
+      if ($error_message == "InstagramAPI\Response\LoginResponse: The password you entered is incorrect. Please try again.") {
+        $error_message = $e->getMessage();
+      } 
+      if ( ($error_message == "InstagramAPI\Response\LoginResponse: Challenge required.") || ( substr($error_message, 0, 18) == "challenge_required") || ($error_message == "InstagramAPI\Response\TimelineFeedResponse: Challenge required.") || ($error_message == "InstagramAPI\Response\LoginResponse: Sorry, there was a problem with your request.") ){
+        $error_message = $e->getMessage();
+      }
+    }
+    return $error_message;
+  }
+
+
+  #GET VIDEO VIEW
+  public static function get_media_timeline($igid,$maxId){
+    try {
+      $error_message="";
+      $i = new Instagram(false,false,[
+        "storage"       => "mysql",
+        "dbhost"       => env('DB_HOST', '127.0.0.1'),
+        "dbname"   => env('DB_DATABASE', ''),
+        "dbusername"   => env('DB_USERNAME', ''),
+        "dbpassword"   => env('DB_PASSWORD', ''),
+      ]); 
+      
+          // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
+          // JANGAN LUPA DILOGIN TERLEBIH DAHULU
+          /*if ( env('APP_ENV') == "production" ) {
+            // $i->setProxy('http://208.115.112.100:9999');
+            $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+          }*/
+          
+          if ( env('APP_ENV') == "local" ) 
+          {
+              $arr_users[] = [
+                "username"=>"bungariaanastasya",
+                "password"=>"qazwsx123",
+              ];      
+
+              $arr_users[] = [
+                "username"=>"mayyyvitri",
+                "password"=>"12345qwerty",
+              ];
+
+              $arr_user = $arr_users[array_rand($arr_users)];      
+              $i->login($arr_user['username'],$arr_user['password'], 300);
+          } 
+          else if ( env('APP_ENV') == "production" ) {
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13889",
+              "username"=>"melodianaelisa",
+              "password"=>"qazwsx123",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13890",
+              "username"=>"dessiarumi",
+              "password"=>"abcde12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13891",
+              "username"=>"renawilliams222",
+              "password"=>"abcde12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13892",
+              "username"=>"marianalaskmi",
+              "password"=>"qwerty12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13893",
+              "username"=>"magdalenapeter96",
+              "password"=>"qazwsx123",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13894",
+              "username"=>"felysamora",
+              "password"=>"abcde12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13895",
+              "username"=>"nithaasyari",
+              "password"=>"qweasdzxc123",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13896",
+              "username"=>"thalianasarifernand",
+              "password"=>"987456321qwerty",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13897",
+              "username"=>"naningtyasa",
+              "password"=>"qwerty12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13898",
+              "username"=>"mayymayyaa",
+              "password"=>"qwerty12345",
+            ];      
+        
+            $arr_user = $arr_users[array_rand($arr_users)];
+          
+            
+            // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+            // $i->login("mayymayyaa", "qwerty12345", 300);
+            $i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
+            // $i->setProxy("http://".$arr_user['username'].":".$arr_user['password']."@".$arr_user['proxy'].":".$arr_user['port']);
+            $i->login($arr_user["username"], $arr_user["password"], 300);
+          }
+
+
+          $timeline = $i->timeline->getUserFeed($igid,$maxId)->get;
           return json_encode($following);
 
     }   

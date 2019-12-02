@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\Account;
-use App\AccountLog;
+//use App\AccountLog;
 
 use App\Helpers\InstagramHelper;
 
@@ -63,11 +63,13 @@ class UpdateAccount extends Command
     
     public function handle()
     {
+
       $accounts = Account::orderBy('voting','desc')->get();
 
-      foreach($accounts as $account){
+      foreach($accounts as $account)
+      {
         //kalo belum ada informasi ig_id ngejalanin pake username di database
-        if($account->ig_id!=null){
+        if($account->ig_id !== null){
           // $url = "http://cmx.space/get-user-data-byid/".$account->ig_id;
           $arr_res = json_decode(InstagramHelper::getUserDataByid($account->ig_id),true);
         } else {
@@ -91,7 +93,7 @@ class UpdateAccount extends Command
           $account->jml_followers = $arr_res["follower_count"];
           $account->jml_post = $arr_res["media_count"];
 
-          var_dump($arr_res["username"]);
+          //var_dump($arr_res["username"]);
 
           $arr_res2 = InstagramHelper::get_user_profile($arr_res["username"]);
           if ($arr_res2["error_message"]=="") {
@@ -100,7 +102,12 @@ class UpdateAccount extends Command
             $jmlcomment = $arr_res2["jmlcomment"];
             $private = $arr_res2["private"];
             $lastpost = $arr_res2["lastpost"];
+            $jmlvideoview = $arr_res2["jmlvideoview"];
 
+            if($count == 0)
+            {
+              $count = 1;
+            }
               
             //hitung rata2 like + comment di 20 post terakhir 
             //check akun private atau nggak
@@ -108,9 +115,11 @@ class UpdateAccount extends Command
             if($private==false){
               $ratalike = $jmllike/$count;
               $ratacomment = $jmlcomment/$count;
+              $ratavideoview = $jmlvideoview/$count;
             } else {
               $ratalike = 0;
               $ratacomment = 0;
+              $ratavideoview = 0;
             }
 
             $account->lastpost = $lastpost;
@@ -118,17 +127,65 @@ class UpdateAccount extends Command
             $account->jml_comments = floor($ratacomment);
             //$account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
 
-            if($account->jml_followers>0){
-              $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers*20);
+            if($account->jml_followers > 0){
+              $account->eng_rate = ($jmlvideoview + $jmllike + $jmlcomment)/($account->jml_followers*12);
               $account->total_influenced = $account->eng_rate*$account->jml_followers;
             }
             
+            /*
             var_dump('ratalike = '.floor($ratalike));
             var_dump('ratacomment = '.floor($ratacomment));
             var_dump('Eng rate = '.round($account->eng_rate*100,2));
+            */
 
             $account->save();
           }
+
+          $dir = storage_path('jsondata');
+          if ( !file_exists( $dir ) && !is_dir( $dir ) ) {
+              mkdir( $dir,0755 );       
+          } 
+
+          $created_json = file_get_contents(storage_path('jsondata').'/'.$account->id.'.json');
+          $log = json_decode($created_json,true);
+
+          if(empty($log['created_at']))
+          {
+              $created = Date("Y-m-d H:i:s");
+          }
+          else
+          {
+              $created = $log['created_at'];
+          }
+
+          $data = array(
+             'account_id'=>$account->id,
+             'jml_followers'=>$account->jml_followers,
+             'jml_following'=>$account->jml_following,
+             'jml_post'=>$account->jml_post,
+             'lastpost'=>$account->lastpost,
+             'jml_likes'=>$account->jml_likes,
+             'jml_comments'=>$account->jml_comments,
+             'total_calc'=>$account->total_calc,
+             'total_compare'=>$account->total_compare,
+             'jmlvideoview'=>$jmlvideoview,
+             'ratavideoview'=>$ratavideoview,
+             'created_at'=>$created,
+             'updated_at'=>Date("Y-m-d H:i:s"),
+          );
+
+          if($account->jml_followers>0){
+            $data['eng_rate'] = $account->eng_rate;
+            $data['total_influenced'] = $account->total_influenced;  
+          }
+
+          $json = json_encode($data);
+
+          if ( file_exists( $dir ) && is_dir( $dir ) ) {
+              file_put_contents(storage_path('jsondata').'/'.$account->id.'.json', $json);
+          }
+
+          /*die('');
 
           $accountlog = new AccountLog;
           $accountlog->account_id = $account->id;
@@ -146,8 +203,13 @@ class UpdateAccount extends Command
           }
           
           $accountlog->save();
+
+          */
+
         }
         sleep(0.5);
       }
     }
+
+/* end class update account */
 }

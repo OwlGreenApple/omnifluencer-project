@@ -40,7 +40,6 @@ class CrawlFollowing extends Command
 
     public function handle()
     {
-      //AFTER PASS 1X24 HOURS MAKE CRAWLED 0 AGAIN
       $accounts = Account::all();
       $act = new AccountController;
 

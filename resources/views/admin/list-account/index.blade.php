@@ -187,7 +187,7 @@
 
         <input type="hidden" name="idlog" id="idlog">
 
-        <table class="table" id="tableLog">
+        <table class="table responsive" id="tableLog">
           <thead align="center">
             <th>Eng Rate</th>
             <th>Total Influenced</th>
@@ -198,6 +198,7 @@
             <th>Avg Likes</th>
             <th>Avg Comments</th>
             <th>Created_at</th>
+            <th>Updated_at</th>
           </thead>
           <tbody id="content-log"></tbody>
         </table>
