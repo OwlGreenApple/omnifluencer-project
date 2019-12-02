@@ -10,6 +10,7 @@ use App\User;
 use App\Group;
 use App\Save;
 use App\Subscribe;
+use App\ListFollowing;
 
 use App\Helpers\Helper;
 use App\Helpers\InstagramHelper;
@@ -87,6 +88,11 @@ class AccountController extends Controller
     $account->jml_followers = $arr_res["follower_count"];
     $account->jml_post = $arr_res["media_count"];
 
+    if($count == 0)
+    {
+      $count = 1;
+    }
+
     //hitung rata2 like + comment di 20 post terakhir 
     //check akun private atau nggak
     if($private==false){
@@ -130,81 +136,126 @@ class AccountController extends Controller
 
 public function test_search(Request $request)
 {
-    try {
-      $error_message="";
-      $i = new Instagram(false,false,[
-        "storage"       => "mysql",
-        "dbhost"       => env('DB_HOST', '127.0.0.1'),
-        "dbname"   => env('DB_DATABASE', ''),
-        "dbusername"   => env('DB_USERNAME', ''),
-        "dbpassword"   => env('DB_PASSWORD', ''),
-      ]); 
-      
-          // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
-          // JANGAN LUPA DILOGIN TERLEBIH DAHULU
-          /*if ( env('APP_ENV') == "production" ) {
-            // $i->setProxy('http://208.115.112.100:9999');
-            $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
-          }*/
-
-          $i->login('mayyyvitri','12345qwerty', 300);
-          $userData = $i->people->getInfoByName('dyodoran')->getUser();
-
-          dd($userData);
-          die('');
-
-    }   
-    catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
-      //klo error password
-      $error_message = $e->getMessage();
-    }
-    catch (\InstagramAPI\Exception\AccountDisabledException $e) {
-      //klo error password
-      $error_message = $e->getMessage();
-    }
-    catch (\InstagramAPI\Exception\CheckpointRequiredException $e) {
-      //klo error email / phone verification 
-      $error_message = $e->getMessage();
-    }
-    catch (\InstagramAPI\Exception\InstagramException $e) {
-      $is_error = true;
-      // if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
-        // echo "2 Factor perlu dioffkan";
-      // } 
-      // else {
-          // all other login errors would get caught here...
-        // echo $e->getMessage();
-        $error_message = $e->getMessage();
-      // }
-    } 
-    catch (NotFoundException $e) {
-      // echo $e->getMessage();
-      $error_message = $e->getMessage();
-    }         
-    catch (Exception $e) {
-      $error_message = $e->getMessage();
-      if ($error_message == "InstagramAPI\Response\LoginResponse: The password you entered is incorrect. Please try again.") {
-        $error_message = $e->getMessage();
-      } 
-      if ( ($error_message == "InstagramAPI\Response\LoginResponse: Challenge required.") || ( substr($error_message, 0, 18) == "challenge_required") || ($error_message == "InstagramAPI\Response\TimelineFeedResponse: Challenge required.") || ($error_message == "InstagramAPI\Response\LoginResponse: Sorry, there was a problem with your request.") ){
-        $error_message = $e->getMessage();
+      $accounts = Account::all();
+      foreach($accounts as $index=>$rows)
+      {
+          echo $index.'----'.$rows->username.'<br/>';
       }
-    }
-    return $error_message;
+     die('');
+     $account = Account::where('id','1572')->first();
+     $ig_id = $account->ig_id;
+     
+     $db = array();
+
+     $arr_res = json_decode(InstagramHelper::get_user_following($ig_id),true);
+     $following = $arr_res['users'];
+
+     foreach($following as $rows)
+     {
+        echo $rows['username'].'<br/>';
+        //$account = Account::where('username',$request->keywords)->first();
+
+     }
+
+     //$arr_res['next_max_id']
+     //$this->load_search()
+     //  $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
+     /*
+         if(is_array($arr_res)){
+            $account = $this->create_account($arr_res);
+          } else {
+            $arr['status'] = 'error';
+            $arr['message'] = 'Username tidak ditemukan!';
+            return $arr;
+          }
+     */
+     //dd($following);
 }
+
+  public function following_pagination($ig_id,$maxId,$total_following)
+  {   
+      #GET FOLLOWING'S PAGINATION
+      $arr_follow = json_decode(InstagramHelper::get_user_following($ig_id,$maxId),true);
+      $nextmaxid = $arr_follow['next_max_id'];
+      $maxid[0] = $maxId;
+      $maxid[] = $nextmaxid;
+      $len = round($total_following/100);
+
+      if($total_following > 0)
+      {
+        for($x=0;$x<=$len;$x++)
+        {
+          $timeline = json_decode(InstagramHelper::get_user_following($ig_id,$nextmaxid),true);
+          $nextmaxid = $timeline['next_max_id'];
+
+          if($nextmaxid <> null)
+          {
+            $maxid[] = $nextmaxid;
+          }
+          else
+          {
+            break;
+          }
+        }
+        sleep(2);
+
+        foreach($maxid as $nextid)
+        {
+            $this->load_following($ig_id,$nextid);
+            sleep(2);
+        }
+      }
+  }
+
+  public function load_following($ig_id,$maxId)
+  {
+      $followings = array();
+      #GET USER'S FOLLOWING
+      $arr_follow = json_decode(InstagramHelper::get_user_following($ig_id,$maxId),true);
+      $followings = $arr_follow['users'];
+
+       #GET FOLLOWING'S USERNAME
+      if(count($followings) > 0)
+      {
+        foreach($followings as $rows)
+        {
+           $account = Account::where('username', $rows['username'])->first();
+           $listfollowing = ListFollowing::where('username', $rows['username'])->first();
+
+           if(is_null($account) && is_null($listfollowing))
+           {
+              $following = new ListFollowing;
+              $following->username = $rows['username'];
+              $following->save();
+           }
+           sleep(2);
+        }
+      }
+  }
 
   public function load_search(Request $request){
     if($request->ajax()){
       $arr['status'] = 'success';
       $arr['message'] = '';
 
+      if(env('APP_ENV') == 'local')
+      {
+        $account_id = array(1,2);
+      }
+      else
+      {
+        $account_id = array(1499,1500);
+      }
+
       if($request->keywords==''){
         //$account = Account::find(1);
         //$account = Account::where('jml_followers','>=',500000)->inRandomOrder()->first();
-        $account = Account::where('id',1499)
-                    ->orWhere('id',1500)
+
+        $account = Account::where('id',$account_id[0])
+                    ->orWhere('id',$account_id[1])
                     ->inRandomOrder()
                     ->first();
+                    
       } else {     
         $account = Account::where('username',$request->keywords)->first();
 
@@ -245,8 +296,6 @@ public function test_search(Request $request)
 
           $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
 
-          die('');
-          
           // if($arr_res!=null){
           if(is_array($arr_res)){
             $account = $this->create_account($arr_res);

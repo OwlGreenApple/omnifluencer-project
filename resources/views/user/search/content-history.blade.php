@@ -1,5 +1,5 @@
 <form class="form-compare">
-  <?php if(!is_null($accounts) && count($accounts)) { ?>
+  <?php if(!is_null($accounts) && count($accounts) > 0) { ?>
 
   <div class="col">
     <div class="rowcom"><br><br>
@@ -26,13 +26,13 @@
     </div>
 
     <?php 
-            $id = null;
-            if(Auth::check()){
-              $id = $account->accountid;
-            } else {
-              $id = $account->id;
-            }
-          ?>
+      $id = null;
+      if(Auth::check()){
+        $id = $account->accountid;
+      } else {
+        $id = $account->id;
+      }
+    ?>
 
     <div class="col-2">
       <span class="username-history" data-id="{{$id}}" style="cursor: pointer;">

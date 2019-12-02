@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Account;
+use App\Http\Controllers\AccountController;
 
 class CrawlFollowing extends Command
 {
@@ -35,8 +37,15 @@ class CrawlFollowing extends Command
      *
      * @return mixed
      */
+
     public function handle()
     {
-        //
+      //AFTER PASS 1X24 HOURS MAKE CRAWLED 0 AGAIN
+      $accounts = Account::all();
+      $act = new AccountController;
+
+      foreach($accounts as $row){
+         $act->following_pagination($row->ig_id, null,$row->jml_following);
+      }
     }
 }
