@@ -147,7 +147,7 @@ public function test_search(Request $request)
             $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
           }*/
 
-          $i->login('mayyyvitri','qwerty12345', 300);
+          $i->login('mayyyvitri','12345qwerty', 300);
           $userData = $i->people->getInfoByName('dyodoran')->getUser();
 
           dd($userData);

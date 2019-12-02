@@ -29,7 +29,7 @@ class InstagramHelper
 					// $i->setProxy('http://208.115.112.100:9999');
 					
 					
-					$i->login("mayyyvitri", "qwerty12345", 300);
+					$i->login("mayyyvitri", "12345qwerty", 300);
 					$userData = $i->people->getInfoByName('jajankulinersurabaya')->getUser();
 
 					if (!is_null($userData)) {
