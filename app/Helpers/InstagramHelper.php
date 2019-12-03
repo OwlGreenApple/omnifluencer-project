@@ -895,8 +895,8 @@ class InstagramHelper
         $i->login($arr_user["username"], $arr_user["password"], 300);
       }
 
-      $nextmaxid = null;
-      $maxid[0] = null;
+      $nextmaxid = $nexid  = null;
+      $maxid = $arr = array();
 
       $username = str_replace("@", "", $username);
       if (!$i->account->checkUsername($username)->getAvailable()) {
@@ -925,7 +925,6 @@ class InstagramHelper
               }
           }
 
-          $nexid = null;
           $userFeed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$nexid);
           $userFeedItems = $userFeed->getItems();
 
@@ -938,21 +937,32 @@ class InstagramHelper
               }
           }
 
-
-          #RENDER 3 NEXT MAX ID
-          /*foreach($maxid as $nexid)
+          #RENDER 2 NEXT MAX ID AFTER NULL
+          if(count($maxid) > 0 && count($arr) < 12)
           {
-              $userFeed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$nexid);
-              $userFeedItems = $userFeed->getItems();
+              foreach($maxid as $nexidpk)
+              {
+                  $userFeedVideo = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$nexidpk);
+                  $userFeedVideoItems = $userFeed->getItems();
 
-              foreach($userFeedItems as )
+                  foreach($userFeedVideoItems as $row)
+                  {
+                      $media_type = $row->getMediaType();
+                      if($mediatype == 2)
+                      {
+                          $arr[] = $row->getViewCount();
+                      }
+
+                      //if(count($arr) >=12)
+                  }
+              }
           }
 
       /* end !private */
       }
 
-
-      return $maxid;
+      dd($arr);
+      //return $maxid;
 
     }   
     catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
