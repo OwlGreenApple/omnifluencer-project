@@ -710,7 +710,6 @@ class InstagramHelper
                 $itemInfo = $i->media->getInfo($item->getId());
                 $jmllike += $itemInfo->getItems()[0]->getLikeCount();
                 $jmlcomment += $itemInfo->getItems()[0]->getCommentCount();
-                $jmlvideoview += $itemInfo->getItems()[0]->getViewCount();
                 $count++;
               }
             }
@@ -770,7 +769,6 @@ class InstagramHelper
       "private"=>$private,
       "lastpost"=>$lastpost,
       "error_message"=>$error_message,
-      "jmlvideoview"=>$jmlvideoview,
     ];
 
 		return $arr_res;
@@ -923,6 +921,7 @@ class InstagramHelper
               {
                   break;
               }
+              sleep(0.5);
           }
 
           $userFeed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$nexid);
@@ -935,6 +934,7 @@ class InstagramHelper
               {
                   $arr[] = $item->getViewCount();
               }
+              sleep(0.5);
           }
 
           #RENDER 2 NEXT MAX ID AFTER NULL
@@ -943,26 +943,32 @@ class InstagramHelper
               foreach($maxid as $nexidpk)
               {
                   $userFeedVideo = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$nexidpk);
-                  $userFeedVideoItems = $userFeed->getItems();
+                  $userFeedVideoItems[] = $userFeedVideo->getItems();
+                  sleep(1);
+              }
 
-                  foreach($userFeedVideoItems as $row)
+              foreach($userFeedVideoItems as $item)
+              {
+                  foreach($item as $row)
                   {
                       $media_type = $row->getMediaType();
-                      if($mediatype == 2)
+                      if($media_type == 2)
                       {
                           $arr[] = $row->getViewCount();
                       }
 
-                      //if(count($arr) >=12)
+                      if(count($arr) >=12)
+                      {
+                         break;
+                      }
+                      sleep(1);    
                   }
               }
           }
 
       /* end !private */
       }
-
-      dd($arr);
-      //return $maxid;
+      return array_sum($arr);
 
     }   
     catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {

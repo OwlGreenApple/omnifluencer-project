@@ -95,6 +95,7 @@ class UpdateAccount extends Command
 
           //var_dump($arr_res["username"]);
 
+          $jmlvideoview = InstagramHelper::get_video_views($arr_res["username"]);
           $arr_res2 = InstagramHelper::get_user_profile($arr_res["username"]);
           if ($arr_res2["error_message"]=="") {
             $count = $arr_res2["count"];
@@ -102,16 +103,17 @@ class UpdateAccount extends Command
             $jmlcomment = $arr_res2["jmlcomment"];
             $private = $arr_res2["private"];
             $lastpost = $arr_res2["lastpost"];
-            $jmlvideoview = $arr_res2["jmlvideoview"];
 
             if($count == 0)
             {
               $count = 1;
             }
               
+            var_dump($arr_res["username"].'-----'.$jmllike.'-----'.$jmlcomment);
+
             //hitung rata2 like + comment di 20 post terakhir 
             //check akun private atau nggak
-            var_dump('Last post ='.$lastpost);
+            //var_dump('Last post ='.$lastpost);
             if($private==false){
               $ratalike = $jmllike/$count;
               $ratacomment = $jmlcomment/$count;
@@ -130,6 +132,7 @@ class UpdateAccount extends Command
 
             if($account->jml_followers > 0){
               $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers);
+              $account->video_view_rate = ($jmlvideoview)/($account->jml_followers);
               $account->total_influenced = $account->eng_rate*$account->jml_followers;
             }
             
@@ -185,6 +188,7 @@ class UpdateAccount extends Command
 
           if($account->jml_followers>0){
             $data['eng_rate'] = $account->eng_rate;
+            $data['video_view_rate'] = $account->video_view_rate;
             $data['total_influenced'] = $account->total_influenced;  
           }
 

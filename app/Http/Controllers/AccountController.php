@@ -174,8 +174,8 @@ class AccountController extends Controller
 
 public function test_search(Request $request)
 {
-      $arr_res = InstagramHelper::get_video_views('nexcarlos');
-      //dd($arr_res);
+      $arr_res = InstagramHelper::get_user_profile('nexcarlos');
+      dd($arr_res);
 }
 
   public function following_pagination($ig_id,$maxId,$total_following)

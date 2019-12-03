@@ -8,20 +8,41 @@
   <p>{{$account->fullname}}</p>
 </div>
 
-<div class="names">
-  <div class="progress blue">
-    <span class="progress-left">
-      <span class="progress-bar"></span>
-    </span>
-    <span class="progress-right">
-      <span class="progress-bar"></span>
-    </span>
-    <div class="progress-value">
-      <span class="counter">
-        <?php echo round($account->eng_rate*100,2) ?>
-      </span>% <br>
-      Engagement Rate
-    </div>
+<div class="col-md-12 names">
+  <div class="row">
+      <div class="col-md-6">
+          <div class="progress blue">
+            <span class="progress-left">
+              <span class="progress-bar"></span>
+            </span>
+            <span class="progress-right">
+              <span class="progress-bar"></span>
+            </span>
+            <div class="progress-value">
+              <span class="counter">
+                <?php echo round($account->eng_rate*100,2) ?>
+              </span>% <br>
+              Engagement Rate
+            </div>
+          </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="progress blue">
+            <span class="progress-left">
+              <span class="progress-bar"></span>
+            </span>
+            <span class="progress-right">
+              <span class="progress-bar"></span>
+            </span>
+            <div class="progress-value">
+              <span class="counter">
+                <?php echo round($account->video_view_rate) ?>
+              </span>% <br>
+              Video View Rate
+            </div>
+          </div>
+      </div>
   </div>
 </div>
 
