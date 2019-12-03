@@ -125,10 +125,11 @@ class UpdateAccount extends Command
             $account->lastpost = $lastpost;
             $account->jml_likes = floor($ratalike);
             $account->jml_comments = floor($ratacomment);
+            $account->jmlvideoview = $jmlvideoview;
             //$account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
 
             if($account->jml_followers > 0){
-              $account->eng_rate = ($jmlvideoview + $jmllike + $jmlcomment)/($account->jml_followers*12);
+              $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers);
               $account->total_influenced = $account->eng_rate*$account->jml_followers;
             }
             

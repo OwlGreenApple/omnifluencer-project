@@ -131,6 +131,9 @@
             <th class="header none" action="jml_following">
               Following
             </th>
+            <th class="header none" action="jml_video_viewer">
+              Video Views&nbsp;
+            </th>
             <th class="header none" action="jml_post">
               Post
             </th>

@@ -109,9 +109,10 @@ class AccountController extends Controller
     $account->lastpost = $lastpost;
     $account->jml_likes = floor($ratalike);
     $account->jml_comments = floor($ratacomment);
+    $account->jmlvideoview = $jmlvideoview;
 
     if($account->jml_followers > 0){
-      $account->eng_rate = ($jmlvideoview + $jmllike + $jmlcomment)/($account->jml_followers*12);
+      $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers);
       $account->total_influenced = $account->eng_rate*$account->jml_followers;
     }
 
@@ -173,8 +174,8 @@ class AccountController extends Controller
 
 public function test_search(Request $request)
 {
-      $arr_res = InstagramHelper::get_user_profile('dyodoran');
-      dd($arr_res);
+      $arr_res = InstagramHelper::get_video_views('nexcarlos');
+      //dd($arr_res);
 }
 
   public function following_pagination($ig_id,$maxId,$total_following)

@@ -75,6 +75,15 @@
       </p>
       <p class="desc-stat">Avg Comment Per Post</p>
     </div>
+  </div> 
+  <div class="row">
+    <div class="col-6">
+      <p class="number-stat">
+        <?php echo Helper::abbreviate_number($account->jmlvideoview,2); ?>
+      </p>
+      <p class="desc-stat">Avg Video Views</p>
+    </div>
+
   </div>
 </div>
 

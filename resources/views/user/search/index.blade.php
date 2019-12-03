@@ -328,13 +328,13 @@
           </div>
         </div>
 
+        <!-- HISTORY -->
         <div class="col-12" id="div-progress">
           <div class="history justify-content-center">
 
             <div class="col-12 col-md-6 d-sm-block d-md-none content-akun"></div>
 
             <div id="content-history"></div>
-            
 
           </div>
         </div>

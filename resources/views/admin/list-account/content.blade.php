@@ -36,6 +36,9 @@
         echo Helper::abbreviate_number($account->jml_following,2)
       ?>
     </td>
+    <td data-label="jml_video_viewer">
+      {{ str_replace(",",".",number_format($account->jmlvideoview)) }}
+    </td>
     <td data-label="Post">
       <?php 
         echo Helper::abbreviate_number($account->jml_post,2)

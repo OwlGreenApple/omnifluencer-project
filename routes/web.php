@@ -60,7 +60,7 @@ Route::post('/login-payment','OrderController@login_payment');
 
 //Auto Confirm
 //Route::get('/testjson','AutoConfirmController@virtualRestApi');
-Route::post('/autoconfirm','AutoConfirmController@confirm')->name('autoconfirm');
+//Route::post('/autoconfirm','AutoConfirmController@confirm')->name('autoconfirm');
 
 Route::post('/subscribe-email','AccountController@subscribe_email');
 

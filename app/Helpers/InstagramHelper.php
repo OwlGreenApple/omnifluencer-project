@@ -703,7 +703,7 @@ class InstagramHelper
                 $itemInfo = $i->media->getInfo($item->getId());
                 $lastpost = date("Y-m-d h:i:s",$itemInfo->getItems()[0]->getTakenAt());
               }
-              
+
               if($count>=12){
                 break;
               } else {
@@ -723,7 +723,6 @@ class InstagramHelper
 
         } while ($count<12);
       }
-      
 
 		}  	
 		catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
@@ -776,6 +775,236 @@ class InstagramHelper
 
 		return $arr_res;
 	}
+
+  public static function get_video_views($username){
+    try {
+      $error_message="";
+      $count = 0;
+      $jmllike = 0;
+      $jmlcomment = 0;
+      $private = false;
+      $lastpost = null;
+      $maxid = null;
+      $jmlvideoview = 0;
+      $i = new Instagram(false,false,[
+        "storage"       => "mysql",
+        "dbhost"       => env('DB_HOST', '127.0.0.1'),
+        "dbname"   => env('DB_DATABASE', ''),
+        "dbusername"   => env('DB_USERNAME', ''),
+        "dbpassword"   => env('DB_PASSWORD', ''),
+      ]); 
+      
+      // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
+      // JANGAN LUPA DILOGIN TERLEBIH DAHULU
+      // if ( env('APP_ENV') == "production" ) {
+        // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+      // }
+
+      if ( env('APP_ENV') == "local" ) {
+            $arr_users[] = [
+              "username"=>"bungariaanastasya",
+              "password"=>"qazwsx123",
+            ];      
+
+            $arr_users[] = [
+              "username"=>"mayyyvitri",
+              "password"=>"12345qwerty",
+            ];
+
+            $arr_user = $arr_users[array_rand($arr_users)];      
+            $i->login($arr_user['username'],$arr_user['password'], 300);
+      } 
+      else if ( env('APP_ENV') == "production" ) {
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13889",
+              "username"=>"melodianaelisa",
+              "password"=>"qazwsx123",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13890",
+              "username"=>"dessiarumi",
+              "password"=>"abcde12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13891",
+              "username"=>"renawilliams222",
+              "password"=>"abcde12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13892",
+              "username"=>"marianalaskmi",
+              "password"=>"qwerty12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13893",
+              "username"=>"magdalenapeter96",
+              "password"=>"qazwsx123",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13894",
+              "username"=>"felysamora",
+              "password"=>"abcde12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13895",
+              "username"=>"nithaasyari",
+              "password"=>"qweasdzxc123",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13896",
+              "username"=>"thalianasarifernand",
+              "password"=>"987456321qwerty",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13897",
+              "username"=>"naningtyasa",
+              "password"=>"qwerty12345",
+            ];      
+            
+            $arr_users[] = [
+              "proxy"=>"216.176.176.138",
+              "port"=>"13898",
+              "username"=>"mayymayyaa",
+              "password"=>"qwerty12345",
+            ];      
+
+        $arr_user = $arr_users[array_rand($arr_users)];
+      
+        
+        // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+        // $i->login("mayymayyaa", "qwerty12345", 300);
+        $i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
+        // $i->setProxy("http://".$arr_user['username'].":".$arr_user['password']."@".$arr_user['proxy'].":".$arr_user['port']);
+        $i->login($arr_user["username"], $arr_user["password"], 300);
+      }
+
+      $nextmaxid = null;
+      $maxid[0] = null;
+
+      $username = str_replace("@", "", $username);
+      if (!$i->account->checkUsername($username)->getAvailable()) {
+        $userData = $i->people->getInfoByName($username)->getUser();
+        if (!is_null($userData)) {
+          //new
+          $private = (int) $userData->getIsPrivate();
+        }
+      }
+      
+      if(!$private)
+      {
+          #GET 3 NEXT ID
+          for($x=0;$x<2;$x++)
+          {
+              $userFeed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$nextmaxid);
+              $nextmaxid = $userFeed->getNextMaxId();
+
+              if($nextmaxid <> null)
+              {
+                  $maxid[] = $nextmaxid;
+              }
+              else
+              {
+                  break;
+              }
+          }
+
+          $nexid = null;
+          $userFeed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$nexid);
+          $userFeedItems = $userFeed->getItems();
+
+          foreach($userFeedItems as $item)
+          {
+              $mediatype = $item->getMediaType();
+              if($mediatype == 2)
+              {
+                  $arr[] = $item->getViewCount();
+              }
+          }
+
+
+          #RENDER 3 NEXT MAX ID
+          /*foreach($maxid as $nexid)
+          {
+              $userFeed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$nexid);
+              $userFeedItems = $userFeed->getItems();
+
+              foreach($userFeedItems as )
+          }
+
+      /* end !private */
+      }
+
+
+      return $maxid;
+
+    }   
+    catch (\InstagramAPI\Exception\IncorrectPasswordException $e) {
+      //klo error password
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\AccountDisabledException $e) {
+      //klo error password
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\CheckpointRequiredException $e) {
+      //klo error email / phone verification 
+      $error_message = $e->getMessage();
+    }
+    catch (\InstagramAPI\Exception\InstagramException $e) {
+      $is_error = true;
+      $error_message = $e->getMessage();
+      // if ($e->hasResponse() && $e->getResponse()->isTwoFactorRequired()) {
+        // echo "2 Factor perlu dioffkan";
+      // } 
+      // else {
+          // all other login errors would get caught here...
+        // echo $e->getMessage();
+      // }
+    } 
+    catch (NotFoundException $e) {
+      $error_message = $e->getMessage();
+      // echo $e->getMessage();
+      // echo "asd";
+    }         
+    catch (Exception $e) {
+      $error_message = $e->getMessage();
+      if ($error_message == "InstagramAPI\Response\LoginResponse: The password you entered is incorrect. Please try again.") {
+        $error_message = $e->getMessage();
+      } 
+      if ( ($error_message == "InstagramAPI\Response\LoginResponse: Challenge required.") || ( substr($error_message, 0, 18) == "challenge_required") || ($error_message == "InstagramAPI\Response\TimelineFeedResponse: Challenge required.") || ($error_message == "InstagramAPI\Response\LoginResponse: Sorry, there was a problem with your request.") ){
+        $error_message = $e->getMessage();
+      }
+    }
+    
+    $arr_res = [
+      "count"=>$count,
+      "jmllike"=>$jmllike,
+      "jmlcomment"=>$jmlcomment,
+      "private"=>$private,
+      "lastpost"=>$lastpost,
+      "error_message"=>$error_message,
+      "jmlvideoview"=>$jmlvideoview,
+    ];
+
+    return $arr_res;
+  }
 
   public static function get_user_following($igid,$maxId){
     try {
