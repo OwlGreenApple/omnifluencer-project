@@ -50,19 +50,22 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request,$user)
     {
-      if ($request->price<>"") {
+
+      if ($request->price<>"") 
+      {
         $ordercont = new OrderController;
         $stat = $ordercont->cekharga($request->namapaket,$request->price);
         if($stat==false){
           return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
         }
 
-        $checkordertype = $ordercont->checkOrderTypeValue($request->ordertype);
+        /*$checkordertype = $ordercont->checkOrderTypeValue($request->ordertype);
          if($checkordertype == false){
             return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
          } else {
             $ordertype = $ordercont->orderValue($request->ordertype);
          }
+        */ 
 
         /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
           //create order 
@@ -125,7 +128,7 @@ class LoginController extends Controller
           $order->buktibayar = "";
           $order->keterangan = "";
           $order->pricing = $pricing;
-          $order->order_type = $ordertype;
+          $order->order_type = 0;
           $order->id_coupon = $coupon['id_coupon'];
           $order->total = $coupon['total'];
           $order->discount = $coupon['discount'];
@@ -148,11 +151,15 @@ class LoginController extends Controller
             $message->subject('[Omnifluencer] Order Nomor '.$order_number);
           });
 
+          return redirect('/thankyou');
+
+          /*
           if($ordertype == 0){
              return redirect('/thankyou');
           } else {
              return redirect(route("thankyouovo"));
           }
+          */
           
         //}
         

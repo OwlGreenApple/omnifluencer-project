@@ -78,10 +78,11 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
-     $checkordertype = $this->checkOrderTypeValue($request->ordertype);
+     /*$checkordertype = $this->checkOrderTypeValue($request->ordertype);
      if($checkordertype == false){
         return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
      }
+     */
     
     return view('auth.register')->with(array(
 			"price"=>$request->price,
@@ -98,16 +99,17 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
-     $checkordertype = $this->checkOrderTypeValue($request->ordertype);
+     /*$checkordertype = $this->checkOrderTypeValue($request->ordertype);
      if($checkordertype == false){
         return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
      }
+     */
 
     return view('auth.login')->with(array(
       "price"=>$request->price,
       "namapaket"=>$request->namapaket,
       "coupon_code"=>$request->coupon_code,
-      "order_type"=>$request->ordertype,
+      /*"order_type"=>$request->ordertype,*/
     ));  
   }
  
@@ -118,6 +120,7 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
+    /*
     $checkordertype = $this->checkOrderTypeValue($request->ordertype);
 
     if($checkordertype == false){
@@ -125,10 +128,11 @@ class OrderController extends Controller
     } else {
         $ordertype = $this->orderValue($request->ordertype);
     }
+    */
 
     /* check coupon and count total payment */
     $pricing = $request->price;
-    $checkCoupon = $this->checkCoupon($request->coupon_code);
+    /*$checkCoupon = $this->checkCoupon($request->coupon_code);
     if($checkCoupon == true){
        $coupon = $this->getTotal($pricing,$request->coupon_code);
     } else {
@@ -136,7 +140,7 @@ class OrderController extends Controller
        $coupon['discount'] = 0;
        $coupon['total'] = $pricing + $this->generateRandomPricingNumber($pricing);
     }
-
+      */
     $user = Auth::user();
 
     /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
@@ -190,7 +194,7 @@ class OrderController extends Controller
       $order->id_coupon = $coupon['id_coupon'];
       $order->total = $coupon['total'];
       $order->discount = $coupon['discount'];
-      $order->order_type = $ordertype;
+      $order->order_type = 0;
       $order->save();
       
       //mail order to user 
@@ -211,31 +215,41 @@ class OrderController extends Controller
           $message->subject('[Omnifluencer] Order Nomor '.$order_number);
         });
 
+         return view('user.pricing.thankyou');
+         /*
          if($ordertype == 0){
             return view('user.pricing.thankyou');
          } else {
             return view('user.pricing.thankyou-ovo');
          }
+         */
       
     //}
   }
 
   /* To check whether coupon available or not */
- public function checkCoupon($coupon){
+ public function checkCoupon(Request $request){
     /* Check whether coupon is valid or not And is empty or not */
+    $coupon = $request->kupon;
+    $pricing = $request->harga;
+
     if(!empty($coupon))
     {
         $coupon_available = DB::table('coupons')->where(array(
             ['coupon_code','=',$coupon],
         ))->first();
     } else {
-        return false;
+        $data['status'] = 'success';
+        $data['total'] = str_replace(",",".",number_format($pricing));
+        return response()->json($data);
     }
 
     if(is_null($coupon_available)){
-       return false;
+       $data['status'] = 'error';
+       $data['message'] = 'Kupon tidak tersedia';
+       return response()->json($data);
     } else {
-       return true;
+       return $this->getTotal($pricing,$coupon);
     }
   }
 
@@ -272,11 +286,13 @@ class OrderController extends Controller
       }
 
        $data = array(
+              'status'=>'success',
               'id_coupon' => $coupon->id,
               'discount' => $discount,
-              'total' => $total + $this->generateRandomPricingNumber($total),
+              'total' => str_replace(",",".",number_format($total + $this->generateRandomPricingNumber($total))),
         );
-       return $data;
+
+        return response()->json($data);
     }
 
   /*To check generate random number according on status, payment_type, and total*/
