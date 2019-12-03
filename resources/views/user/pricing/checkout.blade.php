@@ -68,7 +68,6 @@
                 </label>
                 <select class="form-control form-control-lg col-lg-12" name="ordertype">
                   <option value="bt">Bank Transfer</option>
-                  <option value="ov">OVO</option>
                 </select>
               </div>
 

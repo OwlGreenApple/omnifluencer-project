@@ -308,7 +308,7 @@ class OrderController extends Controller
   /* Check valid value from bank order payment type */
   public function checkOrderTypeValue($ordertype)
   {
-    if($ordertype == 'bt' || $ordertype == 'ov'){
+    if($ordertype == 'bt'){
       return true;
     } else {
       return false;
@@ -319,9 +319,9 @@ class OrderController extends Controller
      if($ordertype == 'bt')
     {
        $ordervalue = 0;
-    } elseif($ordertype == 'ov') {
+    } /*elseif($ordertype == 'ov') {
        $ordervalue = 1;
-    }
+    }*/
     return $ordervalue;
   }
 
