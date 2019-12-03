@@ -246,19 +246,19 @@ public function test_search(Request $request)
 
       if(env('APP_ENV') == 'local')
       {
-        $account_id = array(1,2);
+        $influencer = array(1,2);
       }
       else
       {
-        $account_id = array(1499,1500);
+        $influencer = array(1499,1500);
       }
 
       if($request->keywords==''){
         //$account = Account::find(1);
         //$account = Account::where('jml_followers','>=',500000)->inRandomOrder()->first();
 
-        $account = Account::where('id',$account_id[0])
-                    ->orWhere('id',$account_id[1])
+        $account = Account::where('id',$influencer[0])
+                    ->orWhere('id',$influencer[1])
                     ->inRandomOrder()
                     ->first();
                     
