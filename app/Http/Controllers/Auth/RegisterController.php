@@ -177,20 +177,38 @@ class RegisterController extends Controller
           $user->membership = 'pro';
           $user->save();
         } else {
-          //create order 
+          //create order from user when doing register
+
+           /* check coupon and count total payment */
+          $ordercontroller = new OrderController;
+          $pricing = $data['price'];
+          $checkCoupon = $ordercontroller->checkCoupon($data['coupon_code']);
+          if($checkCoupon == true){
+             $coupon = $ordercontroller->getTotal($pricing,$data['coupon_code']);
+          } else {
+             $coupon['id_coupon'] = 0;
+             $coupon['discount'] = 0;
+             $coupon['total'] = $pricing + $ordercontroller->generateRandomPricingNumber($pricing);
+          }
+
           $dt = Carbon::now();
           $order = new Order;
+          $ordertype = $ordercontroller->orderValue($data['ordertype']);
           $str = 'OMNI'.$dt->format('ymdHi');
           $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
           $order->no_order = $order_number;
           $order->user_id = $user->id;
           $order->package = $data["namapaket"];
           $order->jmlpoin = 0;
-          $order->total = $data['price'];
           $order->discount = 0;
           $order->status = 0;
           $order->buktibayar = "";
           $order->keterangan = "";
+          $order->pricing = $pricing;
+          $order->order_type = $ordertype;
+          $order->id_coupon = $coupon['id_coupon'];
+          $order->total = $coupon['total'];
+          $order->discount = $coupon['discount'];
           $order->save();
           
           //mail order to user 
@@ -203,7 +221,10 @@ class RegisterController extends Controller
           Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
             $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
             $message->to($user->email);
-            $message->bcc(['puspita.celebgramme@gmail.com','endah.celebgram@gmail.com']);
+            if(env('APP_ENV')!=='local')
+            {
+              $message->bcc(['celebgramme.dev@gmail.com','endah.celebgram@gmail.com']);
+            }  
             $message->subject('[Omnifluencer] Order Nomor '.$order_number);
           });
         }
@@ -254,6 +275,14 @@ class RegisterController extends Controller
         }
       }
 
+      /* to prevent if user change value of bank transfer */
+       $checkordertype = $ordercont->checkOrderTypeValue($request->ordertype);
+         if($checkordertype == false){
+            return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
+         } else {
+            $ordertype = $ordercont->orderValue($request->ordertype);
+         }
+
       if(!$validator->fails()) {
         $user = $this->create($request->all());
 
@@ -281,9 +310,11 @@ class RegisterController extends Controller
         if ($request->price<>"") {
           if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
             return redirect('thankyou-free');   
-          } else {
-            return redirect('thankyou');  
-          }
+          } else if($ordertype == 0) {
+              return redirect('thankyou');  
+          } else if($ordertype == 1) {
+            return redirect(route('thankyouovo'));  
+          }  
         } else {
           return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
           /*Auth::loginUsingId($user->id);

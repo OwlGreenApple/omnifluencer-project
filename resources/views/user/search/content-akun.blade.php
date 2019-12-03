@@ -96,6 +96,7 @@ function check_loading(){
             });
     }
 }
+
 check_loading();
 $window.scroll(function() {
   check_loading();

@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
 <script type="text/javascript">
   var table;
 
@@ -128,6 +129,7 @@
       <br>  
 
       <form>
+        <div class="table-responsive">
         <table class="table" id="myTable">
           <thead align="center">
             <th action="no_order">
@@ -139,11 +141,17 @@
             <th action="package">
               Package
             </th>
-            <th action="total">
-              Total
+            <th action="price">
+              Price
             </th>
             <th action="discount">
               Discount
+            </th>
+            <th action="total">
+              Total
+            </th>
+            <th action="id_coupon">
+              Coupon code
             </th>
             <th action="created_at">
               Date
@@ -163,6 +171,8 @@
 
         <div id="pager"></div>    
       </form>
+    </div><!-- end table-responsive -->
+
     </div>
   </div>
 </div>
