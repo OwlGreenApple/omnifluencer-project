@@ -59,17 +59,35 @@
                 <label class="label-title-test" for="formGroupExampleInput">
                   Masukkan Kode Kupon:
                 </label>
-                <input type="text" class="form-input" name="coupon_code" id="text" placeholder="Masukkan Kode Kupon Disini" />
-              </div>
 
+                <div class="col-md-12 row">
+                    <div class="col-md-11 pl-0">
+                       <input style="width : 100%" type="text" class="form-control form-control-lg" name="coupon_code" id="kupon" placeholder="Masukkan Kode Kupon Disini" />
+                    </div>
+                    <div class="col-md-1 pl-0">
+                      <button type="button" class="btn btn-primary btn-kupon">
+                        Apply
+                      </button>  
+                    </div>  
+                </div>  
+              </div>
+                  
+              <!--
               <div class="form-group">
                 <label class="label-title-test" for="formGroupExampleInput">
                   Pilih Metode Pembayaran:
                 </label>
                 <select class="form-control form-control-lg col-lg-12" name="ordertype">
                   <option value="bt">Bank Transfer</option>
-                  <option value="ov">OVO</option>
                 </select>
+              </div>
+               -->
+
+              <div class="form-group">
+                 <label class="label-title-test" for="formGroupExampleInput">
+                   <h5>Total :</h5>
+                </label>
+                <h4><span class="total"></span></h4>
               </div>
 
               <div class="form-group">
@@ -88,4 +106,65 @@
     </div>
   </div>
 
+  <script type="text/javascript">
+    $(document).ready(function(){
+        getDataValue();
+        getCoupon();
+    });
+
+    function getCoupon()
+    {
+      $("body").on("click", ".btn-kupon", function() {
+        check_kupon();
+      });
+    }
+
+    function getDataValue()
+    {
+       $( "#select-auto-manage" ).change(function() {
+        var price = $(this).find("option:selected").attr("data-price");
+        var namapaket = $(this).find("option:selected").attr("data-paket");
+
+        $("#price").val(price);
+        $("#namapaket").val(namapaket);
+        check_kupon();
+        });
+        $( "#select-auto-manage" ).change();
+    }
+
+    function check_kupon(){
+      $.ajax({
+        type: 'POST',
+        url: "{{route('checkcoupon')}}",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+          harga : $('#price').val(),
+          kupon : $('#kupon').val(),
+          idpaket : $( "#select-auto-manage" ).val(),
+        },
+        dataType: 'json',
+        beforeSend: function() {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        },
+        success: function(data) {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+
+          if (data.status == 'success') {
+            $('.total').html('Rp. ' + data.total);
+            $('#pesan').hide();
+          } else {
+            $('#pesan').html(data.message);
+            $('#pesan').removeClass('alert-success');
+            $('#pesan').addClass('alert-danger');
+            $('#pesan').show();
+          }
+        }
+      });
+    }
+
+  </script>
 @endsection

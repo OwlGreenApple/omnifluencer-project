@@ -35,6 +35,7 @@ Route::get('/search/delete-history','AccountController@delete_history');
 //Route generate halaman register berdasarkan referral link
 Route::get('/ref/{rand}','ReferralController@refer');
 
+Route::post('login', 'Auth\LoginController@login')->name('login');
 //Route verifyemail
 Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
 
@@ -54,13 +55,16 @@ Route::get('/checkout/{id}','OrderController@checkout');
 //payment
 Route::post('/confirm-payment','OrderController@confirm_payment');
 Route::post('/register-payment','OrderController@register_payment');
-Route::post('/login-payment','OrderController@login_payment');
+Route::post('/login-payment','OrderController@login_payment')->name('loginbuy');
 
 //Auto Confirm
 //Route::get('/testjson','AutoConfirmController@virtualRestApi');
 Route::post('/autoconfirm','AutoConfirmController@confirm')->name('autoconfirm');
 
 Route::post('/subscribe-email','AccountController@subscribe_email');
+
+//Coupon
+Route::post('check_coupon','OrderController@checkCoupon')->name('checkcoupon');
 
 //User
 Route::group(['middleware' => ['web','auth']], function() 

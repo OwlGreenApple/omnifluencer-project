@@ -13,7 +13,7 @@ use App\User;
 use App\UserLog;
 use App\Order;
 
-use Crypt, Carbon, Mail, Auth;
+use Crypt, Carbon, Mail, Auth, Session, Lang;
 
 class LoginController extends Controller
 {
@@ -48,21 +48,41 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /* CREATE CUSTOM AUTHENTICATE REDIRECT*/
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        Session::reflash();
+        return redirect()->to('login')
+        ->withInput($request->only($this->username(), 'remember'))
+        ->withErrors([
+            $this->username() => Lang::get('auth.failed'),
+        ])->with(array(
+          "price"=>$request->price,
+          "namapaket"=>$request->namapaket,
+          "coupon_code"=>$request->coupon_code,
+          /*"order_type"=>$request->ordertype,*/
+        ));
+    }
+    
+
     protected function authenticated(Request $request,$user)
     {
-      if ($request->price<>"") {
+      
+      if (!empty($request->price) && Session::has('coupon')) 
+      {
         $ordercont = new OrderController;
         $stat = $ordercont->cekharga($request->namapaket,$request->price);
         if($stat==false){
           return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
         }
 
-        $checkordertype = $ordercont->checkOrderTypeValue($request->ordertype);
+        /*$checkordertype = $ordercont->checkOrderTypeValue($request->ordertype);
          if($checkordertype == false){
             return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
          } else {
             $ordertype = $ordercont->orderValue($request->ordertype);
          }
+        */ 
 
         /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
           //create order 
@@ -103,6 +123,9 @@ class LoginController extends Controller
            /* check coupon and count total payment */
           $ordercontroller = new OrderController;
           $pricing = $request->price;
+          $coupon = Session::get('coupon');
+
+          /*
           $checkCoupon = $ordercontroller->checkCoupon($request->coupon_code);
           if($checkCoupon == true){
              $coupon = $ordercontroller->getTotal($pricing,$request->coupon_code);
@@ -111,6 +134,7 @@ class LoginController extends Controller
              $coupon['discount'] = 0;
              $coupon['total'] = $pricing + $ordercontroller->generateRandomPricingNumber($pricing);
           }
+          */
 
           $dt = Carbon::now();
           $order = new Order;
@@ -125,7 +149,7 @@ class LoginController extends Controller
           $order->buktibayar = "";
           $order->keterangan = "";
           $order->pricing = $pricing;
-          $order->order_type = $ordertype;
+          $order->order_type = 0;
           $order->id_coupon = $coupon['id_coupon'];
           $order->total = $coupon['total'];
           $order->discount = $coupon['discount'];
@@ -148,11 +172,15 @@ class LoginController extends Controller
             $message->subject('[Omnifluencer] Order Nomor '.$order_number);
           });
 
+          return redirect('/thankyou');
+
+          /*
           if($ordertype == 0){
              return redirect('/thankyou');
           } else {
              return redirect(route("thankyouovo"));
           }
+          */
           
         //}
         

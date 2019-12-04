@@ -133,8 +133,18 @@ class AccountController extends Controller
       if($request->keywords==''){
         //$account = Account::find(1);
         //$account = Account::where('jml_followers','>=',500000)->inRandomOrder()->first();
-        $account = Account::where('id',1499)
-                    ->orWhere('id',1500)
+
+        if(env('APP_ENV') == 'local')
+        {
+          $influencer = array(1,2);
+        }
+        else
+        {
+          $influencer = array(1499,1500);
+        }
+
+        $account = Account::where('id',$influencer[0])
+                    ->orWhere('id',$influencer[1])
                     ->inRandomOrder()
                     ->first();
       } else {     
