@@ -273,6 +273,7 @@
     });
   });  
 </script>
+<?php if ( env('APP_ENV') !== "local" ) { ?>
 <!-- Provely Conversions App Data Code -->
 <script>(function(w,n) {
 if (typeof(w[n]) == 'undefined'){ob=n+'Obj';w[ob]=[];w[n]=function(){w[ob].push(arguments);};
@@ -298,4 +299,5 @@ provelys('data', 'campaignId', '16163');
 provelys('config', 'widget', 1);
 </script>
 <!-- End Provely Conversions App Display Code -->
+<?php } ?>
 @endsection
