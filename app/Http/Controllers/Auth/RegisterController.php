@@ -68,7 +68,7 @@ class RegisterController extends Controller
       return Validator::make($data, [
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:6', 'confirmed'],
+        // 'password' => ['required', 'string', 'min:6', 'confirmed'],
       ]);
     }
 
@@ -282,8 +282,18 @@ class RegisterController extends Controller
          }
        */
 
-      if(!$validator->fails() && Session::has('coupon')) {
-        $user = $this->create($request->all());
+      // if(!$validator->fails() && Session::has('coupon')) {
+      if(!$validator->fails()) {
+        //random password
+        $pas = $request->email.$request->name;
+        $gh = substr($pas, 0,6);
+        $chrnd =substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,5);
+        $password = str_replace(' ','', $gh.$chrnd);
+        
+        $arrRequest = $request->all();
+        $arrRequest['password'] = $password;
+        $user = $this->create($arrRequest);
+        // $user = $this->create($request->all());
 
         $register_time = Carbon::now()->toDateTimeString();
         $confirmcode = Hash::make($user->email.$register_time);
@@ -301,7 +311,7 @@ class RegisterController extends Controller
         $emaildata = [
           'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
           'user' => $user,
-          'password' => $request->password,
+          'password' => $password,
         ];
         
         Mail::to($user->email)->send(new ConfirmEmail($emaildata));
@@ -332,7 +342,16 @@ class RegisterController extends Controller
       $validator = $this->validator($request->all());
 
       if(!$validator->fails()) {
-        $user = $this->create($request->all());
+        //random password
+        $pas = $request->email.$request->name;
+        $gh = substr($pas, 0,6);
+        $chrnd =substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,5);
+        $password = str_replace(' ','', $gh.$chrnd);
+        
+        $arrRequest = $request->all();
+        $arrRequest['password'] = $password;
+        $user = $this->create($arrRequest);
+        // $user = $this->create($request->all());
 
         $register_time = Carbon::now()->toDateTimeString();
         $confirmcode = Hash::make($user->email.$register_time);
@@ -350,7 +369,7 @@ class RegisterController extends Controller
         $emaildata = [
           'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
           'user' => $user,
-          'password' => $request->password,
+          'password' => $password,
         ];
         
         Mail::to($user->email)->queue(new ConfirmEmail($emaildata));

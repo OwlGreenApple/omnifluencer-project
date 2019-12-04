@@ -111,7 +111,7 @@
 
             </div>
 
-            <div class="form-group">
+            <!--<div class="form-group">
               <label class="label-title-test">
                 Masukkan Password:
               </label>
@@ -154,7 +154,7 @@
                 </div>
               </div>
             </div>
-
+-->
             <div class="form-group">
               <label class="label-title-test">
                 Masukkan No WA
