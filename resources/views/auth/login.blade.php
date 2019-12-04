@@ -9,11 +9,12 @@
 
       <div class="signup">
         <div class="signup-content">
+
           <form method="POST" id="signup-form" class="signup-form" action="{{route('login')}}">
             @csrf
-            <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
-            <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>">
-            <input type="hidden" name="coupon_code" value="<?php if (isset($coupon_code)) {echo $coupon_code;} ?>">
+            <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>@if(session('price')){{session('price')}}@endif">
+            <input type="hidden" name="namapaket" value="<?php if (isset($namapaket)) {echo $namapaket;} ?>@if(session('namapaket')){{session('namapaket')}} @endif">
+            <input type="hidden" name="coupon_code" value="<?php if (isset($coupon_code)) {echo $coupon_code;} ?>@if(session('coupon_code')){{session('coupon_code')}} @endif">
             <!--<input type="hidden" name="ordertype" value="<php if (isset($order_type)) {echo $order_type;} ?>">-->
 
             <h2 class="form-title">Masukkan<br>Email & Password</h2>
@@ -69,6 +70,11 @@
             <p class="loginhere">
               Belum punya akun? klik <a href="{{url('register')}}" class="loginhere-link">Register disini</a>
             </p>
+
+            <!-- Keep session for total -->
+            @php
+              Session::reflash();
+            @endphp
 
           </form>
         </div>

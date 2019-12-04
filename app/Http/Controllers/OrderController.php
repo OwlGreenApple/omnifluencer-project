@@ -13,6 +13,7 @@ use App\Order;
 use App\Notification;
 use App\Coupons;
 use DB;
+use Session;
 
 use App\Mail\ConfirmOrderMail;
 
@@ -72,6 +73,7 @@ class OrderController extends Controller
   }
 
   public function register_payment(Request $request){
+    Session::reflash();
     $stat = $this->cekharga($request->namapaket,$request->price);
 
     if($stat==false){
@@ -88,11 +90,11 @@ class OrderController extends Controller
 			"price"=>$request->price,
 			"namapaket"=>$request->namapaket,
       "coupon_code"=>$request->coupon_code,
-      "order_type"=>$request->ordertype,
 		));
   }
   
   public function login_payment(Request $request){
+    Session::reflash();
     $stat = $this->cekharga($request->namapaket,$request->price);
 
     if($stat==false){
@@ -132,15 +134,7 @@ class OrderController extends Controller
 
     /* check coupon and count total payment */
     $pricing = $request->price;
-    /*$checkCoupon = $this->checkCoupon($request->coupon_code);
-    if($checkCoupon == true){
-       $coupon = $this->getTotal($pricing,$request->coupon_code);
-    } else {
-       $coupon['id_coupon'] = 0;
-       $coupon['discount'] = 0;
-       $coupon['total'] = $pricing + $this->generateRandomPricingNumber($pricing);
-    }
-      */
+    $coupon = Session::get('coupon');
     $user = Auth::user();
 
     /*if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
@@ -232,6 +226,8 @@ class OrderController extends Controller
     /* Check whether coupon is valid or not And is empty or not */
     $coupon = $request->kupon;
     $pricing = $request->harga;
+    $idpaket = $request->idpaket;
+    $total = $pricing + $this->generateRandomPricingNumber($pricing);
 
     if(!empty($coupon))
     {
@@ -240,7 +236,13 @@ class OrderController extends Controller
         ))->first();
     } else {
         $data['status'] = 'success';
-        $data['total'] = str_replace(",",".",number_format($pricing));
+        $data['total'] = str_replace(",",".",number_format($total));
+        $coupon['id_coupon'] = 0;
+        $coupon['discount'] = 0;
+        $coupon['total'] = $total;
+        Session::flash('coupon',$coupon);
+        //Session::reflash();
+
         return response()->json($data);
     }
 
@@ -291,7 +293,7 @@ class OrderController extends Controller
               'discount' => $discount,
               'total' => str_replace(",",".",number_format($total + $this->generateRandomPricingNumber($total))),
         );
-
+        Session::flash('coupon',$data);
         return response()->json($data);
     }
 

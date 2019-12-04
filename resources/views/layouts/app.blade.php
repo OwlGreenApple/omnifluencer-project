@@ -88,6 +88,17 @@
                   ->take(5)
                   ->get();
         }
+
+        $uri = Request::segment(1);
+
+        if($uri == 'checkout' || $uri == 'register-payment')
+        {
+           $page = false;
+        }
+        else
+        {
+           $page = true;
+        }
   ?>
 
   <script type="text/javascript">
@@ -112,6 +123,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
+        @if($page == true)
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -133,6 +145,7 @@
                 Pricing 
               </a>
             </li>
+             
           
             <!-- Authentication Links -->
             @guest
@@ -156,6 +169,7 @@
                   Dashboard
                 </a>
               </li>
+
 
               <li class="nav-item dropdown" >
                 <a id="navbarDropdown" class="nav-link main-menu" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre data-offset="5,10">
@@ -250,8 +264,10 @@
             @endguest
           </ul>
         </div>
+         @endif
       </div>
     </nav>
+
 
     <main>
       @yield('content')

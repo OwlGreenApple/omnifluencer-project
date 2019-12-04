@@ -21,7 +21,7 @@ use App\Mail\ConfirmEmail;
 use App\Helpers\Helper;
 use App\Http\Controllers\OrderController;
 
-use Carbon, Crypt, Mail,Auth;
+use Carbon, Crypt, Mail,Auth, Session;
 
 class RegisterController extends Controller
 {
@@ -88,6 +88,7 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     { 
+      Session::reflash();
       $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -144,7 +145,8 @@ class RegisterController extends Controller
 
       } 
       
-      if ($data['price']<>"") {
+      if ($data['price']<>"" && Session::has('coupon')) {
+
         if($data['namapaket']=='Pro 15 hari' and strtoupper($data['coupon_code'])==$this->coupon_code){
           //create order 
           $dt = Carbon::now();
@@ -182,18 +184,11 @@ class RegisterController extends Controller
            /* check coupon and count total payment */
           $ordercontroller = new OrderController;
           $pricing = $data['price'];
-          $checkCoupon = $ordercontroller->checkCoupon($data['coupon_code']);
-          if($checkCoupon == true){
-             $coupon = $ordercontroller->getTotal($pricing,$data['coupon_code']);
-          } else {
-             $coupon['id_coupon'] = 0;
-             $coupon['discount'] = 0;
-             $coupon['total'] = $pricing + $ordercontroller->generateRandomPricingNumber($pricing);
-          }
+          $coupon = Session::get('coupon');
 
           $dt = Carbon::now();
           $order = new Order;
-          $ordertype = $ordercontroller->orderValue($data['ordertype']);
+          //$ordertype = $ordercontroller->orderValue($data['ordertype']);
           $str = 'OMNI'.$dt->format('ymdHi');
           $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
           $order->no_order = $order_number;
@@ -205,7 +200,7 @@ class RegisterController extends Controller
           $order->buktibayar = "";
           $order->keterangan = "";
           $order->pricing = $pricing;
-          $order->order_type = $ordertype;
+          $order->order_type = 0;
           $order->id_coupon = $coupon['id_coupon'];
           $order->total = $coupon['total'];
           $order->discount = $coupon['discount'];
@@ -247,6 +242,7 @@ class RegisterController extends Controller
     }
 
     public function cek_email(Request $request){
+      Session::reflash();
       $validator = $this->cek_emailvalid($request->all());
 
       if($validator->fails()){
@@ -260,14 +256,16 @@ class RegisterController extends Controller
       return $arr;
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
+      Session::reflash();
       if(!is_numeric($request->wa_number)){
         return redirect("register")->with("error", " No WA harus angka");
       }
-
+      $ordertype = 0;
       $validator = $this->validator($request->all());
 
-      if($request->price<>""){
+      if($request->price<>"" && Session::has('coupon')){
         $ordercont = new OrderController;
         $stat = $ordercont->cekharga($request->namapaket,$request->price);
         if($stat==false){
@@ -275,15 +273,16 @@ class RegisterController extends Controller
         }
       }
 
-      /* to prevent if user change value of bank transfer */
+      /* to prevent if user change value of bank transfer 
        $checkordertype = $ordercont->checkOrderTypeValue($request->ordertype);
          if($checkordertype == false){
             return redirect("checkout/1")->with("error", "Mohon untuk tidak untuk mengubah value");
          } else {
             $ordertype = $ordercont->orderValue($request->ordertype);
          }
+       */
 
-      if(!$validator->fails()) {
+      if(!$validator->fails() && Session::has('coupon')) {
         $user = $this->create($request->all());
 
         $register_time = Carbon::now()->toDateTimeString();
@@ -312,9 +311,9 @@ class RegisterController extends Controller
             return redirect('thankyou-free');   
           } else if($ordertype == 0) {
               return redirect('thankyou');  
-          } else if($ordertype == 1) {
+          } /*else if($ordertype == 1) {
             return redirect(route('thankyouovo'));  
-          }  
+          } */ 
         } else {
           return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
           /*Auth::loginUsingId($user->id);
