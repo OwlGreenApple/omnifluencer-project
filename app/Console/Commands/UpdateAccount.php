@@ -109,7 +109,7 @@ class UpdateAccount extends Command
               $count = 1;
             }
               
-            var_dump($arr_res["username"].'-----'.$jmllike.'-----'.$jmlcomment);
+            //var_dump($arr_res["username"].'-----'.$jmllike.'-----'.$jmlcomment);
 
             //hitung rata2 like + comment di 20 post terakhir 
             //check akun private atau nggak

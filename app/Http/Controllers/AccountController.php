@@ -72,13 +72,13 @@ class AccountController extends Controller
 
   public static function create_account($arr_res){
     set_time_limit(0);
+    $jmlvideoview = InstagramHelper::get_video_views($arr_res["username"]);
     $arr_res2 = InstagramHelper::get_user_profile(strtolower($arr_res["username"]));
     $count = $arr_res2["count"];
     $jmllike = $arr_res2["jmllike"];
     $jmlcomment = $arr_res2["jmlcomment"];
     $private = $arr_res2["private"];
     $lastpost = $arr_res2["lastpost"];
-    $jmlvideoview = $arr_res2["jmlvideoview"];
 
     $account = new Account;
     $account->ig_id = $arr_res["pk"];
@@ -99,11 +99,9 @@ class AccountController extends Controller
     if($private==false){
       $ratalike = $jmllike/$count;
       $ratacomment = $jmlcomment/$count;
-      $ratavideoview = $jmlvideoview/$count;
     } else {
       $ratalike = 0;
       $ratacomment = 0;
-      $ratavideoview = 0;
     }
 
     $account->lastpost = $lastpost;
@@ -113,6 +111,7 @@ class AccountController extends Controller
 
     if($account->jml_followers > 0){
       $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers);
+      $account->video_view_rate = ($jmlvideoview)/($account->jml_followers);
       $account->total_influenced = $account->eng_rate*$account->jml_followers;
     }
 
@@ -134,13 +133,13 @@ class AccountController extends Controller
        'total_calc'=>$account->total_calc,
        'total_compare'=>$account->total_compare,
        'jmlvideoview'=>$jmlvideoview,
-       'ratavideoview'=>$ratavideoview,
        'created_at'=>Date("Y-m-d H:i:s"),
        'updated_at'=>Date("Y-m-d H:i:s"),
     );
 
     if($account->jml_followers>0){
       $data['eng_rate'] = $account->eng_rate;
+      $data['video_view_rate'] = $account->jmlvideoview;
       $data['total_influenced'] = $account->total_influenced;  
     }
 

@@ -507,12 +507,12 @@ input[type="text"] {
   text-align: left;
 }
 
-.desc-stat {
+p.desc-stat {
   margin-top: -15px;
   font-size: 18px;
   font-weight: 300;
   color: #fff;
-  text-align: left;
+  text-align: center;
 }
 
 
