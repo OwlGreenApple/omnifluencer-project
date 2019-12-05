@@ -20,6 +20,9 @@ Route::get('/tes-igcallback', 'TesController@tes_igcallback');
 Route::post('post-register', 'Auth\RegisterController@post_register');
 Route::post('register/cek-email', 'Auth\RegisterController@cek_email');
 
+//API 
+Route::post('generate-coupon', 'ApiController@generate_coupon');
+
 //Home
 Route::get('/home', 'AccountController@index')
       ->name('home');
