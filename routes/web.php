@@ -17,7 +17,8 @@ Auth::routes();
 Route::get('/tes-igcallback', 'TesController@tes_igcallback');
 
 //Auth
-Route::post('post-register', 'Auth\RegisterController@post_register');
+Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
+Route::post('post-register', 'Auth\RegisterController@post_register')->middleware('checkwa');
 Route::post('register/cek-email', 'Auth\RegisterController@cek_email');
 
 //API 
