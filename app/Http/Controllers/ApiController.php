@@ -10,6 +10,8 @@ use App\User;
 use App\Group;
 use App\Save;
 use App\Subscribe;
+use App\Coupon;
+use App\User;
 
 use App\Helpers\Helper;
 use App\Helpers\InstagramHelper;
@@ -25,28 +27,37 @@ class ApiController extends Controller
   {
     $data = json_decode($request->getContent(),true);
 
-    $user_id = UserList::where('id',$data['list_id'])->first();
-    if(is_null($user_id))
-    {
-      $msg['is_error'] = 'Id not available, it may Deleted!!!';
-      return json_encode($msg);
+    $user = User::where("wa_number",$data['wa_no'])->first();
+    if (!is_null($user)) {
+      do
+      {
+        $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
+        $string = 'special-';
+        for ($i = 0; $i < 7 ; $i++) {
+          $pos = rand(0, strlen($karakter)-1);
+          $string .= $karakter{$pos};
+        }
+        $coupon = Coupon::where("kodekupon","=",$string)->first();
+      } while (!is_null($coupon));
+      $coupon = new Coupon;
+      $coupon->kodekupon = $string;
+      $coupon->diskon_value = 0;
+      $coupon->diskon_percent = 0;
+      $coupon->valid_until = new DateTime('+2 days');
+      $coupon->valid_to = $data['package'];
+      $coupon->keterangan = "Kupon AutoGenerate Package User";
+      $coupon->package_id = 4;
+      $coupon->user_id = $user->id;
+      $coupon->save();
     }
-    $userid = $user_id->user_id;
-    $cust = new Customer;
-    $cust->user_id = $userid;
-    $cust->list_id = $data['list_id'];
-    $cust->name = $data['name'];
-    $cust->wa_number = $data['wa_no'];
-    $cust->save();
-
-    if($cust->save())
-    {
-      $msg['is_error'] = 0;
+    else {
+      $arr['coupon_code'] = "";
+      $arr['is_error'] = 1;
+      return json_encode($arr);
     }
-    else
-    {
-      $msg['is_error'] = 1;
-    }
-    return json_encode($msg);
+    
+    $arr['coupon_code'] = $string;
+    $arr['is_error'] = 0;
+    return json_encode($arr);
   }
 }
