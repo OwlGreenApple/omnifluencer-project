@@ -403,7 +403,7 @@ class OrderController extends Controller
 
   public function load_list_order(Request $request){
     $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id') 
-                ->rightJoin(env('DB_DATABASE').'.coupons', 'orders.id_coupon', '=', 'coupons.id') 
+                ->leftJoin(env('DB_DATABASE').'.coupons', 'orders.id_coupon', '=', 'coupons.id') 
                 ->select('orders.*','users.email','coupons.coupon_code')
                 ->orderBy('orders.created_at','descend')
                 ->get();
