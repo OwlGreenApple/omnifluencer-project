@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\is_admin::class,
         'coupon' => \App\Http\Middleware\CouponValidator::class,
+        'checkwa'=>\App\Http\Middleware\CheckWANumber::class,
     ];
 
     /**
