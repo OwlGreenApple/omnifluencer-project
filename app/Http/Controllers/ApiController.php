@@ -27,7 +27,7 @@ class ApiController extends Controller
   {
     $data = json_decode($request->getContent(),true);
 
-    $user = User::where("wa_number",$data['wa_no'])->first();
+    $user = User::where("email",$data['email'])->first();
     if (!is_null($user)) {
       do
       {
