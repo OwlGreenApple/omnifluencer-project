@@ -21,8 +21,10 @@ Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa
 Route::post('post-register', 'Auth\RegisterController@post_register')->middleware('checkwa');
 Route::post('register/cek-email', 'Auth\RegisterController@cek_email');
 
+
 //API 
 Route::post('generate-coupon', 'ApiController@generate_coupon');
+Route::post('sendmailfromactivwa', 'ApiController@sendmailfromactivwa');
 
 //Home
 Route::get('/home', 'AccountController@index')
