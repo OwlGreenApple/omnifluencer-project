@@ -42,7 +42,7 @@ class ApiController extends Controller
       $coupon->valid_until = new DateTime('+2 days');
       $coupon->valid_to = $data['package'];
       $coupon->coupon_description = "Kupon AutoGenerate Package User";
-      $coupon->package_id = 4;
+      $coupon->package_id = 0;
       $coupon->user_id = $user->id;
       $coupon->save();
     }

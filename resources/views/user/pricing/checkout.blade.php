@@ -8,6 +8,7 @@
       $( "#select-auto-manage" ).change(function() {
         $("#price").val($(this).find("option:selected").attr("data-price"));
         $("#namapaket").val($(this).find("option:selected").attr("data-paket"));
+        $('#kupon').val("");
       });
       $( "#select-auto-manage" ).change();
     });
@@ -156,7 +157,26 @@
           if (data.status == 'success') {
             $('.total').html('Rp. ' + data.total);
             $('#pesan').hide();
-          } else {
+          } 
+          else if (data.status == 'success-paket') {
+            $('.total').html('Rp. ' + data.total);
+            $('#pesan').removeClass('alert-danger');
+            $('#pesan').addClass('alert-success');
+            
+            flagSelect = false;
+            $("#select-auto-manage option").each(function() {
+              console.log($(this).val());
+              if ($(this).val() == data.paketid) {
+                flagSelect = true;
+              }
+            });
+
+            if (flagSelect == false) {
+              $('#select-auto-manage').append('<option value="'+data.paketid+'" data-price="'+data.dataPrice+'" data-paket="'+data.dataPaket+'" selected="selected">'+data.paket+'</option>');
+            }
+            $('#select-auto-manage').val(data.paketid);
+          }
+          else {
             $('#pesan').html(data.message);
             $('#pesan').removeClass('alert-success');
             $('#pesan').addClass('alert-danger');
