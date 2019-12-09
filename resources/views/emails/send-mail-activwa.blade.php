@@ -1,1 +1,1 @@
-Your coupon code is : <b>{{$emaildata}}</b>
+{{$emaildata}}
