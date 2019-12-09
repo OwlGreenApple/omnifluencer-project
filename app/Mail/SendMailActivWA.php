@@ -11,8 +11,8 @@ class SendMailActivWA extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $emaildata;
-    protected $subject;
+    public $emaildata;
+    public $subject;
 
     /**
      * Create a new message instance.
@@ -37,7 +37,6 @@ class SendMailActivWA extends Mailable
                   ->subject($this->subject)
                   ->view('emails.send-mail-activwa')
                   ->with($this->emaildata);
-        }
     }
 
 /* end mail class */

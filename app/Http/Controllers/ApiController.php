@@ -63,15 +63,15 @@ class ApiController extends Controller
       Mail::to($data['mail'])->queue(new SendMailActivWA($data['emaildata'],$data['subject']));
   }
 
-  public function testcoupon()
+  public function testmail()
     {
-        //https://omnifluencer.com/generate-coupon
         $curl = curl_init();
         $data = array(
-            'email'=>'test@mail.com',
-            'package'=>'package-premium-6',
+            'mail'=>'Papercut@user.com',
+            'emaildata'=>'package-premium-6',
+            'subject'=>'package',
         );
-        $url = 'http://localhost/omnifluencer/generate-coupon';
+        $url = 'http://localhost/omnifluencer/sendmailfromactivwa';
 
         curl_setopt_array($curl, array(
           CURLOPT_URL => $url,
