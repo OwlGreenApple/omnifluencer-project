@@ -49,6 +49,11 @@ class OrderController extends Controller
       'Pro Yearly' => 708000,
       'Premium Yearly' => 1068000,
       'Pro 15 hari' => 98500,
+      
+      'Premium 1 Months' => 197000,
+      'Premium 2 Months' => 297000,
+      'Premium 4 Months' => 397000,
+      'Premium 6 Months' => 497000,
     );
 
     if(isset($paket[$namapaket])){
@@ -222,7 +227,7 @@ class OrderController extends Controller
   }
 
   /* To check whether coupon available or not */
- public function checkCoupon(Request $request){
+  public function checkCoupon(Request $request){
     /* Check whether coupon is valid or not And is empty or not */
     $coupon = $request->kupon;
     $pricing = $request->harga;
@@ -261,6 +266,60 @@ class OrderController extends Controller
       $coupon = DB::table('coupons')->where(array(
             ['coupon_code','=',$coupon_code],
         ))->first();
+
+
+      if(substr($coupon->valid_to,0,7)=='package'){
+        $total = 0;
+        $diskon = 0;
+        $paket = "";
+        $paketid = 0;
+        $dataPaket = "";
+
+        if ($coupon->valid_to == "package-premium-1") {
+          $total = 197000;
+          $paket = "Paket Premium 1 Bulan";
+          $paketid = 5;
+          $dataPaket = "Premium 1 Months";
+        }
+        if ($coupon->valid_to == "package-premium-2") {
+          $total = 297000;
+          $paket = "Paket Premium 2 Bulan";
+          $paketid = 6;
+          $dataPaket = "Premium 2 Months";
+        }
+        if ($coupon->valid_to == "package-premium-4") {
+          $total = 397000;
+          $paket = "Paket Premium 4 Bulan";
+          $paketid = 7;
+          $dataPaket = "Premium 4 Months";
+        }
+        if ($coupon->valid_to == "package-premium-6") {
+          $total = 497000;
+          $paket = "Paket Premium 6 Bulan";
+          $paketid = 8;
+          $dataPaket = "Premium 6 Months";
+        }
+        
+
+        $data = array(
+              'id_coupon' => $coupon->id,
+              'discount' => 0,
+              'total' => str_replace(",",".",number_format($total + $this->generateRandomPricingNumber($total))),
+        );
+        // selectbox ditambah dengan paket kupon 
+        $data['status'] = 'success-paket';
+        $data['message'] = 'Kupon berhasil dipakai & berlaku sekarang';
+        $data['paket'] = $paket;
+        $data['paketid'] = $paketid;
+        $data['dataPaket'] = $dataPaket;
+        $data['dataPrice'] = $total;
+        
+        Session::flash('coupon',$data);
+        return response()->json($data);
+      }
+      else if($coupon->valid_to==''){
+      }
+
 
       /* if valid then get discount from coupon */
       if($today <= $coupon->valid_until)
@@ -460,7 +519,8 @@ class OrderController extends Controller
 
       $user->valid_until = $valid;
       $user->membership = 'pro';
-    } else if(substr($order->package,0,7) === "Premium"){
+    } 
+    else if(substr($order->package,0,7) === "Premium"){
       if($order->package=='Premium Monthly'){
         //$valid = new DateTime("+1 months");
         $valid = $this->add_time($user,"+1 months");
@@ -468,6 +528,23 @@ class OrderController extends Controller
         //$valid = new DateTime("+12 months");
         $valid = $this->add_time($user,"+12 months");
       }
+      else if($order->package=='Premium 1 Months'){
+        $valid = $this->add_time($user,"+1 months");
+      }
+      else if($order->package=='Premium 2 Months'){
+        $valid = $this->add_time($user,"+2 months");
+      }
+      else if($order->package=='Premium 4 Months'){
+        $valid = $this->add_time($user,"+4 months");
+      }
+      else if($order->package=='Premium 6 Months'){
+        $valid = $this->add_time($user,"+6 months");
+      }
+
+      /*'Premium 1 Months' => 197000,
+      'Premium 2 Months' => 297000,
+      'Premium 4 Months' => 397000,
+      'Premium 6 Months' => 497000,*/
 
       $userlog = new UserLog;
       $userlog->user_id = $user->id;
