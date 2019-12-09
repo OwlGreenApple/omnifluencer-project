@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Account;
 use App\AccountLog;
 use App\HistorySearch;
-use App\User;
 use App\Group;
 use App\Save;
 use App\Subscribe;
