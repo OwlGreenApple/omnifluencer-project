@@ -9,14 +9,10 @@ use App\HistorySearch;
 use App\Group;
 use App\Save;
 use App\Subscribe;
-use App\Coupon;
+use App\Coupons;
 use App\User;
 
 use App\Helpers\Helper;
-use App\Helpers\InstagramHelper;
-
-use App\Mail\ProfileEmail;
-use App\Mail\ProfileBulkEmail;
 use App\Mail\SendMailActivWA;
 
 use Auth,PDF,Excel,Mail,Validator,Carbon,Datetime;
@@ -37,15 +33,15 @@ class ApiController extends Controller
           $pos = rand(0, strlen($karakter)-1);
           $string .= $karakter{$pos};
         }
-        $coupon = Coupon::where("kodekupon","=",$string)->first();
+        $coupon = Coupons::where("coupon_code","=",$string)->first();
       } while (!is_null($coupon));
-      $coupon = new Coupon;
-      $coupon->kodekupon = $string;
-      $coupon->diskon_value = 0;
-      $coupon->diskon_percent = 0;
+      $coupon = new Coupons;
+      $coupon->coupon_code = $string;
+      $coupon->value = 0;
+      $coupon->discount = 0;
       $coupon->valid_until = new DateTime('+2 days');
       $coupon->valid_to = $data['package'];
-      $coupon->keterangan = "Kupon AutoGenerate Package User";
+      $coupon->coupon_description = "Kupon AutoGenerate Package User";
       $coupon->package_id = 4;
       $coupon->user_id = $user->id;
       $coupon->save();
@@ -66,6 +62,40 @@ class ApiController extends Controller
       $data = json_decode($request->getContent(),true);
       Mail::to($data['mail'])->queue(new SendMailActivWA($data['emaildata'],$data['subject']));
   }
+
+  public function testcoupon()
+    {
+        //https://omnifluencer.com/generate-coupon
+        $curl = curl_init();
+        $data = array(
+            'email'=>'test@mail.com',
+            'package'=>'package-premium-6',
+        );
+        $url = 'http://localhost/omnifluencer/generate-coupon';
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => $url,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTREDIR => 3,
+          CURLOPT_POSTFIELDS => json_encode($data),
+          CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+          echo $response;
+          //return json_decode($response,true);
+        }
+    }
 
 /* end class */  
 }

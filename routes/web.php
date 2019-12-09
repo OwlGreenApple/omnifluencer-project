@@ -15,6 +15,7 @@ Auth::routes();
 
 //Tes
 Route::get('/tes-igcallback', 'TesController@tes_igcallback');
+//Route::get('testcoupon', 'ApiController@testcoupon');
 
 //Auth
 Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
