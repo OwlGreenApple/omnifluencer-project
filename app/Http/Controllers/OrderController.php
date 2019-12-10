@@ -582,6 +582,7 @@ class OrderController extends Controller
 
     $arr['status'] = 'success';
     $arr['message'] = 'Order berhasil dikonfirmasi';
+    $arr['response'] = $this->IsPay($user->email,18,1);
 
     return $arr;
   }
@@ -589,4 +590,48 @@ class OrderController extends Controller
   public function index_upgrade(){
     return view('user.upgrade-account.index');
   }
+
+  private function IsPay($email,$list_id,$is_pay)
+    {
+        $curl = curl_init();
+        $data = array(
+            'email'=>$email,
+            'list_id'=>$list_id,
+            'is_pay'=>$is_pay
+        );
+
+        if(env('APP_ENV') == 'local')
+        {
+          $url = 'http://192.168.88.177/wa-project/is_pay';
+        }
+        else
+        {
+          $url = 'https://activwa.com/dashboard/is_pay';
+        }
+        
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => $url,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTREDIR => 3,
+          CURLOPT_POSTFIELDS => json_encode($data),
+          CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+          $response = json_decode($response,true);
+          return $response['response'];
+        }
+    }
+
+/* end class */  
 }
