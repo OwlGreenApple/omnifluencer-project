@@ -84,6 +84,10 @@
     </td> 
     <td data-label="Action">
       <div class="menu-nomobile">
+        <a href="{{url('statistics/'."$account->accountid")}}" class="btn btn-sm btn-primary">
+          <i class="fas fa-chart-line"></i>
+        </a>
+
         <button type="button" class="btn btn-sm btn-primary btn-profile" data-id="{{$account->accountid}}" data-type="pdf" data-toggle="modal" data-target="#send-file">
           <i class="fas fa-file-pdf"></i>
         </button>

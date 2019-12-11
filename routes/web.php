@@ -87,6 +87,7 @@ Route::group(['middleware' => ['web','auth']], function()
   Route::get('/history-search/create-groups','AccountController@create_groups');
   Route::get('/history-search/save-groups','AccountController@save_groups');
   Route::get('/history-search/delete-history-bulk','AccountController@delete_history_bulk');
+  Route::get('/statistics/{id}','AccountController@Statistics');
 
   //Edit Profile
   Route::get('/edit-profile','ProfileController@index_edit');

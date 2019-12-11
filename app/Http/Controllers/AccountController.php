@@ -907,5 +907,20 @@ public function test_search(Request $request)
     return $arr;
   }
 
+  #DISPLAY INSTAGRAM INFLUENCER'S STATISTIC
+  public function Statistics()
+  {
+    $id = 5;
+    $dir_recordedstatistic = storage_path('jsonstatistic').'/'.$id.'.json';
+    $getcontent = array();
+
+    if(file_exists($dir_recordedstatistic)) 
+    {
+       $getcontent = file_get_contents($dir_recordedstatistic);
+       $getcontent = json_decode($getcontent,true);
+    }
+    return view('user.history-search.statistic',['content'=>$getcontent]);
+  }
+
 /* AccountController */  
 }

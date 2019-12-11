@@ -80,7 +80,8 @@ class UpdateAccount extends Command
         // $arr_res = $this->igcallback($url);
         
         // if($arr_res!=null){
-        if(is_array($arr_res)){
+        if(is_array($arr_res))
+        {
           $account->ig_id = $arr_res["pk"];
           //replace username di database kalo beda sama yang diambil
           if($account->username!=$arr_res["username"]){
@@ -145,6 +146,8 @@ class UpdateAccount extends Command
             $account->save();
           }
 
+          #UPDATE NEW DATA
+
           $dir = storage_path('jsondata');
           if ( !file_exists( $dir ) && !is_dir( $dir ) ) {
               mkdir( $dir,0755 );       
@@ -198,6 +201,40 @@ class UpdateAccount extends Command
               file_put_contents(storage_path('jsondata').'/'.$account->id.'.json', $json);
           }
 
+          #STATISTIC
+
+          $dir_statistic = storage_path('jsonstatistic');
+          if( !file_exists( $dir_statistic ) && !is_dir( $dir_statistic ) ) 
+          {
+              mkdir($dir_statistic,0755);       
+          } 
+
+          $day_created = Date("Y-m-d");
+          $statistic = [$day_created =>[
+              'Total_Followers'=>$arr_res["follower_count"],
+              'Total_Following'=>$arr_res["following_count"],
+              'Total_Post'=>$arr_res["media_count"],
+          ]];
+
+          $recordedstatistic = [];
+          $dir_recordedstatistic = $dir_statistic.'/'.$account->id.'.json';
+          if(file_exists( $dir_recordedstatistic )) 
+          {
+              $recordedstatistic = file_get_contents($dir_recordedstatistic);
+              $recordedstatistic = json_decode($recordedstatistic,true);
+              $jsonstatistic = $recordedstatistic + $statistic;
+              $jsonstatistic = json_encode($jsonstatistic);
+          }
+          else
+          {
+              $jsonstatistic = json_encode($statistic);
+          }
+          
+          if(file_exists( $dir_statistic ) && is_dir( $dir_statistic )) 
+          {
+              file_put_contents(storage_path('jsonstatistic').'/'.$account->id.'.json', $jsonstatistic);
+          }
+
           /*die('');
 
           $accountlog = new AccountLog;
@@ -221,7 +258,8 @@ class UpdateAccount extends Command
 
         }
         sleep(0.5);
-      }
+      } /* end for */
+    /* end function */
     }
 
 /* end class update account */
