@@ -14,9 +14,11 @@
 		    <th class="header menu-nomobile" action="jml_followers">
 		      Followers
 		    </th>
+		    <th>Action</th>
 		    <th class="header menu-nomobile" action="jml_following">
 		      Following
 		    </th>
+		    <th>Action</th>
 		    <th class="header menu-nomobile" action="jml_post">
 		      Media / Post
 		    </th>
@@ -25,13 +27,18 @@
 		  <tbody>
 		  	@if(count($content) > 0)
 		  		@foreach($content as $date=>$val)
-		  			<tr><td>{{$date}}</td></tr>
-		  			<tr><td>{{$val['Total_Followers']}}</td></tr>
-		  			<tr><td>{{$val['Total_Following']}}</td></tr>
-		  			<tr><td>{{$val['Total_Post']}}</td></tr>
+		  			<tr>
+		  				<td>{{$date}}</td>
+		  				<td>{{$val['Total_Followers']}}</td>
+		  				<td><span style="color:#1dbb0a">+1</span></td>
+		  				<td>{{$val['Total_Following']}}</td>
+		  				<td><span style="color:#1dbb0a">+1</span></td>
+		  				<td>{{$val['Total_Post']}}</td>
+		  				<td><span style="color:#1dbb0a">+1</span></td>
+		  			</tr>
 		  		@endforeach
 		  	@else
-		  		<tr><td colspan="3" class="text-center">xaxsax</td></tr>
+		  		<tr><td colspan="3" class="text-center">No Data</td></tr>
 		  	@endif
 		  </tbody>
 		</table>
