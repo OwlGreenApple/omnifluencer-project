@@ -910,7 +910,7 @@ public function test_search(Request $request)
   #DISPLAY INSTAGRAM INFLUENCER'S STATISTIC
   public function Statistics()
   {
-    $id = 5;
+    $id = 2;
     $dir_recordedstatistic = storage_path('jsonstatistic').'/'.$id.'.json';
     $getcontent = array();
 
@@ -919,6 +919,21 @@ public function test_search(Request $request)
        $getcontent = file_get_contents($dir_recordedstatistic);
        $getcontent = json_decode($getcontent,true);
     }
+
+    $x=0;
+    foreach($getcontent as $date)
+    {
+      $val = array_values($getcontent);
+      print_r($val)."\n";
+      //$data = array_slice($val,$x,2);
+      //print_r($data[1]['Total_Followers'])."\n";
+      //$deviation = $data[1]['Total_Followers'] - $data[0]['Total_Followers'];
+      //echo $deviation."\n";
+      $x++;
+    }
+
+    die('');
+    
     return view('user.history-search.statistic',['content'=>$getcontent]);
   }
 
