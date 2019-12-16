@@ -25,7 +25,9 @@ class ApiController extends Controller
 
     $user = User::where("email",$data['email'])->first();
     if (!is_null($user)) {
-      $coupon = Coupon::where("valid_to",$data['package'])->first();
+      $coupon = Coupon::where("valid_to",$data['package'])
+                ->where("user_id",$user->id)
+                ->first();
       if (!is_null($coupon)) {
         $arr['coupon_code'] = $coupon->coupon_code;
         $arr['is_error'] = 0;
