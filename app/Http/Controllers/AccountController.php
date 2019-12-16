@@ -925,10 +925,6 @@ public function test_search(Request $request)
        $getcontent = file_get_contents($dir_recordedstatistic);
        $getcontent = json_decode($getcontent,true);
     }
-    else
-    {
-       return redirect('history-influencer');
-    }
 
     return view('user.history-search.statistic',['content'=>$getcontent]);
   }
