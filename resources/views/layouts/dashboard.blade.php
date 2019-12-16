@@ -36,8 +36,10 @@
   <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 
   <link href="{{ asset('DataTables/DataTables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
-  <link href="{{ asset('DataTables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>
+  <link href="{{ asset('DataTables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link> 
 
+  <!-- Canvas JS -->
+  <script type="text/javascript" src="{{ asset('assets/canvasjs/jquery.canvasjs.min.js') }}"></script>
   <script>
     $(document).ready(function() {
       $('.tooltipstered').tooltipster({
@@ -307,7 +309,7 @@
           </span>
         </li>
 
-        <li class="<?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile') or Request::is('groups') or Request::is('groups/*')) echo 'active' ?>">
+        <li class="<?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile') or Request::is('groups') or Request::is('groups/*') or Request::is('statistics/*')) echo 'active' ?>">
           <span class="submenu-navbar">
             <a href="#infSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
               <i class="fas fa-certificate icon-menu"></i>
@@ -315,8 +317,8 @@
             </a>
           </span>
           
-          <ul class="collapse list-unstyled <?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile') or Request::is('groups') or Request::is('groups/*')) echo 'show' ?>" id="infSubmenu">
-            <li class="<?php if(Request::is('history-influencer')) echo 'active' ?>">
+          <ul class="collapse list-unstyled <?php if(Request::is('history-influencer') or Request::is('compare-history') or Request::is('saved-profile') or Request::is('groups') or Request::is('groups/*') or Request::is('statistics/*')) echo 'show' ?>" id="infSubmenu">
+            <li class="<?php if(Request::is('history-influencer')  or Request::is('statistics/*') ) echo 'active' ?>">
               <a href="{{url('history-influencer')}}">
                 <i class="fas fa-history icon-menu"></i>
                 History Influencer

@@ -908,9 +908,15 @@ public function test_search(Request $request)
   }
 
   #DISPLAY INSTAGRAM INFLUENCER'S STATISTIC
-  public function Statistics()
+  public function Statistics($id)
   {
-    $id = 2;
+    $userid = Auth::id();
+    $check_id = HistorySearch::where([['account_id',$id],['user_id',$userid]])->first();
+    if(is_null($check_id))
+    {
+      return redirect('history-influencer');
+    }
+
     $dir_recordedstatistic = storage_path('jsonstatistic').'/'.$id.'.json';
     $getcontent = array();
 
@@ -919,21 +925,11 @@ public function test_search(Request $request)
        $getcontent = file_get_contents($dir_recordedstatistic);
        $getcontent = json_decode($getcontent,true);
     }
-
-    $x=0;
-    foreach($getcontent as $date)
+    else
     {
-      $val = array_values($getcontent);
-      print_r($val)."\n";
-      //$data = array_slice($val,$x,2);
-      //print_r($data[1]['Total_Followers'])."\n";
-      //$deviation = $data[1]['Total_Followers'] - $data[0]['Total_Followers'];
-      //echo $deviation."\n";
-      $x++;
+       return redirect('history-influencer');
     }
 
-    die('');
-    
     return view('user.history-search.statistic',['content'=>$getcontent]);
   }
 

@@ -203,22 +203,54 @@ class UpdateAccount extends Command
 
           #STATISTIC
 
+          #make directory if not available
           $dir_statistic = storage_path('jsonstatistic');
           if( !file_exists( $dir_statistic ) && !is_dir( $dir_statistic ) ) 
           {
               mkdir($dir_statistic,0755);       
           } 
 
+          $previous_file = storage_path('jsonstatistic').'/'.$account->id.'.json';
+          $getcontent = $vals = array();
+
+          #get previous file
+          if(file_exists($previous_file)) 
+          {
+             $getcontent = file_get_contents($previous_file);
+             $getcontent = json_decode($getcontent,true);
+          }
+
+          if(count($getcontent) > 0)
+          {
+             $vals = array_values($getcontent);
+          }
+          $previous_total = count($vals);
+
+          if($previous_total > 0)
+          {
+             $last_array = end($vals);
+             $deviationfollower = $arr_res["follower_count"] - $last_array['Total_Followers'];
+             $deviationfollowing = $arr_res["following_count"] - $last_array['Total_Following'];
+             $deviationpost = $arr_res["media_count"] - $last_array['Total_Post'];
+          }
+          else
+          {
+             $deviationfollower = $deviationfollowing = $deviationpost = 0;
+          }
+
           $day_created = Date("Y-m-d");
           $statistic = [$day_created =>[
               'Total_Followers'=>$arr_res["follower_count"],
+              'FollowerDeviation'=>$deviationfollower,
               'Total_Following'=>$arr_res["following_count"],
+              'FollowingDeviation'=>$deviationfollowing,
               'Total_Post'=>$arr_res["media_count"],
+              'PostDeviation'=>$deviationpost,
           ]];
 
           $recordedstatistic = [];
           $dir_recordedstatistic = $dir_statistic.'/'.$account->id.'.json';
-          if(file_exists( $dir_recordedstatistic )) 
+          if(file_exists( $dir_recordedstatistic ) && $previous_total > 0) 
           {
               $recordedstatistic = file_get_contents($dir_recordedstatistic);
               $recordedstatistic = json_decode($recordedstatistic,true);
@@ -234,6 +266,8 @@ class UpdateAccount extends Command
           {
               file_put_contents(storage_path('jsonstatistic').'/'.$account->id.'.json', $jsonstatistic);
           }
+
+          #END STATISTIC
 
           /*die('');
 
