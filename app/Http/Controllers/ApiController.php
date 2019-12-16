@@ -25,26 +25,34 @@ class ApiController extends Controller
 
     $user = User::where("email",$data['email'])->first();
     if (!is_null($user)) {
-      do
-      {
-        $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
-        $string = 'special-';
-        for ($i = 0; $i < 7 ; $i++) {
-          $pos = rand(0, strlen($karakter)-1);
-          $string .= $karakter{$pos};
-        }
-        $coupon = Coupons::where("coupon_code","=",$string)->first();
-      } while (!is_null($coupon));
-      $coupon = new Coupons;
-      $coupon->coupon_code = $string;
-      $coupon->value = 0;
-      $coupon->discount = 0;
-      $coupon->valid_until = new DateTime('+2 days');
-      $coupon->valid_to = $data['package'];
-      $coupon->coupon_description = "Kupon AutoGenerate Package User";
-      $coupon->package_id = 0;
-      $coupon->user_id = $user->id;
-      $coupon->save();
+      $coupon = Coupon::where("valid_to",$data['package'])->first();
+      if (!is_null($coupon)) {
+        $arr['coupon_code'] = $coupon->coupon_code;
+        $arr['is_error'] = 0;
+        return json_encode($arr);
+      }
+      else {
+        do
+        {
+          $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
+          $string = 'special-';
+          for ($i = 0; $i < 7 ; $i++) {
+            $pos = rand(0, strlen($karakter)-1);
+            $string .= $karakter{$pos};
+          }
+          $coupon = Coupons::where("coupon_code","=",$string)->first();
+        } while (!is_null($coupon));
+        $coupon = new Coupons;
+        $coupon->coupon_code = $string;
+        $coupon->value = 0;
+        $coupon->discount = 0;
+        $coupon->valid_until = new DateTime('+2 days');
+        $coupon->valid_to = $data['package'];
+        $coupon->coupon_description = "Kupon AutoGenerate Package User";
+        $coupon->package_id = 0;
+        $coupon->user_id = $user->id;
+        $coupon->save();
+      }
     }
     else {
       $arr['coupon_code'] = "";
