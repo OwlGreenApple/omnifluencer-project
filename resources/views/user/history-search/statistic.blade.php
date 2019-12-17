@@ -5,6 +5,23 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-11">
+
+      	<div class="row">
+	        <div class="col-md-8 col-12">
+	          <h2><b>Instgram Statistic : {{$influencername}}</b></h2>      
+	        </div>
+      	</div>
+      	
+      	<div class="row">
+	        <div class="col-md-5 col-12 mb-10">
+	          <h5>
+	            Select bulk action, save or add it to group
+	          </h5>    
+	        </div>
+	    </div>
+
+	    <hr>
+
     	<!-- table -->
 		<table class="table responsive">
 		  <thead>
@@ -55,6 +72,35 @@
 		  				</td>
 		  			</tr>
 		  		@endforeach
+		  			<tr>
+		  				<td colspan="2" style="color : #b7b7b7">Daily Averages</td>
+		  				<td>
+		  					@if($totalfollowersdeviation < 0)<span style="color:#f14242">{{number_format($totalfollowersdeviation)}}</span> @else <span style="color:#1dbb0a">+{{number_format($totalfollowersdeviation)}}</span>
+		  					@endif
+		  				</td>
+		  				<td colspan="1">&nbsp;</td>
+		  				<td>
+		  					@if($totalfollowingsdeviation < 0)<span style="color:#f14242">{{number_format($totalfollowingsdeviation)}}</span> @else <span style="color:#1dbb0a">+{{number_format($totalfollowingsdeviation)}}</span>
+		  					@endif
+		  				</td>
+		  				<td colspan="1">&nbsp;</td>
+		  				<td>
+		  					@if($totalpostsdeviation < 0)<span style="color:#f14242">{{number_format($totalpostsdeviation)}}</span> @else <span style="color:#1dbb0a">+{{number_format($totalpostsdeviation)}}</span>
+		  					@endif
+		  				</td>
+		  			</tr>
+		  			<!--<tr>
+		  				<td colspan="2" style="color : #b7b7b7">Monthly Averages</td>
+		  				<td>+4</td>
+		  				<td colspan="1">&nbsp;</td>
+		  				<td>+8</td>
+		  				<td colspan="1">&nbsp;</td>
+		  				<td>+8</td>
+		  			</tr>
+		  			-->
+		  			<tr>
+		  				<td colspan="7"><button class="btn btn-success btn-sm">Download CSV</button></td>
+		  			</tr>
 		  	@else
 		  		<tr><td colspan="7" class="text-center">Currently data is not available</td></tr>
 		  	@endif
@@ -62,10 +108,36 @@
 		</table>
 		<!-- end table -->
 
+		<hr>
+      	<div class="row">
+	        <div class="col-md-8 col-12">
+	          <h3><b>Instagram Chart History For {{$influencername}}</b></h3>      
+	        </div>
+      	</div>
+      	<hr>
+
 		<!-- Charts -->
-		<div id="chartContainer" style="height: 360px"></div>
-		<div id="chartContainerFollowing" style="height: 360px"></div>
-		<div id="chartContainerPost" style="height: 360px"></div>
+		<div class="row">
+	        <div class="col-md-12 col-12">
+	          <div id="chartContainer" style="height: 360px"></div>  
+	        </div>
+      	</div>
+
+      	<hr>
+
+      	<div class="row">
+	        <div class="col-md-12 col-12">
+	          <div id="chartContainerFollowing" style="height: 360px"></div> 
+	        </div>
+      	</div>
+
+      	<hr>
+
+      	<div class="row">
+	        <div class="col-md-12 col-12">
+	          <div id="chartContainerPost" style="height: 360px"></div>
+	        </div>
+      	</div>
 		<!-- End Charts -->
     </div>
    </div>
@@ -83,16 +155,24 @@
 		var options = {
 			title: {
 				fontSize: 24,
+				padding: {
+				     top: 10,
+				     right: 10,
+				     bottom: 5,
+				     left: 10
+			    },
+				fontFamily: "Nunito,sans-serif",
 				text: "Total Daily Follower"
 			},
 			axisX: {
-				labelFontSize: 14,
-				title : "Date",
 				valueFormatString: "DD-MMM-YY"
 			},
 			axisY: {
-				labelFontSize: 14,
-				title : "Total Follower"
+				titleFontFamily: "Nunito,sans-serif",
+				labelFontSize: 12,
+				titleFontSize : 12,
+				title : "Followers",
+				titleFontColor: "#b7b7b7"
 			},
 			toolTip: {
 				shared: true,
@@ -142,16 +222,24 @@
 		var optionFollowing = {
 			title: {
 				fontSize: 24,
+				padding: {
+				     top: 10,
+				     right: 10,
+				     bottom: 5,
+				     left: 10
+			    },
+				fontFamily: "Nunito,sans-serif",
 				text: "Total Daily Following"
 			},
 			axisX: {
-				labelFontSize: 14,
-				title : "Date",
 				valueFormatString: "DD-MMM-YY"
 			},
 			axisY: {
-				labelFontSize: 14,
-				title : "Total Following"
+				titleFontFamily: "Nunito,sans-serif",
+				labelFontSize: 12,
+				titleFontSize : 12,
+				title : "Followings",
+				titleFontColor: "#b7b7b7"
 			},
 			toolTip: {
 				shared: true,
@@ -202,16 +290,24 @@
 		var optionPost = {
 			title: {
 				fontSize: 24,
+				padding: {
+				     top: 10,
+				     right: 10,
+				     bottom: 5,
+				     left: 10
+			    },
+				fontFamily: "Nunito,sans-serif",
 				text: "Total Daily Post"
 			},
 			axisX: {
-				labelFontSize: 14,
-				title : "Date",
 				valueFormatString: "DD-MMM-YY"
 			},
 			axisY: {
-				labelFontSize: 14,
-				title : "Total Post"
+				titleFontFamily: "Nunito,sans-serif",
+				labelFontSize: 12,
+				titleFontSize : 12,
+				title : "Posts",
+				titleFontColor: "#b7b7b7"
 			},
 			toolTip: {
 				shared: true,

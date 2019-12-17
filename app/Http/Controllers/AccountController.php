@@ -912,10 +912,16 @@ public function test_search(Request $request)
   {
     $userid = Auth::id();
     $check_id = HistorySearch::where([['account_id',$id],['user_id',$userid]])->first();
-    /*if(is_null($check_id))
+    if(is_null($check_id))
     {
       return redirect('history-influencer');
-    }*/
+    }
+    $getuser = HistorySearch::where([['history_searchs.account_id',$id],['history_searchs.user_id',$userid]])->join('accounts','accounts.id','=','history_searchs.account_id')->select("accounts.username")->first();
+
+    if(is_null($getuser))
+    {
+      return redirect('history-influencer');
+    }
 
     $dir_recordedstatistic = storage_path('jsonstatistic').'/'.$id.'.json';
     $contentpost = $contentfollowing = $contentfollower = $getcontent = array();
@@ -943,6 +949,7 @@ public function test_search(Request $request)
         
     }
 
+    $totalfollowersdeviation = $totalfollowingsdeviation = $totalpostsdeviation = 0;
     if($getarr > 0)
     {
       foreach($getcontent as $date=>$val)
@@ -950,10 +957,60 @@ public function test_search(Request $request)
          $contentfollower[$date] = ['total'=>$val['Total_Followers'] ,'deviation'=>$val['FollowerDeviation']];
          $contentfollowing[$date] = ['total'=>$val['Total_Following'] ,'deviation'=>$val['FollowingDeviation']];
          $contentpost[$date] = ['total'=>$val['Total_Post'],'deviation'=>$val['PostDeviation']];
+
+         $totalfollowersdeviation += $val['FollowerDeviation'];
+         $totalfollowingsdeviation += $val['FollowingDeviation'];
+         $totalpostsdeviation += $val['PostDeviation'];
       }
+
+      $dailyavgfollowers = $totalfollowersdeviation/$getarr;
+      $dailyavgfollowins = $totalfollowingsdeviation/$getarr;
+      $dailyavgposts = $totalpostsdeviation/$getarr;
+    } 
+
+    $data = [
+      'content'=>$getcontent, 
+      'contentfollower'=>$contentfollower, 
+      'contentfollowing'=>$contentfollowing, 
+      'contentpost'=>$contentpost,
+      'influencername' => $getuser->username,
+      'totalfollowersdeviation' =>$dailyavgfollowers,
+      'totalfollowingsdeviation'=>$dailyavgfollowins,
+      'totalpostsdeviation'=>$dailyavgposts
+    ];
+
+    return view('user.history-search.statistic',$data);
+  }
+
+  public function StatisticsCSV()
+  {
+    $id = 1;
+    $filename = 'history-statistics';
+    $dir_recordedstatistic = storage_path('jsonstatistic').'/'.$id.'.json';
+    $getcontent = array();
+
+    if(file_exists($dir_recordedstatistic)) 
+    {
+       $getcontent = file_get_contents($dir_recordedstatistic);
+       $getcontent = json_decode($getcontent,true);
     }
 
-    return view('user.history-search.statistic',['content'=>$getcontent, 'contentfollower'=>$contentfollower, 'contentfollowing'=>$contentfollowing, 'contentpost'=>$contentpost]);
+    foreach($getcontent as $date=>$val)
+    {
+        $exc[] = array(
+          $date,$val['Total_Followers']
+        );
+    }
+
+    Excel::create($filename, function($excel) use($exc){
+        
+      $excel->sheet('Sheetname', function($sheet) use ($exc) {
+
+          $sheet->fromArray($exc, null ,'A1', false, false);
+
+      });
+
+    })->export('csv');
   }
 
 /* AccountController */  
