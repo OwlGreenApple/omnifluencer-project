@@ -912,13 +912,13 @@ public function test_search(Request $request)
   {
     $userid = Auth::id();
     $check_id = HistorySearch::where([['account_id',$id],['user_id',$userid]])->first();
-    if(is_null($check_id))
+    /*if(is_null($check_id))
     {
       return redirect('history-influencer');
-    }
+    }*/
 
     $dir_recordedstatistic = storage_path('jsonstatistic').'/'.$id.'.json';
-    $getcontent = array();
+    $contentpost = $contentfollowing = $contentfollower = $getcontent = array();
 
     if(file_exists($dir_recordedstatistic)) 
     {
@@ -926,7 +926,34 @@ public function test_search(Request $request)
        $getcontent = json_decode($getcontent,true);
     }
 
-    return view('user.history-search.statistic',['content'=>$getcontent]);
+    if($getcontent <> null)
+    {
+        $getarr = count($getcontent);
+    }
+    else
+    {
+        $getarr = 0;
+        $getcontent = array();
+    }
+
+    if($getarr > 30)
+    {
+        $contentarray = $getarr - 30;
+        $getcontent = array_slice($getcontent,$contentarray,30);
+        
+    }
+
+    if($getarr > 0)
+    {
+      foreach($getcontent as $date=>$val)
+      {
+         $contentfollower[$date] = ['total'=>$val['Total_Followers'] ,'deviation'=>$val['FollowerDeviation']];
+         $contentfollowing[$date] = ['total'=>$val['Total_Following'] ,'deviation'=>$val['FollowingDeviation']];
+         $contentpost[$date] = ['total'=>$val['Total_Post'],'deviation'=>$val['PostDeviation']];
+      }
+    }
+
+    return view('user.history-search.statistic',['content'=>$getcontent, 'contentfollower'=>$contentfollower, 'contentfollowing'=>$contentfollowing, 'contentpost'=>$contentpost]);
   }
 
 /* AccountController */  

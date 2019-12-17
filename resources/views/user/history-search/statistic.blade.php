@@ -56,7 +56,7 @@
 		  			</tr>
 		  		@endforeach
 		  	@else
-		  		<tr><td colspan="3" class="text-center">No Data</td></tr>
+		  		<tr><td colspan="7" class="text-center">Currently data is not available</td></tr>
 		  	@endif
 		  </tbody>
 		</table>
@@ -74,26 +74,57 @@
 
 <script>
 	$(function() {
-		//Better to construct options first and then pass it as a parameter
+		
+		var follower = [];
+		$.each(<?php echo json_encode($contentfollower);?>, function( i, item ) {
+			follower.push({'x': new Date(i), 'y': item.total, 'z':item.deviation});
+	 	});
+
 		var options = {
 			title: {
+				fontSize: 24,
 				text: "Total Daily Follower"
+			},
+			axisX: {
+				labelFontSize: 14,
+				title : "Date",
+				valueFormatString: "DD-MMM-YY"
+			},
+			axisY: {
+				labelFontSize: 14,
+				title : "Total Follower"
+			},
+			toolTip: {
+				shared: true,
+				contentFormatter: function (e) {
+					var content = "";
+					var comb = [];
+
+					for (var i = 0; i < e.entries.length; i++) {
+						if(parseInt(e.entries[i].dataPoint.z) < 0)
+			          	{
+			          		comb.push('<span style="color:#f14242">'+e.entries[i].dataPoint.z+'</span>');
+			          	}
+			          	else if(parseInt(e.entries[i].dataPoint.z) == 0)
+			          	{
+			          		comb.push(e.entries[i].dataPoint.z);
+			          	}
+			          	else
+			          	{
+			          		comb.push('<span style="color:#1dbb0a">+'+e.entries[i].dataPoint.z+'</span>');
+			          	}
+
+						content = 'Date : <span style="color:blue">'+CanvasJS.formatDate(e.entries[i].dataPoint.x, "DD-MMM-YYYY")+'</span><br/>Total Followers : <strong>'+e.entries[i].dataPoint.y+'</strong><br/>Deviation : '+comb[i]; 
+					}
+					return content;
+				}
 			},
 			animationEnabled: true,
 			exportEnabled: true,
 			data: [
 			{
 				type: "spline", //change it to line, area, column, pie, etc
-				dataPoints: [
-					{ x: 10, y: 10 },
-					{ x: 20, y: 12 },
-					{ x: 30, y: 8 },
-					{ x: 40, y: 14 },
-					{ x: 50, y: 6 },
-					{ x: 60, y: 24 },
-					{ x: 70, y: -4 },
-					{ x: 80, y: 10 }
-				]
+				dataPoints: follower
 			}
 			]
 		};
@@ -102,58 +133,122 @@
 
 	/* Daily Following */
 	$(function() {
-		//Better to construct options first and then pass it as a parameter
+		
+		var following = [];
+		$.each(<?php echo json_encode($contentfollowing);?>, function( i, item ) {
+			following.push({'x': new Date(i), 'y': item.total, 'z':item.deviation});
+	 	});
+
 		var optionFollowing = {
 			title: {
+				fontSize: 24,
 				text: "Total Daily Following"
+			},
+			axisX: {
+				labelFontSize: 14,
+				title : "Date",
+				valueFormatString: "DD-MMM-YY"
+			},
+			axisY: {
+				labelFontSize: 14,
+				title : "Total Following"
+			},
+			toolTip: {
+				shared: true,
+				contentFormatter: function (e) {
+					var content = "";
+					var comb = [];
+
+					for (var i = 0; i < e.entries.length; i++) {
+						if(parseInt(e.entries[i].dataPoint.z) < 0)
+			          	{
+			          		comb.push('<span style="color:#f14242">'+e.entries[i].dataPoint.z+'</span>');
+			          	}
+			          	else if(parseInt(e.entries[i].dataPoint.z) == 0)
+			          	{
+			          		comb.push(e.entries[i].dataPoint.z);
+			          	}
+			          	else
+			          	{
+			          		comb.push('<span style="color:#1dbb0a">+'+e.entries[i].dataPoint.z+'</span>');
+			          	}
+
+						content = 'Date : <span style="color:blue">'+CanvasJS.formatDate(e.entries[i].dataPoint.x, "DD-MMM-YYYY")+'</span><br/>Total Followings : <strong>'+e.entries[i].dataPoint.y+'</strong><br/>Deviation : '+comb[i]; 
+					}
+					return content;
+				}
 			},
 			animationEnabled: true,
 			exportEnabled: true,
 			data: [
 			{
 				type: "spline", //change it to line, area, column, pie, etc
-				dataPoints: [
-					{ x: 10, y: 10 },
-					{ x: 20, y: 12 },
-					{ x: 30, y: 8 },
-					{ x: 40, y: 14 },
-					{ x: 50, y: 6 },
-					{ x: 60, y: 24 },
-					{ x: 70, y: -4 },
-					{ x: 80, y: 10 }
-				]
+				dataPoints: following
 			}
 			]
 		};
 		$("#chartContainerFollowing").CanvasJSChart(optionFollowing);
 	});
 
-	/* Daily Post */
+	/* Daily Post  */
+
 	$(function() {
-		//Better to construct options first and then pass it as a parameter
+		
+		var posts = [];
+		$.each(<?php echo json_encode($contentpost);?>, function( i, item ) {
+			posts.push({'x': new Date(i), 'y': item.total, 'z':item.deviation});
+	 	});
+
 		var optionPost = {
 			title: {
+				fontSize: 24,
 				text: "Total Daily Post"
+			},
+			axisX: {
+				labelFontSize: 14,
+				title : "Date",
+				valueFormatString: "DD-MMM-YY"
+			},
+			axisY: {
+				labelFontSize: 14,
+				title : "Total Post"
+			},
+			toolTip: {
+				shared: true,
+				contentFormatter: function (e) {
+					var content = "";
+					var comb = [];
+
+					for (var i = 0; i < e.entries.length; i++) {
+						if(parseInt(e.entries[i].dataPoint.z) < 0)
+			          	{
+			          		comb.push('<span style="color:#f14242">'+e.entries[i].dataPoint.z+'</span>');
+			          	}
+			          	else if(parseInt(e.entries[i].dataPoint.z) == 0)
+			          	{
+			          		comb.push(e.entries[i].dataPoint.z);
+			          	}
+			          	else
+			          	{
+			          		comb.push('<span style="color:#1dbb0a">+'+e.entries[i].dataPoint.z+'</span>');
+			          	}
+
+						content = 'Date : <span style="color:blue">'+CanvasJS.formatDate(e.entries[i].dataPoint.x, "DD-MMM-YYYY")+'</span><br/>Total Posts : <strong>'+e.entries[i].dataPoint.y+'</strong><br/>Deviation : '+comb[i]; 
+					}
+					return content;
+				}
 			},
 			animationEnabled: true,
 			exportEnabled: true,
 			data: [
 			{
 				type: "spline", //change it to line, area, column, pie, etc
-				dataPoints: [
-					{ x: 10, y: 10 },
-					{ x: 20, y: 12 },
-					{ x: 30, y: 8 },
-					{ x: 40, y: 14 },
-					{ x: 50, y: 6 },
-					{ x: 60, y: 24 },
-					{ x: 70, y: -4 },
-					{ x: 80, y: 10 }
-				]
+				dataPoints: posts
 			}
 			]
 		};
 		$("#chartContainerPost").CanvasJSChart(optionPost);
 	});
-</script>
+	
+ </script>
 @endsection
