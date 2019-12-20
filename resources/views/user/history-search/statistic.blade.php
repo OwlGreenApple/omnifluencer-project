@@ -8,7 +8,7 @@
 
       	<div class="row">
 	        <div class="col-md-8 col-12">
-	          <h2><b>Instgram Statistic : {{$influencername}}</b></h2>      
+	          <h2><b>Instgram Statistic : <span class="influencer-styling">{{$influencername}}</span></b></h2>      
 	        </div>
       	</div>
       	
@@ -99,7 +99,7 @@
 		  			</tr>
 		  			-->
 		  			<tr>
-		  				<td colspan="7"><button class="btn btn-success btn-sm">Download CSV</button></td>
+		  				<td colspan="7"><a href="{{url('statisticscsv/'."$influencerid")}}" class="btn btn-success btn-sm">Download CSV</a></td>
 		  			</tr>
 		  	@else
 		  		<tr><td colspan="7" class="text-center">Currently data is not available</td></tr>
@@ -111,7 +111,7 @@
 		<hr>
       	<div class="row">
 	        <div class="col-md-8 col-12">
-	          <h3><b>Instagram Chart History For {{$influencername}}</b></h3>      
+	          <h3><b>Instagram Chart History For <span class="influencer-styling">{{$influencername}}</span></b></h3>      
 	        </div>
       	</div>
       	<hr>

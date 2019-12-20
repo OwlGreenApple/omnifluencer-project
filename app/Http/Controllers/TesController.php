@@ -10,6 +10,68 @@ use App\Helpers\InstagramHelper;
 
 class TesController extends Controller
 {
+
+  public function resize_image($file, $w, $h, $crop=false) {
+      list($width, $height) = getimagesize($file);
+      $r = $width / $height;
+      if ($crop) {
+          if ($width > $height) {
+              $width = ceil($width-($width*abs($r-$w/$h)));
+          } else {
+              $height = ceil($height-($height*abs($r-$w/$h)));
+          }
+          $newwidth = $w;
+          $newheight = $h;
+      } else {
+          if ($w/$h > $r) {
+              $newwidth = $h*$r;
+              $newheight = $h;
+          } else {
+              $newheight = $w/$r;
+              $newwidth = $w;
+          }
+      }
+      
+      //Get file extension
+      $exploding = explode(".",$file);
+      $ext = end($exploding);
+      
+      switch($ext){
+          case "png":
+              $src = imagecreatefrompng($file);
+          break;
+          case "jpeg":
+          case "jpg":
+              $src = imagecreatefromjpeg($file);
+          break;
+          case "gif":
+              $src = imagecreatefromgif($file);
+          break;
+          default:
+              $src = imagecreatefromjpeg($file);
+          break;
+      }
+      
+      $dst = imagecreatetruecolor($newwidth, $newheight);
+      imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+      return $dst;
+   }
+
+   public function runresize()
+   {
+      $filename = storage_path('img').'/teknobie.jpg';
+      $resizedFilename = storage_path('img').'/resize/test.jpg';
+
+      // resize the image with 300x300
+      $imgData = $this->resize_image($filename, 300, 300);
+      // save the image on the given filename
+      imagejpeg($imgData, $resizedFilename);
+      // or according to the original format, use another method
+      // imagejpeg($imgData, $resizedFilename);
+      // imagegif($imgData, $resizedFilename);
+   }
+
     public function tes_igcallback(){
       // $url = "http://cmx.space/get-user-data/heiwahyu_";
       // $arr_res = AccountController::igcallback($url);

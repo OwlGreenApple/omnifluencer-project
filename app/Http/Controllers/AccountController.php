@@ -949,7 +949,7 @@ public function test_search(Request $request)
         
     }
 
-    $totalfollowersdeviation = $totalfollowingsdeviation = $totalpostsdeviation = 0;
+    $dailyavgposts = $dailyavgfollowins = $dailyavgfollowers = $totalfollowersdeviation = $totalfollowingsdeviation = $totalpostsdeviation = 0;
     if($getarr > 0)
     {
       foreach($getcontent as $date=>$val)
@@ -976,15 +976,15 @@ public function test_search(Request $request)
       'influencername' => $getuser->username,
       'totalfollowersdeviation' =>$dailyavgfollowers,
       'totalfollowingsdeviation'=>$dailyavgfollowins,
-      'totalpostsdeviation'=>$dailyavgposts
+      'totalpostsdeviation'=>$dailyavgposts,
+      "influencerid"=>$id
     ];
 
     return view('user.history-search.statistic',$data);
   }
 
-  public function StatisticsCSV()
+  public function StatisticsCSV($id)
   {
-    $id = 1;
     $filename = 'history-statistics';
     $dir_recordedstatistic = storage_path('jsonstatistic').'/'.$id.'.json';
     $getcontent = array();
@@ -994,23 +994,30 @@ public function test_search(Request $request)
        $getcontent = file_get_contents($dir_recordedstatistic);
        $getcontent = json_decode($getcontent,true);
     }
+    else
+    {
+      return false;
+    }
 
     foreach($getcontent as $date=>$val)
     {
+        $exc[0] = array(
+          "Date","Total Followers","","Total Following","","Total Post",""
+        );
+
+        $exc[1] = array();
         $exc[] = array(
-          $date,$val['Total_Followers']
+          $date,number_format($val['Total_Followers']),number_format($val['FollowerDeviation']),number_format($val['Total_Following']),number_format($val['FollowingDeviation']),number_format($val['Total_Post']),number_format($val['PostDeviation'])
         );
     }
 
     Excel::create($filename, function($excel) use($exc){
-        
-      $excel->sheet('Sheetname', function($sheet) use ($exc) {
 
+      $excel->sheet('Statistics', function($sheet) use ($exc) {
           $sheet->fromArray($exc, null ,'A1', false, false);
-
       });
 
-    })->export('csv');
+    })->export('csv'); 
   }
 
 /* AccountController */  
