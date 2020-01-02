@@ -718,16 +718,37 @@
 
   </div>
 </div>
-<!-- Provely Conversions App Display Code -->
-<script>(function(w,n) {
-if (typeof(w[n]) == 'undefined'){ob=n+'Obj';w[ob]=[];w[n]=function(){w[ob].push(arguments);};
-d=document.createElement('script');d.type = 'text/javascript';d.async=1;
-d.src='https://s3.amazonaws.com/provely-public/w/provely-2.0.js';x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(d,x);}
-})(window, 'provelys', '');
-provelys('config', 'baseUrl', 'app.provely.io');
-provelys('config', 'https', 1);
-provelys('data', 'campaignId', '16163');
-provelys('config', 'widget', 1);
-</script>
-<!-- End Provely Conversions App Display Code -->
+<?php if ( env('APP_ENV') !== "local" ) { ?>
+  <!-- Provely Conversions App Display Code -->
+  <script>(function(w,n) {
+  if (typeof(w[n]) == 'undefined'){ob=n+'Obj';w[ob]=[];w[n]=function(){w[ob].push(arguments);};
+  d=document.createElement('script');d.type = 'text/javascript';d.async=1;
+  d.src='https://s3.amazonaws.com/provely-public/w/provely-2.0.js';x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(d,x);}
+  })(window, 'provelys', '');
+  provelys('config', 'baseUrl', 'app.provely.io');
+  provelys('config', 'https', 1);
+  provelys('data', 'campaignId', '16163');
+  provelys('config', 'widget', 1);
+  </script>
+  <!-- End Provely Conversions App Display Code -->
+
+  <!-- Facebook Pixel Code Activomni Page view -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '181710632734846');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=181710632734846&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Facebook Pixel Code -->
+<?php } ?>
+
 @endsection
