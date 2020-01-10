@@ -147,7 +147,7 @@ class UpdateAccount extends Command
           
           $accountlog->save();
         }
-        sleep(0.5);
+        sleep(7);
       }
     }
 }

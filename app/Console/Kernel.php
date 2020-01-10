@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('backup:db')->daily();
         $schedule->command('check:membership')->dailyAt('00:00');
-        $schedule->command('update:account')->dailyAt('02:00')->withoutOverlapping();
+        $schedule->command('update:account')->dailyAt('02:20')->withoutOverlapping();
         $schedule->command('expired:order')->dailyAt('02:00');
     }
 
