@@ -13,8 +13,8 @@ Anda telah memesan paket
 	<strong>TRANSFER Melalui :</strong><br>
 	<br>
 	<strong>Bank BCA</strong><br>
-  	8290981477<br>
-  	Rizky Redjosoewignjo<br>
+  	8290-812-845<br>
+  	Sugiarto Lasjim<br>
 	<br>
 	 
 	
