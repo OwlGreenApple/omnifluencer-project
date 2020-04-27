@@ -63,7 +63,8 @@ class UpdateAccount extends Command
     
     public function handle()
     {
-      $accounts = Account::orderBy('voting','desc')->get();
+      $accounts = Account::where("jml_followers",">",500000)
+									->orderBy('voting','desc')->get();
 
       foreach($accounts as $account){
         //kalo belum ada informasi ig_id ngejalanin pake username di database
