@@ -25,7 +25,7 @@ class TesController extends Controller
       $private = false;
       $lastpost = null;
       // $arr_res = InstagramHelper::get_user_profile("successfoundation");
-			$arr_res = json_decode(InstagramHelper::get_user_data($account->username),true);
+			$arr_res = json_decode(InstagramHelper::get_user_data("successfoundation"),true);
       
       dd($arr_res);
       exit;
