@@ -161,9 +161,22 @@
               </label>
 
               <div class="input-group" id="show_wa_number">
-                <input id="wa-number" type="text" class="form-input form-control" name="wa_number" placeholder="No WA ex: 6281..." required style="width: auto !important" onkeypress="return hanyaAngka(event)">
+                <input id="wa-number" type="text" class="form-input form-control @if($errors->has('wa_number')) is-invalid @endif" name="wa_number"required onkeypress="return hanyaAngka(event)">
+                @if($errors->has('wa_number'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('wa_number') }}</strong>
+                    </span>
+                @endif
+                <input id="hidden_country_code" type="hidden" class="form-control" name="code_country" />
+                 @if($errors->has('code_country'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('code_country') }}</strong>
+                    </span>
+                 @endif
+                <input name="data_country" type="hidden" /> 
               </div>
-            </div>
+
+            </div>  
 
             <div class="form-group">
               <label class="label-title-test" for="gender">
@@ -303,8 +316,27 @@
             this.value = this.value.replace(reg, '');
         }
     });
+    getDataFromCountry();
+    // countryChange();
   });  
+
+  function getDataFromCountry()
+  {
+     var data_country = $(".iti__selected-flag").attr('data-country');
+     $("input[name='data_country']").val(data_country);
+  }
+
+  function countryChange()
+  {
+     jQuery("#phone").on('countrychange', function(e, countryData){
+        var data_country = $(".iti__selected-flag").attr('data-country');
+        $("input[name='data_country']").val(data_country);
+    })
+  } 
+
 </script>
+<script src="{{ asset('intl-tel-input/callback.js') }}" type="text/javascript"></script>
+
 <?php if ( env('APP_ENV') !== "local" ) { ?>
   <!-- Provely Conversions App Data Code -->
   <script>(function(w,n) {

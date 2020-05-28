@@ -54,6 +54,11 @@
       });
     });
   </script>
+
+  <!-- Intl Dialing Code -->
+  <link href="{{ asset('/intl-tel-input/css/intlTelInput.min.css') }}" rel="stylesheet" />
+  <script type="text/javascript" src="{{ asset('/intl-tel-input/js/intlTelInput.js') }}"></script> 
+
 <!-- Facebook Pixel Code -->
 <script>
   !function(f,b,e,v,n,t,s)

@@ -17,6 +17,7 @@ use App\Notification;
 use App\PointLog;
 
 use App\Mail\ConfirmEmail;
+use App\Rules\CheckUserPhone;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\OrderController;
@@ -68,6 +69,8 @@ class RegisterController extends Controller
       return Validator::make($data, [
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'code_country' => ['required'],
+        'wa_number' => ['required','max:18','min:6','max:18',new CheckUserPhone($data['code_country'],null)],
         // 'password' => ['required', 'string', 'min:6', 'confirmed'],
       ]);
     }
@@ -89,13 +92,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     { 
       Session::reflash();
+      $calling_code = str_replace('+','',$data['code_country']);
       $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'gender'=> $data['gender'],
                 'password' => Hash::make($data['password']),
                 'username' => '',
-                'wa_number' => $data['wa_number'],
+                'wa_number' => $calling_code.$data['wa_number'],
+                'country_code' => $data['code_country']
             ]);
       $user->referral_link = uniqid().md5($user->id);
       $user->point = 10;
