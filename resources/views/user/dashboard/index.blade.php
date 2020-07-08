@@ -137,7 +137,7 @@
                 <hr>
 
                 <span class="tooltipstered" title="Jumlah berapa kali melakukan save as PDF">
-                  <a class="hover-details" href="#">
+                  <a class="hover-details" href="{{url('history-influencer')}}">
                     View Details &raquo;
                   </a>
                 </span>
@@ -176,7 +176,7 @@
                 <hr>
 
                 <span class="tooltipstered" title="Jumlah berapa kali melakukan save as Excel">
-                  <a class="hover-details" href="#">
+                  <a class="hover-details" href="{{url('history-influencer')}}">
                     View Details &raquo;
                   </a>
                 </span>
