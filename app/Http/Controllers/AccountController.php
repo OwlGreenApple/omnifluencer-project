@@ -87,13 +87,14 @@ class AccountController extends Controller
 
     //hitung rata2 like + comment di 20 post terakhir 
     //check akun private atau nggak
+    $ratalike = 0;
+    $ratacomment = 0;
     if($private==false){
-      $ratalike = $jmllike/$count;
-      $ratacomment = $jmlcomment/$count;
-    } else {
-      $ratalike = 0;
-      $ratacomment = 0;
-    }
+      if ($count>0) {
+        $ratalike = $jmllike/$count;
+        $ratacomment = $jmlcomment/$count;
+      }
+    } 
 
     $account->lastpost = $lastpost;
     $account->jml_likes = floor($ratalike);
