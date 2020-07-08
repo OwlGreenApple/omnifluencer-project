@@ -8,10 +8,10 @@ if(url[2] == 'localhost')
 }
 else
 {
-    path = 'https://'+url[2]+'/'+url[3];
+    path = 'https://'+url[2];
 }
 
-console.log(path);
+// console.log(path);
 
 var input = document.querySelector("#wa-number");
 window.intlTelInput(input, {
