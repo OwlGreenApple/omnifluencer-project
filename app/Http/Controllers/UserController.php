@@ -20,6 +20,11 @@ class UserController extends Controller
       return view('admin.admin',['data'=>$user]);
     }
     
+    public function LoginUser($id){
+      Auth::loginUsingId($id, true);
+      return redirect('home');
+    }
+
     public function index(){
       return view('admin.list-user.index');
     }
