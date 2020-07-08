@@ -328,7 +328,7 @@ class RegisterController extends Controller
             return redirect(route('thankyouovo'));  
           } */ 
         } else {
-          $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
+          $response = $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
           Session::forget('error');
           return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
           /*Auth::loginUsingId($user->id);
@@ -409,9 +409,9 @@ class RegisterController extends Controller
         curl_close($curl);
 
         if ($err) {
-          echo "cURL Error #:" . $err;
+          return "cURL Error #:" . $err;
         } else {
-          echo $response."\n";
+          return $response."\n";
         }
     }
 
