@@ -148,10 +148,7 @@ class AccountController extends Controller
                     ->inRandomOrder()
                     ->first();
       } else {     
-        $account = Account::
-                    where('username',$request->keywords)
-                    // ->whereDate('lastpost', '>', Carbon::now()->subDay())
-                    ->first();
+        $account = Account::where('username',$request->keywords)->first();
 
         if(is_null($account)){
           /* pengecekan membership */
@@ -199,6 +196,82 @@ class AccountController extends Controller
             return $arr;
           }
         }
+
+        //cek klo selisih 1 hari maka search lagi trs di update yang di account
+        if (Carbon::now()->subDay()->lt(Carbon::parse($account->updated_at))) {
+          $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
+          
+          if(is_array($arr_res)){
+            $account->ig_id = $arr_res["pk"];
+            //replace username di database kalo beda sama yang diambil
+            if($account->username!=$arr_res["username"]){
+              $account->username = $arr_res["username"];
+            }
+
+            $account->fullname = $arr_res["full_name"];
+            $account->prof_pic = $arr_res["hd_profile_pic_url_info"]["url"];
+            $account->jml_following = $arr_res["following_count"];
+            $account->jml_followers = $arr_res["follower_count"];
+            $account->jml_post = $arr_res["media_count"];
+
+            // var_dump($arr_res["username"]);
+
+            $arr_res2 = InstagramHelper::get_user_profile($arr_res["username"]);
+            if ($arr_res2["error_message"]=="") {
+              $count = $arr_res2["count"];
+              $jmllike = $arr_res2["jmllike"];
+              $jmlcomment = $arr_res2["jmlcomment"];
+              $private = $arr_res2["private"];
+              $lastpost = $arr_res2["lastpost"];
+
+                
+              //hitung rata2 like + comment di 20 post terakhir 
+              //check akun private atau nggak
+              // var_dump('Last post ='.$lastpost);
+              if($private==false){
+                $ratalike = $jmllike/$count;
+                $ratacomment = $jmlcomment/$count;
+              } else {
+                $ratalike = 0;
+                $ratacomment = 0;
+              }
+
+              $account->lastpost = $lastpost;
+              $account->jml_likes = floor($ratalike);
+              $account->jml_comments = floor($ratacomment);
+              //$account->eng_rate = ($account->jml_likes + $account->jml_comments)/$account->jml_followers;
+
+              if($account->jml_followers>0){
+                $account->eng_rate = ($jmllike + $jmlcomment)/($account->jml_followers*20);
+                $account->total_influenced = $account->eng_rate*$account->jml_followers;
+              }
+              
+              // var_dump('ratalike = '.floor($ratalike));
+              // var_dump('ratacomment = '.floor($ratacomment));
+              // var_dump('Eng rate = '.round($account->eng_rate*100,2));
+
+              $account->save();
+            }
+
+            $accountlog = new AccountLog;
+            $accountlog->account_id = $account->id;
+            $accountlog->jml_followers = $account->jml_followers;
+            $accountlog->jml_following = $account->jml_following;
+            $accountlog->jml_post = $account->jml_post;
+            $accountlog->lastpost = $account->lastpost;
+            $accountlog->jml_likes = $account->jml_likes;
+            $accountlog->jml_comments = $account->jml_comments;
+            $accountlog->total_calc = $account->total_calc;
+            $accountlog->total_compare = $account->total_compare;
+            if($account->jml_followers>0){
+              $accountlog->eng_rate = $account->eng_rate;
+              $accountlog->total_influenced = $account->total_influenced;  
+            }
+            
+            $accountlog->save();
+          }
+        }
+        // ->whereDate('lastpost', '>', )
 
         if(Auth::check()){
           $history = HistorySearch::where('user_id',Auth::user()->id) 
