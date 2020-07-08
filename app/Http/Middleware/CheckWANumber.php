@@ -22,7 +22,7 @@ class CheckWANumber
             return redirect("register")->with("error", " No WA harus angka");
         }
 
-        if(!preg_match("/^\+628/",$phone)){
+        if(!preg_match("/^\+628/i",$phone)){
           return redirect("register")->with("error", " No WA Tidak Valid");
         }
         return $next($request);
