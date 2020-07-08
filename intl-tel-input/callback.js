@@ -1,14 +1,17 @@
 var filename = window.location.href;
 var url = filename.split('/');
 var path;
+var hidden_url;
 
 if(url[2] == 'localhost')
 {
     path = 'https://localhost/'+url[3];
+    hidden_url = url[4];
 }
 else
 {
     path = 'https://'+url[2];
+    hidden_url = url[3];
 }
 
 // console.log(path);
@@ -31,7 +34,7 @@ window.intlTelInput(input, {
   // autoHideDialCode: false,
   // autoPlaceholder: "off",
   dropdownContainer: document.body,
-  pageHiddenInput : url[4],
+  pageHiddenInput : hidden_url,
   // excludeCountries: ["us"],
   // formatOnDisplay: false,
   // initialCountry: "us",
