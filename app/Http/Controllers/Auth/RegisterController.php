@@ -70,7 +70,7 @@ class RegisterController extends Controller
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'code_country' => ['required'],
-        'wa_number' => ['required','max:18','min:6','max:18',new CheckUserPhone($data['code_country'],null)],
+        'wa_number' => ['required','min:6','max:18',new CheckUserPhone($data['code_country'],null)],
         // 'password' => ['required', 'string', 'min:6', 'confirmed'],
       ]);
     }

@@ -17,11 +17,12 @@ class CheckWANumber
     {
 
         $phone = $request->code_country.$request->wa_number;
+
         if(!is_numeric($request->wa_number)){
             return redirect("register")->with("error", " No WA harus angka");
         }
 
-        if(!preg_match("/^\+628+[0-9]/i",$phone)){
+        if(!preg_match("/^\+628/",$phone)){
           return redirect("register")->with("error", " No WA Tidak Valid");
         }
         return $next($request);
