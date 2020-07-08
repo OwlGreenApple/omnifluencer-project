@@ -150,7 +150,7 @@ class AccountController extends Controller
       } else {     
         $account = Account::
                     where('username',$request->keywords)
-                    ->whereDate('lastpost', '>', Carbon::now()->subDay())
+                    // ->whereDate('lastpost', '>', Carbon::now()->subDay())
                     ->first();
 
         if(is_null($account)){
