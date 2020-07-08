@@ -198,7 +198,8 @@ class AccountController extends Controller
         }
 
         //cek klo selisih 1 hari maka search lagi trs di update yang di account
-        if (Carbon::now()->subDay()->lt(Carbon::parse($account->updated_at))) {
+        // ->whereDate('lastpost', '>', Carbon::now()->subDay())
+        if (Carbon::now()->subDay()->gt(Carbon::parse($account->updated_at))) {
           $arr_res = json_decode(InstagramHelper::get_user_data($request->keywords),true);
           
           if(is_array($arr_res)){
@@ -271,7 +272,7 @@ class AccountController extends Controller
             $accountlog->save();
           }
         }
-        // ->whereDate('lastpost', '>', )
+       
 
         if(Auth::check()){
           $history = HistorySearch::where('user_id',Auth::user()->id) 
