@@ -166,7 +166,9 @@ Route::group(['middleware' => ['web','auth']], function()
 Route::group(['middleware' => ['web','auth','admin']], function()
 {
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-
+  
+  Route::get('superadmin', 'UserController@super_admin');
+  
   //List Order
   Route::get('/list-order','OrderController@index_list_order');
   Route::get('/list-order/load-order','OrderController@load_list_order');

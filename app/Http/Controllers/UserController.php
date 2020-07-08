@@ -14,6 +14,12 @@ use Excel, Carbon, Auth, File, Hash, Mail;
 
 class UserController extends Controller
 {
+    public function super_admin()
+    {
+      $user = User::all();
+      return view('admin.admin',['data'=>$user]);
+    }
+    
     public function index(){
       return view('admin.list-user.index');
     }
