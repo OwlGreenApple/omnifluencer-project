@@ -365,7 +365,7 @@ class RegisterController extends Controller
             $message .= 'Tim Omnifluencer';
 
             
-            Helper::send_message_queue_system($arrRet['user']->wa_number,$message);
+            Helper::send_message_queue_system($user->wa_number,$message);
         }
 
         if ($request->price<>"") {
