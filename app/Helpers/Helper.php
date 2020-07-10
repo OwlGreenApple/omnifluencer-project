@@ -85,6 +85,33 @@ class Helper
 		return $search.str_pad($ctr, $pad_length, $pad_string, STR_PAD_LEFT);
   }
 	
+  public static function send_message_queue_system($phone_number,$message){
+      $curl = curl_init();
+
+      $data = array(
+          'phone_number'=>$phone_number,
+          'message'=>$message,
+      );
+
+		  $url = "https://activrespon.com/dashboard/send-message-queue-system";
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 300,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+      ));
+
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
+
+      curl_close($curl);
+      return $response;
+  }
 }
 
 ?>

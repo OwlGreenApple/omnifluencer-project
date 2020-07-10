@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\User;
 use App\UserLog;
 use App\Notification;
+use App\Helpers\Helper;
 
 use App\Mail\ExpiredMembershipMail;
 
@@ -61,6 +62,23 @@ class CheckMembership extends Command
           $notif->keterangan = 'Masa aktif membership Anda akan berakhir dalam 5 hari. Segera perpanjang melalui order maupun redeem point.';
           $notif->type = 'promo';
           $notif->save();
+          if (!is_null($user->wa_number)){
+              $message = null;
+              $message .= "*Selamat ".$user->name.",* \n\n";
+              $message .= "Gimana kabarnya? \n \n";
+              $message .= "Kami mau kasih tau kalau *waktu berlangganan kamu akan habis 5 hari lagi*. \n \n";
+              $message .= "Jangan sampai kamu _kehabisan waktu berlangganan saat menggunakan Omnilinkz_ yah \n \n";
+              $message .= "Kamu bisa langsung perpanjang dengan klik link dibawah ini \n";
+              $message .= "*►https://omnifluencer.com/pricing* \n \n";
+
+              $message .= "_Oh iya, kalau kamu pertanyaan jangan ragu untuk menghubungi kami di_  \n";
+              $message .= "*WA 0817-318-368* \n\n";
+
+              $message .= 'Terima Kasih,'."\n\n";
+              $message .= 'Team Omnifluencer'."\n";
+              $message .= '_*Omnifluencer is part of Activomni.com_';
+              Helper::send_message_queue_system($user->wa_number,$message);
+          }
         }
 
         if($date < $now){

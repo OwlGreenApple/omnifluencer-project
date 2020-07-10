@@ -227,6 +227,36 @@ class RegisterController extends Controller
             }  
             $message->subject('[Omnifluencer] Order Nomor '.$order_number);
           });
+          if (!is_null($user->wa_number)){
+              $message = null;
+              $message .= '*Hi '.$user->name.'*,'."\n\n";
+              $message .= "Berikut info pemesanan Omnifluencer :\n";
+              $message .= '*No Order :* '.$order->no_order.''."\n";
+              $message .= '*Nama :* '.$user->name.''."\n";
+              $message .= '*Paket :* '.$order->package.''."\n";
+              // $message .= '*Tgl Pembelian :* '.$dt->format('d-M-Y').''."\n";
+              $message .= '*Total Biaya :*  Rp. '.str_replace(",",".",number_format($order->total))."\n";
+
+              $message .= "Silahkan melakukan pembayaran dengan bank berikut : \n\n";
+              $message .= 'BCA (Sugiarto Lasjim)'."\n";
+              $message .= '8290-812-845'."\n\n";
+              
+              $message .= "Harus diperhatikan juga, kalau jumlah yang di transfer harus *sama persis dengan nominal diatas* supaya _*kami lebih mudah memproses pembelianmu*_.\n\n";
+
+              $message .= '*Sesudah transfer:*'."\n";
+              $message .= '- *Login* ke https://omnifluencer.com'."\n";
+              $message .= '- *Klik* Profile'."\n";
+              $message .= '- Pilih *Order & Confirm*'."\n";
+              $message .= '- *Upload bukti konfirmasi* disana'."\n\n";
+
+              $message .= 'Terima Kasih,'."\n\n";
+              $message .= 'Team Omnifluencer'."\n";
+              $message .= '_*Omnifluencer is part of Activomni.com_';
+              
+              Helper::send_message_queue_system($user->wa_number,$message);
+          }
+          
+          
         }
       }
 
@@ -318,6 +348,25 @@ class RegisterController extends Controller
         ];
         
         Mail::to($user->email)->send(new ConfirmEmail($emaildata));
+        
+        if (!is_null($user->wa_number)){
+            $message = null;
+            $message .= '*Hi '.$user->name."*, \n\n";
+            $message .= '*Welcome to Omnifluencer*'."\n";
+            $message .= "Terima kasih sudah memilih Omnifluencer sebagai _Tool yang bisa membantu kamu lebih dekat dengan klienmu._ Jika kamu sudah dapat WA ini berarti akunmu sudah terdaftar database kami. \n\n";
+            $message .= "Berikut info login kamu : \n";
+            $message .= "*Nama :* ".$user->name."\n";
+            $message .= "*Email :* ".$user->email."\n";
+            $message .= '*Password :* '.$password."\n\n";
+            $message .= '*Link login:* ';
+            $message .= 'https://omnifluencer.com/login'."\n\n";
+            $message .= "Oh iya, kalau ada yang ingin ditanyakan, jangan sungkan menghubungi kami di *WA 0818-318-368*. \n\n";
+            $message .= "Salam hangat, \n";
+            $message .= 'Tim Omnifluencer';
+
+            
+            Helper::send_message_queue_system($arrRet['user']->wa_number,$message);
+        }
 
         if ($request->price<>"") {
           if($request->namapaket=='Pro 15 hari' and strtoupper($request->coupon_code)==$this->coupon_code){
