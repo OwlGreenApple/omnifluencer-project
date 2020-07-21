@@ -479,10 +479,10 @@ class RegisterController extends Controller
     $fname = "";
     $lname = "";
     $arr_name = explode(" ",$name);
-    if (!is_null($arr_name[0])) {
+    if (isset($arr_name[0])) {
       $fname = $arr_name[0];
     }
-    if (!is_null($arr_name[1])) {
+    if (isset($arr_name[1])) {
       $lname = $arr_name[1];
     }
     $lname = "";
