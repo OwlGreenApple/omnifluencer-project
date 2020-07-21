@@ -109,6 +109,7 @@ class RegisterController extends Controller
       //New system, to activrespon list
       if(env('APP_ENV') <> 'local'){
         $temp = $this->sendToActivrespon($calling_code.$data['wa_number'],$data['name'],$data['email']);
+        $temp = $this->sendToCelebmail($data['name'],$data['email']);
       }
 
       $pointlog = new PointLog;
@@ -471,6 +472,44 @@ class RegisterController extends Controller
          }
          */
     }
+
+  public function sendToCelebmail($name,$email)
+  {
+    $curl = curl_init();
+    $fname = "";
+    $lname = "";
+    $arr_name = explode(" ",$name);
+    if (!is_null($arr_name[0])) {
+      $fname = $arr_name[0];
+    }
+    if (!is_null($arr_name[1])) {
+      $lname = $arr_name[1];
+    }
+    $lname = "";
+      $data = array(
+          'FNAME'=>$fname,
+          'LNAME'=>$lname,
+          'EMAIL'=>$email,
+      );
+
+		 $url = "https://celebmail.id/mail/index.php/lists/oj028pjaah5ab/subscribe";
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+      ));
+
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
+
+      curl_close($curl);
+  }
 
   public function sendToActivWA($wa_no,$name,$email)
     {
