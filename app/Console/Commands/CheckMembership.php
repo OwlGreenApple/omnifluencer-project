@@ -8,6 +8,8 @@ use App\UserLog;
 use App\Notification;
 use App\Helpers\Helper;
 
+use Carbon\Carbon;
+
 use App\Mail\ExpiredMembershipMail;
 
 use Mail,DateTime;
@@ -48,11 +50,15 @@ class CheckMembership extends Command
       $users = User::All();
 
       foreach ($users as $user) {
-        $now = new DateTime();
+        
+        $interval = Carbon::parse($user->valid_until)->diffInDays(Carbon::now());
+        
+        /* old code $now = new DateTime();
         $date = new DateTime($user->valid_until);
         $interval = $date->diff($now)->format('%d');
         var_dump($interval);
-        var_dump($date<$now);
+        var_dump($date<$now);*/
+        
         if($interval==5){
           Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
           
@@ -81,7 +87,8 @@ class CheckMembership extends Command
           }
         }
 
-        if($date < $now){
+        // if($date < $now){
+        if( Carbon::parse($user->valid_until)->lt(Carbon::now()) && !is_null($user->valid_until) ){
           Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
 
           $user->membership = 'free';
