@@ -70,7 +70,7 @@ class ApiController extends Controller
   public function sendmailfromactivwa(Request $request)
   {
       $data = json_decode($request->getContent(),true);
-      Mail::to($data['mail'])->queue(new SendMailActivWA($data['emaildata'],$data['subject']));
+      Mail::to($data['mail'])->bcc("celebgramme.dev@gmail.com")->queue(new SendMailActivWA($data['emaildata'],$data['subject']));
   }
 
   public function testmail()

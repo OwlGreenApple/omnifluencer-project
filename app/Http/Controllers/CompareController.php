@@ -510,7 +510,7 @@ class CompareController extends Controller
       }
       
 
-      Mail::to($request->email)->queue(new ProfileCompareEmail($request->email,$request->type,$data));
+      Mail::to($request->email)->bcc("celebgramme.dev@gmail.com")->queue(new ProfileCompareEmail($request->email,$request->type,$data));
 
       $arr['status'] = 'success';
       $arr['message'] = 'Email berhasil terkirim';

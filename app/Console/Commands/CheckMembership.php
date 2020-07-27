@@ -60,7 +60,7 @@ class CheckMembership extends Command
         var_dump($date<$now);*/
         
         if($interval==5){
-          Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
+          Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ExpiredMembershipMail($user->email,$user));
           
           $notif = new Notification;
           $notif->user_id = $user->id;
@@ -89,7 +89,7 @@ class CheckMembership extends Command
 
         // if($date < $now){
         if( Carbon::parse($user->valid_until)->lt(Carbon::now()) && !is_null($user->valid_until) ){
-          Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
+          Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ExpiredMembershipMail($user->email,$user));
 
           $user->membership = 'free';
           $user->valid_until = null;

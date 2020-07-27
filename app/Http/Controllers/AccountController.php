@@ -562,7 +562,7 @@ class AccountController extends Controller
     $validator = $this->validator($request->all());
 
     if(!$validator->fails()){
-      Mail::to($request->email)->queue(new ProfileEmail($request->email,$request->type,$request->id));
+      Mail::to($request->email)->bcc("celebgramme.dev@gmail.com")->queue(new ProfileEmail($request->email,$request->type,$request->id));
 
       $arr['status'] = 'success';
       $arr['message'] = 'Email berhasil terkirim';
@@ -585,7 +585,7 @@ class AccountController extends Controller
 
     if(!$validator->fails()){
 
-      Mail::to($request->email)->queue(new ProfileBulkEmail($request->email,$request->type,$request->accountid));
+      Mail::to($request->email)->bcc("celebgramme.dev@gmail.com")->queue(new ProfileBulkEmail($request->email,$request->type,$request->accountid));
 
       $arr['status'] = 'success';
       $arr['message'] = 'Email berhasil terkirim';

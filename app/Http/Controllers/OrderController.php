@@ -597,7 +597,7 @@ class OrderController extends Controller
     $notif->keterangan = 'Order '.$order->no_order.' telah dikonfirmasi oleh admin. Terimakasih dan selamat menikmati layanan kami.';
     $notif->save();
 
-    // Mail::to($user->email)->queue(new ConfirmOrderMail($user,$order));
+    // Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ConfirmOrderMail($user,$order));
     $emaildata = [
         'order' => $order,
         'user' => $user,
