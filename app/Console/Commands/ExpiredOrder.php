@@ -40,7 +40,10 @@ class ExpiredOrder extends Command
     public function handle()
     {
         $today = Carbon::now();
-        $check_time = DB::connection('mysql2')->table('orders')->select('created_at','id')->get();
+        $check_time = DB::connection('mysql2')->table('orders')
+                      ->select('created_at','id')
+                      ->where('status','<',2)
+                      ->get();
         foreach($check_time as $tm){
             $expired = Carbon::parse($tm->created_at)->addDay();
             if($today >= $expired) 
