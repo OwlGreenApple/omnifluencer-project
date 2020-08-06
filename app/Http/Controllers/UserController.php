@@ -141,7 +141,7 @@ class UserController extends Controller
                   "valid_until" => $dt->toDateTimeString(),
                 ];
                 Mail::send('emails.welcome', $dataEmail, function ($message) use ($dataEmail) {
-                  $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+                  $message->from('info@omnifluencer.com', 'Omnifluencer');
                   $message->to($dataEmail['email']);
                   $message->subject('[Omnifluencer] Bonus Berlangganan Omnifluencer');
                 });

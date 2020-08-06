@@ -33,7 +33,7 @@ class SendMailActivWA extends Mailable
     public function build()
     {
          return $this
-        ->from('no-reply@omnifluencer.com', 'Omnifluencer')
+        ->from('info@omnifluencer.com', 'Omnifluencer')
                   ->subject($this->subject)
                   ->view('emails.send-mail-activwa')
                   ->with($this->emaildata);

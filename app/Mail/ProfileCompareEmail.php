@@ -46,7 +46,7 @@ class ProfileCompareEmail extends Mailable
 
         $filename = "profile compare - ".count(array_filter($this->data['data']))." accounts - ".date('d-m-Y').".pdf";
 
-        return $this->from('no-reply@omnifluencer.com', 'Omnifluencer')
+        return $this->from('info@omnifluencer.com', 'Omnifluencer')
                     ->subject('[Omnifluencer] Profile Document')
                     ->attachData($pdf->output(), $filename)
                     ->view('emails.profile-docs')
@@ -97,7 +97,7 @@ class ProfileCompareEmail extends Mailable
           });
         })->store('xlsx',storage_path('app/'.Auth::user()->email));
 
-        return $this->from('no-reply@omnifluencer.com', 'Omnifluencer')
+        return $this->from('info@omnifluencer.com', 'Omnifluencer')
                     ->subject('[Omnifluencer] Profile Document')
                     ->attach(asset($store))
                     ->view('emails.profile-docs')

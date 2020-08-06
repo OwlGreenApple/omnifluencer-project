@@ -163,7 +163,7 @@ class LoginController extends Controller
               'no_order' => $order_number,
           ];
           Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-            $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+            $message->from('info@omnifluencer.com', 'Omnifluencer');
             $message->to($user->email);
             if(env('APP_ENV')!=='local')
             {

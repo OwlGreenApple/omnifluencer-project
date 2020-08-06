@@ -53,7 +53,7 @@ class ProfileEmail extends Mailable
 
         $filename = "profile ".$account->username.".pdf";
 
-        return $this->from('no-reply@omnifluencer.com', 'Omnifluencer')
+        return $this->from('info@omnifluencer.com', 'Omnifluencer')
                     ->subject('[Omnifluencer] Profile Document')
                     ->attachData($pdf->output(),$filename)
                     ->view('emails.profile-docs')
@@ -96,7 +96,7 @@ class ProfileEmail extends Mailable
           });
         })->store('xlsx',storage_path('app/'.Auth::user()->email));
 
-        return $this->from('no-reply@omnifluencer.com', 'Omnifluencer')
+        return $this->from('info@omnifluencer.com', 'Omnifluencer')
                     ->subject('[Omnifluencer] Profile Document')
                     ->attach(asset($store))
                     ->view('emails.profile-docs')

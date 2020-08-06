@@ -205,7 +205,7 @@ class OrderController extends Controller
       ];
 
          Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-          $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+          $message->from('info@omnifluencer.com', 'Omnifluencer');
           $message->to($user->email);
           if(env('APP_ENV')!=='local')
           {
@@ -603,7 +603,7 @@ class OrderController extends Controller
         'user' => $user,
     ];
     Mail::send('emails.confirm-order', $emaildata, function ($message) use ($user,$order) {
-      $message->from('no-reply@omnifluencer.com', 'Omnifluencer');
+      $message->from('info@omnifluencer.com', 'Omnifluencer');
       $message->to($user->email);
       $message->subject('[Omnifluencer] Konfirmasi Order '.$order->no_order);
     });
