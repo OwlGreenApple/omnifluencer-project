@@ -115,7 +115,7 @@
         <div class="card-body pricing">
           <h5 class="gray-color">
             <b class="sbold small">
-              FREE
+              Basic Plus
             </b>  
           </h5>
           <span class="harga harga-small free">
@@ -177,7 +177,7 @@
             <span class="gray-color">
               <h3>
                 <b class="sbold">
-                  FREE
+                  Basic Plus
                 </b>  
               </h3>
             </span>
@@ -188,7 +188,7 @@
               <sup>Rp</sup> 0 <sub>/bln</sub>
             </span><br>
             <span class="harga-real free">
-              Gratis Selamanya
+              Gratis
             </span><br>
             <p class="hemat monthly mt-4">
               <i class="fas fa-redo-alt"></i>

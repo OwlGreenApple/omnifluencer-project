@@ -34,7 +34,7 @@
         <th class="tl ">
         </th>
         <th class="qbse compare-heading ">
-          FREE
+          Basic Plus
         </th>
         <th class="qbse compare-heading ">
           PRO
