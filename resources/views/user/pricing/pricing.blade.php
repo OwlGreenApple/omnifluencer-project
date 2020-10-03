@@ -115,7 +115,7 @@
         <div class="card-body pricing">
           <h5 class="gray-color">
             <b class="sbold small">
-              Basic Plus
+              Basic
             </b>  
           </h5>
           <span class="harga harga-small free">
@@ -177,7 +177,7 @@
             <span class="gray-color">
               <h3>
                 <b class="sbold">
-                  Basic Plus
+                  Basic
                 </b>  
               </h3>
             </span>
