@@ -45,11 +45,11 @@
         <button type="button" class="btn btn-primary btn-confirm" data-toggle="modal" data-target="#confirm-order" data-id="{{$order->id}}">
           Confirm
         </button>
-      @else if($order->status==2)
+      @elseif($order->status==2)
         <span style="color: green">
           <b>Confirmed</b>
         </span>
-      @else if($order->status==3)
+      @elseif($order->status==3)
         <span style="color: red">
           <b>Expired</b>
         </span>
