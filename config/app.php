@@ -178,7 +178,6 @@ return [
         Barryvdh\Snappy\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         'Maatwebsite\Excel\ExcelServiceProvider',
-        Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
     ],
 
     /*
