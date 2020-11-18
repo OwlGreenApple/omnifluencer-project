@@ -165,7 +165,7 @@
       
       <hr>
 
-      <div id="pesan" class="alert"></div>
+      <div class="pesan"><!-- message --></div>
 
       <br>  
       <div class="form-group">
@@ -232,6 +232,11 @@
               <label class="btn btn-default btn-file">
                 <input type="file" name="import_file">
               </label>
+              <select name="membership" class="form-control">
+                <option value="free">Free</option>
+                <option value="pro">Pro</option>
+                <option value="premium">Premium</option>
+              </select>
               <a href="{{url('example-add-user.xlsx')}}" target="_blank">example</a>
             </div>
           </div>
@@ -358,24 +363,33 @@
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      type: 'post',
+      type: 'POST',
       data : fd,
       processData:false,
       contentType: false,
       beforeSend: function(result) {
-        $("#div-loading").show();
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
       },
-      dataType: 'text',
-      success: function(result)
+      dataType: 'json',
+      success: function(data)
       {
-        var data = jQuery.parseJSON(result);
-        /*if(data.status=='error'){
-          $('#pesan').html('<div class="alert alert-warning"><strong>Warning!</strong> '+data.message+'</div>');
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        /*var data = jQuery.parseJSON(result);*/
+        if(data.status=='error'){
+          $('.pesan').html('<div class="alert alert-warning"><strong>Warning!</strong> '+data.message+'</div>');
         } else {
-          $('#pesan').html('<div class="alert alert-success"><strong>Success!</strong> '+data.message+'</div>');
-        }*/
-        $("#div-loading").hide();
-        alert(data.message);
+          $('.pesan').html('<div class="alert alert-success"><strong>Success!</strong> '+data.message+'</div>');
+        }
+        refresh_page();
+        // alert(data.message);
+      },
+      error : function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
       }        
     });
   });

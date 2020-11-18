@@ -74,6 +74,16 @@ class UserController extends Controller
         "message" => "User berhasil di add",
       ];
 
+      if(is_null($request->time_d) || empty($request->time_d))
+      {
+        $arr = [
+          "status" => "error",
+          "message" => "Trial day tidak boleh kosong",
+        ];
+
+        return response()->json($arr);
+      }
+
       if ($admin->is_admin == 1) {
 
           $active_d = strtotime(''.$request->time_d.' day 0 second', 0);
@@ -82,7 +92,7 @@ class UserController extends Controller
 
         })->get();
 
-        if(!empty($data) && $data->count()){
+        if(!empty($data) && $data->count() > 0){
           foreach ($data as $key) {
             foreach ($key as $value) {
               //echo $value->email;
@@ -114,7 +124,7 @@ class UserController extends Controller
                 $ordercont = new OrderController;
                 $valid = $ordercont->add_time($user,"+".$request->time_d." days");
                 $user->valid_until = $valid;
-                $user->membership = 'premium';
+                $user->membership = $request->membership;
                 $user->save();
           
                 $pointlog = new PointLog;
@@ -128,7 +138,7 @@ class UserController extends Controller
                 $userlog = new UserLog;
                 $userlog->user_id = $user->id;
                 $userlog->type = 'membership';
-                $userlog->value = 'premium';
+                $userlog->value = $request->membership;
                 $userlog->keterangan = "Add Bonus user from admin";
                 $userlog->save();
           
@@ -159,7 +169,7 @@ class UserController extends Controller
           "message" => "Not Authorize",
         ];
       }
-      return $arr;
+      return response()->json($arr);
     }
 
 
