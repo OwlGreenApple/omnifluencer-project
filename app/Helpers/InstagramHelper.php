@@ -7,7 +7,7 @@ namespace App\Helpers;
 use Carbon;
 use DB, Crypt, App;
 
-use \InstagramAPI\Instagram;
+use InstagramAPI\Instagram;
 
 class InstagramHelper
 {
