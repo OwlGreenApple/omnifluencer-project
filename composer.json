@@ -18,6 +18,7 @@
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "~1.0",
         "maatwebsite/excel": "~2.1.0",
+        "mgp25/instagram-php": "^7.0",
         "rap2hpoutre/laravel-log-viewer": "^1.0",
         "rvanlaak/wkhtmltopdf-amd64-centos7": "~0.12",
         "webup/laravel-sendinblue": "^2.0",
