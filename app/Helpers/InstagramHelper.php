@@ -237,9 +237,8 @@ class InstagramHelper
 	public static function get_user_data($username){
 		try {
 			$error_message="";
-      require __DIR__.'/../../vendor/autoload.php';
-			// $i = new Instagram(false,false,[
-			$i = new \InstagramAPI\Instagram(false,false,[
+			$i = new Instagram(false,false,[
+			// $i = new \InstagramAPI\Instagram(false,false,[
 				"storage"       => "mysql",
         "dbhost"       => env('DB_HOST', '127.0.0.1'),
         "dbname"   => env('DB_DATABASE', ''),
