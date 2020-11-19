@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AccountController;
 
 use App\Helpers\InstagramHelper;
+use \InstagramAPI\Instagram;
 
 class TesController extends Controller
 {
