@@ -12,7 +12,7 @@ use \InstagramAPI\Instagram;
 class TesController extends Controller
 {
     public function tes_igcallback(){
-      /*return env('DB_HOST', '127.0.0.1')." ".env('DB_DATABASE', '')." ".env('DB_USERNAME', '')." ".env('DB_PASSWORD', '');
+      //return env('DB_HOST', '127.0.0.1')." ".env('DB_DATABASE', '')." ".env('DB_USERNAME', '')." ".env('DB_PASSWORD', '');
       
 			$i = new Instagram(false,false,[
 			// $i = new \InstagramAPI\Instagram(false,false,[
@@ -26,7 +26,7 @@ class TesController extends Controller
       $i->setProxy("http://celebgramme:Ls3gX0Op@107.181.187.190:24479");
       $i->login("mayymayyaa", "qwerty12345", 300);
       $userData = $i->people->getInfoByName('successfoundation')->getUser();
-      dd($userData);*/
+      dd($userData);
       
       
       
