@@ -44,7 +44,7 @@
     "autoload": {
         "files": [
           "mgp25/instagram-php/src/Instagram.php",
-          "mgp25/instagram-php/src/ExperimentsInterface.php",
+          "mgp25/instagram-php/src/ExperimentsInterface.php"
         ],
         "psr-4": {
             "App\\": "app/"
