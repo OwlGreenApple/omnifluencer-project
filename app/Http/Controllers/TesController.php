@@ -15,10 +15,10 @@ class TesController extends Controller
 			$i = new Instagram(false,false,[
 			// $i = new \InstagramAPI\Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => env('DB_HOST', '127.0.0.1'),
-        "dbname"   => env('DB_DATABASE', ''),
-        "dbusername"   => env('DB_USERNAME', ''),
-        "dbpassword"   => env('DB_PASSWORD', ''),
+        "settings_dbhost"       => env('DB_HOST', '127.0.0.1'),
+        "settings_dbname"   => env('DB_DATABASE', ''),
+        "settings_dbusername"   => env('DB_USERNAME', ''),
+        "settings_dbpassword"   => env('DB_PASSWORD', ''),
 			]);	      
       $i->setProxy("http://celebgramme:Ls3gX0Op@107.181.187.190:24479");
       dd($i->login("mayymayyaa", "qwerty12345", 300));
