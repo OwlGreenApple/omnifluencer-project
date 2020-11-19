@@ -43,11 +43,11 @@
     },
     "autoload": {
         "psr-0": {
-            "Mgp25\\Instagram-php\\": "mgp25/instagram-php/src"
+            "InstagramAPI\\Instagram\\": "mgp25/instagram-php/src"
         },
         "psr-4": {
             "App\\": "app/",
-            "Mgp25\\Instagram-php\\": "mgp25/instagram-php/src"
+            "InstagramAPI\\Instagram\\": "mgp25/instagram-php/src"
         },
         "classmap": [
             "database/seeds",
