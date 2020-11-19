@@ -22,7 +22,9 @@ class TesController extends Controller
         "dbtablename"   => 'user_sessions',
 			]);	      
       $i->setProxy("http://celebgramme:Ls3gX0Op@107.181.187.190:24479");
-      dd($i->login("mayymayyaa", "qwerty12345", 300));
+      $i->login("mayymayyaa", "qwerty12345", 300);
+      $userData = $i->people->getInfoByName($username)->getUser();
+      dd($userData);
       
       
       // $url = "http://cmx.space/get-user-data/heiwahyu_";
