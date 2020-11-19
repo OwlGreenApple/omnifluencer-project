@@ -8,21 +8,22 @@ use Carbon;
 use DB, Crypt, App;
 
 use \InstagramAPI\Instagram;
-use App\Helpers\InstagramHelper;
 class InstagramHelper
 {
-  protected $dbhost='localhost',$dbname='activfla_omnifluencer_1',$dbusername='activfla_omniflue_user',$dbpassword='k*?J3Je63Yoh';
-
 	public static function check_login(){
 		try {
-      $ighelper = new InstagramHelper;
+      $dbhost='localhost';
+      $dbname='activfla_omnifluencer_1';
+      $dbusername='activfla_omniflue_user';
+      $dbpassword='k*?J3Je63Yoh';
+
 			$error_message="";
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => $ighelper->dbhost,
-        "dbname"   => $ighelper->dbname,
-        "dbusername"   => $ighelper->dbusername,
-        "dbpassword"   => $ighelper->dbpassword,
+        "dbhost"       => $dbhost,
+        "dbname"   => $dbname,
+        "dbusername"   => $dbusername,
+        "dbpassword"   => $dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -95,14 +96,18 @@ class InstagramHelper
 	
   public static function getUserDataByid($id){
     try {
-      $ighelper = new InstagramHelper;
+      $dbhost='localhost';
+      $dbname='activfla_omnifluencer_1';
+      $dbusername='activfla_omniflue_user';
+      $dbpassword='k*?J3Je63Yoh';
+
       $error_message="";
       $i = new Instagram(false,false,[
         "storage"       => "mysql",
-        "dbhost"       => $ighelper->dbhost,
-        "dbname"   => $ighelper->dbname,
-        "dbusername"   => $ighelper->dbusername,
-        "dbpassword"   => $ighelper->dbpassword,
+        "dbhost"       => $dbhost,
+        "dbname"   => $dbname,
+        "dbusername"   => $dbusername,
+        "dbpassword"   => $dbpassword,
         "dbtablename"   => 'user_sessions',
       ]);	
       
@@ -243,15 +248,19 @@ class InstagramHelper
 	public static function get_user_data($username){
 		try {
 			$error_message="";
-      $ighelper = new InstagramHelper;
+      $dbhost='localhost';
+      $dbname='activfla_omnifluencer_1';
+      $dbusername='activfla_omniflue_user';
+      $dbpassword='k*?J3Je63Yoh';
+
       // require __DIR__.'vendor/autoload.php';
 			$i = new Instagram(false,false,[
 			// $i = new \InstagramAPI\Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => $ighelper->dbhost,
-        "dbname"   => $ighelper->dbname,
-        "dbusername"   => $ighelper->dbusername,
-        "dbpassword"   => $ighelper->dbpassword,
+        "dbhost"       => $dbhost,
+        "dbname"   => $dbname,
+        "dbusername"   => $dbusername,
+        "dbpassword"   => $dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -394,14 +403,18 @@ class InstagramHelper
 	
  	public static function get_user_feed($username,$maxid = null){
 		try {
-      $ighelper = new InstagramHelper;
+      $dbhost='localhost';
+      $dbname='activfla_omnifluencer_1';
+      $dbusername='activfla_omniflue_user';
+      $dbpassword='k*?J3Je63Yoh';
+
 			$error_message="";
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => $ighelper->dbhost,
-        "dbname"   => $ighelper->dbname,
-        "dbusername"   => $ighelper->dbusername,
-        "dbpassword"   => $ighelper->dbpassword,
+        "dbhost"       => $dbhost,
+        "dbname"   => $dbname,
+        "dbusername"   => $dbusername,
+        "dbpassword"   => $dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -464,14 +477,18 @@ class InstagramHelper
 
 	public static function get_user_feed_maxid($username,$maxid = null){
 		try {
-      $ighelper = new InstagramHelper;
+      $dbhost='localhost';
+      $dbname='activfla_omnifluencer_1';
+      $dbusername='activfla_omniflue_user';
+      $dbpassword='k*?J3Je63Yoh';
+
 			$error_message="";
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => $ighelper->dbhost,
-        "dbname"   => $ighelper->dbname,
-        "dbusername"   => $ighelper->dbusername,
-        "dbpassword"   => $ighelper->dbpassword,
+        "dbhost"       => $dbhost,
+        "dbname"   => $dbname,
+        "dbusername"   => $dbusername,
+        "dbpassword"   => $dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -542,13 +559,17 @@ class InstagramHelper
       $private = false;
       $lastpost = null;
       $maxid = null;
-      $ighelper = new InstagramHelper;
+      $dbhost='localhost';
+      $dbname='activfla_omnifluencer_1';
+      $dbusername='activfla_omniflue_user';
+      $dbpassword='k*?J3Je63Yoh';
+
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => $ighelper->dbhost,
-        "dbname"   => $ighelper->dbname,
-        "dbusername"   => $ighelper->dbusername,
-        "dbpassword"   => $ighelper->dbpassword,
+        "dbhost"       => $dbhost,
+        "dbname"   => $dbname,
+        "dbusername"   => $dbusername,
+        "dbpassword"   => $dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
