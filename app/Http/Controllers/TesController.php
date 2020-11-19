@@ -12,6 +12,8 @@ use \InstagramAPI\Instagram;
 class TesController extends Controller
 {
     public function tes_igcallback(){
+      return env('DB_HOST', '127.0.0.1')." ".env('DB_DATABASE', '')." ".env('DB_USERNAME', '')." ".env('DB_PASSWORD', '');
+      
 			$i = new Instagram(false,false,[
 			// $i = new \InstagramAPI\Instagram(false,false,[
 				"storage"       => "mysql",
