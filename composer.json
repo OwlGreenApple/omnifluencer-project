@@ -47,7 +47,7 @@
         },
         "classmap": [
             "database/seeds",
-            "mgp25/instagram-php",
+            "mgp25/instagram-php/src",
             "database/factories"
         ]
     },
