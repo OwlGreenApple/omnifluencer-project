@@ -233,5 +233,9 @@ return [
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
     ],
-
+    
+    'dbhost' => env('DB_HOST'),
+    'dbdatabase' => env('DB_DATABASE'),
+    'dbusername' => env('DB_USERNAME'),
+    'dbpassword' => env('DB_PASSWORD'),
 ];

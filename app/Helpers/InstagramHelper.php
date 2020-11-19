@@ -16,10 +16,10 @@ class InstagramHelper
 			$error_message="";
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => env('DB_HOST', '127.0.0.1'),
-        "dbname"   => env('DB_DATABASE', ''),
-        "dbusername"   => env('DB_USERNAME', ''),
-        "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbhost"       => config('app.dbhost'),
+        "dbname"   => config('app.dbdatabase'),
+        "dbusername"   => config('app.dbusername'),
+        "dbpassword"   => config('app.dbpassword'),
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -95,10 +95,11 @@ class InstagramHelper
       $error_message="";
       $i = new Instagram(false,false,[
         "storage"       => "mysql",
-        "dbhost"       => env('DB_HOST', '127.0.0.1'),
-        "dbname"   => env('DB_DATABASE', ''),
-        "dbusername"   => env('DB_USERNAME', ''),
-        "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbhost"       => config('app.dbhost'),
+        "dbname"   => config('app.dbdatabase'),
+        "dbusername"   => config('app.dbusername'),
+        "dbpassword"   => config('app.dbpassword'),
+        "dbtablename"   => 'user_sessions',
       ]);	
       
           // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
@@ -242,10 +243,10 @@ class InstagramHelper
 			$i = new Instagram(false,false,[
 			// $i = new \InstagramAPI\Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => env('DB_HOST', '127.0.0.1'),
-        "dbname"   => env('DB_DATABASE', ''),
-        "dbusername"   => env('DB_USERNAME', ''),
-        "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbhost"       => config('app.dbhost'),
+        "dbname"   => config('app.dbdatabase'),
+        "dbusername"   => config('app.dbusername'),
+        "dbpassword"   => config('app.dbpassword'),
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -391,10 +392,10 @@ class InstagramHelper
 			$error_message="";
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => env('DB_HOST', '127.0.0.1'),
-        "dbname"   => env('DB_DATABASE', ''),
-        "dbusername"   => env('DB_USERNAME', ''),
-        "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbhost"       => config('app.dbhost'),
+        "dbname"   => config('app.dbdatabase'),
+        "dbusername"   => config('app.dbusername'),
+        "dbpassword"   => config('app.dbpassword'),
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -460,10 +461,10 @@ class InstagramHelper
 			$error_message="";
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => env('DB_HOST', '127.0.0.1'),
-        "dbname"   => env('DB_DATABASE', ''),
-        "dbusername"   => env('DB_USERNAME', ''),
-        "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbhost"       => config('app.dbhost'),
+        "dbname"   => config('app.dbdatabase'),
+        "dbusername"   => config('app.dbusername'),
+        "dbpassword"   => config('app.dbpassword'),
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -536,10 +537,10 @@ class InstagramHelper
       $maxid = null;
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => env('DB_HOST', '127.0.0.1'),
-        "dbname"   => env('DB_DATABASE', ''),
-        "dbusername"   => env('DB_USERNAME', ''),
-        "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbhost"       => config('app.dbhost'),
+        "dbname"   => config('app.dbdatabase'),
+        "dbusername"   => config('app.dbusername'),
+        "dbpassword"   => config('app.dbpassword'),
         "dbtablename"   => 'user_sessions',
 			]);	
 			
