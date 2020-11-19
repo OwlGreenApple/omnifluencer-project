@@ -47,13 +47,13 @@
         },
         "classmap": [
             "database/seeds",
+            "mgp25/instagram-php",
             "database/factories"
         ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-            
         }
     },
     "minimum-stability": "dev",
