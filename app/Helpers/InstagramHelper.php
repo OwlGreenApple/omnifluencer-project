@@ -11,15 +11,22 @@ use \InstagramAPI\Instagram;
 
 class InstagramHelper
 {
+  protected $fillable = [
+      'dbhost'=>'localhost', 
+      'dbname'=>'activfla_omnifluencer_1', 
+      'dbusername'=>'activfla_omniflue_user', 
+      'dbpassword'=>'k*?J3Je63Yoh', 
+  ];
+  
 	public static function check_login(){
 		try {
 			$error_message="";
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => config('app.dbhost'),
-        "dbname"   => config('app.dbdatabase'),
-        "dbusername"   => config('app.dbusername'),
-        "dbpassword"   => config('app.dbpassword'),
+        "dbhost"       => $this->dbhost,
+        "dbname"   => $this->dbname,
+        "dbusername"   => $this->dbusername,
+        "dbpassword"   => $this->dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -95,10 +102,10 @@ class InstagramHelper
       $error_message="";
       $i = new Instagram(false,false,[
         "storage"       => "mysql",
-        "dbhost"       => config('app.dbhost'),
-        "dbname"   => config('app.dbdatabase'),
-        "dbusername"   => config('app.dbusername'),
-        "dbpassword"   => config('app.dbpassword'),
+        "dbhost"       => $this->dbhost,
+        "dbname"   => $this->dbname,
+        "dbusername"   => $this->dbusername,
+        "dbpassword"   => $this->dbpassword,
         "dbtablename"   => 'user_sessions',
       ]);	
       
@@ -243,10 +250,10 @@ class InstagramHelper
 			$i = new Instagram(false,false,[
 			// $i = new \InstagramAPI\Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => config('app.dbhost'),
-        "dbname"   => config('app.dbdatabase'),
-        "dbusername"   => config('app.dbusername'),
-        "dbpassword"   => config('app.dbpassword'),
+        "dbhost"       => $this->dbhost,
+        "dbname"   => $this->dbname,
+        "dbusername"   => $this->dbusername,
+        "dbpassword"   => $this->dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -392,10 +399,10 @@ class InstagramHelper
 			$error_message="";
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => config('app.dbhost'),
-        "dbname"   => config('app.dbdatabase'),
-        "dbusername"   => config('app.dbusername'),
-        "dbpassword"   => config('app.dbpassword'),
+        "dbhost"       => $this->dbhost,
+        "dbname"   => $this->dbname,
+        "dbusername"   => $this->dbusername,
+        "dbpassword"   => $this->dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -461,10 +468,10 @@ class InstagramHelper
 			$error_message="";
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => config('app.dbhost'),
-        "dbname"   => config('app.dbdatabase'),
-        "dbusername"   => config('app.dbusername'),
-        "dbpassword"   => config('app.dbpassword'),
+        "dbhost"       => $this->dbhost,
+        "dbname"   => $this->dbname,
+        "dbusername"   => $this->dbusername,
+        "dbpassword"   => $this->dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
@@ -537,10 +544,10 @@ class InstagramHelper
       $maxid = null;
 			$i = new Instagram(false,false,[
 				"storage"       => "mysql",
-        "dbhost"       => config('app.dbhost'),
-        "dbname"   => config('app.dbdatabase'),
-        "dbusername"   => config('app.dbusername'),
-        "dbpassword"   => config('app.dbpassword'),
+        "dbhost"       => $this->dbhost,
+        "dbname"   => $this->dbname,
+        "dbusername"   => $this->dbusername,
+        "dbpassword"   => $this->dbpassword,
         "dbtablename"   => 'user_sessions',
 			]);	
 			
