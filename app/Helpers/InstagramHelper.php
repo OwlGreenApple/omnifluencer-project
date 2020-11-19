@@ -7,7 +7,7 @@ namespace App\Helpers;
 use Carbon;
 use DB, Crypt, App;
 
-// use \InstagramAPI\Instagram;
+use \InstagramAPI\Instagram;
 
 class InstagramHelper
 {
@@ -237,9 +237,9 @@ class InstagramHelper
 	public static function get_user_data($username){
 		try {
 			$error_message="";
-      require __DIR__.'/../../vendor/autoload.php';
-			// $i = new Instagram(false,false,[
-			$i = new \InstagramAPI\Instagram(false,false,[
+      // require __DIR__.'/../../vendor/autoload.php';
+			$i = new Instagram(false,false,[
+			// $i = new \InstagramAPI\Instagram(false,false,[
 				"storage"       => "mysql",
         "dbhost"       => env('DB_HOST', '127.0.0.1'),
         "dbname"   => env('DB_DATABASE', ''),
