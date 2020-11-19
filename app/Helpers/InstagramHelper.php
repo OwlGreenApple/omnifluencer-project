@@ -20,6 +20,7 @@ class InstagramHelper
         "dbname"   => env('DB_DATABASE', ''),
         "dbusername"   => env('DB_USERNAME', ''),
         "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbtablename"   => 'user_sessions',
 			]);	
 			
           if ( env('APP_ENV') == "production" ) {
@@ -245,6 +246,7 @@ class InstagramHelper
         "dbname"   => env('DB_DATABASE', ''),
         "dbusername"   => env('DB_USERNAME', ''),
         "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbtablename"   => 'user_sessions',
 			]);	
 			
 					// $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
@@ -393,6 +395,7 @@ class InstagramHelper
         "dbname"   => env('DB_DATABASE', ''),
         "dbusername"   => env('DB_USERNAME', ''),
         "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbtablename"   => 'user_sessions',
 			]);	
 			
 					// $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
@@ -461,6 +464,7 @@ class InstagramHelper
         "dbname"   => env('DB_DATABASE', ''),
         "dbusername"   => env('DB_USERNAME', ''),
         "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbtablename"   => 'user_sessions',
 			]);	
 			
 					// $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
@@ -536,6 +540,7 @@ class InstagramHelper
         "dbname"   => env('DB_DATABASE', ''),
         "dbusername"   => env('DB_USERNAME', ''),
         "dbpassword"   => env('DB_PASSWORD', ''),
+        "dbtablename"   => 'user_sessions',
 			]);	
 			
       // $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
