@@ -42,6 +42,7 @@
         }
     },
     "autoload": {
+        "files": ["mgp25/instagram-php/src/Instagram.php"],
         "psr-0": {
             "InstagramAPI\\Instagram\\": "mgp25/instagram-php/src/"
         },
