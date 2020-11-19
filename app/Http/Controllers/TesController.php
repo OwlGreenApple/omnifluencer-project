@@ -23,12 +23,10 @@ class TesController extends Controller
 			]);	      
       $i->setProxy("http://celebgramme:Ls3gX0Op@107.181.187.190:24479");
       $i->login("mayymayyaa", "qwerty12345", 300);
-      $userData = $i->people->getInfoByName($username)->getUser();
+      $userData = $i->people->getInfoByName('successfoundation')->getUser();
       dd($userData);
       
       
-      // $url = "http://cmx.space/get-user-data/heiwahyu_";
-      // $arr_res = AccountController::igcallback($url);
       
       //buat login 
       // dd(json_decode(InstagramHelper::check_login(),true));
