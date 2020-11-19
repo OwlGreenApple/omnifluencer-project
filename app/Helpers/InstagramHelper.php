@@ -11,13 +11,7 @@ use \InstagramAPI\Instagram;
 
 class InstagramHelper
 {
-  protected $fillable = [
-      'dbhost'=>'localhost', 
-      'dbname'=>'activfla_omnifluencer_1', 
-      'dbusername'=>'activfla_omniflue_user', 
-      'dbpassword'=>'k*?J3Je63Yoh', 
-  ];
-  
+  protected $dbhost='localhost',$dbname='activfla_omnifluencer_1',$dbusername='activfla_omniflue_user',$dbpassword='k*?J3Je63Yoh';
 	public static function check_login(){
 		try {
 			$error_message="";
