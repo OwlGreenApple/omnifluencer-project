@@ -27,9 +27,9 @@ class InstagramHelper
         "dbtablename"   => 'user_sessions',
 			]);	
 			
-          if ( env('APP_ENV') == "production" ) {
-            $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
-          }
+          // if ( env('APP_ENV') == "production" ) {
+            // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+          // }
 					// JANGAN LUPA DILOGIN TERLEBIH DAHULU
 					// $i->setProxy('http://208.115.112.100:9999');
 					
@@ -118,10 +118,10 @@ class InstagramHelper
             $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
           }*/
           
-          if ( env('APP_ENV') == "local" ) {
-            $i->login("mayyyvitri", "qwerty12345", 300);
-          } 
-          else if ( env('APP_ENV') == "production" ) {
+          // if ( env('APP_ENV') == "local" ) {
+            // $i->login("mayyyvitri", "qwerty12345", 300);
+          // } 
+          // else if ( env('APP_ENV') == "production" ) {
             $arr_users[] = [
               "proxy"=>"107.181.187.190",
               "port"=>"24470",
@@ -201,7 +201,7 @@ class InstagramHelper
             $i->setProxy("http://michaelsugih:69682micro@".$arr_user['proxy'].":".$arr_user['port']);*/
             $i->setProxy("http://celebgramme:Ls3gX0Op@".$arr_user['proxy'].":".$arr_user['port']);
             $i->login($arr_user["username"], $arr_user["password"], 300);
-          }
+          // }
           $userData = $i->people->getInfoById($id)->getUser();
 
           return json_encode($userData);
@@ -272,10 +272,10 @@ class InstagramHelper
           }*/
 					
 					
-          if ( env('APP_ENV') == "local" ) {
-            $i->login("mayyyvitri", "qwerty12345", 300);
-          } 
-          else if ( env('APP_ENV') == "production" ) {
+          // if ( env('APP_ENV') == "local" ) {
+            // $i->login("mayyyvitri", "qwerty12345", 300);
+          // } 
+          // else if ( env('APP_ENV') == "production" ) {
             $arr_users[] = [
               "proxy"=>"107.181.187.190",
               "port"=>"24470",
@@ -356,7 +356,7 @@ class InstagramHelper
             // $i->setProxy("http://".$arr_user['username'].":".$arr_user['password']."@".$arr_user['proxy'].":".$arr_user['port']);
             $i->setProxy("http://celebgramme:Ls3gX0Op@".$arr_user['proxy'].":".$arr_user['port']);
             $i->login($arr_user["username"], $arr_user["password"], 300);
-          }
+          // }
 					$userData = $i->people->getInfoByName($username)->getUser();
 
 					return json_encode($userData);
@@ -420,18 +420,17 @@ class InstagramHelper
 			
 					// $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
 					// JANGAN LUPA DILOGIN TERLEBIH DAHULU
-          if ( env('APP_ENV') == "production" ) {
-            // $i->setProxy('http://208.115.112.100:9999');
-            $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
-          }
+          // if ( env('APP_ENV') == "production" ) {
+            // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+          // }
 					
 					
-          if ( env('APP_ENV') == "local" ) {
-            $i->login("mayyyvitri", "qwerty12345", 300);
-          } 
-          else {
+          // if ( env('APP_ENV') == "local" ) {
+            // $i->login("mayyyvitri", "qwerty12345", 300);
+          // } 
+          // else {
             $i->login("mayymayyaa", "qwerty12345", 300);
-          }
+          // }
 					$feed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
 
 					return json_encode($feed->getItems());
@@ -494,18 +493,17 @@ class InstagramHelper
 			
 					// $i->setProxy('http://sugiarto:sugiarto12@196.18.172.66:57159');
 					// JANGAN LUPA DILOGIN TERLEBIH DAHULU
-          if ( env('APP_ENV') == "production" ) {
-            // $i->setProxy('http://208.115.112.100:9999');
-            $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
-          }
+          // if ( env('APP_ENV') == "production" ) {
+            // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
+          // }
 					
 					
-          if ( env('APP_ENV') == "local" ) {
-            $i->login("mayyyvitri", "qwerty12345", 300);
-          } 
-          else {
+          // if ( env('APP_ENV') == "local" ) {
+            // $i->login("mayyyvitri", "qwerty12345", 300);
+          // } 
+          // else {
             $i->login("mayymayyaa", "qwerty12345", 300);
-          }
+          // }
 					$feed = $i->timeline->getUserFeed($i->people->getUserIdForName($username),$maxid);
 
 					return $feed->getNextMaxId();
@@ -579,10 +577,10 @@ class InstagramHelper
         // $i->setProxy('http://michaelsugih:TUhmQPS2erGtEe2@id.smartproxy.io:10001');
       // }
 
-      if ( env('APP_ENV') == "local" ) {
-        $i->login("mayyyvitri", "qwerty12345", 300);
-      } 
-      else if ( env('APP_ENV') == "production" ) {
+      // if ( env('APP_ENV') == "local" ) {
+        // $i->login("mayyyvitri", "qwerty12345", 300);
+      // } 
+      // else if ( env('APP_ENV') == "production" ) {
             $arr_users[] = [
               "proxy"=>"107.181.187.190",
               "port"=>"24470",
@@ -663,7 +661,7 @@ class InstagramHelper
         // $i->setProxy("http://".$arr_user['username'].":".$arr_user['password']."@".$arr_user['proxy'].":".$arr_user['port']);
         $i->setProxy("http://celebgramme:Ls3gX0Op@".$arr_user['proxy'].":".$arr_user['port']);
         $i->login($arr_user["username"], $arr_user["password"], 300);
-      }
+      // }
       
       //var_dump($arr_res2);
 
