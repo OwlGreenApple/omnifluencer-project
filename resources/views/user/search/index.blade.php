@@ -191,7 +191,7 @@
     }
 
     p++;
-   },1000);
+   },1550);
   }
 
   function search_byid(id) {
