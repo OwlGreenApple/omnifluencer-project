@@ -187,6 +187,7 @@
     else
     {
       clearInterval(timer);
+      p = 0
     }
 
     p++;
