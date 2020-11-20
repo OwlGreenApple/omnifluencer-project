@@ -6,6 +6,9 @@
 
   $(document).ready(function() {
     refresh_page();
+
+    $('#loader').show();
+    $('.div-loading').addClass('background-load');
   });
 
   jQuery(document).ready(function($) {
@@ -79,7 +82,9 @@
     }
   }
 
-  function load_search() {
+  function load_search() 
+  {
+    timeout_trigger();
     $.ajax({
       type: 'GET',
       url: "<?php echo url('/search/load-search') ?>",
@@ -88,12 +93,15 @@
       },
       dataType: 'text',
       beforeSend: function() {
-        $('#loader').show();
+        $('#progress_bar').show();
+        // $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
       success: function(result) {
-        $('#loader').hide();
+        $('#progress_bar').hide();
+        // $('#loader').hide();
         $('.div-loading').removeClass('background-load');
+        $(".progress-view").html(0+"%");
 
         var data = jQuery.parseJSON(result);
 
@@ -135,8 +143,54 @@
             $('#modal-pesan').modal('show');
           }
         }
+      },
+      error : function(xhr){
+        $('#progress_bar').hide();
+        // $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
       }
     });
+  }
+
+  function timeout_trigger() 
+  {
+   p = 0;
+   var timer = setInterval(function(){
+    $(".progress-view").html(p+"%");
+
+    if(p <= 15)
+    {
+      $(".progress-status").css('margin-left',-142+'px');
+      $(".progress-status").html('checking IG database');
+    }
+    else if(p > 15 && p <= 30)
+    {
+      $(".progress-status").css('margin-left',-159+'px');
+      $(".progress-status").html('pulling recent posts data');
+    }
+    else if(p > 30 && p <= 45)
+    {
+      $(".progress-status").css('margin-left',-142+'px');
+      $(".progress-status").html('compiling data for you');
+    }
+    else if(p > 45 && p <= 60)
+    {
+      $(".progress-status").css('margin-left',-149+'px');
+      $(".progress-status").html('calculating data for you');
+    }
+    else if(p > 60 && p <= 98)
+    {
+      $(".progress-status").css('margin-left',-150+'px');
+      $(".progress-status").html('translating data for you');
+    }
+    else
+    {
+      clearInterval(timer);
+    }
+
+    p++;
+   },1000);
   }
 
   function search_byid(id) {
@@ -396,7 +450,7 @@
         </div>
       </div>
 
-      <!--      Mobile View Card-->
+      <!--Mobile View Card-->
       <div class="row col-md-12 mobilecard">
         <div class="col-md-4 col-4 d-block d-sm-none">
           <div class="card">

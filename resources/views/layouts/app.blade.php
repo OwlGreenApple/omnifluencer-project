@@ -393,6 +393,10 @@
     <!--Loading Bar-->
     <div class="div-loading">
       <div id="loader" style="display: none;"></div>  
+      <div id="progress_bar" style="display: none;">
+        <div class="progress-view"></div>
+        <div class="progress-status"></div>
+      </div>  
     </div>
 
   </div>
