@@ -224,15 +224,20 @@ class RegisterController extends Controller
               'nama_paket' => $data['namapaket'],
               'no_order' => $order_number,
           ];
-          Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-            $message->from('info@omnifluencer.com', 'Omnifluencer');
-            $message->to($user->email);
-            if(env('APP_ENV')!=='local')
-            {
-              $message->bcc(['celebgramme.dev@gmail.com','endah.celebgram@gmail.com']);
-            }  
-            $message->subject('[Omnifluencer] Order Nomor '.$order_number);
-          });
+
+          if(env('APP_ENV') <> 'local')
+          {
+             Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+              $message->from('info@omnifluencer.com', 'Omnifluencer');
+              $message->to($user->email);
+              if(env('APP_ENV')!=='local')
+              {
+                $message->bcc(['celebgramme.dev@gmail.com','endah.celebgram@gmail.com']);
+              }  
+              $message->subject('[Omnifluencer] Order Nomor '.$order_number);
+            });
+          }
+         
           if (!is_null($user->wa_number)){
               $message = null;
               $message .= '*Hi '.$user->name.'*,'."\n\n";
@@ -352,8 +357,12 @@ class RegisterController extends Controller
           'user' => $user,
           'password' => $password,
         ];
-        
-        Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->send(new ConfirmEmail($emaildata));
+
+
+        if(env('APP_ENV') <> 'local')
+        {
+          Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->send(new ConfirmEmail($emaildata));
+        }
         
         if (!is_null($user->wa_number)){
             $message = null;
@@ -427,8 +436,10 @@ class RegisterController extends Controller
           'user' => $user,
           'password' => $password,
         ];
-        
-        Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ConfirmEmail($emaildata));
+        if(env('APP_ENV') <> 'local')
+        {
+          Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ConfirmEmail($emaildata));
+        }
         Session::forget('error');
         return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
       } else {
