@@ -42,7 +42,7 @@ class TesController extends Controller
       $lastpost = null;
       // $arr_res = InstagramHelper::get_user_profile("successfoundation");
 			// $arr_res = json_decode(InstagramHelper::get_user_data("successfoundation"),true);
-			$arr_res = InstagramHelper::get_user_data("thasanathasa");
+			$arr_res = InstagramHelper::get_user_data("successfoundation");
       
       dd($arr_res);
       exit;
