@@ -112,19 +112,19 @@ class InstagramHelper
             // $i->login("mayyyvitri", "qwerty12345", 300);
           // } 
           // else if ( env('APP_ENV') == "production" ) {
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24470",
-              "username"=>"melodianaelisa",
-              "password"=>"12345qwerty",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24470",
+              // "username"=>"melodianaelisa",
+              // "password"=>"12345qwerty",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24471",
-              "username"=>"dessiarumi",
-              "password"=>"13679asdf",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24471",
+              // "username"=>"dessiarumi",
+              // "password"=>"13679asdf",
+            // ];			
             
             $arr_users[] = [
               "proxy"=>"107.181.187.190",
@@ -147,33 +147,33 @@ class InstagramHelper
               "password"=>"qwerty12345",
             ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24475",
-              "username"=>"felysamora",
-              "password"=>"qwerty12345",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24475",
+              // "username"=>"felysamora",
+              // "password"=>"qwerty12345",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24476",
-              "username"=>"nithaasyari",
-              "password"=>"qwerty12345",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24476",
+              // "username"=>"nithaasyari",
+              // "password"=>"qwerty12345",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24477",
-              "username"=>"thalianasarifernand",
-              "password"=>"54321qwerty",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24477",
+              // "username"=>"thalianasarifernand",
+              // "password"=>"54321qwerty",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24478",
-              "username"=>"naningtyasa",
-              "password"=>"qwerty54321",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24478",
+              // "username"=>"naningtyasa",
+              // "password"=>"qwerty54321",
+            // ];			
             
             $arr_users[] = [
               "proxy"=>"107.181.187.190",
@@ -261,19 +261,19 @@ class InstagramHelper
             // $i->login("mayyyvitri", "qwerty12345", 300);
           // } 
           // else if ( env('APP_ENV') == "production" ) {
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24470",
-              "username"=>"melodianaelisa",
-              "password"=>"12345qwerty",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24470",
+              // "username"=>"melodianaelisa",
+              // "password"=>"12345qwerty",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24471",
-              "username"=>"dessiarumi",
-              "password"=>"13679asdf",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24471",
+              // "username"=>"dessiarumi",
+              // "password"=>"13679asdf",
+            // ];			
             
             $arr_users[] = [
               "proxy"=>"107.181.187.190",
@@ -296,33 +296,33 @@ class InstagramHelper
               "password"=>"qwerty12345",
             ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24475",
-              "username"=>"felysamora",
-              "password"=>"qwerty12345",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24475",
+              // "username"=>"felysamora",
+              // "password"=>"qwerty12345",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24476",
-              "username"=>"nithaasyari",
-              "password"=>"qwerty12345",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24476",
+              // "username"=>"nithaasyari",
+              // "password"=>"qwerty12345",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24477",
-              "username"=>"thalianasarifernand",
-              "password"=>"54321qwerty",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24477",
+              // "username"=>"thalianasarifernand",
+              // "password"=>"54321qwerty",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24478",
-              "username"=>"naningtyasa",
-              "password"=>"qwerty54321",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24478",
+              // "username"=>"naningtyasa",
+              // "password"=>"qwerty54321",
+            // ];			
             
             $arr_users[] = [
               "proxy"=>"107.181.187.190",
@@ -551,19 +551,19 @@ class InstagramHelper
         // $i->login("mayyyvitri", "qwerty12345", 300);
       // } 
       // else if ( env('APP_ENV') == "production" ) {
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24470",
-              "username"=>"melodianaelisa",
-              "password"=>"12345qwerty",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24470",
+              // "username"=>"melodianaelisa",
+              // "password"=>"12345qwerty",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24471",
-              "username"=>"dessiarumi",
-              "password"=>"13679asdf",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24471",
+              // "username"=>"dessiarumi",
+              // "password"=>"13679asdf",
+            // ];			
             
             $arr_users[] = [
               "proxy"=>"107.181.187.190",
@@ -586,33 +586,33 @@ class InstagramHelper
               "password"=>"qwerty12345",
             ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24475",
-              "username"=>"felysamora",
-              "password"=>"qwerty12345",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24475",
+              // "username"=>"felysamora",
+              // "password"=>"qwerty12345",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24476",
-              "username"=>"nithaasyari",
-              "password"=>"qwerty12345",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24476",
+              // "username"=>"nithaasyari",
+              // "password"=>"qwerty12345",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24477",
-              "username"=>"thalianasarifernand",
-              "password"=>"54321qwerty",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24477",
+              // "username"=>"thalianasarifernand",
+              // "password"=>"54321qwerty",
+            // ];			
             
-            $arr_users[] = [
-              "proxy"=>"107.181.187.190",
-              "port"=>"24478",
-              "username"=>"naningtyasa",
-              "password"=>"qwerty54321",
-            ];			
+            // $arr_users[] = [
+              // "proxy"=>"107.181.187.190",
+              // "port"=>"24478",
+              // "username"=>"naningtyasa",
+              // "password"=>"qwerty54321",
+            // ];			
             
             $arr_users[] = [
               "proxy"=>"107.181.187.190",
