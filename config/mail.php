@@ -15,13 +15,7 @@ return [
     |            "sparkpost", "log", "array"
     |
     */
-    'mailers' => [
-        // ...
-        'sendinblue' => [
-            'transport' => 'sendinblue',
-        ],
-    ],
-    
+
     'driver' => env('MAIL_DRIVER', 'smtp'),
 
     /*
