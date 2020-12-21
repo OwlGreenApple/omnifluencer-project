@@ -20,7 +20,7 @@
         "maatwebsite/excel": "~2.1.0",
         "rap2hpoutre/laravel-log-viewer": "^1.0",
         "rvanlaak/wkhtmltopdf-amd64-centos7": "~0.12",
-        "webup/laravel-sendinblue": "^2.0",
+        "webup/laravel-sendinblue": "^3.1",
         "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
     },
     "require-dev": {
