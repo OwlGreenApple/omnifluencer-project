@@ -48,6 +48,7 @@
         "classmap": [
             "database/seeds",
             "vendor/mgp25/instagram-php",
+            "vendor/lazyjsonmapper/lazyjsonmapper",
             "database/factories"
         ]
     },
