@@ -452,7 +452,7 @@ class RegisterController extends Controller
       $curl = curl_init();
 
         $data = array(
-            'list_name'=>'3f5r6oxv',
+            'list_name'=>'97qx45fu',
             'name'=>$name,
             'email'=>$email,
             'phone_number'=>$wa_no,
