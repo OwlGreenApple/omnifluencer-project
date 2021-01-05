@@ -43,6 +43,7 @@ class ExpiredOrder extends Command
         $check_time = DB::connection('mysql2')->table('orders')
                       ->select('created_at','id')
                       ->where('status','<',2)
+                      ->where('buktibayar','')
                       ->get();
         foreach($check_time as $tm){
             $expired = Carbon::parse($tm->created_at)->addDay();
