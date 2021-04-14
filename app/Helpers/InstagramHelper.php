@@ -113,71 +113,71 @@ class InstagramHelper
           // } 
           // else if ( env('APP_ENV') == "production" ) {
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19109",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24470",
               "username"=>"melodianaelisa",
               "password"=>"pjgubUB236",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19110",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24471",
               "username"=>"monicalitha",
               "password"=>"Kekksd61556",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19111",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24472",
               "username"=>"renawilliams222",
               "password"=>"32516YOIT",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19112",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24473",
               "username"=>"marianalaskmi",
               "password"=>"951QSCVHI",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19113",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24474",
               "username"=>"magdalenapeter96",
               "password"=>"951knmbv",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19114",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24475",
               "username"=>"felysamora",
               "password"=>"apkh31879",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19115",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24476",
               "username"=>"nithaasyari",
               "password"=>"Agung96103",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19116",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24477",
               "username"=>"thalianasarifernand",
               "password"=>"951plmc",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19117",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24478",
               "username"=>"tinalawrens",
               "password"=>"qwerty2222",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19118",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24479",
               "username"=>"verahwardani",
               "password"=>"abcde12345",
             ];			
@@ -262,71 +262,71 @@ class InstagramHelper
           // } 
           // else if ( env('APP_ENV') == "production" ) {
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19109",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24470",
               "username"=>"melodianaelisa",
               "password"=>"pjgubUB236",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19110",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24471",
               "username"=>"monicalitha",
               "password"=>"Kekksd61556",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19111",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24472",
               "username"=>"renawilliams222",
               "password"=>"32516YOIT",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19112",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24473",
               "username"=>"marianalaskmi",
               "password"=>"951QSCVHI",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19113",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24474",
               "username"=>"magdalenapeter96",
               "password"=>"951knmbv",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19114",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24475",
               "username"=>"felysamora",
               "password"=>"apkh31879",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19115",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24476",
               "username"=>"nithaasyari",
               "password"=>"Agung96103",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19116",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24477",
               "username"=>"thalianasarifernand",
               "password"=>"951plmc",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19117",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24478",
               "username"=>"tinalawrens",
               "password"=>"qwerty2222",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19118",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24479",
               "username"=>"verahwardani",
               "password"=>"abcde12345",
             ];			
@@ -552,71 +552,71 @@ class InstagramHelper
       // } 
       // else if ( env('APP_ENV') == "production" ) {
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19109",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24470",
               "username"=>"melodianaelisa",
               "password"=>"pjgubUB236",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19110",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24471",
               "username"=>"monicalitha",
               "password"=>"Kekksd61556",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19111",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24472",
               "username"=>"renawilliams222",
               "password"=>"32516YOIT",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19112",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24473",
               "username"=>"marianalaskmi",
               "password"=>"951QSCVHI",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19113",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24474",
               "username"=>"magdalenapeter96",
               "password"=>"951knmbv",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19114",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24475",
               "username"=>"felysamora",
               "password"=>"apkh31879",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19115",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24476",
               "username"=>"nithaasyari",
               "password"=>"Agung96103",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19116",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24477",
               "username"=>"thalianasarifernand",
               "password"=>"951plmc",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19117",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24478",
               "username"=>"tinalawrens",
               "password"=>"qwerty2222",
             ];			
             
             $arr_users[] = [
-              "proxy"=>"217.12.208.31",
-              "port"=>"19118",
+              "proxy"=>"107.181.187.190",
+              "port"=>"24479",
               "username"=>"verahwardani",
               "password"=>"abcde12345",
             ];			
