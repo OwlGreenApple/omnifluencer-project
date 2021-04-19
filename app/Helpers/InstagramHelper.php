@@ -189,7 +189,7 @@ class InstagramHelper
             // $i->login("mayymayyaa", "qwerty12345", 300);
             /*$i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
             $i->setProxy("http://michaelsugih:69682micro@".$arr_user['proxy'].":".$arr_user['port']);*/
-            $i->setProxy("http://celebgramme:Ls3gX0Op@".$arr_user['proxy'].":".$arr_user['port']);
+            $i->setProxy("http://celebgramme:safsdg32g2qg3g@".$arr_user['proxy'].":".$arr_user['port']);
             $i->login($arr_user["username"], $arr_user["password"], 300);
           // }
           $userData = $i->people->getInfoById($id)->getUser();
@@ -339,7 +339,7 @@ class InstagramHelper
             /*$i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
             $i->setProxy("http://michaelsugih:69682micro@".$arr_user['proxy'].":".$arr_user['port']);*/
             // $i->setProxy("http://".$arr_user['username'].":".$arr_user['password']."@".$arr_user['proxy'].":".$arr_user['port']);
-            $i->setProxy("http://celebgramme:Ls3gX0Op@".$arr_user['proxy'].":".$arr_user['port']);
+            $i->setProxy("http://celebgramme:safsdg32g2qg3g@".$arr_user['proxy'].":".$arr_user['port']);
             $i->login($arr_user["username"], $arr_user["password"], 300);
           // }
 					$userData = $i->people->getInfoByName($username)->getUser();
@@ -629,7 +629,7 @@ class InstagramHelper
         /*$i->setProxy("http://".$arr_user['proxy'].":".$arr_user['port']);
         $i->setProxy("http://michaelsugih:69682micro@".$arr_user['proxy'].":".$arr_user['port']);*/
         // $i->setProxy("http://".$arr_user['username'].":".$arr_user['password']."@".$arr_user['proxy'].":".$arr_user['port']);
-        $i->setProxy("http://celebgramme:Ls3gX0Op@".$arr_user['proxy'].":".$arr_user['port']);
+        $i->setProxy("http://celebgramme:safsdg32g2qg3g@".$arr_user['proxy'].":".$arr_user['port']);
         $i->login($arr_user["username"], $arr_user["password"], 300);
       // }
       
